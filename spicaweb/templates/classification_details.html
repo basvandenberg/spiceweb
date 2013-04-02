@@ -1,0 +1,68 @@
+## classifier_details.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/scripts_classifier_details.js' % (root_url)}"></script>
+</%block>
+
+<%block name="main_title">
+</%block>
+
+<%block name="main_content">
+
+<%include file="classification_bar.html" />
+
+% if cl_id:
+
+## Classfier details
+<h2>Details classifier ${cl_id}</h2>
+
+% if cl_result and cl_settings:
+<%
+import numpy
+%>
+
+<h3>Classification results</h3>
+
+<table id="cl_result" class="tablesorter">
+<thead>
+<tr>
+  <th>CV</th>
+% for sname in sorted(cl_result.keys()):
+  <th>${sname}</th>
+% endfor 
+</tr>
+</thead>
+<tbody>
+% for index in range(cl_settings['n_fold_cv']):
+  <tr>
+    <td>${index}</td>
+% for sname in sorted(cl_result.keys()):
+    <td>${'%.3f' % (cl_result[sname][index])}</td>
+% endfor
+  </tr>
+% endfor
+  <tr class="double">
+    <td>avg/std</td>
+% for sname in cl_result.keys():
+    <td>${'%.2f / %.2f' % (numpy.mean(cl_result[sname]), numpy.std(cl_result[sname]))}</td>
+% endfor
+  </tr>
+</tbody>
+</table>
+% endif
+
+% if cl_settings:
+<h3>Classifier settings</h3>
+% endif
+
+<h3>Progress</h3>
+<textarea class="progress" id="${cl_id}" rows="20"></textarea>
+
+% else:
+
+<p>Error: No classifier id provided.</p>
+
+% endif
+
+</%block>

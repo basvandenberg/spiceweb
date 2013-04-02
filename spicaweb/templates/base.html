@@ -1,0 +1,203 @@
+## base.html
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+
+  ## common style sheets
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="${'%scss/style.css' % (root_url)}" />
+  <link rel="stylesheet" type="text/css" href="${'%sauth_css/style.css' % (root_url)}" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+  <link rel="stylesheet" type="text/css" href="${'%scss/css3-gmail-style.css' % (root_url)}" />
+  ## block to add custom style sheets per page
+  <%block name="stylesheets">
+  </%block>
+
+  ## common javascript libraries and scripts
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+  <script type="application/javascript" src="${'%sjs/jquery.cookie.js' % (root_url)}"></script>
+% if show_filter and fe.feature_matrix.feature_ids:
+  <script type="application/javascript" src="${'%sjs/scripts_filter.js' % (root_url)}"></script>
+% endif
+  
+  ## block for custom scripts per page
+  <%block name="scripts">
+  </%block>
+
+  <meta charset="utf-8">
+  <title>SPiCa - Sequence-based Protein Classification</title>
+
+</head>
+
+<body>
+
+## the top-right header menu items
+<div id="header_menu">
+% for index, (name, url) in enumerate(header_menu):
+% if header_menu_index == index:
+  <a href=${root_url}${url} class="active">${name}</a>
+% else:
+  <a href=${root_url}${url}>${name}</a>
+% endif
+% endfor
+</div>
+
+## header text
+<div id="header" class=${main_menu[main_menu_index][0]}>
+<div id="title">SPiCa</div>
+<div id="subtitle">Sequence-based Protein Classification</div>
+<div id="version">version 0.1</div>
+</div>
+
+## show menu bar with current menu active
+<div id="main_menu">
+% for index, (name, url) in enumerate(main_menu):
+  <a class="menu_item ${name}${' menu_active' if main_menu_index == index else ''}" href="${root_url}${url}">${name}</a>
+% endfor
+</div>
+
+## show current user id and project id when provided in project bar
+## TODO use the cherry_auth include auth_bar.html and add project id...
+<div id="project_bar">
+% if user_id:
+  <div class="login_buttons">
+    <a href="${'%saccount' % (root_url)}" class="signup_button">Account</a>
+    <a href="${'%slogout' % (root_url)}" class="signup_button">Logout</a>
+  </div>
+  <div class="project_item">user: <b>${user_id}</b>
+  </div>
+% else:
+  <div class="login_buttons">
+    <a href="${'%slogin' % (root_url)}" class="signup_button">Log in</a>
+    <a href="${'%sregister' % (root_url)}" class="signup_button">Create account</a>
+  </div>
+% endif
+% if project_id and not project_id == 'None':
+  <div class="project_item" id="project_name">project: <b>${project_id}</b>
+  </div>
+% endif
+</div>
+
+## block for the main content
+<div id="wrapper">
+<%block name="main_content">
+</%block>
+</div>
+
+## display the footer
+<div id="footer">
+Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+</div>
+
+## add feature filter, if requested for and features are available.
+% if show_filter and fe.feature_matrix.feature_ids:
+
+<%block name="filter">
+
+<div id="filterwrapper">
+<div id="filterbar"></div>
+<div id="filterscreen">
+<form id="filter">
+
+<div class="filtercol">
+<div class="filter_header first">Label filter</div>
+
+<div class="filter_subheader">
+  <div class="filter_showcat" id="labelfilter">show / hide</div>
+</div>
+
+<div class="filter_select" id="labelfilter">
+<%
+labeling_names = sorted(fe.feature_matrix.labeling_dict.keys())
+cur_labeling_index = 0
+if(labeling_names[cur_labeling_index] == 'one_class' and len(labeling_names) > 1):
+    cur_labeling_index = 1
+cur_labeling = fe.feature_matrix.labeling_dict[labeling_names[cur_labeling_index]]
+num_select = 0
+%>
+<select id="labeling_select">
+% for index, labeling_name in enumerate(labeling_names):
+  <option value="${labeling_name}" ${'selected="selected"' if index == cur_labeling_index else ''}>${labeling_name}</option>
+% endfor
+</select>
+
+<div class="ui-widget labsel_wrapper" id="${labeling_name}">
+<ul id="labels_selected" class="ui-helper-reset label_list select">
+% for class_name in cur_labeling.class_names[:num_select]:
+    <li class="label ui-widget-content">
+        <div>${class_name}</div>
+        <a href="#" class="ui-icon ui-icon-triangle-1-e"></a>
+    </li>
+% endfor
+</ul>
+<ul id="labels_unselected" class="ui-helper-reset ui-helper-clearfix label_list">
+% for class_name in cur_labeling.class_names[num_select:]:
+    <li class="label ui-widget-content">
+        <div>${class_name}</div>
+        <a href="#" class="ui-icon ui-icon-triangle-1-w"></a>
+    </li>
+% endfor
+</ul>
+</div>
+</div>
+
+<div class="filter_header">Feature filter</div>
+<%
+first = True
+fm = fe.feature_matrix
+fid2name = fe.feat_id_to_name_dict()
+available = [f.uid for f in fe.available_features()]
+%>
+% for fc in fe.feature_categories:
+% if (fc.uid in available):
+  <div class="filter_subheader">
+    <div class="filter_subtitle">${fc.name.title()}</div>
+    <div class="filter_showcat" id="${fc.uid}">show / hide</div>
+  </div>
+  <div class="filter_select" id="${fc.uid}">
+% if filter_all_feat:
+    <div class="filter_select_bar">
+      <div id="${fc.uid}" class="filter_select_all sel inline">Select all</div>
+      <div class="inline"> | </div>
+      <div id="${fc.uid}" class="filter_deselect_all sel inline">Deselect all</div>
+    </div>
+% endif
+<%
+
+name_dict = fe.feat_id_to_name_dict()
+feat_ids = fc.ids
+feat_names = fc.noncat_names
+features = zip(feat_ids, feat_names)
+
+num_selected = 0
+#if(filter_feat_selection == 'all'):
+#    num_selected = len(fid2name)
+#else:
+#    num_selected = filter_feat_selection
+%>
+    <ol class="feats selectable" id="${fc.uid}">
+% for index, (feat_id, feat_name) in enumerate(features):
+      <li ${'class="feat ui-widget-content ui-selected"' if index < num_selected and first else 'class="feat ui-widget-content"'} id="${feat_id}">${feat_name}</li>
+% endfor
+    </ol>
+  </div>
+<%
+first = False
+%>
+% endif
+% endfor
+</div>
+
+</form>
+</div>
+</div>
+</%block>
+
+% endif
+
+</body>
+
+</html>
+

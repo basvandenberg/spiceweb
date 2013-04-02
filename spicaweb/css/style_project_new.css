@@ -1,0 +1,11 @@
+form#upload_new input.red[type="submit"][disabled] {
+  color:#babdb6;
+  cursor:default;
+}
+div#seq_type {
+  display:inline;
+}
+.ui-button .ui-button-text { 
+  display: inline; 
+  line-height: 1.4;  
+}

@@ -1,0 +1,35 @@
+## news.html
+<%inherit file="base.html"/>
+
+<%block name="main_content">
+
+<div id="sidebar_wrapper">
+
+</div>
+
+<div id="main_wrapper">
+
+<h1>News</h1>
+
+% for news_item in news_collection:
+% if news_item.highlighted:
+<div class="news_item">
+<h3>${news_item.title}</h3>
+<p>${news_item.text}</p>
+</div>
+% endif
+% endfor
+
+<ul>
+% for news_item in news_collection:
+% if news_item.published and not news_item.highlighted:
+<li>${news_item.title}</li>
+% endif
+% endfor
+</ul>
+
+</div>
+
+
+
+</%block>

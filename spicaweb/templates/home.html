@@ -1,0 +1,48 @@
+## login.html
+<%inherit file="base.html"/>
+
+<%block name="stylesheets">
+</%block>
+
+<%block name="main_content">
+
+<div id="main_wrapper">
+
+<div id="introduction" class="news_item">
+<p>
+
+SPiCa is a web application that can be used to explore a set of protein
+sequences. After uploading a fasta file with protein sequences, the application
+can be used to calculate a large range of sequence-based features. If labels
+are also provided for the proteins, the web application can also be used to
+train and test sequence-based classifiers.
+
+</p>
+<a href="${root_url + 'doc'}">Read more ></a>
+
+</div>
+
+<h2>News</h2>
+
+<div id="news_items">
+% for news_item in news_collection:
+% if news_item.highlighted:
+<div class="news_item">
+<h3>${news_item.title}</h3>
+<div class="date">${news_item.date.strftime('%d %B %Y')}</div>
+<p>${news_item.text}</p>
+</div>
+% endif
+% endfor
+<a href="${root_url + 'news'}">Read more ></a>
+</div>
+
+
+</div>
+
+<div id="sidebar_wrapper">
+
+</div>
+
+
+</%block>

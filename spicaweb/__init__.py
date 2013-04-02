@@ -16,7 +16,7 @@ import news
 # settings that need to be changed
 # TODO these paths should be in tools settings...
 root_url = 'http://localhost:8080/spica/'
-root_dir = '/home/bastiaan/Development/spica_website/'
+root_dir = '/home/bastiaan/Development/spicaweb_test/'
 projects_dir = os.path.join(root_dir, 'projects')
 config_f = os.path.join(root_dir, 'spica.cfg')
 auth_config_f = os.path.join(root_dir, 'auth.cfg')

@@ -1,0 +1,52 @@
+## project_new.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/scripts_project_new.js' % (root_url)}"></script>
+</%block>
+<%block name="stylesheets">
+  <link rel="stylesheet" type="text/css" href="${'%scss/style_project_new.css' % (root_url)}" />
+</%block>
+
+<%block name="main_content">
+
+<%include file="projects_bar.html" />
+
+## Initialize new project form
+<div class="form_wrapper">
+  <form id="upload_new" action="${root_url}/app/projects/new" method="post" enctype="multipart/form-data">
+
+    <!--input type="hidden" name="data_type" value="data_source" /-->
+
+    <div class="form_item">
+      <label for="fasta_file">Fasta file:</label>
+      <input type="file" name="fasta_file" id="fasta_file" /><br />
+    </div>
+
+    <div class="form_item">
+      <!--div id="sequence_type"-->
+      <label for="sequence_type">Sequence type:</label><br />
+    </div>
+    <div class="form_item">
+        <input type="radio" id="orf" name="sequence_type" value="orf_seq" /><label for="orf">ORF sequences</label><br />
+    </div>
+    <div class="form_item">
+        <input type="radio" id="protein" name="sequence_type" value="prot_seq" checked="checked" /><label for="protein">Protein sequences</label><br />
+      <!--/div-->
+    </div>
+
+    <div class="form_item">
+      <label for="new_project_id">Project id:</label> 
+      <input type="text" id="project_id" name="project_id" />
+      <div class="error" id="new_projectid_error">invalid project id</div><br />
+    </div>
+
+    <hr class="submit" />
+
+    <input type="submit" id="new_project" value="create project" class="bttn red" />
+    <input type="button" id="example_project" value="load example" class="bttn" />
+
+  </form>
+</div>
+
+</%block>

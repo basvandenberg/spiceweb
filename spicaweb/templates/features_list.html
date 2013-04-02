@@ -1,0 +1,72 @@
+## feature_list.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/scripts_feature_list.js' % (root_url)}"></script>
+</%block>
+
+<%block name="main_content">
+
+<%include file="features_bar.html" />
+
+## List with available feature categories
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th id="status"></th>
+  <th>categorie</th>
+  <th>required data sources</th>
+  <th>action</th>
+</tr>
+</thead>
+<tbody>
+
+% for featcat in fe.feature_categories:
+
+<%
+all_ds = featcat.data_source_names()
+missing_ds = featcat.missing_data_source_names()
+%>
+
+<tr>
+% if featcat.uid in feat_status.keys():
+  <td id="status" class="${feat_status[featcat.uid]}"></td>
+% else:
+  <td id="status" class="notdone"></td>
+% endif
+  <td>${featcat.name.capitalize()}</td>
+  <td>
+<%
+divs = []
+for item in all_ds:
+    if item in missing_ds:
+        divs.append('<div class="disabled text">%s</div>' % (item))
+    else:
+        divs.append('<div class="text">%s</div>' % (item))
+result = '<div class="text">, </div>'.join(divs)
+%>
+    ${result}
+  </td>
+% if missing_ds:
+  <td class="disabled">calculate</td>
+% elif featcat.uid in feat_status.keys():
+  <td></td>
+% else:
+  <td><a class="calc" href="#" id="${featcat.uid}">calculate</a></td>
+% endif
+</tr>
+
+% endfor
+
+</tbody>
+</table>
+
+<div class="legend">
+  <div class="status notdone"></div><div class="text">not available</div>
+  <div class="status waiting"></div><div class="text">waiting</div>
+  <div class="status running"></div><div class="text">running</div>
+  <div class="status error"></div><div class="text">error</div>
+  <div class="status done"></div><div class="text">ready</div>
+</div>
+
+</%block>

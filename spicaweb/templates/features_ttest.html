@@ -1,0 +1,30 @@
+## feature_ttest.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/jquery.tablesorter.min.js' % (root_url)}"></script>
+  <script type="application/javascript" src="${'%sjs/scripts_feature_ttest.js' % (root_url)}"></script>
+  <script type="text/javascript">
+$(document).ready(function(){ $("#sortTable").tablesorter(); }); 
+  </script>
+</%block>
+
+<%block name="main_content">
+
+<%include file="features_bar.html" />
+
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th>category</th>
+  <th>name</th>
+  <th>t-value</th>
+  <th>p-value</th>
+</tr>
+</thead>
+<tbody id="ttest_table">
+
+</tbody>
+</table>
+
+</%block>

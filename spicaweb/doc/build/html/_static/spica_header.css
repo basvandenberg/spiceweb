@@ -1,0 +1,48 @@
+div#header {
+  position: relative;
+  display: block;
+  margin-top: 15px;
+  width: 846px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 43px;
+  color: #babdb6;
+  text-align: center;
+  font-family: sans-serif;
+  border-radius: 15px 15px 0px 0px;
+  border-bottom: 0px;
+  height: 48px;
+}
+div#header div#title {
+  font-family: 'Ubuntu';
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-size:30px;
+  color: #eeeeec;
+}
+div#header div#subtitle {
+  font-family: 'Ubuntu';
+  position: absolute;
+  left: 20px;
+  bottom: 6px;
+  font-size:13pt;
+}
+div#header div#version {
+  font-family: 'Ubuntu';
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+  font-size:10pt;
+}
+
+div#footer {
+  margin-top: 5px;
+  width: 644px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1px 43px;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 9pt;
+}

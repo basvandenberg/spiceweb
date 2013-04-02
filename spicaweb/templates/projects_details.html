@@ -1,0 +1,112 @@
+## project_details.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/scripts_project_details.js' % (root_url)}"></script>
+</%block>
+<%block name="stylesheets">
+  <link rel="stylesheet" type="text/css" href="${'%scss/style_project_details.css' % (root_url)}" />
+</%block>
+
+
+<%block name="main_content">
+
+<%include file="projects_bar.html" />
+
+## Project details
+<h2>Project Details: ${project_id}</h2>
+
+<h3>Available data</h3>
+
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th id="status"></th>
+  <th>data</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+
+% for ds in fe.data_sources:
+<tr>
+  <td id="status" class="${'done' if ds.available() else 'notdone'}"></td>
+  <td>${ds.name}</td>
+% if ds.available():
+  <td class="data_source"><a href="#" class="download" id="${ds.uid}">download</a></td>
+% else:
+  <td class="data_source"><a href="#" class="upload" id="${ds.uid}">upload</a>
+
+<div class="dialog" id="${ds.uid}" title="Upload ${ds.name} file">
+    <form class="upload" id="${ds.uid}" action="upload" method="post" enctype="multipart/form-data">
+      <label for="data_file">Data file</label>
+      <input type="file" name="data_file" id="data_file" class="text ui-widget-cmntent ui-corner-all" />
+      <input type="hidden" name="data_name" value="${ds.uid}">
+      <input type="hidden" name="data_type" value="data_source" />
+    </form>
+</div>
+
+  </td>
+
+% endif
+</tr>
+% endfor
+
+</tbody>
+</table>
+
+<div class="legend">
+  <div class="status notdone"></div><div class="text">not available</div>
+  <div class="status waiting"></div><div class="text">waiting</div>
+  <div class="status running"></div><div class="text">running</div>
+  <div class="status error"></div><div class="text">error</div>
+  <div class="status done"></div><div class="text">ready</div>
+</div>
+
+<%
+lname = 'labeling%i' % (len(fe.feature_matrix.labeling_dict.keys()))
+%>
+
+<h3>Available label files</h3>
+
+<div class="labeling">
+<a href="#" class="upload labeling" id="${lname}">upload additional labeling file</a>
+</div>
+
+<div class="dialog labeling" id="${lname}" title="Upload labeling file">
+    <form class="upload labeling" id=${lname} action="upload" method="post" enctype="multipart/form-data">
+      <label for="data_name">Labeling name</label>
+      <input type="text" name="data_name" id="data_name" value="${lname}" class="text ui-corner-all">
+      <label for="data_file">Labeling file</label>
+      <input type="file" name="data_file" id="data_file" class="text ui-widget-cmntent ui-corner-all" />
+      <input type="hidden" name="data_type" value="labeling" />
+    </form>
+</div>
+
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th id="status"></th>
+  <th>name</th>
+  <th>class names</th>
+  <th>#</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+% for lname, l in sorted(fe.feature_matrix.labeling_dict.iteritems()):
+
+<tr>
+  <td id="status" class="done"></td>
+  <td>${lname}</td>
+  <td>${', '.join(['%s (%i)' % (cn, len(l.object_indices_per_class[cn])) for cn in l.class_names])}</td>
+  <td>${len(l.class_names)}</td>
+  <td class="labeling"><a href=# id="${lname}" class="download">download</a></td>
+</tr>
+
+% endfor
+
+</tbody>
+</table>
+
+</%block>

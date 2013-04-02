@@ -1,0 +1,27 @@
+{% extends "!layout.html" %}
+
+{% block rootrellink %}
+    <li><a href="http://localhost:8080/spica">SPiCa</a> &raquo;</li>
+    {{ super() }}
+{% endblock %}
+
+{% block extraheader %}
+    <link rel="stylesheet" type="text/css" href="_static/spica_header.css" />
+    {{ super() }}
+{% endblock %}
+
+{% block header %}
+    <div id="header" class="home">
+        <div id="title"><a href="http://localhost:8080/spica">SPiCa</a></div>
+        <div id="subtitle">Sequence-based Protein Classification</div>
+        <div id="version">version 0.1</div>
+    </div>
+    {{ super() }}
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+{% endblock %}

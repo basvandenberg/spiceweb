@@ -1,0 +1,17 @@
+## feature_histograms.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/jquery.json-2.3.min.js' % (root_url)}"></script>
+  <script type="application/javascript" src="${'%sjs/scripts_feature_histogram.js' % (root_url)}"></script>
+</%block>
+
+<%block name="main_content">
+
+<%include file="features_bar.html" />
+
+<ul id="sortable">
+
+</ul>
+
+</%block>

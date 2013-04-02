@@ -1,0 +1,55 @@
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/scripts_project_list.js' % (root_url)}"></script>
+</%block>
+<%block name="stylesheets">
+  <link rel="stylesheet" type="text/css" href="${'%scss/style_project_list.css' % (root_url)}" />
+</%block>
+
+<%block name="main_content">
+
+## delete project dialog
+<div id="dialog-confirm" title="Delete project?">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The project will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
+
+<%include file="projects_bar.html" />
+
+<%
+uri_root = '%s%s/' % (root_url, main_menu[main_menu_index][1])
+def uri_details(pid):
+    print uri_root
+    return '%s%s/%s' % (uri_root, sub_menu[2], pid)
+%>
+
+
+% if len(projects) > 0:
+## List projects
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th>project id</th>
+  <th>initiated</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+% for row_i in xrange(len(projects)):
+<tr id="$row_i}">
+<%
+(name, init) = projects[row_i]
+%>
+  <td><a href="${uri_details(name)}">${name}</a></td>
+  <td>${init}</td>
+  <td class="icon-button"><button class="delete" id="${name}">delete</button></td>
+</tr>
+% endfor
+</tbody>
+</table>
+% else:
+<p>No projects available.</p>
+% endif
+
+</%block>
+
