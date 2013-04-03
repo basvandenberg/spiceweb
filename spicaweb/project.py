@@ -6,7 +6,7 @@ import simplejson
 import cherrypy
 from cherrypy.lib.static import serve_file
 
-import spica
+import spicaweb
 
 
 class Project:
@@ -46,13 +46,13 @@ class Project:
         smi = 0
         projects = self.project_manager.get_projects()
 
-        kw_args = spica.get_template_args(main_menu_index=mmi,
+        kw_args = spicaweb.get_template_args(main_menu_index=mmi,
                 sub_menu_index=smi)
         kw_args['projects'] = projects
-        template_f = '%s_%s.html' % (spica.main_menu[mmi][0],
-                spica.sub_menus[mmi][smi])
+        template_f = '%s_%s.html' % (spicaweb.main_menu[mmi][0],
+                spicaweb.sub_menus[mmi][smi])
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def new(self, project_id=None, fasta_file=None, sequence_type=None):
@@ -73,18 +73,18 @@ class Project:
 
             # redirect to project list page TODO set project as current and go
             # to details page
-            new_uri = '%s%s/%s' % (self.root_url, spica.main_menu[mmi][1],
-                    spica.sub_menus[mmi][0])
+            new_uri = '%s%s/%s' % (self.root_url, spicaweb.main_menu[mmi][1],
+                    spicaweb.sub_menus[mmi][0])
 
             raise cherrypy.HTTPRedirect(new_uri)
 
         # show form
-        kw_args = spica.get_template_args(main_menu_index=mmi,
+        kw_args = spicaweb.get_template_args(main_menu_index=mmi,
                 sub_menu_index=smi)
-        template_f = '%s_%s.html' % (spica.main_menu[mmi][0],
-                spica.sub_menus[mmi][smi])
+        template_f = '%s_%s.html' % (spicaweb.main_menu[mmi][0],
+                spicaweb.sub_menus[mmi][smi])
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def details(self, project_id):
@@ -102,14 +102,14 @@ class Project:
         # TODO try this, except no project, than redirect...?
         fe = self.project_manager.get_feature_extraction()
 
-        kw_args = spica.get_template_args(main_menu_index=mmi,
+        kw_args = spicaweb.get_template_args(main_menu_index=mmi,
                 sub_menu_index=smi)
         kw_args['fe'] = fe
 
-        template_f = '%s_%s.html' % (spica.main_menu[mmi][0],
-                spica.sub_menus[mmi][smi])
+        template_f = '%s_%s.html' % (spicaweb.main_menu[mmi][0],
+                spicaweb.sub_menus[mmi][smi])
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     #
     # ajax methods
@@ -170,8 +170,8 @@ class Project:
         # redirect back to the project details page
         # TODO do same return as delete function
         new_uri = '%s%s/%s/%s' % (self.root_url,
-                spica.main_menu[self.menu_index], self.project_id,
-                spica.sub_menus[self.menu_index][self.sub_menu_index])
+                spicaweb.main_menu[self.menu_index], self.project_id,
+                spicaweb.sub_menus[self.menu_index][self.sub_menu_index])
         raise cherrypy.HTTPRedirect(new_uri)
 
     @cherrypy.expose

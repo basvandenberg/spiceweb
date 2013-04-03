@@ -7,7 +7,9 @@ from mako.lookup import TemplateLookup
 
 from cherrypy_auth import auth
 
-import project_management
+from spica import project_management
+from spica import job_management
+
 import project
 import feature
 import classification

@@ -3,7 +3,7 @@ import simplejson
 import cherrypy
 from cherrypy.lib.static import serve_file
 
-import spica
+import spicaweb
 from project import Project
 
 class Feature:
@@ -35,13 +35,13 @@ class Feature:
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
 
     def get_template_args(self, smi):
-        return spica.get_template_args(main_menu_index=self.mmi, 
+        return spicaweb.get_template_args(main_menu_index=self.mmi, 
                 sub_menu_index=smi)
 
     def no_project_selected(self):
         kw_args = self.get_template_args(0)
         template_f = 'no_project_selected.html'
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def index(self):
@@ -63,7 +63,7 @@ class Feature:
 
         template_f = self.get_template_f(smi)
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def ttest(self):
@@ -98,7 +98,7 @@ class Feature:
 
         template_f = self.get_template_f(smi)
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     #
     # ajax functions

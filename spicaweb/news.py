@@ -3,7 +3,7 @@ import datetime
 
 import cherrypy
 
-import spica
+import spicaweb
 
 class News:
 
@@ -12,15 +12,15 @@ class News:
 
         hmi = 0
 
-        kw_args = spica.get_template_args(header_menu_index=hmi)
+        kw_args = spicaweb.get_template_args(header_menu_index=hmi)
         kw_args['news_collection'] = self.parse_news()
 
-        template_f = '%s.html' % (spica.header_menu[hmi][0])
+        template_f = '%s.html' % (spicaweb.header_menu[hmi][0])
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     def parse_news(self):
-        news_f = os.path.join(spica.news_dir, 'news.txt')
+        news_f = os.path.join(spicaweb.news_dir, 'news.txt')
         news_parser = NewsCollectionParser(news_f)
         news_collection = news_parser.parse()
         return news_collection

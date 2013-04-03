@@ -3,7 +3,7 @@ import numpy
 
 import cherrypy
 
-import spica
+import spicaweb
 from project import Project
 
 class Classification:
@@ -35,13 +35,13 @@ class Classification:
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
 
     def get_template_args(self, smi):
-        return spica.get_template_args(main_menu_index=self.mmi, 
+        return spicaweb.get_template_args(main_menu_index=self.mmi, 
                 sub_menu_index=smi)
 
     def no_project_selected(self):
         kw_args = self.get_template_args(0)
         template_f = 'no_project_selected.html'
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def index(self):
@@ -59,7 +59,7 @@ class Classification:
         kw_args = self.get_template_args(smi)
         template_f = self.get_template_f(smi)
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def new(self, cl_type=None, n_fold_cv=None, featsel=None,
@@ -91,7 +91,7 @@ class Classification:
 
             template_f = self.get_template_f(smi)
 
-            return spica.get_template(template_f, **kw_args)
+            return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def details(self, cl_id):
@@ -113,7 +113,7 @@ class Classification:
 
         template_f = self.get_template_f(smi)
 
-        return spica.get_template(template_f, **kw_args)
+        return spicaweb.get_template(template_f, **kw_args)
 
     #
     # ajax functions
@@ -152,10 +152,10 @@ class Classification:
 
         mmi = 3
 
-        uri_root = '%s%s' % (spica.root_url, spica.main_menu[mmi])
+        uri_root = '%s%s' % (spicaweb.root_url, spicaweb.main_menu[mmi])
 
         def uri_details(cl_id):
-            return '%s/%s/%s' % (uri_root, spica.sub_menus[mmi][2], cl_id)
+            return '%s/%s/%s' % (uri_root, spicaweb.sub_menus[mmi][2], cl_id)
 
         cl_all_results = self.project_manager.get_all_classifier_results()
 
@@ -248,7 +248,7 @@ class Classification:
             s = text[13:15]
             return '%s-%s-%s %s:%s:%s' % (day, month, year, h, m, s)
 
-        uri_root = '%s%s' % (spica.root_url, spica.main_menu[mmi])
+        uri_root = '%s%s' % (spicaweb.root_url, spicaweb.main_menu[mmi])
 
         def uri_details(cl_id):
             return '%s/%s' % (self.get_url(2), cl_id)
