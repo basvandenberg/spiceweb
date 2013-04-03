@@ -28,7 +28,7 @@
 </thead>
 <tbody>
 
-% for ds in fe.data_sources:
+% for ds in fe.protein_data_set.data_sources:
 <tr>
   <td id="status" class="${'done' if ds.available() else 'notdone'}"></td>
   <td>${ds.name}</td>
@@ -64,7 +64,7 @@
 </div>
 
 <%
-lname = 'labeling%i' % (len(fe.feature_matrix.labeling_dict.keys()))
+lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 %>
 
 <h3>Available label files</h3>
@@ -94,7 +94,7 @@ lname = 'labeling%i' % (len(fe.feature_matrix.labeling_dict.keys()))
 </tr>
 </thead>
 <tbody>
-% for lname, l in sorted(fe.feature_matrix.labeling_dict.iteritems()):
+% for lname, l in sorted(fe.fm_protein.labeling_dict.iteritems()):
 
 <tr>
   <td id="status" class="done"></td>
