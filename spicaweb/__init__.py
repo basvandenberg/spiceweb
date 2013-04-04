@@ -18,7 +18,7 @@ import news
 # settings that need to be changed
 # TODO these paths should be in tools settings...
 root_url = 'http://localhost:8080/spica/'
-root_dir = '/home/bastiaan/Development/spicaweb_test/'
+root_dir = '/home/bastiaan/Develop/spicaweb_test/'
 projects_dir = os.path.join(root_dir, 'projects')
 config_f = os.path.join(root_dir, 'spica.cfg')
 auth_config_f = os.path.join(root_dir, 'auth.cfg')
@@ -28,7 +28,7 @@ news_dir = os.path.join(root_dir, 'news')
 data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 tmpl_dir = os.path.join(data_dir, 'templates')
 # TODO fetch from config or something...
-auth_tmpl_dir = '/home/bastiaan/Development/cherrypy_auth_0.1/' +\
+auth_tmpl_dir = '/home/bastiaan/Develop/cherrypy_auth/' +\
         'cherrypy_auth/template/mako'
 
 def authenticate():
