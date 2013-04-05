@@ -18,7 +18,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
   <script type="application/javascript" src="${'%sjs/jquery.cookie.js' % (root_url)}"></script>
-% if show_filter and fe.feature_matrix.feature_ids:
+% if show_filter and fe.fm_protein.feature_ids:
   <script type="application/javascript" src="${'%sjs/scripts_filter.js' % (root_url)}"></script>
 % endif
   
@@ -92,7 +92,7 @@ Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft
 </div>
 
 ## add feature filter, if requested for and features are available.
-% if show_filter and fe.feature_matrix.feature_ids:
+% if show_filter and fe.fm_protein.feature_ids:
 
 <%block name="filter">
 
@@ -110,11 +110,11 @@ Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft
 
 <div class="filter_select" id="labelfilter">
 <%
-labeling_names = sorted(fe.feature_matrix.labeling_dict.keys())
+labeling_names = sorted(fe.fm_protein.labeling_dict.keys())
 cur_labeling_index = 0
 if(labeling_names[cur_labeling_index] == 'one_class' and len(labeling_names) > 1):
     cur_labeling_index = 1
-cur_labeling = fe.feature_matrix.labeling_dict[labeling_names[cur_labeling_index]]
+cur_labeling = fe.fm_protein.labeling_dict[labeling_names[cur_labeling_index]]
 num_select = 0
 %>
 <select id="labeling_select">
@@ -146,7 +146,7 @@ num_select = 0
 <div class="filter_header">Feature filter</div>
 <%
 first = True
-fm = fe.feature_matrix
+fm = fe.fm_protein
 fid2name = fe.feat_id_to_name_dict()
 available = [f.uid for f in fe.available_features()]
 %>
