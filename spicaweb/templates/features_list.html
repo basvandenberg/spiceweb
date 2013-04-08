@@ -21,38 +21,36 @@
 </thead>
 <tbody>
 
-% for featcat in fe.feature_categories:
+% for featvec in fe.fv_dict_protein.values():
 
 <%
-all_ds = featcat.data_source_names()
-missing_ds = featcat.missing_data_source_names()
+available, missing = featvec.data_availability()
 %>
 
 <tr>
-% if featcat.uid in feat_status.keys():
-  <td id="status" class="${feat_status[featcat.uid]}"></td>
+% if featvec.uid in feat_status.keys():
+  <td id="status" class="${feat_status[featvec.uid]}"></td>
 % else:
   <td id="status" class="notdone"></td>
 % endif
-  <td>${featcat.name.capitalize()}</td>
+  <td>${featvec.name.capitalize()}</td>
   <td>
 <%
 divs = []
-for item in all_ds:
-    if item in missing_ds:
-        divs.append('<div class="disabled text">%s</div>' % (item))
-    else:
-        divs.append('<div class="text">%s</div>' % (item))
+for item in available:
+    divs.append('<div class="disabled text">%s</div>' % (item))
+for item in missing:
+    divs.append('<div class="text">%s</div>' % (item))
 result = '<div class="text">, </div>'.join(divs)
 %>
     ${result}
   </td>
-% if missing_ds:
+% if len(missing) > 0:
   <td class="disabled">calculate</td>
-% elif featcat.uid in feat_status.keys():
+% elif featvec.uid in feat_status.keys():
   <td></td>
 % else:
-  <td><a class="calc" href="#" id="${featcat.uid}">calculate</a></td>
+  <td><a class="calc" href="#" id="${featvec.uid}">calculate</a></td>
 % endif
 </tr>
 
