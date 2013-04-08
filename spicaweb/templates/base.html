@@ -147,13 +147,13 @@ num_select = 0
 <%
 first = True
 fm = fe.fm_protein
-fid2name = fe.feat_id_to_name_dict()
-available = [f.uid for f in fe.available_features()]
+fid2name = fe.protein_feat_id_to_name_dict()
+available = [f.uid for f in fe.available_protein_feature_vectors()]
 %>
-% for fc in fe.feature_categories:
-% if (fc.uid in available):
+% for featvec in fe.fv_dict_protein.values():
+% if (featvec.uid in available):
   <div class="filter_subheader">
-    <div class="filter_subtitle">${fc.name.title()}</div>
+    <div class="filter_subtitle">${featvec.name.title()}</div>
     <div class="filter_showcat" id="${fc.uid}">show / hide</div>
   </div>
   <div class="filter_select" id="${fc.uid}">
