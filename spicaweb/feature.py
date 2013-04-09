@@ -137,10 +137,10 @@ class Feature:
         cherrypy.response.headers['Content-Type'] = 'application/json'
 
         fe = self.project_manager.get_feature_extraction()
-        fm = fe.feature_matrix
+        fm = self.project_manager.get_feature_matrix()
         (label0, label1) = class_ids.split(',')
         ttest_data = fm.ttest(labeling_name, label0.strip(), label1.strip())
-        featid_to_name = fe.feat_id_to_name_dict()
+        featid_to_name = fe.protein_feat_id_to_name_dict()
 
         str_data = ''
         for index, (tval, pval) in enumerate(ttest_data):
