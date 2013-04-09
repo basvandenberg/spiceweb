@@ -149,26 +149,27 @@ first = True
 fm = fe.fm_protein
 fid2name = fe.protein_feat_id_to_name_dict()
 available = [f.uid for f in fe.available_protein_feature_vectors()]
+print available
 %>
 % for featvec in fe.fv_dict_protein.values():
 % if (featvec.uid in available):
   <div class="filter_subheader">
     <div class="filter_subtitle">${featvec.name.title()}</div>
-    <div class="filter_showcat" id="${fc.uid}">show / hide</div>
+    <div class="filter_showcat" id="${featvec.uid}">show / hide</div>
   </div>
-  <div class="filter_select" id="${fc.uid}">
+  <div class="filter_select" id="${featvec.uid}">
 % if filter_all_feat:
     <div class="filter_select_bar">
-      <div id="${fc.uid}" class="filter_select_all sel inline">Select all</div>
+      <div id="${featvec.uid}" class="filter_select_all sel inline">Select all</div>
       <div class="inline"> | </div>
-      <div id="${fc.uid}" class="filter_deselect_all sel inline">Deselect all</div>
+      <div id="${featvec.uid}" class="filter_deselect_all sel inline">Deselect all</div>
     </div>
 % endif
 <%
 
-name_dict = fe.feat_id_to_name_dict()
-feat_ids = fc.ids
-feat_names = fc.noncat_names
+name_dict = fe.protein_feat_id_to_name_dict()
+feat_ids = featvec.feat_ids
+feat_names = featvec.feat_names
 features = zip(feat_ids, feat_names)
 
 num_selected = 0
@@ -177,7 +178,7 @@ num_selected = 0
 #else:
 #    num_selected = filter_feat_selection
 %>
-    <ol class="feats selectable" id="${fc.uid}">
+    <ol class="feats selectable" id="${featvec.uid}">
 % for index, (feat_id, feat_name) in enumerate(features):
       <li ${'class="feat ui-widget-content ui-selected"' if index < num_selected and first else 'class="feat ui-widget-content"'} id="${feat_id}">${feat_name}</li>
 % endfor
