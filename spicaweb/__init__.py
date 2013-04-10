@@ -1,5 +1,4 @@
 import os
-import datetime
 
 import cherrypy
 
@@ -223,6 +222,3 @@ class App:
         kw_args = self.get_template_args()
         template_name = 'project_not_exist'
         return get_template('%s.html' % (template_name), **kw_args)
-
-    def timestamp_str(self):
-        return datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')[:-3]

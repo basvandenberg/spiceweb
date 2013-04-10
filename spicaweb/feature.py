@@ -216,6 +216,6 @@ class Feature:
         return serve_file(filepath, filetype, 'attachment')
 
     @cherrypy.expose
-    def calcfeat(self, cat_id):
-        self.run_feature_extraction([cat_id])
+    def calcfeat(self, featvec):
+        self.project_manager.run_feature_extraction([featvec])
 

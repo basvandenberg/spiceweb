@@ -13,7 +13,7 @@ $(document).ready(function() {
 
   $('a.calc').bind('click', function(event) {
     $.post('calcfeat', 
-           {feat_ids: $(this).attr('id')}, 
+           {featvec: $(this).attr('id')}, 
            function() {
                location.reload();
            });
