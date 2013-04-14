@@ -6,10 +6,11 @@ from cherrypy.lib.static import serve_file
 import spicaweb
 from project import Project
 
+
 class Feature:
 
     def __init__(self, auth, project_manager, root_url, main_menu,
-            main_menu_index, sub_menu):
+                 main_menu_index, sub_menu):
 
         self.auth = auth
         self.project_manager = project_manager
@@ -35,8 +36,8 @@ class Feature:
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
 
     def get_template_args(self, smi):
-        return spicaweb.get_template_args(main_menu_index=self.mmi, 
-                sub_menu_index=smi)
+        return spicaweb.get_template_args(main_menu_index=self.mmi,
+                                          sub_menu_index=smi)
 
     def no_project_selected(self):
         kw_args = self.get_template_args(0)
@@ -115,19 +116,19 @@ class Feature:
         class_names = fm.labeling_dict[labeling_name].class_names
 
         str_data0 = '<ul id="labels_selected"' +\
-                'class="ui-helper-reset label_list select">\n'
+                    'class="ui-helper-reset label_list select">\n'
         str_data1 = '<ul id="labels_unselected" ' +\
-                'class="ui-helper-reset ui-helper-clearfix label_list">\n'
+                    'class="ui-helper-reset ui-helper-clearfix label_list">\n'
         for class_name in class_names:
             str_data1 += '  <li class="label ui-widget-content">\n'
             str_data1 += '    <div>%s</div>\n' % (class_name)
             str_data1 += '    <a href="#" ' +\
-                    'class="ui-icon ui-icon-triangle-1-w"></a>\n'
+                         'class="ui-icon ui-icon-triangle-1-w"></a>\n'
             str_data1 += '  </li>\n'
-        str_data1 += '</ul>\n'
+            str_data1 += '</ul>\n'
 
         return simplejson.dumps(dict(class_names_selected=str_data0,
-                class_names_unselected=str_data1))
+                                class_names_unselected=str_data1))
 
     @cherrypy.expose
     def attest(self, labeling_name, class_ids):
@@ -165,12 +166,12 @@ class Feature:
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
-            filepath = fm.get_hist_svg_path(feat_ids,
-                    labeling_name=labeling_name, labels=class_ids)
+            filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
+                                         class_ids=class_ids, img_format='svg')
         else:
             filetype = 'image/png'
-            filepath = fm.get_hist_png_path(feat_ids,
-                    labeling_name=labeling_name, labels=class_ids)
+            filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
+                                         class_ids=class_ids)
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
@@ -179,18 +180,19 @@ class Feature:
     def ascatter(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
         feat_ids = [f.strip() for f in feat_ids.split(',')]
-        #assert(len(feature_ids) == 2)
         class_ids = [l.strip() for l in class_ids.split(',')]
         fm = self.project_manager.get_feature_matrix()
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
-            filepath = fm.get_scatter_svg_path(feat_ids[0], feat_ids[1],
-                    labeling_name=labeling_name, classes=class_ids)
+            filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
+                                       labeling_name=labeling_name,
+                                       class_ids=class_ids, img_format='svg')
         else:
             filetype = 'image/png'
-            filepath = fm.get_scatter_png_path(feat_ids[0], feat_ids[1],
-                    labeling_name=labeling_name, classes=class_ids)
+            filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
+                                       labeling_name=labeling_name,
+                                       class_ids=class_ids, img_format='png')
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
@@ -203,7 +205,8 @@ class Feature:
         fm = self.project_manager.get_feature_matrix()
 
         filepath = fm.get_clustdist_path(feature_ids=feat_ids,
-                labeling_name=labeling_name, class_ids=class_ids)
+                                         labeling_name=labeling_name,
+                                         class_ids=class_ids)
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
@@ -218,4 +221,3 @@ class Feature:
     @cherrypy.expose
     def calcfeat(self, featvec):
         self.project_manager.run_feature_extraction([featvec])
-
