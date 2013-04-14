@@ -203,6 +203,29 @@ div.footer a {
     text-decoration: underline;
 }
 
+div#header_menu {
+    width: 96%;
+    height: 20px;
+    margin: 0px auto;
+    margin-bottom: 19px;
+    background-color: #555753;
+    border-radius: 0px 0px 8px 8px;
+    text-align: right;
+    font-family: sans-serif;
+    font-size: 11pt;
+    padding: 2px 20px;
+}
+
+div#header_menu a {
+    color: #babdb6;
+    padding-right: 10px;
+}
+
+div#header_menu a.active {
+    color: #ffffff;
+    font-weight: bold;
+}
+
 /* -- body styles ----------------------------------------------------------- */
 
 p {    
