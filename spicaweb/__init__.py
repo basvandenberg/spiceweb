@@ -124,33 +124,68 @@ class Root:
     def __init__(self):
         
         # create authentication object
-        a = auth.Auth(get_template, get_template_args(), root_url,
+        self.a = auth.Auth(get_template, get_template_args(), root_url,
                 auth_config_f)
 
         # authentication links (because I want them in root, not /auth/login)
-        self.login = a.login
-        self.alogin = a.alogin
-        self.register = a.register
-        self.aregister = a.aregister
-        self.forgot_password = a.forgot_password
-        self.aforgot_password = a.aforgot_password
-        self.change_password = a.change_password
-        self.achange_password = a.achange_password
-        self.activate_account = a.activate_account
-        self.logout = a.logout
+        self.login = self.a.login
+        self.alogin = self.a.alogin
+        self.register = self.a.register
+        self.aregister = self.a.aregister
+        self.forgot_password = self.a.forgot_password
+        self.aforgot_password = self.a.aforgot_password
+        self.change_password_once = self.a.change_password
+        self.achange_password_once = self.a.achange_password
+        self.activate_account = self.a.activate_account
+        self.logout = self.a.logout
         # the following are only accessible by authenticated users
-        self.account = a.account
-        self.change_password_once = a.change_password_once
-        self.achange_password_once = a.achange_password_once
-        self.delete_account = a.delete_account
-        self.adelete_account = a.adelete_account
+        self.account = self.a.account
 
         # links to the app, documentation and news page
-        self.app = App(a)
+        self.app = App(self.a)
         self.news = news.News()
 
         # the other static data page links are the functions in this class.
 
+    # wrappers to disallow access for geust account
+    @cherrypy.expose
+    def delete_account(self):
+        if(self.is_guest_user()):
+            return self.no_guest_access()
+        else:
+            return self.a.delete_account()
+
+    @cherrypy.expose
+    def adelete_account(self, username, password):
+        if(self.is_guest_user()):
+            return None
+        else:
+            return self.a.adelete_account(username, password)
+
+    @cherrypy.expose                                                            
+    def change_password(self):            
+        if(self.is_guest_user()):
+            return self.no_guest_access()
+        else:
+            return self.a.change_password()
+                                                                               
+    @cherrypy.expose                                                            
+    def achange_password(self, password):  
+        if(self.is_guest_user()):
+            return None
+        else:
+            return self.a.achange_password(password)
+
+    def no_guest_access(self):
+        kw_args = get_template_args()
+        template_name = 'no_guest_access'
+        return get_template('%s.html' % (template_name), **kw_args)
+
+    def is_guest_user(self):
+        user = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
+        return not user == None and user == 'spica.webapp@gmail.com'
+
+    # info pages
     @cherrypy.expose
     def index(self, project_id=None):
 
