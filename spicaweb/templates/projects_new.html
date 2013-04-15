@@ -14,39 +14,40 @@
 
 ## Initialize new project form
 <div class="form_wrapper">
-  <form id="upload_new" action="${root_url}/app/projects/new" method="post" enctype="multipart/form-data">
 
-    <!--input type="hidden" name="data_type" value="data_source" /-->
+<div id="stylized" class="myform">
+<form id="upload_new" method="post" action="${root_url}/app/projects/new" enctype="multipart/form-data">
 
-    <div class="form_item">
-      <label for="fasta_file">Fasta file:</label>
-      <input type="file" name="fasta_file" id="fasta_file" /><br />
+    <h1>New project</h1>
+    <p>Use this form to initialize a new project</p>
+
+    <label>Fasta file
+    <span class="small">Upload protein sequence data</span>
+    </label>
+    <input type="file" name="fasta_file" id="fasta_file" />
+
+    <label>Sequence type
+    <span class="small">Uploading protein or ORF sequences?</span>
+    </label>
+    <div class="radio_options">
+        <input type="radio" id="protein" name="sequence_type" value="prot_seq" checked="checked" />
+        <div class="option_label">Protein (amino acid) sequences</div>
+        <input type="radio" id="orf" name="sequence_type" value="orf_seq" />
+        <div class="option_label">ORF (nucleotide) sequences</div>
     </div>
 
-    <div class="form_item">
-      <!--div id="sequence_type"-->
-      <label for="sequence_type">Sequence type:</label><br />
-    </div>
-    <div class="form_item">
-        <input type="radio" id="orf" name="sequence_type" value="orf_seq" /><label for="orf">ORF sequences</label><br />
-    </div>
-    <div class="form_item">
-        <input type="radio" id="protein" name="sequence_type" value="prot_seq" checked="checked" /><label for="protein">Protein sequences</label><br />
-      <!--/div-->
-    </div>
+    <label>Project id
+    <span class="small">Minimal 6 characters</span>
+    </label>
+    <input type="text" name="project_id" id="project_id" />
 
-    <div class="form_item">
-      <label for="new_project_id">Project id:</label> 
-      <input type="text" id="project_id" name="project_id" />
-      <div class="error" id="new_projectid_error">invalid project id</div><br />
-    </div>
+    <button type="submit" class="red">Initialize project</button>
+    <button type="submit" class="grey">Load example</button>
+    <div class="spacer"></div>
 
-    <hr class="submit" />
+</form>
+</div>
 
-    <input type="submit" id="new_project" value="create project" class="bttn red" />
-    <input type="button" id="example_project" value="load example" class="bttn" />
-
-  </form>
 </div>
 
 </%block>

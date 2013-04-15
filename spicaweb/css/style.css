@@ -266,6 +266,8 @@ hr.submit {
   margin-top: 18px;
 }
 
+/* form **********************************************************************/
+
 .form_wrapper {
 }
 .form_item {
@@ -297,6 +299,103 @@ form .form_item>label {
   color: #d3d7cf;
   cursor: default;
 }
+
+/* form2 *********************************************************************/
+.myform {
+    margin: 50px auto;
+    width: 600px;
+    padding: 14px;
+}
+
+/* ----------- stylized ----------- */
+#stylized {
+    border: solid 1px #babdb6;
+    border-radius: 4px;
+    background: #fff;
+}
+#stylized h1 {
+    color: #2e3436;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+#stylized p{
+    font-size: 11px;
+    color: #2e3436;
+    margin-bottom: 20px;
+    border-bottom: solid 1px #888a85;
+    padding-bottom: 10px;
+}
+#stylized label{
+    display: block;
+    text-align: right;
+    color: #204a87;
+    width: 200px;
+    float: left;
+}
+#stylized .small{
+    color: #888a85;
+    display: block;
+    font-size: 11px;
+    font-weight: normal;
+    text-align: right;
+    width: 200px;
+}
+#stylized input{
+    float: left;
+    font-size: 12px;
+    padding: 4px 2px;
+    width: 340px;
+    margin: 2px 0 20px 10px;
+}
+#stylized input[type=text] {
+    border: solid 1px #babdb6;
+}
+#stylized .radio_options {
+    float: left;
+    font-size: 12px;
+    padding: 4px 2px;
+    width: 340px;
+    margin: 2px 0 20px 10px;
+}
+#stylized .radio_options input[type=radio] {
+    display: block;
+    float: left;
+    width: 26px;
+    padding: 0;
+    margin: 3px 0px;
+}
+#stylized .radio_options .option_label {
+    float: left;
+    display: inline;
+    width: 300px;
+    margin: 0px 0px 6px 0px;
+}
+#stylized button{
+    clear: both;
+    width: 105px;
+    height: 29px;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 27px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 30px 0 0 4px;
+    background-color: #babdb6;
+    border: 1px solid #2e3436;
+    color: #888a85;
+}
+#stylized button.red {
+    background-color: #cc0000;
+    border: 1px solid #a40000;
+    color: #eeeeec;
+}
+#stylized button.grey {
+    background-color: #eeeeec;
+    border: 1px solid #2e3436;
+    color: #555753;
+}
+
 
 .description {
   text-align: justify;
