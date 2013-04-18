@@ -117,40 +117,47 @@ if(labeling_names[cur_labeling_index] == 'one_class' and len(labeling_names) > 1
 cur_labeling = fe.fm_protein.labeling_dict[labeling_names[cur_labeling_index]]
 num_select = 0
 %>
-<select id="labeling_select">
-% for index, labeling_name in enumerate(labeling_names):
-  <option value="${labeling_name}" ${'selected="selected"' if index == cur_labeling_index else ''}>${labeling_name}</option>
-% endfor
-</select>
 
-<div class="ui-widget labsel_wrapper" id="${labeling_name}">
-<ul id="labels_selected" class="ui-helper-reset label_list select">
+    <select id="labeling_select">
+% for index, labeling_name in enumerate(labeling_names):
+      <option value="${labeling_name}" ${'selected="selected"' if index == cur_labeling_index else ''}>${labeling_name}</option>
+% endfor
+    </select>
+
+    <div class="ui-widget labsel_wrapper" id="${labeling_name}">
+
+    <ul id="labels_selected" class="ui-helper-reset label_list select">
 % for class_name in cur_labeling.class_names[:num_select]:
-    <li class="label ui-widget-content">
-        <div>${class_name}</div>
-        <a href="#" class="ui-icon ui-icon-triangle-1-e"></a>
-    </li>
+        <li class="label ui-widget-content">
+            <div>${class_name}</div>
+            <a href="#" class="ui-icon ui-icon-triangle-1-e"></a>
+        </li>
 % endfor
-</ul>
-<ul id="labels_unselected" class="ui-helper-reset ui-helper-clearfix label_list">
+    </ul>
+
+    <ul id="labels_unselected" class="ui-helper-reset ui-helper-clearfix label_list">
 % for class_name in cur_labeling.class_names[num_select:]:
-    <li class="label ui-widget-content">
-        <div>${class_name}</div>
-        <a href="#" class="ui-icon ui-icon-triangle-1-w"></a>
-    </li>
+        <li class="label ui-widget-content">
+            <div>${class_name}</div>
+            <a href="#" class="ui-icon ui-icon-triangle-1-w"></a>
+        </li>
 % endfor
-</ul>
+    </ul>
 </div>
+
 </div>
+
+
 
 <div class="filter_header">Feature filter</div>
+
 <%
-first = True
 fm = fe.fm_protein
 fid2name = fe.protein_feat_id_to_name_dict()
 available = [f.uid for f in fe.available_protein_feature_vectors()]
-print available
+custom_feats = fm.get_custom_features()
 %>
+
 % for featvec in fe.fv_dict_protein.values():
 % if (featvec.uid in available):
   <div class="filter_subheader">
@@ -158,37 +165,49 @@ print available
     <div class="filter_showcat" id="${featvec.uid}">show / hide</div>
   </div>
   <div class="filter_select" id="${featvec.uid}">
-% if filter_all_feat:
     <div class="filter_select_bar">
       <div id="${featvec.uid}" class="filter_select_all sel inline">Select all</div>
       <div class="inline"> | </div>
       <div id="${featvec.uid}" class="filter_deselect_all sel inline">Deselect all</div>
     </div>
-% endif
-<%
 
+<%
 name_dict = fe.protein_feat_id_to_name_dict()
 feat_ids = featvec.feat_ids
 feat_names = featvec.feat_names
 features = zip(feat_ids, feat_names)
-
-num_selected = 0
-#if(filter_feat_selection == 'all'):
-#    num_selected = len(fid2name)
-#else:
-#    num_selected = filter_feat_selection
 %>
+
     <ol class="feats selectable" id="${featvec.uid}">
 % for index, (feat_id, feat_name) in enumerate(features):
-      <li ${'class="feat ui-widget-content ui-selected"' if index < num_selected and first else 'class="feat ui-widget-content"'} id="${feat_id}">${feat_name}</li>
+      <li class="feat ui-widget-content" id="${feat_id}">${feat_name}</li>
 % endfor
     </ol>
   </div>
-<%
-first = False
-%>
 % endif
 % endfor
+
+## custom features
+
+% for custom_featvec_id in custom_feats.keys():
+  <div class="filter_subheader">
+    <div class="filter_subtitle">${custom_featvec_id}</div>
+    <div class="filter_showcat" id="${custom_featvec_id}">show / hide</div>
+  </div>
+  <div class="filter_select" id="${custom_featvec_id}">
+    <div class="filter_select_bar">
+      <div id="${custom_featvec_id}" class="filter_select_all sel inline">Select all</div>
+      <div class="inline"> | </div>
+      <div id="${custom_featvec_id}" class="filter_deselect_all sel inline">Deselect all</div>
+    </div>
+    <ol class="feats selectable" id="${custom_featvec_id}">
+% for feat_id in custom_feats[custom_featvec_id]:
+      <li class="feat ui-widget-content" id="${feat_id}">${feat_id}</li>
+% endfor
+    </ol>
+  </div>
+% endfor
+
 </div>
 
 </form>

@@ -33,6 +33,8 @@ $(document).ready(function() {
     // hide feature categories by default
     $(".filter_select:gt(0)").animate({height:'toggle'});
 
+    toggle_showhide();
+
 });
 
 function project_name() {
@@ -92,7 +94,7 @@ function init_labeling_filter(labeling_name, class_ids) {
         var postdata = {labeling_name: l};
         $.post('class_names', postdata, 
             function(data) {
-                $("#labels_selected").replaceWith(data['class_names_selected']); 
+                $("#labels_selected").replaceWith(data['class_names_selected']);
                 $("#labels_unselected").replaceWith(data['class_names_unselected']);
                 init_class_filter(c);
             });

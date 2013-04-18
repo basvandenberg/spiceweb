@@ -49,7 +49,7 @@ class Feature:
         raise cherrypy.HTTPRedirect(self.get_url(0))
 
     @cherrypy.expose
-    def list(self):
+    def list(self, object_ids_f=None, feature_matrix_f=None):
 
         smi = 0
 
@@ -58,9 +58,21 @@ class Feature:
         if(self.project_id is None):
             return self.no_project_selected()
 
+        pm = self.project_manager
         kw_args = self.get_template_args(smi)
-        kw_args['fe'] = self.project_manager.get_feature_extraction()
-        kw_args['feat_status'] = self.project_manager.get_feat_calc_status()
+
+        # upload custom feature matrix
+        error_msg = None
+        if(object_ids_f and feature_matrix_f):
+            error_msg = pm.add_custom_features(self.project_id, object_ids_f,
+                                               feature_matrix_f)
+
+        print
+        print error_msg
+        print
+        kw_args['error_msg'] = error_msg
+        kw_args['fe'] = pm.get_feature_extraction()
+        kw_args['feat_status'] = pm.get_feat_calc_status()
 
         template_f = self.get_template_f(smi)
 
@@ -95,7 +107,8 @@ class Feature:
 
         kw_args = self.get_template_args(smi)
         kw_args['fe'] = self.project_manager.get_feature_extraction()
-        kw_args['show_filter'] = self.project_manager.get_feat_calc_status()
+        #kw_args['show_filter'] = self.project_manager.get_feat_calc_status()
+        kw_args['show_filter'] = True
 
         template_f = self.get_template_f(smi)
 
@@ -104,7 +117,6 @@ class Feature:
     #
     # ajax functions
     #
-
     @cherrypy.expose
     def class_names(self, labeling_name):
 
@@ -125,7 +137,8 @@ class Feature:
             str_data1 += '    <a href="#" ' +\
                          'class="ui-icon ui-icon-triangle-1-w"></a>\n'
             str_data1 += '  </li>\n'
-            str_data1 += '</ul>\n'
+
+        str_data1 += '</ul>\n'
 
         return simplejson.dumps(dict(class_names_selected=str_data0,
                                 class_names_unselected=str_data1))

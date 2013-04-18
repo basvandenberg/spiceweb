@@ -61,18 +61,23 @@ class Project:
         mmi = 1
         smi = 1
 
+        error_msg = None
+
         # start a new project
         if((fasta_file and sequence_type) and project_id):
 
-            # initiate new project
-            self.project_manager.start_new_project(project_id, fasta_file,
-                    sequence_type)
+            try:
+                # initiate new project
+                self.project_manager.start_new_project(project_id, fasta_file,
+                                                       sequence_type)
+            except Error:
+                # TODO set error msg
+                error_msg = 'error'
 
             # if creation went well, store project id in session
             cherrypy.session['project_id'] = project_id
 
-            # redirect to project list page TODO set project as current and go
-            # to details page
+            # redirect to project list page
             new_uri = '%s%s/%s' % (self.root_url, spicaweb.main_menu[mmi][1],
                     spicaweb.sub_menus[mmi][0])
 
@@ -81,6 +86,8 @@ class Project:
         # show form
         kw_args = spicaweb.get_template_args(main_menu_index=mmi,
                 sub_menu_index=smi)
+        kw_args['msg'] = error_msg
+
         template_f = '%s_%s.html' % (spicaweb.main_menu[mmi][0],
                 spicaweb.sub_menus[mmi][smi])
 

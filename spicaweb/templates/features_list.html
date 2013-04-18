@@ -10,6 +10,9 @@
 <%include file="features_bar.html" />
 
 ## List with available feature categories
+
+<h2>Predefined features</h2>
+
 <table id="sortTable" class="tablesorter">
 <thead>
 <tr>
@@ -65,6 +68,67 @@ result = '<div class="text">, </div>'.join(divs)
   <div class="status running"></div><div class="text">running</div>
   <div class="status error"></div><div class="text">error</div>
   <div class="status done"></div><div class="text">ready</div>
+</div>
+
+
+
+<hr class="menu" />
+## List with uploaded custom feature vectors
+
+<h2>Custom features</h2>
+
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th id="status"></th>
+  <th>Custom feature vector</th>
+  <th>Number of features</th>
+</tr>
+</thead>
+<tbody>
+
+% for featvec_id, feat_ids in fe.fm_protein.get_custom_features().items():
+
+<tr>
+  <td id="status" class="done"></td>
+  <td>${featvec_id}</td>
+  <td>${len(feat_ids)}
+</tr>
+
+% endfor
+
+</tbody>
+</table>
+
+
+
+<hr class="menu" />
+## Upload custom feature form
+
+<h2>Upload custom features</h2>
+
+<div class="form_wrapper">
+
+<div id="stylized" class="myform">
+<form id="upload_new" method="post" action="${root_url}app/features/list" enctype="multipart/form-data">
+
+    <h1>Custom features form</h1>
+    <p>Use this form to upload a feature matrix with your own calculated features</p>
+
+    <label>Object ids
+    <span class="small">Upload a file with object ids</span>
+    </label>
+    <input type="file" name="object_ids_f" id="object_ids_f" />
+
+    <label>Feature matrix
+    <span class="small">Upload feature matrix file</span>
+    </label>
+    <input type="file" name="feature_matrix_f" id="feature_matrix_f" />
+
+    <button type="submit" class="red">Upload feature matrix</button>
+    <div class="spacer"></div>
+
+</form>
 </div>
 
 </%block>

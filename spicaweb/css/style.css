@@ -267,7 +267,6 @@ hr.submit {
 }
 
 /* form **********************************************************************/
-
 .form_wrapper {
 }
 .form_item {
@@ -395,7 +394,6 @@ form .form_item>label {
     border: 1px solid #2e3436;
     color: #555753;
 }
-
 
 .description {
   text-align: justify;

@@ -91,6 +91,11 @@ class Classification:
 
             template_f = self.get_template_f(smi)
 
+            print
+            print 'classification'
+            print kw_args
+            print
+
             return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
@@ -140,6 +145,7 @@ class Classification:
             str_data1 += '    <a href="#" ' +\
                     'class="ui-icon ui-icon-triangle-1-w"></a>\n'
             str_data1 += '  </li>\n'
+
         str_data1 += '</ul>\n'
 
         return simplejson.dumps(dict(class_names_selected=str_data0,
