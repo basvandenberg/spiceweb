@@ -150,21 +150,23 @@ class Feature:
 
         cherrypy.response.headers['Content-Type'] = 'application/json'
 
-        fe = self.project_manager.get_feature_extraction()
+        #fe = self.project_manager.get_feature_extraction()
         fm = self.project_manager.get_feature_matrix()
-        (label0, label1) = class_ids.split(',')
+        label0, label1 = class_ids.split(',')
         ttest_data = fm.ttest(labeling_name, label0.strip(), label1.strip())
-        featid_to_name = fe.protein_feat_id_to_name_dict()
+        #featid_to_name = fe.protein_feat_id_to_name_dict()
 
+        # create html table
         str_data = ''
         for index, (tval, pval) in enumerate(ttest_data):
-            str_data += '<tr id=%s>\n' % (fm.feature_ids[index])
-            uid = fm.feature_ids[index]
-            #catid = uid.split('_')[0]
-            #featid = '_'.join(uid.split('_')[1:])
-            (catname, featname) = featid_to_name[uid]
-            str_data += '  <td>%s</td>\n' % (catname.capitalize())
-            str_data += '  <td>%s</td>\n' % (featname)
+
+            fid = fm.feature_ids[index]
+
+            str_data += '<tr id=%s>\n' % (fid)
+            featname = fm.feature_names[fid]
+            #str_data += '  <td>%s</td>\n' % (catname.capitalize())
+            str_data += '<td>TODO feature vector name</td>'
+            str_data += '  <td>%s</td>\n' % (fm.feature_names[fid])
             str_data += '  <td class="n">%.2f</td>\n' % (tval)
             str_data += '  <td class="n">%.15f</td>\n' % (pval)
             str_data += '</tr>\n'
