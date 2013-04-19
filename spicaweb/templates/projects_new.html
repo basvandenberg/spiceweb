@@ -41,7 +41,13 @@
     </label>
     <input type="text" name="project_id" id="project_id" />
 
-    <button type="submit" class="red">Initialize project</button>
+% if msg:
+    <div id="msg">${msg}</div>
+% else:
+    <div id="msg"></div>
+% endif
+
+    <input type="submit" class="red" value="Initialize project" />
     <button type="submit" class="grey">Load example</button>
     <div class="spacer"></div>
 

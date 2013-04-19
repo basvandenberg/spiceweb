@@ -2,6 +2,7 @@ import os
 import shutil
 import zipfile
 import simplejson
+import traceback
 
 import cherrypy
 from cherrypy.lib.static import serve_file
@@ -61,6 +62,10 @@ class Project:
         mmi = 1
         smi = 1
 
+        # obtain default template kwargs
+        kw_args = spicaweb.get_template_args(main_menu_index=mmi,
+                sub_menu_index=smi)
+
         error_msg = None
 
         # start a new project
@@ -70,27 +75,26 @@ class Project:
                 # initiate new project
                 self.project_manager.start_new_project(project_id, fasta_file,
                                                        sequence_type)
-            except Error:
-                # TODO set error msg
+            except:
+                print(traceback.format_exc())
                 error_msg = 'error'
 
-            # if creation went well, store project id in session
-            cherrypy.session['project_id'] = project_id
+            if(error_msg is None):
+                
+                # store project id in session
+                cherrypy.session['project_id'] = project_id
 
-            # redirect to project list page
-            new_uri = '%s%s/%s' % (self.root_url, spicaweb.main_menu[mmi][1],
-                    spicaweb.sub_menus[mmi][0])
+                # redirect to project list page
+                new_uri = '%s%s/%s' % (self.root_url,
+                                       spicaweb.main_menu[mmi][1],
+                                       spicaweb.sub_menus[mmi][0])
+                raise cherrypy.HTTPRedirect(new_uri)
+            else:
+                kw_args['msg'] = error_msg
 
-            raise cherrypy.HTTPRedirect(new_uri)
-
-        # show form
-        kw_args = spicaweb.get_template_args(main_menu_index=mmi,
-                sub_menu_index=smi)
-        kw_args['msg'] = error_msg
-
+        # show new project form
         template_f = '%s_%s.html' % (spicaweb.main_menu[mmi][0],
                 spicaweb.sub_menus[mmi][smi])
-
         return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose

@@ -47,13 +47,11 @@ $(document).ready(function() {
         //activateSubmitNew();
     });
 
-
 });
 
-$("input#faste_file").live("change", function() {
-    fileFsa = $(this).val();
-    //activateSubmitNew();
-});
+//$("input#faste_file").live("change", function() {
+//    fileFsa = $(this).val();
+//});
 
 // change feats url based on current projectid
 //function changeActionNew(act) {
