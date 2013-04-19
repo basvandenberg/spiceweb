@@ -62,8 +62,8 @@ class Classification:
         return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def new(self, cl_type=None, n_fold_cv=None, featsel=None,
-            labeling_name=None, class_ids=None, feat_ids=None):
+    def new(self, cl_type=None, n_fold_cv=None, labeling_name=None,
+            class_ids=None, feat_ids=None):
 
         smi = 1
         self.fetch_session_data()
@@ -71,14 +71,21 @@ class Classification:
         if(self.project_id is None):
             return self.no_project_selected()
 
-        # start classification job if required arguments from form are there
-        # TODO not tested yet
-        if(not cl_type is None and
-                (not n_fold_cv is None and not featsel is None)):
+        error_msg = None
 
-            # start job
-            self.project_manager.run_classification(cl_type, n_fold_cv,
-                    featsel, labeling_name, class_ids, feat_ids)
+        # start classification job if required arguments from form are there
+        if not(cl_type is None or n_fold_cv is None):
+
+            pm = self.project_manager
+
+            # check the number of class ids
+            if(len(class_ids) < 2):
+                error_msg = 'At least two classes should be provided.'
+            elif(len(feat_ids) < 1):
+                error_msg = 'No features selected.'
+            else:
+                pm.run_classification(cl_type, n_fold_cv, labeling_name,
+                                      class_ids, feat_ids)
 
             # redirect to classifier list page
             raise cherrypy.HTTPRedirect(self.get_url(0))
@@ -88,13 +95,9 @@ class Classification:
             kw_args = self.get_template_args(smi)
             kw_args['fe'] = self.project_manager.get_feature_extraction()
             kw_args['show_filter'] = True
+            kw_args['error_msg'] = error_msg
 
             template_f = self.get_template_f(smi)
-
-            print
-            print 'classification'
-            print kw_args
-            print
 
             return spicaweb.get_template(template_f, **kw_args)
 

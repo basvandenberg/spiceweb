@@ -72,7 +72,7 @@ result = '<div class="text">, </div>'.join(divs)
 
 
 
-<hr class="menu" />
+<hr class="spacer" />
 ## List with uploaded custom feature vectors
 
 <h2>Custom features</h2>
@@ -102,13 +102,12 @@ result = '<div class="text">, </div>'.join(divs)
 
 
 
-<hr class="menu" />
+<hr class="spacer" />
 ## Upload custom feature form
 
 <h2>Upload custom features</h2>
 
 <div class="form_wrapper">
-
 <div id="stylized" class="myform">
 <form id="upload_new" method="post" action="${root_url}app/features/list" enctype="multipart/form-data">
 
@@ -125,10 +124,11 @@ result = '<div class="text">, </div>'.join(divs)
     </label>
     <input type="file" name="feature_matrix_f" id="feature_matrix_f" />
 
-    <button type="submit" class="red">Upload feature matrix</button>
+    <button type="submit" class="red">Upload</button>
     <div class="spacer"></div>
 
 </form>
+</div>
 </div>
 
 </%block>

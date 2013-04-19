@@ -17,18 +17,8 @@ $(document).ready(function() {
         step: 1,
     });
 
-    // show suitable options per classifier
-    var cl = $("#classifier").val()
-    $(".classifier_specific").hide(200)
-    $("#" + cl).show('fast')
-    $("#classifier").change(function(){
-        var cl = $(this).val()
-        $(".classifier_specific").hide(200)
-        $("#" + cl).show('fast')
-    });
-
     // run button
-    $('input[type="submit"]').click(function(event) {
+    $('button[type="submit"]').click(function(event) {
         
         // prevent default click behavior
         event.preventDefault();
@@ -36,6 +26,7 @@ $(document).ready(function() {
         // check if more than one labels are selected
         var class_ids = selected_classes();
         if(class_ids.length < 2) {
+            // TODO turn this into showing error message on page
             alert('More then one label should be selected.');
             return false;
         }
@@ -51,24 +42,17 @@ $(document).ready(function() {
         var labeling =  selected_labeling();
         feat_ids = feat_ids.join(',');
         class_ids = class_ids.join(',');
-
+        
         // obtain form values
-        var fs = $("select#featsel").val();
-        var n = $("input#nfold").val();
-        var cl = $("select#classifier").val();
-        if(cl == "knn") {
-            var w = $("select#knn_weights").val();
-            cl = cl + "_" + w;
-        }
-        if(cl == "nr") {
-            cl = cl + "_" + $("select#nr_weights").val();
-        }
+        var n_fold_cv = $("input#n_fold_cv").val();
+        var cl_type = $("select#cl_type").val();
         
         // build url and send
-        var u = $(location).attr('href'); 
-        var url = u + '?feat_ids=' + feat_ids + '&labeling_name=' + 
-              labeling + '&class_ids=' + class_ids + '&featsel=' + fs + 
-              '&n_fold_cv=' + n + '&cl_type=' + cl;
+        var u = $(location).attr('href');
+        var url = u + '?feat_ids=' + feat_ids + '&labeling_name=' + labeling +
+            '&class_ids=' + class_ids + '&n_fold_cv=' + n_fold_cv +
+            '&cl_type=' + cl_type;
+
         window.location.href=url;
     });
 });

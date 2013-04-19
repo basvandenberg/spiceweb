@@ -9,69 +9,52 @@
 
 <%include file="classification_bar.html" />
 
-  <div class="form_wrapper">
+<div class="form_wrapper">
+<div id="stylized" class="myform">
+<form id="classification" method="post" enctype="multipart/form-data">
 
-    <form id="classification" action="/classification/${project_id}/classifier_new" method="post" 
-          enctype="multipart/form-data">
+    <h1>New classifier</h1>
+    <p>Use this form to start a new classification performance test</p>
 
-      <div class="form_item">
-        <label for="nfold">Cross-validation n:</label>
-        <input id="nfold" name="value" value="10" />
-      </div>
+    <label>Cross validation
+    <span class="small">Number of cross-validation loops</span>
+    </label>
+    <input id="n_fold_cv" name="n_fold_cv" value="10"/>
 
-      <div class="form_item">
-        <label for="featsel">Feature selection:</label>
-        <select id="featsel" name="featsel">
-          <option value="none" selected="selected">No feature selection</option>
-          <option value="ffs">Forward feature selection</option>
-        </select>
-      </div>
-      
-      <div class="form_item">
-        <label for="classifier">Classifier:</label>
-        <select id="classifier" name="cl_type">
-          <optgroup label="Support Vector Classifiers">
+    <label>Classifier
+    <span class="small">Type of classifier to use</span>
+    </label>
+    <select id="cl_type" name=cl_type />
+        <optgroup label="Support Vector Classifiers">
             <option value="linearsvc">LinearSVC</option>
             <option value="svc_linear">SVC linear kernel</option>
             <option value="svc_rbf">SVC RBF kernel</option>
-          </optgroup>
-          <optgroup label="Nearest Neighbor Classifiers">
-            <option value="knn">k-Nearest neighbor classifier</option>
-            <!--option value="nr">Nearest radius classifier</option-->
+        </optgroup>
+        <optgroup label="Nearest Neighbor Classifiers">
+            <option value="knn-uniform">k-Nearest neighbor classifier (uniform weights)</option>
+            <option value="knn-weight">k-Nearest neighbor classifier (distance-based weights)</option>
             <option value="nc">Nearest centroid classifier</option>
-          </optgroup>
-          <!--option value="nb">Naive Bayes</option-->
-          <!--optgroup label="Linear Discriminant Analysis"-->
-            <!--option value="lda">LDA classifier</option-->
-            <!--option value="qda">QDA classifier</option-->
-          <!--/optgroup-->
-          
-          <!--option value="dt">Decision Tree</option-->
-          <!--option value="lr">Logistic Regression</option-->
-        </select>
-      </div>
+        </optgroup>
+        <optgroup label="Naive Bayes">
+            <option value="gnb">Gaussian naive bayes</option>
+            <option value="mnb">Multinomial naive bayes</option>
+            <option value="bnb">Bernoulli naive bayes</option>
+        </optgroup>
+        <optgroup label="Linear Discriminant Analysis">
+            <option value="lda">LDA classifier</option>
+            <option value="qda">QDA classifier</option>
+        </optgroup>
+        <optgroup label="Tree classifiers">
+            <option value="dtree">Decision Tree</option>
+            <option value="rforest">Random Forest</option>
+        </optgroup>
+    </select>
 
-      <div class="form_item classifier_specific" id="knn" style="display:none;">
-        <label for="knn_weights">Weight function:</label>
-        <select id="knn_weights" name="knn_weights">
-            <option value="uniform" selected="selected">uniform</option>
-            <option value="distance">distance</option>
-        </select>
-      </div>
+    <button type="submit" class="red">Run</button>
+    <div class="spacer"></div>
 
-      <div class="form_item classifier_specific" id="nr" style="display:none;">
-        <label for="nr_weights">Weight function:</label>
-        <select id="nr_weights" name="nr_weights">
-            <option value="uniform" selected="selected">uniform</option>
-            <option value="distance">distance</option>
-        </select>
-      </div>
-
-      <hr class="submit" \>
-      <input type="submit" id="run" value="run classifier" class="bttn red" />
-
-    </form>
-
-  </div>
+</form>
+</div>
+</div>
 
 </%block>

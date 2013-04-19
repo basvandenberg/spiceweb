@@ -265,6 +265,9 @@ hr.menu {
 hr.submit {
   margin-top: 18px;
 }
+hr.spacer {
+    margin: 35px 0px 0px 0px;
+}
 
 /* form **********************************************************************/
 .form_wrapper {
@@ -340,12 +343,18 @@ form .form_item>label {
     text-align: right;
     width: 200px;
 }
-#stylized input{
+#stylized input, #stylized select, #stylized span.ui-spinner {
     float: left;
     font-size: 12px;
     padding: 4px 2px;
     width: 340px;
     margin: 2px 0 20px 10px;
+}
+#stylized select {
+    width: 348px;
+}
+#stylized span.ui-spinner{
+    height: 26px;
 }
 #stylized input[type=text] {
     border: solid 1px #babdb6;
