@@ -94,9 +94,6 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
     Returns a dict with default template parameters.
     '''
 
-    # obtain root_url from config
-    root_url = cherrypy.config.get('tools.spicaweb.root_url')
-
     # retrieve user id from session data
     if(hasattr(cherrypy, 'session')):
         user_id = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
@@ -258,17 +255,21 @@ class App:
         pm = project_management.ProjectManager(projects_dir)
         self.root_url = root_url
 
-        self.projects = project.Project(authentication, pm, root_url,
+        self.projects = project.Project(authentication, pm, self.root_url,
                 main_menu, 1, sub_menus[1])
 
-        self.features = feature.Feature(authentication, pm, root_url,
+        self.features = feature.Feature(authentication, pm, self.root_url,
                 main_menu, 2, sub_menus[2])
 
         self.classification = classification.Classification(authentication, pm,
-                root_url, main_menu, 3, sub_menus[3])
+                self.root_url, main_menu, 3, sub_menus[3])
 
     @cherrypy.expose()
     def index(self):
+        print
+        print 'App self.root_url'
+        print self.root_url
+        print
         url = '%sapp/projects/list' % (self.root_url)
         raise cherrypy.HTTPRedirect(url)
 
