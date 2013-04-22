@@ -68,14 +68,14 @@
   </div>
   <div class="project_item">user: <b>${user_id}</b>
   </div>
+% if project_id and not project_id == 'None':
+  <div class="project_item" id="project_name">project: <b>${project_id}</b>
+  </div>
+% endif
 % else:
   <div class="login_buttons">
     <a href="${'%slogin' % (root_url)}" class="signup_button">Log in</a>
     <a href="${'%sregister' % (root_url)}" class="signup_button">Create account</a>
-  </div>
-% endif
-% if project_id and not project_id == 'None':
-  <div class="project_item" id="project_name">project: <b>${project_id}</b>
   </div>
 % endif
 </div>
