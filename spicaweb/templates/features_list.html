@@ -9,7 +9,9 @@
 
 <%include file="features_bar.html" />
 
+###############################################################################
 ## List with available feature categories
+###############################################################################
 
 <h2>Predefined features</h2>
 
@@ -70,10 +72,13 @@ result = '<div class="text">, </div>'.join(divs)
   <div class="status done"></div><div class="text">ready</div>
 </div>
 
+###############################################################################
+## List with uploaded custom feature vectors, if available
+###############################################################################
 
+% if fe.fm_protein.get_custom_features():
 
 <hr class="spacer" />
-## List with uploaded custom feature vectors
 
 <h2>Custom features</h2>
 
@@ -100,10 +105,13 @@ result = '<div class="text">, </div>'.join(divs)
 </tbody>
 </table>
 
+% endif
 
+###############################################################################
+## Upload custom feature form
+###############################################################################
 
 <hr class="spacer" />
-## Upload custom feature form
 
 <h2>Upload custom features</h2>
 
