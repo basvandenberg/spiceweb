@@ -14,9 +14,9 @@ $(document).ready(function() {
             modal: true,
             buttons: {
                 "Delete project": function() {
-                    var postdata = {action_project_id: pid};
-                    $.post('delete', postdata, function (data) {
-                        window.location.href = data['redirect'];
+                    var postdata = {project_id: pid};
+                    $.post('delete', postdata, function() {
+                        location.reload();
                     });
                     $( this ).dialog( "close" );
                 },

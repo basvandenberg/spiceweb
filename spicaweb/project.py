@@ -107,9 +107,6 @@ class Project:
         # store project id in session
         cherrypy.session['project_id'] = project_id
 
-        # set project_id as the current active project
-        self.project_manager.set_project(project_id)
-
         # TODO try this, except no project, than redirect...?
         fe = self.project_manager.get_feature_extraction()
 
@@ -126,15 +123,20 @@ class Project:
     # ajax methods
     #
 
+    @cherrypy.expose
     def download(self, data_type='project', data_name=None):
 
+        self.fetch_session_data()
+        pm = self.project_manager
+
         if(data_type == 'project'):
+
             filetype = 'application/zip'
-            filepath = os.path.join(self._get_user_dir(),
-                    '%s.zip' % (self.project_id))
+            filepath = os.path.join(pm.user_dir, '%s.zip' % (self.project_id))
+
             with zipfile.ZipFile(filepath, 'w') as fout:
                 first = True
-                for root, dirs, files in os.walk(self._get_project_dir()):
+                for root, dirs, files in os.walk(pm.project_dir):
                     if first:
                         rootroot = os.path.dirname(root)
                         first = False
@@ -145,29 +147,35 @@ class Project:
 
         elif(data_type == 'data_source'):
             filetype = 'text/plain'
-            fe = self.get_feature_extraction()
-            filepath = fe.ds_dict[data_name].get_path()
+            fe = pm.get_feature_extraction()
+            filepath = fe.protein_data_set.ds_dict[data_name].get_data_path()
+            print filepath
 
         elif(data_type == 'labeling'):
             filetype = 'text/plain'
-            fm = self.get_feature_matrix()
+            fm = pm.get_feature_matrix()
             filepath = os.path.join(fm.labels_dir, '%s.txt' % (data_name))
+            print filepath
 
         return serve_file(filepath, filetype, 'attachment')
 
     # handle upload of data file, redirect to project details
     def upload(self, data_type, data_name, data_file):
 
-        fe = self.get_feature_extraction()
+        self.fetch_session_data()
+        pm = self.project_manager
+        fe = pm.get_feature_extraction()
+
+        error_msg = None
 
         if(data_type == 'data_source'):
 
             try:
-                fe.read_data_source(data_name, data_file.file)
+                fe.protein_data_set.read_data_source(data_name, data_file.file)
                 fe.save()
             except Exception as e:
                 print '\n%s\n%s\n%s\n' % (e, type(e), e.args)
-                # TODO show error
+                error_msg = 'Uploaded data contains an error.'
 
         elif(data_type == 'labeling'):
 
@@ -176,32 +184,31 @@ class Project:
                 fe.save()
             except Exception as e:
                 print '\n%s\n%s\n%s\n' % (e, type(e), e.args)
-                # TODO show error
+                error_msg = 'Uploaded labeling contains an error.'
 
+        mmi = 1
+        smi = 2
+
+        kw_args = spicaweb.get_template_args(main_menu_index=mmi,
+                sub_menu_index=smi)
+        kw_args['fe'] = fe
+        kw_args['msg'] = error_msg
+
+        template_f = '%s_%s.html' % (spicaweb.main_menu[mmi][0],
+                spicaweb.sub_menus[mmi][smi])
+
+        return spicaweb.get_template(template_f, **kw_args)
+        
         # redirect back to the project details page
-        # TODO do same return as delete function
-        new_uri = '%s%s/%s/%s' % (self.root_url,
-                spicaweb.main_menu[self.menu_index], self.project_id,
-                spicaweb.sub_menus[self.menu_index][self.sub_menu_index])
-        raise cherrypy.HTTPRedirect(new_uri)
+        #new_uri = '%s%s/%s/%s' % (self.root_url,
+        #        spicaweb.main_menu[self.menu_index], self.project_id,
+        #        spicaweb.sub_menus[self.menu_index][self.sub_menu_index])
+        #raise cherrypy.HTTPRedirect(new_uri)
 
     @cherrypy.expose
-    def delete(self, project_id):
+    def delete(self, project_id=None):
         '''
         This function handles an ajax call to delete a project.
         '''
-
         self.fetch_session_data()
-        cherrypy.response.headers['Content-Type'] = 'application/json'
-
-        # let the project manager delete the project
-        success = self.project_manager.delete_project(project_id)
-
-        # return result message
-        if(success):
-            msg = 'Project successfully removed'
-        else:
-            msg = 'Unable to delete project, project does not exist'
-
-        return simplejson.dumps(dict(msg=msg))
-
+        self.project_manager.delete_project(project_id)

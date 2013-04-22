@@ -1,34 +1,40 @@
 import os
-
+import ConfigParser
 import cherrypy
-
 from mako.lookup import TemplateLookup
 
 from cherrypy_auth import auth
-
 from spica import project_management
-from spica import job_management
+#from spica import job_management
 
 import project
 import feature
 import classification
-import news
+#import news
 
-# settings that need to be changed
-# TODO these paths should be in tools settings...
-root_url = 'http://localhost:8080/spica/'
-root_dir = '/home/bastiaan/Develop/spicaweb_test/'
-projects_dir = os.path.join(root_dir, 'projects')
-config_f = os.path.join(root_dir, 'spica.cfg')
-auth_config_f = os.path.join(root_dir, 'auth.cfg')
-news_dir = os.path.join(root_dir, 'news')
+###############################################################################
+# Paths
+###############################################################################
 
-# path to template directory
-data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
-tmpl_dir = os.path.join(data_dir, 'templates')
-# TODO fetch from config or something...
-auth_tmpl_dir = '/home/bastiaan/Develop/cherrypy_auth/' +\
-        'cherrypy_auth/template/mako'
+# path to spicaweb module
+spicaweb_dir = os.path.dirname(os.path.abspath(__file__))
+
+# path to template directories
+tmpl_d = os.path.join(spicaweb_dir, 'templates')
+auth_tmpl_d = os.path.join(os.path.dirname(os.path.abspath(auth.__file__)),
+                           'template/mako')
+
+# config file name
+CONFIG_FILE = 'spicaweb.cfg'
+
+# read root url from config
+config = ConfigParser.ConfigParser()
+config.read(CONFIG_FILE)
+ROOT_URL = config.get('spicaweb', 'root_url')
+
+###############################################################################
+# Authentication decorator
+###############################################################################
 
 def authenticate():
     '''
@@ -36,7 +42,7 @@ def authenticate():
     '''
     user = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
     if(user is None):
-        raise cherrypy.HTTPRedirect('%slogin' % (root_url))
+        raise cherrypy.HTTPRedirect('%slogin' % (ROOT_URL))
 
 # add the authentication decorator as a tool
 cherrypy.tools.authenticate = cherrypy.Tool('before_handler', authenticate)
@@ -69,26 +75,27 @@ header_menu = [
         ('contact', 'contact/')]
 
 ###############################################################################
-# Temlpate stuff
+# Temlpate functions
 ###############################################################################
 
 # create global template lookup object
-mylookup = TemplateLookup(directories=[tmpl_dir, auth_tmpl_dir],
-                          module_directory='/tmp/mako/')
+tmpl_dirs = [tmpl_d, auth_tmpl_d]
+mylookup = TemplateLookup(directories=tmpl_dirs, module_directory='/tmp/mako/')
 
 
-# function to obtain templates
 def get_template(name, **kwargs):
     t = mylookup.get_template(name)
     return t.render(**kwargs)
 
 
-# get default template arguments dictionary
 def get_template_args(main_menu_index=0, sub_menu_index=-1,
         header_menu_index=-1):
     '''
     Returns a dict with default template parameters.
     '''
+
+    # obtain root_url from config
+    root_url = cherrypy.config.get('tools.spicaweb.root_url')
 
     # retrieve user id from session data
     if(hasattr(cherrypy, 'session')):
@@ -111,8 +118,9 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
             'main_menu_index': main_menu_index,
             'sub_menu': sub_menus[main_menu_index],
             'sub_menu_index': sub_menu_index,
-            'root_url': root_url,
+            'root_url': ROOT_URL,
             'show_filter': False}
+
 
 ###############################################################################
 # The Root class
@@ -122,10 +130,22 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
 class Root:
 
     def __init__(self):
-        
-        # create authentication object
-        self.a = auth.Auth(get_template, get_template_args(), root_url,
-                auth_config_f)
+
+        # read spicaweb config file
+        config = ConfigParser.ConfigParser()
+        config.read(CONFIG_FILE)
+        project_dir = config.get('spicaweb', 'project_dir')
+        title = config.get('auth', 'title')
+        db_file = config.get('sqlite', 'db_file')
+        smtp_server = config.get('email', 'smtp_server')
+        port = config.get('email', 'port')
+        fr = config.get('email', 'from')
+        user = config.get('email', 'user')
+        password = config.get('email', 'password')
+
+        self.a = auth.Auth(get_template, get_template_args(), ROOT_URL,
+                           title, db_file)
+        self.a.set_email_settings(smtp_server, port, fr, user, password)
 
         # authentication links (because I want them in root, not /auth/login)
         self.login = self.a.login
@@ -141,13 +161,10 @@ class Root:
         # the following are only accessible by authenticated users
         self.account = self.a.account
 
-        # links to the app, documentation and news page
-        self.app = App(self.a)
-        self.news = news.News()
+        self.app = App(self.a, ROOT_URL, project_dir)
+        #self.news = news.News()
 
-        # the other static data page links are the functions in this class.
-
-    # wrappers to disallow access for geust account
+    # wrappers to disallow access for guest account
     @cherrypy.expose
     def delete_account(self):
         if(self.is_guest_user()):
@@ -182,12 +199,14 @@ class Root:
         return get_template('%s.html' % (template_name), **kw_args)
 
     def is_guest_user(self):
+        guest_users = ['spica.webapp@gmail.com']
+        guest_users.extend(['guest%i' % (i) for i in xrange(10)])
         user = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
-        return not user == None and user == 'spica.webapp@gmail.com'
+        return not user == None and user in guest_users
 
     # info pages
     @cherrypy.expose
-    def index(self, project_id=None):
+    def index(self):
 
         kw_args = get_template_args()
         #TODO
@@ -202,36 +221,42 @@ class Root:
 
     @cherrypy.expose
     def doc(self):
-        url = '%s%sindex.html' % (root_url, header_menu[1][1])
+        url = '%s%sindex.html' % (ROOT_URL, header_menu[1][1])
         raise cherrypy.HTTPRedirect(url)
 
     @cherrypy.expose
-    def software(self, project_id=None):
+    def software(self):
         hmi = 2
         kw_args = get_template_args(header_menu_index=hmi)
         template_f = '%s.html' % (header_menu[hmi][0])
         return get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def about(self, project_id=None):
+    def about(self):
         hmi = 3
         kw_args = get_template_args(header_menu_index=hmi)
         template_f = '%s.html' % (header_menu[hmi][0])
         return get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def contact(self, project_id=None):
+    def contact(self):
         hmi = 4
         kw_args = get_template_args(header_menu_index=hmi)
         template_f = '%s.html' % (header_menu[hmi][0])
         return get_template(template_f, **kw_args)
 
 
+###############################################################################
+# The App class
+###############################################################################
+
+
 @cherrypy.tools.authenticate()
 class App:
-    def __init__(self, authentication):
+    def __init__(self, authentication, root_url, projects_dir):
 
         pm = project_management.ProjectManager(projects_dir)
+        self.root_url = root_url
 
         self.projects = project.Project(authentication, pm, root_url,
                 main_menu, 1, sub_menus[1])
@@ -244,7 +269,7 @@ class App:
 
     @cherrypy.expose()
     def index(self):
-        url = '%sapp/projects/list' % (root_url)
+        url = '%sapp/projects/list' % (self.root_url)
         raise cherrypy.HTTPRedirect(url)
 
     # TODO check if needed... some helper functions
@@ -257,3 +282,5 @@ class App:
         kw_args = self.get_template_args()
         template_name = 'project_not_exist'
         return get_template('%s.html' % (template_name), **kw_args)
+
+#app = cherrypy.tree.mount(Root(), '/spica', 'prod.cfg')

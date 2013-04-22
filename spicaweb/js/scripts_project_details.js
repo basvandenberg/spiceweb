@@ -1,10 +1,12 @@
+root_url = 'http://localhost:8080/spica/app/projects/'
 
 // call server side download function to obtain this data file.
 $(document).ready(function() {
   $('a.download').bind('click', function(event) {
     var data_type = $(this).parent().attr('class');
     var data_name = $(this).attr('id');
-    var url = 'download?data_type=' + data_type + '&data_name=' + data_name;
+    var url = root_url + 'download?data_type=' + data_type + '&data_name='
+            + data_name;
     event.preventDefault();
     window.location.href=url;
   });
