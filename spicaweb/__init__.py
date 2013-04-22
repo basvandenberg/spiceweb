@@ -53,9 +53,9 @@ cherrypy.tools.authenticate = cherrypy.Tool('before_handler', authenticate)
 
 # menu items
 main_menu = [('home', ''),
-    ('projects', 'app/projects'),
-    ('features', 'app/features'),
-    ('classification', 'app/classification')
+    ('projects', 'app/projects/'),
+    ('features', 'app/features/'),
+    ('classification', 'app/classification/')
 ]
 
 # sub menu items
