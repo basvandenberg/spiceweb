@@ -82,7 +82,7 @@ class Project:
             if(error_msg is None):
                 
                 # store project id in session
-                cherrypy.session['project_id'] = project_id
+                cherrypy.session[self.SESSION_PROJECT_KEY] = project_id
 
                 # redirect to project list page
                 new_uri = '%s%s/%s' % (self.root_url,
@@ -100,12 +100,12 @@ class Project:
     @cherrypy.expose
     def details(self, project_id):
 
+        # store project id in session
+        cherrypy.session[self.SESSION_PROJECT_KEY] = project_id
+
         self.fetch_session_data()
         mmi = 1
         smi = 2
-
-        # store project id in session
-        cherrypy.session['project_id'] = project_id
 
         # TODO try this, except no project, than redirect...?
         fe = self.project_manager.get_feature_extraction()
@@ -211,4 +211,11 @@ class Project:
         This function handles an ajax call to delete a project.
         '''
         self.fetch_session_data()
+        print
+        print project_id
+        print
         self.project_manager.delete_project(project_id)
+
+        # remove project id from session if it is the currently active one
+        if(cherrypy.session['project_id'] == project_id):
+            cherrypy.session['project_id'] = None
