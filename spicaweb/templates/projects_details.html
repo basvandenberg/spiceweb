@@ -8,7 +8,6 @@
   <link rel="stylesheet" type="text/css" href="${'%scss/style_project_details.css' % (root_url)}" />
 </%block>
 
-
 <%block name="main_content">
 
 <%include file="projects_bar.html" />
@@ -17,6 +16,12 @@
 <h2>Project Details: ${project_id}</h2>
 
 <div class="project"><a href="#" class="download" id="none">download</a></div>
+
+###############################################################################
+## Available protein data files
+###############################################################################
+
+<hr class="spacer" />
 
 <h3>Available data</h3>
 
@@ -65,11 +70,17 @@
   <div class="status done"></div><div class="text">ready</div>
 </div>
 
+###############################################################################
+## Available protein labeling files
+###############################################################################
+
+<hr class="spacer" />
+
+<h3>Available label files</h3>
+
 <%
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 %>
-
-<h3>Available label files</h3>
 
 <div class="labeling">
 <a href="#" class="upload labeling" id="${lname}">upload additional labeling file</a>

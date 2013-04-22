@@ -1,7 +1,6 @@
 ## classifier_list.html
 <%inherit file="base.html"/>
 
-
 ## add automatic page refresh timer when showing list of jobs 
 <%block name="scripts">
   <script type="application/javascript" src="${'%sjs/jquery.tablesorter.min.js' % (root_url)}"></script>
@@ -12,12 +11,24 @@
 
 <%include file="classification_bar.html" />
 
-<h2>Results</h2>
+###############################################################################
+## Results table
+###############################################################################
+
+<hr class="spacer" \>
+
+<h3>Results</h3>
 
 <div id="score_select"></div>
 <div id="classifier_results"></div>
 
-<h2>Job status</h2>
+###############################################################################
+## Job status table
+###############################################################################
+
+<hr class="spacer" \>
+
+<h3>Job status</h3>
 
 <div id="job_status"></div>
 <div class="legend">
@@ -27,6 +38,5 @@
   <div class="status error"></div><div class="text">error</div>
   <div class="status done"></div><div class="text">ready</div>
 </div>
-
 
 </%block>

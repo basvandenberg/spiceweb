@@ -35,9 +35,12 @@ input {
 input[type="checkbox"] {
   margin: 6px 3px 0px 3px;
 }
-h1,h2,h3 {
+h1, h2, h3 {
   font-family: 'Ubuntu';
   font-weight: normal;
+}
+h3 {
+    margin-top: 4px;
 }
 
 div#header {
