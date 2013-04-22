@@ -149,13 +149,11 @@ class Project:
             filetype = 'text/plain'
             fe = pm.get_feature_extraction()
             filepath = fe.protein_data_set.ds_dict[data_name].get_data_path()
-            print filepath
 
         elif(data_type == 'labeling'):
             filetype = 'text/plain'
             fm = pm.get_feature_matrix()
             filepath = os.path.join(fm.labels_dir, '%s.txt' % (data_name))
-            print filepath
 
         return serve_file(filepath, filetype, 'attachment')
 
@@ -211,9 +209,6 @@ class Project:
         This function handles an ajax call to delete a project.
         '''
         self.fetch_session_data()
-        print
-        print project_id
-        print
         self.project_manager.delete_project(project_id)
 
         # remove project id from session if it is the currently active one
