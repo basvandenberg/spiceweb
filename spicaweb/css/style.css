@@ -407,6 +407,15 @@ form .form_item>label {
     color: #555753;
 }
 
+/* Show error messages */
+.msg {
+    color: #ce5c00;
+    font-weight: bold;
+    font-size: 10pt;
+    padding: 10px 4px;
+}
+
+
 .description {
   text-align: justify;
   color: #2e3436;

@@ -102,7 +102,7 @@ class Project:
         return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def details(self, project_id):
+    def details(self, project_id, msg_data=None, msg_labeling=None):
 
         self.fetch_session_data()
         smi = 2
@@ -126,6 +126,8 @@ class Project:
         kw_args = self.get_template_args(smi)
         kw_args['fe'] = fe
         kw_args['data_sources'] = ['prot_seq', 'orf_seq', 'ss_seq', 'sa_seq']
+        kw_args['msg_data'] = msg_data
+        kw_args['msg_labeling'] = msg_labeling
 
         template_f = self.get_template_f(smi)
 
@@ -176,28 +178,33 @@ class Project:
         # TODO get_feature_extraction() get called twice, which could be a bit
         # expensive for larger data sets... check this, improve
 
+        smi = 2
+
         self.fetch_session_data()
         pm = self.project_manager
 
-        error_msg = ''
+        msg_data = ''
+        msg_labeling = ''
 
-        if(data_file == None):
-            error_msg = 'No file provided.'
-        elif(data_type == 'data_source'):
-            error_msg = pm.add_data_source(data_name, data_file.file)
+        if(data_type == 'data_source'):
+            if(data_file.file == None):
+                msg_data = 'No file provided.'
+            else:
+                msg_data = pm.add_data_source(data_name, data_file.file)
         elif(data_type == 'labeling'):
-            error_msg = pm.add_labeling(data_name, data_file.file)
+            if(data_file.file == None):
+                msg_labeling = 'No file provided.'
+            else:
+                msg_labeling = pm.add_labeling(data_name, data_file.file)
         else:
-            error_msg = 'Upload error.'
+            msg_data = 'Unexpected upload error.'
 
-        smi = 2
+        if(len(msg_labeling) > 100):
+            msg_labeling = msg_labeling[:100] + '...' 
 
-        kw_args = self.get_template_args(smi)
-        kw_args['fe'] = pm.get_feature_extraction()
-        kw_args['msg'] = error_msg
-
-        # redirect back to the project details page
-        url = '%s/%s' % (self.get_url(smi), pm.project_id)
+        # redirect to the project details page
+        url = '%s/%s?msg_data=%s&msg_labeling=%s' %\
+            (self.get_url(smi), pm.project_id, msg_data, msg_labeling)
         raise cherrypy.HTTPRedirect(url)
 
     @cherrypy.expose

@@ -29,6 +29,10 @@
 
 <h3>Available data</h3>
 
+% if msg_data:
+<div id="msg_data" class="msg">${msg_data}</div>
+% endif
+
 ## data table
 
 <table id="sortTable" class="tablesorter">
@@ -84,6 +88,10 @@
 <hr class="spacer" />
 
 <h3>Available label files</h3>
+
+% if msg_labeling:
+<div id="msg_labeling" class="msg">${msg_labeling}</div>
+% endif
 
 <%
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
