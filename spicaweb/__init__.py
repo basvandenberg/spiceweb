@@ -220,6 +220,13 @@ class Root:
     def doc(self):
         url = '%s%sindex.html' % (ROOT_URL, header_menu[1][1])
         raise cherrypy.HTTPRedirect(url)
+    
+    @cherrypy.expose
+    def news(self):
+        hmi = 0
+        kw_args = get_template_args(header_menu_index=hmi)
+        template_f = '%s.html' % (header_menu[hmi][0])
+        return get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def software(self):
