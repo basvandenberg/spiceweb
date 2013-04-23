@@ -67,9 +67,9 @@ class Feature:
             error_msg = pm.add_custom_features(self.project_id, object_ids_f,
                                                feature_matrix_f)
 
-        kw_args['error_msg'] = error_msg
         kw_args['fe'] = pm.get_feature_extraction()
         kw_args['feat_status'] = pm.get_feat_calc_status()
+        kw_args['error_msg'] = error_msg
 
         template_f = self.get_template_f(smi)
 
