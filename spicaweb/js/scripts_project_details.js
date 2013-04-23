@@ -21,7 +21,7 @@ $(document).ready(function() {
         window.location.href=url;
     });
 
-    $('a.upload').bind('click', function() {
+    $('.upload').bind('click', function() {
         
         var data_name = $(this).attr('id')
  

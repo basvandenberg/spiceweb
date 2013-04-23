@@ -382,7 +382,7 @@ form .form_item>label {
     width: 300px;
     margin: 0px 0px 6px 0px;
 }
-#stylized button, #stylized input[type=submit]{
+#stylized button, #stylized input[type=submit], button.noform {
     clear: both;
     width: 105px;
     height: 29px;
@@ -396,7 +396,7 @@ form .form_item>label {
     border: 1px solid #2e3436;
     color: #888a85;
 }
-#stylized button.red, #stylized input[type=submit].red {
+#stylized button.red, #stylized input[type=submit].red, button.red {
     background-color: #cc0000;
     border: 1px solid #a40000;
     color: #eeeeec;
@@ -405,6 +405,9 @@ form .form_item>label {
     background-color: #eeeeec;
     border: 1px solid #2e3436;
     color: #555753;
+}
+button.noform {
+    margin-top: 5px;
 }
 
 /* Show error messages */

@@ -89,29 +89,9 @@
 
 <h3>Available label files</h3>
 
-% if msg_labeling:
-<div id="msg_labeling" class="msg">${msg_labeling}</div>
-% endif
-
 <%
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 %>
-
-## upload form
-
-<div class="labeling">
-<a href="#" class="upload labeling" id="${lname}">upload additional labeling file</a>
-</div>
-
-<div class="dialog labeling" id="${lname}" title="Upload labeling file">
-    <form class="upload labeling" id=${lname} action="${root_url}app/projects/upload" method="post" enctype="multipart/form-data">
-      <label for="data_name">Labeling name</label>
-      <input type="text" name="data_name" id="data_name" value="${lname}" class="text ui-corner-all">
-      <label for="data_file">Labeling file</label>
-      <input type="file" name="data_file" id="data_file" class="text ui-widget-cmntent ui-corner-all" />
-      <input type="hidden" name="data_type" value="labeling" />
-    </form>
-</div>
 
 ## labelings table
 
@@ -140,5 +120,28 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 
 </tbody>
 </table>
+
+% if msg_labeling:
+<div id="msg_labeling" class="msg">${msg_labeling}</div>
+% endif
+
+## upload form
+<button type="submit" class="upload labeling red noform" id="${lname}">Upload labeling</button>
+
+<div class="labeling">
+<!--a href="#" class="upload labeling" id="${lname}">upload additional labeling file</a-->
+</div>
+
+<div class="dialog labeling" id="${lname}" title="Upload labeling file">
+    <form class="upload labeling" id=${lname} action="${root_url}app/projects/upload" method="post" enctype="multipart/form-data">
+      <label for="data_name">Labeling name</label>
+      <input type="text" name="data_name" id="data_name" value="${lname}" class="text ui-corner-all">
+      <label for="data_file">Labeling file</label>
+      <input type="file" name="data_file" id="data_file" class="text ui-widget-cmntent ui-corner-all" />
+      <input type="hidden" name="data_type" value="labeling" />
+    </form>
+</div>
+
+
 
 </%block>
