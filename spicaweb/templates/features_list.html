@@ -31,11 +31,6 @@
 <%
 featvec = fe.fv_dict_protein[featvec_id]
 available, missing = featvec.data_availability()
-print
-print 'available, missing'
-print available
-print missing
-print
 %>
 
 <tr>
@@ -53,7 +48,6 @@ for item in available:
 for item in missing:
     divs.append('<div class="disabled text">%s</div>' % (item))
 result = '<div class="text">, </div>'.join(divs)
-print result
 %>
     ${result}
   </td>
