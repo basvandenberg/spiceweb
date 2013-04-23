@@ -30,7 +30,7 @@ class Feature:
         self.project_manager.set_project(self.project_id)
 
     def get_url(self, smi):
-        return '%s%s/%s' % (self.root_url, self.mm_url, self.sub_menu[smi])
+        return '%s%s%s' % (self.root_url, self.mm_url, self.sub_menu[smi])
 
     def get_template_f(self, smi):
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
@@ -67,9 +67,6 @@ class Feature:
             error_msg = pm.add_custom_features(self.project_id, object_ids_f,
                                                feature_matrix_f)
 
-        print
-        print error_msg
-        print
         kw_args['error_msg'] = error_msg
         kw_args['fe'] = pm.get_feature_extraction()
         kw_args['feat_status'] = pm.get_feat_calc_status()

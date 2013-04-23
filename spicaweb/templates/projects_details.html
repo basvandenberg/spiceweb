@@ -15,6 +15,10 @@
 ## Project details
 <h2>Project Details: ${project_id}</h2>
 
+###############################################################################
+## Download project-zip
+###############################################################################
+
 <div class="project"><a href="#" class="download" id="none">download</a></div>
 
 ###############################################################################
@@ -24,6 +28,8 @@
 <hr class="spacer" />
 
 <h3>Available data</h3>
+
+## data table
 
 <table id="sortTable" class="tablesorter">
 <thead>
@@ -35,7 +41,7 @@
 </thead>
 <tbody>
 
-% for ds in fe.protein_data_set.data_sources:
+% for ds in [d for d in fe.protein_data_set.data_sources if d.uid in data_sources]:
 <tr>
   <td id="status" class="${'done' if ds.available() else 'notdone'}"></td>
   <td>${ds.name}</td>
@@ -44,12 +50,13 @@
 % else:
   <td class="data_source"><a href="#" class="upload" id="${ds.uid}">upload</a>
 
+## upload dialog
 <div class="dialog" id="${ds.uid}" title="Upload ${ds.name} file">
-    <form class="upload" id="${ds.uid}" action="upload" method="post" enctype="multipart/form-data">
-      <label for="data_file">Data file</label>
-      <input type="file" name="data_file" id="data_file" class="text ui-widget-cmntent ui-corner-all" />
-      <input type="hidden" name="data_name" value="${ds.uid}">
-      <input type="hidden" name="data_type" value="data_source" />
+    <form action="#" class="upload" id="${ds.uid}" method="post" enctype="multipart/form-data">
+        <label for="data_file">Data file</label>
+        <input id="data_file" type="file" name="data_file" class="text ui-widget-cmntent ui-corner-all" />
+        <input id="data_name" type="hidden" name="data_name" value="${ds.uid}">
+        <input id="data_type" type="hidden" name="data_type" value="data_source" />
     </form>
 </div>
 
@@ -82,12 +89,14 @@
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 %>
 
+## upload form
+
 <div class="labeling">
 <a href="#" class="upload labeling" id="${lname}">upload additional labeling file</a>
 </div>
 
 <div class="dialog labeling" id="${lname}" title="Upload labeling file">
-    <form class="upload labeling" id=${lname} action="upload" method="post" enctype="multipart/form-data">
+    <form class="upload labeling" id=${lname} action="${root_url}app/projects/upload" method="post" enctype="multipart/form-data">
       <label for="data_name">Labeling name</label>
       <input type="text" name="data_name" id="data_name" value="${lname}" class="text ui-corner-all">
       <label for="data_file">Labeling file</label>
@@ -95,6 +104,8 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
       <input type="hidden" name="data_type" value="labeling" />
     </form>
 </div>
+
+## labelings table
 
 <table id="sortTable" class="tablesorter">
 <thead>

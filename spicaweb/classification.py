@@ -9,7 +9,7 @@ from project import Project
 class Classification:
 
     def __init__(self, auth, project_manager, root_url, main_menu,
-            main_menu_index, sub_menu):
+                 main_menu_index, sub_menu):
 
         self.auth = auth
         self.project_manager = project_manager
@@ -29,7 +29,7 @@ class Classification:
         self.project_manager.set_project(self.project_id)
 
     def get_url(self, smi):
-        return '%s%s/%s' % (self.root_url, self.mm_url, self.sub_menu[smi])
+        return '%s%s%s' % (self.root_url, self.mm_url, self.sub_menu[smi])
 
     def get_template_f(self, smi):
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
@@ -161,7 +161,8 @@ class Classification:
 
         mmi = 3
 
-        uri_root = '%s%s' % (spicaweb.root_url, spicaweb.main_menu[mmi])
+        # TODO use get_url function
+        uri_root = '%s%s' % (self.root_url, spicaweb.main_menu[mmi])
 
         def uri_details(cl_id):
             return '%s/%s/%s' % (uri_root, spicaweb.sub_menus[mmi][2], cl_id)
