@@ -106,9 +106,10 @@ class Project:
 
         self.fetch_session_data()
         smi = 2
-
+        
         # first check if the provided project_id excists
-        if not(project_id in self.project_manager.get_projects()):
+        existing_projects = [p[0] for p in self.project_manager.get_projects()]
+        if not(project_id in existing_projects):
             kw_args = self.get_template_args(smi)
             template_f = 'no_such_project.html'
             return spicaweb.get_template(template_f, **kw_args)
