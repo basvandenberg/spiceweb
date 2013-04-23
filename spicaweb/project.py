@@ -104,11 +104,20 @@ class Project:
     @cherrypy.expose
     def details(self, project_id):
 
+        self.fetch_session_data()
+        smi = 2
+
+        # first check if the provided project_id excists
+        if not(project_id in self.project_manager.get_projects()):
+            kw_args = self.get_template_args(smi)
+            template_f = 'no_such_project.html'
+            return spicaweb.get_template(template_f, **kw_args)
+
         # store project id in session
         cherrypy.session[self.SESSION_PROJECT_KEY] = project_id
 
+        # reset the session data, using the new project id
         self.fetch_session_data()
-        smi = 2
 
         # TODO try this, except no project, than redirect...?
         fe = self.project_manager.get_feature_extraction()
