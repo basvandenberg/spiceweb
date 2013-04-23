@@ -41,10 +41,11 @@
     </label>
     <input type="text" name="project_id" id="project_id" />
 
+    <div class="spacer"></div>
 % if msg:
-    <div id="msg">${msg}</div>
+    <div class="msg">${msg}</div>
 % else:
-    <div id="msg"></div>
+    <div class="msg"></div>
 % endif
 
     <input type="submit" class="red" value="Initialize project" />

@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import zipfile
 import simplejson
@@ -76,24 +77,33 @@ class Project:
         # start a new project
         if((fasta_file and sequence_type) and project_id):
 
-            try:
-                # initiate new project
-                self.project_manager.start_new_project(project_id, fasta_file,
-                                                       sequence_type)
-            except:
-                print(traceback.format_exc())
-                error_msg = 'error'
+            if(fasta_file.file is None):
+                error_msg = 'No fasta file provided'
+            elif(len(project_id) < 4):
+                error_msg = 'Project id should be at least 4 characters long'
+            elif(' ' in project_id):
+                error_msg = 'Spaces are not allowed in the project id'
+            elif not(re.match('^[A-Za-z0-9_-]*$', project_id)):
+                error_msg = 'Only characters, digits, dashes, and ' +\
+                            'underscores are allowed in a project id'
+            else:
+                try:
+                    # initiate new project
+                    error_msg = self.project_manager.start_new_project(
+                            project_id, fasta_file, sequence_type)
+                except:
+                    print(traceback.format_exc())
+                    error_msg = 'Error creating new project'
 
-            if(error_msg is None):
+            if(error_msg == ''):
                 
                 # store project id in session
                 cherrypy.session[self.SESSION_PROJECT_KEY] = project_id
 
                 # redirect to project list page
-                new_uri = '%s%s/%s' % (self.root_url,
-                                       spicaweb.main_menu[self.mmi][1],
-                                       spicaweb.sub_menus[self.mmi][0])
-                raise cherrypy.HTTPRedirect(new_uri)
+                url = self.get_url(0)
+                raise cherrypy.HTTPRedirect(url)
+
             else:
                 kw_args['msg'] = error_msg
 
