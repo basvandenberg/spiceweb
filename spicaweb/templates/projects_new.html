@@ -12,17 +12,20 @@
 
 <%include file="projects_bar.html" />
 
+###############################################################################
 ## Initialize new project form
+###############################################################################
+
 <div class="form_wrapper">
 
 <div id="stylized" class="myform">
-<form id="upload_new" method="post" action="${root_url}/app/projects/new" enctype="multipart/form-data">
+<form id="upload_new" method="post" action="${root_url}app/projects/new" enctype="multipart/form-data">
 
     <h1>New project</h1>
     <p>Use this form to initialize a new project</p>
 
     <label>Fasta file
-    <span class="small">Upload protein sequence data</span>
+    <span class="small">Upload sequence data (max. 50MB)</span>
     </label>
     <input type="file" name="fasta_file" id="fasta_file" />
 

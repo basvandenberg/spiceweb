@@ -4,6 +4,7 @@ import shutil
 import zipfile
 import simplejson
 import traceback
+import mimetypes
 
 import cherrypy
 from cherrypy.lib.static import serve_file

@@ -1,12 +1,24 @@
+import os
 import simplejson
 import numpy
 
 import cherrypy
+from cherrypy.lib.static import serve_file
 
 import spicaweb
 from project import Project
 
 class Classification:
+
+    SCORE_NAMES = {
+        'roc_auc': 'AUROC', 'f1': 'F1-score', 'recall': 'Recall',
+        'average_precision': 'Avg. precision', 'precision': 'Precision',
+        'accuracy': 'Accuracy'
+    }
+    CL_NAMES = {
+        'lda': 'Linear Distcriminant Analysis classifier',
+        'qda': 'Quadratic Discriminant Analysis classifier'
+    }
 
     def __init__(self, auth, project_manager, root_url, main_menu,
                  main_menu_index, sub_menu):
@@ -38,9 +50,15 @@ class Classification:
         return spicaweb.get_template_args(main_menu_index=self.mmi, 
                 sub_menu_index=smi)
 
+    # Duplicate method in feature.py
     def no_project_selected(self):
         kw_args = self.get_template_args(0)
         template_f = 'no_project_selected.html'
+        return spicaweb.get_template(template_f, **kw_args)
+
+    def no_such_classifier(self):
+        kw_args = self.get_template_args(0)
+        template_f = 'no_such_classifier.html'
         return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
@@ -107,32 +125,44 @@ class Classification:
         smi = 2
         self.fetch_session_data()
 
+        pm = self.project_manager
+
         if(self.project_id is None):
             return self.no_project_selected()
+
+        if not(cl_id in pm.get_classifier_ids()):
+            return self.no_such_classifier()
 
         kw_args = self.get_template_args(smi)
         kw_args['cl_id'] = cl_id
 
         if(self.project_manager.get_classifier_finished(cl_id)):
-            kw_args['cl_result'] =\
-                    self.project_manager.get_classifier_result(cl_id)
-            kw_args['cl_settings'] =\
-                    self.project_manager.get_classifier_settings(cl_id)
+            cv_results, avg_results = pm.get_classifier_result(cl_id)
+            kw_args['cv_results'] = cv_results
+            kw_args['avg_results'] = avg_results
+            kw_args['cl_settings'] = pm.get_classifier_settings(cl_id)
+            kw_args['cl_names'] = self.CL_NAMES
+            roc_f = pm.get_roc_f(cl_id)
+            if(roc_f and os.path.exists(roc_f)):
+                kw_args['roc_url'] = '%s%s%s/%s' % (self.root_url, self.mm_url,
+                                                    'roc', cl_id)
+            else:
+                kw_args['roc_url'] = None
 
         template_f = self.get_template_f(smi)
 
         return spicaweb.get_template(template_f, **kw_args)
 
-    #
-    # ajax functions
-    #
+    ###########################################################################
+    # ajax calls
+    ###########################################################################
 
-    # TODO this is a copy of the function in feature.py!
+    # TODO this is a copy of the function in feature.py! 
+    # Maybe create a parent class, some other methods can be inherited as well
     @cherrypy.expose
     def class_names(self, labeling_name):
 
         self.fetch_session_data()
-
         cherrypy.response.headers['Content-Type'] = 'application/json'
 
         fm = self.project_manager.get_feature_matrix()
@@ -157,22 +187,20 @@ class Classification:
     @cherrypy.expose
     def result_tables(self):
 
+        self.fetch_session_data()
         cherrypy.response.headers['Content-Type'] = 'application/json'
 
-        mmi = 3
-
-        # TODO use get_url function
-        uri_root = '%s%s' % (self.root_url, spicaweb.main_menu[mmi])
-
         def uri_details(cl_id):
-            return '%s/%s/%s' % (uri_root, spicaweb.sub_menus[mmi][2], cl_id)
+            return '%s/%s' % (self.get_url(2), cl_id)
 
+        # use project manager to fetch classification results
         cl_all_results = self.project_manager.get_all_classifier_results()
 
+        # create result table if there are any results
         if(len(cl_all_results) > 0):
 
             score_names = sorted(cl_all_results.values()[0]
-                .values()[0]['cl_result'].keys())
+                .values()[0]['cv_results'].keys())
 
             sel_str = '<div id="score_select">\n'
             sel_str = '<label for="score">Score measure:</label>\n'
@@ -188,7 +216,7 @@ class Classification:
                 # table title
                 class_ids_str = ', '.join([' '.join(c.split('_')).capitalize()
                         for c in class_ids])
-                str_data += '<h3>%s</h3>\n' % (class_ids_str)
+                str_data += '<h4>Classes: %s</h4>\n' % (class_ids_str)
 
                 # sort classifier by id
                 cl_ids = sorted(cl_dict.keys())
@@ -198,18 +226,17 @@ class Classification:
                 str_data += '<tr>\n'
                 str_data += '<th>job id</th>\n'
                 str_data += '<th>classifier</th>\n'
-                str_data += '<th>features</th>\n'
-                str_data += '<th>feat.sel.</th>\n'
-                str_data += '<th>n</th>\n'
-                for index, sname in enumerate(score_names):
+                str_data += '<th># features</th>\n'
+                str_data += '<th># CV-loops</th>\n'
+                for sname in score_names:
                     str_data += '<th class="score" id="%s">%s</th>\n'\
-                            % (sname, index)
+                            % (sname, self.SCORE_NAMES[sname])
                 str_data += '</tr>\n'
                 str_data += '</thead>\n'
                 str_data += '<tbody>\n'
 
                 for cl_id in cl_ids:
-                    cl_result = cl_dict[cl_id]['cl_result']
+                    cl_result = cl_dict[cl_id]['cv_results']
                     cv_scores = [cl_result[sname] for sname in score_names]
                     cl_settings = cl_dict[cl_id]['cl_settings']
                     str_data += '<tr>\n'
@@ -219,8 +246,6 @@ class Classification:
                             (cl_settings['classifier_name'].split('.')[-1])
                     str_data += '<td class="n">%s</td>\n' %\
                             (len(cl_settings['feature_names']))
-                    str_data += '<td>%s</td>\n' %\
-                            (cl_settings['feature_selection'])
                     str_data += '<td class="n">%s</td>\n' %\
                             (cl_settings['n_fold_cv'])
                     for index, cv_score in enumerate(cv_scores):
@@ -234,20 +259,21 @@ class Classification:
                 str_data += '</tbody>\n'
                 str_data += '</table>\n\n'
                 str_data += '</div>\n'
+
+        # otherwise return emtpy table string
         else:
             str_data = '<div id="classifier_results">' +\
-                    'No results available yet.</div>'
+                    'No classification results available yet.</div>'
             sel_str = ''
 
         return simplejson.dumps(dict(result_tables=str_data,
-                                     score_select=sel_str))
+                                score_select=sel_str))
 
     @cherrypy.expose
     def status_table(self):
 
+        self.fetch_session_data()
         cherrypy.response.headers['Content-Type'] = 'application/json'
-
-        mmi = 3
 
         def date_string(text):
             year = text[:4]
@@ -257,8 +283,6 @@ class Classification:
             m = text[11:13]
             s = text[13:15]
             return '%s-%s-%s %s:%s:%s' % (day, month, year, h, m, s)
-
-        uri_root = '%s%s' % (spicaweb.root_url, spicaweb.main_menu[mmi])
 
         def uri_details(cl_id):
             return '%s/%s' % (self.get_url(2), cl_id)
@@ -292,7 +316,24 @@ class Classification:
     @cherrypy.expose
     def progress(self, cl_id):
 
+        self.fetch_session_data()
         cherrypy.response.headers['Content-Type'] = 'application/json'
-        txt = self.project_manager.get_classifier_progress(cl_id)
+
+        progress_txt = self.project_manager.get_classifier_progress(cl_id)
+        error_txt = self.project_manager.get_classifier_error(cl_id)
         finished = self.project_manager.get_classifier_finished(cl_id)
-        return simplejson.dumps(dict(progress=txt, finished=finished))
+
+        return simplejson.dumps(
+            dict(progress=progress_txt, error=error_txt, finished=finished))
+
+    @cherrypy.expose
+    def roc(self, cl_id):    
+        
+        self.fetch_session_data()
+        pm = self.project_manager
+
+        filetype = 'image/png'
+        filepath = pm.get_roc_f(cl_id)
+
+        # serve the file
+        return serve_file(filepath, filetype, 'attachment')

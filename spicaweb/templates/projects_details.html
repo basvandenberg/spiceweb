@@ -103,7 +103,7 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 </tr>
 </thead>
 <tbody>
-% for lname, l in sorted(fe.fm_protein.labeling_dict.iteritems()):
+% for index, (lname, l) in enumerate(sorted(fe.fm_protein.labeling_dict.iteritems())):
 
 <tr>
   <td id="status" class="done"></td>
@@ -121,6 +121,10 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 % if msg_labeling:
 <div id="msg_labeling" class="msg">${msg_labeling}</div>
 % endif
+
+<%
+lname = 'labeling%i' % (index + 1)
+%>
 
 ## upload form
 <button type="submit" class="upload labeling red noform" id="${lname}">Upload labeling</button>

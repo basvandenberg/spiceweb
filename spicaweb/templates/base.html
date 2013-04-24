@@ -18,7 +18,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
   <script type="application/javascript" src="${'%sjs/jquery.cookie.js' % (root_url)}"></script>
-% if show_filter and fe.fm_protein.feature_ids:
+% if show_filter:
   <script type="application/javascript" src="${'%sjs/scripts_filter.js' % (root_url)}"></script>
 % endif
   
@@ -91,8 +91,11 @@
 Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
 </div>
 
-## add feature filter, if requested for and features are available.
-% if show_filter and fe.fm_protein.feature_ids:
+###############################################################################
+## Feature and class filter
+###############################################################################
+
+% if show_filter:
 
 <%block name="filter">
 
@@ -100,6 +103,10 @@ Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft
 <div id="filterbar"></div>
 <div id="filterscreen">
 <form id="filter">
+
+##
+## Class filter
+##
 
 <div class="filtercol">
 <div class="filter_header first">Label filter</div>
@@ -109,6 +116,7 @@ Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft
 </div>
 
 <div class="filter_select" id="labelfilter">
+
 <%
 labeling_names = sorted(fe.fm_protein.labeling_dict.keys())
 cur_labeling_index = 0
@@ -147,7 +155,9 @@ num_select = 0
 
 </div>
 
-
+##
+## Feature filter
+##
 
 <div class="filter_header">Feature filter</div>
 

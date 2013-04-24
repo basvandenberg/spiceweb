@@ -39,6 +39,7 @@ class Feature:
         return spicaweb.get_template_args(main_menu_index=self.mmi,
                                           sub_menu_index=smi)
 
+    # Duplicate method in classification.py
     def no_project_selected(self):
         kw_args = self.get_template_args(0)
         template_f = 'no_project_selected.html'
