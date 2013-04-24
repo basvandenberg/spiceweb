@@ -27,7 +27,7 @@
 
 <hr class="spacer" />
 
-<h3>Available data</h3>
+<h3>Available protein data</h3>
 
 % if msg_data:
 <div id="msg_data" class="msg">${msg_data}</div>
@@ -74,11 +74,8 @@
 </table>
 
 <div class="legend">
-  <div class="status notdone"></div><div class="text">not available</div>
-  <div class="status waiting"></div><div class="text">waiting</div>
-  <div class="status running"></div><div class="text">running</div>
-  <div class="status error"></div><div class="text">error</div>
-  <div class="status done"></div><div class="text">ready</div>
+  <div class="status done"></div><div class="text">available</div>
+  <div class="status notdone"></div><div class="text">unavailable</div>
 </div>
 
 ###############################################################################
@@ -101,7 +98,7 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
   <th id="status"></th>
   <th>name</th>
   <th>class names</th>
-  <th>#</th>
+  <th># classes</th>
   <th></th>
 </tr>
 </thead>
