@@ -26,19 +26,18 @@
     </label>
     <select id="cl_type" name=cl_type />
         <optgroup label="Support Vector Classifiers">
-            <option value="linearsvc">LinearSVC</option>
-            <option value="svc_linear">SVC linear kernel</option>
-            <option value="svc_rbf">SVC RBF kernel</option>
+            <option value="linearsvc">SVM (linear)</option>
+            <option value="svc_rbf">SVM (RBF)</option>
         </optgroup>
         <optgroup label="Nearest Neighbor Classifiers">
-            <option value="knn-uniform">k-Nearest neighbor classifier (uniform weights)</option>
-            <option value="knn-weight">k-Nearest neighbor classifier (distance-based weights)</option>
+            <option value="kn_uniform">k-Nearest neighbor classifier (uniform weights)</option>
+            <option value="kn_distance">k-Nearest neighbor classifier (distance-based weights)</option>
             <option value="nc">Nearest centroid classifier</option>
         </optgroup>
         <optgroup label="Naive Bayes">
             <option value="gnb">Gaussian naive bayes</option>
-            <option value="mnb">Multinomial naive bayes</option>
-            <option value="bnb">Bernoulli naive bayes</option>
+            <!--option value="mnb">Multinomial naive bayes</option-->
+            <!--option value="bnb">Bernoulli naive bayes</option-->
         </optgroup>
         <optgroup label="Linear Discriminant Analysis">
             <option value="lda">LDA classifier</option>
