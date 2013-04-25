@@ -1,10 +1,7 @@
 import os
 import re
-import shutil
 import zipfile
-import simplejson
 import traceback
-import mimetypes
 
 import cherrypy
 from cherrypy.lib.static import serve_file
@@ -15,6 +12,12 @@ import spicaweb
 class Project:
 
     SESSION_PROJECT_KEY = 'project_id'
+
+    EXAMPLE_DIR = 'example_projects'
+    EXAMPLES = [
+        ('localization', 'protein.fsa', 'prot_seq', 'localization.txt'),
+        ('production', 'orf.fsa', 'orf_seq', 'production.txt')
+    ]
 
     def __init__(self, auth, project_manager, root_url, main_menu,
                  main_menu_index, sub_menu):
@@ -144,6 +147,48 @@ class Project:
 
         return spicaweb.get_template(template_f, **kw_args)
 
+    @cherrypy.expose
+    def load_example(self, example_number):
+
+        self.fetch_session_data()
+        smi = 1
+
+        try:
+            example_number = int(example_number)
+        except ValueError:
+            example_number = -1
+
+        if(example_number < 0 or example_number >= len(self.EXAMPLES)):
+            kw_args = self.get_template_args(smi)
+            template_f = 'no_such_example.html'
+            print template_f
+            return spicaweb.get_template(template_f, **kw_args)
+        
+        pm = self.project_manager
+        (pid, seq_f, seq_type, labeling_f) = self.EXAMPLES[example_number]
+
+        root_d = spicaweb.spicaweb_dir
+        seq_f = os.path.join(root_d, self.EXAMPLE_DIR, pid, seq_f)
+        labeling_f = os.path.join(root_d, self.EXAMPLE_DIR, pid, labeling_f)
+        error_msg = pm.start_example_project(pid, seq_f, seq_type, labeling_f)
+        
+        if(error_msg == ''):
+            
+            # store project id in session
+            cherrypy.session[self.SESSION_PROJECT_KEY] = pid
+
+            # redirect to project list page
+            url = self.get_url(0)
+            raise cherrypy.HTTPRedirect(url)
+
+        else:
+            print
+            print 'This should not happen...'
+            print error_msg
+        
+        url = self.get_url(0)
+        raise cherrypy.HTTPRedirect(url)
+
     #
     # ajax methods
     #
@@ -223,6 +268,9 @@ class Project:
         '''
         This function handles an ajax call to delete a project.
         '''
+        print
+        print project_id
+        print
         self.fetch_session_data()
         self.project_manager.delete_project(project_id)
 

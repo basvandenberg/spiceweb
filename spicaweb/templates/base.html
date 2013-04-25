@@ -69,7 +69,7 @@
   <div class="project_item">user: <b>${user_id}</b>
   </div>
 % if project_id and not project_id == 'None':
-  <div class="project_item" id="project_name">project: <b>${project_id}</b>
+  <div class="project_item" id="project_name">project: <a href="${root_url}${main_menu[1][1]}/details/${project_id}"><b>${project_id}</b></a>
   </div>
 % endif
 % else:

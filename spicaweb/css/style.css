@@ -350,11 +350,11 @@ form .form_item>label {
     float: left;
     font-size: 12px;
     padding: 4px 2px;
-    width: 340px;
+    width: 380px;
     margin: 2px 0 20px 10px;
 }
 #stylized select {
-    width: 348px;
+    width: 380px;
 }
 #stylized span.ui-spinner{
     height: 26px;
@@ -366,7 +366,7 @@ form .form_item>label {
     float: left;
     font-size: 12px;
     padding: 4px 2px;
-    width: 340px;
+    width: 380px;
     margin: 2px 0 20px 10px;
 }
 #stylized .radio_options input[type=radio] {
@@ -379,10 +379,16 @@ form .form_item>label {
 #stylized .radio_options .option_label {
     float: left;
     display: inline;
-    width: 300px;
+    width: 340px;
     margin: 0px 0px 6px 0px;
 }
+#stylized .button_bar {
+    float: left;
+    width: 100%;
+    display: block;
+}
 #stylized button, #stylized input[type=submit], button.noform {
+    display: block;
     clear: both;
     width: 105px;
     height: 29px;
@@ -391,7 +397,7 @@ form .form_item>label {
     /*line-height: 27px;*/
     font-size: 12px;
     cursor: pointer;
-    margin: 30px 0 0 4px;
+    margin: 15px 0 10px 4px;
     background-color: #babdb6;
     border: 1px solid #2e3436;
     color: #888a85;
