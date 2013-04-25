@@ -1,4 +1,5 @@
 import os
+import shutil
 import ConfigParser
 import cherrypy
 from mako.lookup import TemplateLookup
@@ -131,7 +132,7 @@ class Root:
         # read spicaweb config file
         config = ConfigParser.ConfigParser()
         config.read(CONFIG_FILE)
-        project_dir = config.get('spicaweb', 'project_dir')
+        self.project_dir = config.get('spicaweb', 'project_dir')
         title = config.get('auth', 'title')
         db_file = config.get('sqlite', 'db_file')
         smtp_server = config.get('email', 'smtp_server')
@@ -151,14 +152,14 @@ class Root:
         self.aregister = self.a.aregister
         self.forgot_password = self.a.forgot_password
         self.aforgot_password = self.a.aforgot_password
-        self.change_password_once = self.a.change_password
-        self.achange_password_once = self.a.achange_password
+        self.change_password_once = self.a.change_password_once
+        self.achange_password_once = self.a.achange_password_once
         self.activate_account = self.a.activate_account
         self.logout = self.a.logout
         # the following are only accessible by authenticated users
         self.account = self.a.account
 
-        self.app = App(self.a, ROOT_URL, project_dir)
+        self.app = App(self.a, ROOT_URL, self.project_dir)
         #self.news = news.News()
 
     # wrappers to disallow access for guest account
@@ -174,6 +175,12 @@ class Root:
         if(self.is_guest_user()):
             return None
         else:
+            # delete project dir
+            if(self.a.udb.verify_password(username, password)):
+                pm = project_management.ProjectManager(self.project_dir)
+                pm.set_user(username)
+                shutil.rmtree(pm.user_dir)
+            # delete account
             return self.a.adelete_account(username, password)
 
     @cherrypy.expose                                                            
@@ -196,7 +203,7 @@ class Root:
         return get_template('%s.html' % (template_name), **kw_args)
 
     def is_guest_user(self):
-        guest_users = ['spica.webapp@gmail.com']
+        guest_users = []
         guest_users.extend(['guest%i' % (i) for i in xrange(10)])
         user = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
         return not user == None and user in guest_users
