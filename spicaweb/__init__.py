@@ -180,6 +180,7 @@ class Root:
                 pm = project_management.ProjectManager(self.project_dir)
                 pm.set_user(username)
                 shutil.rmtree(pm.user_dir)
+                cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
             # delete account
             return self.a.adelete_account(username, password)
 

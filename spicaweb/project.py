@@ -268,12 +268,9 @@ class Project:
         '''
         This function handles an ajax call to delete a project.
         '''
-        print
-        print project_id
-        print
         self.fetch_session_data()
         self.project_manager.delete_project(project_id)
 
         # remove project id from session if it is the currently active one
-        if(cherrypy.session['project_id'] == project_id):
-            cherrypy.session['project_id'] = None
+        if(cherrypy.session[self.SESSION_PROJECT_KEY] == project_id):
+            cherrypy.session[self.SESSION_PROJECT_KEY] = None
