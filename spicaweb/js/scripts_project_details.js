@@ -1,12 +1,10 @@
 
 function get_url_root() {
-    var path = window.location;
-    var path_orig = path.origin;
-    var path_name = path.pathname;
-    var path_list = path_name.split('/');
+    var path = window.location.href;
+    var path_list = path.split('/');
     path_list.pop();
     path_list.pop();
-    var root_url = path_orig + path_list.join('/');
+    var root_url = path_list.join('/');
     return root_url;
 }
 
