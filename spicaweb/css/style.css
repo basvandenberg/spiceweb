@@ -1,3 +1,5 @@
+/* General *******************************************************************/
+
 body {
   background-color: #eeeeec;
   margin: 0;
@@ -9,6 +11,9 @@ body {
 }
 p {
   font-family: 'Raleway', sans-serif;
+}
+p.story {
+    text-align: justify;
 }
 a {
   text-decoration:none;
@@ -42,6 +47,8 @@ h1, h2, h3 {
 h3 {
     margin-top: 4px;
 }
+
+/* Header ********************************************************************/
 
 div#header {
   position: relative;
@@ -81,6 +88,8 @@ div#header div#version {
   font-size:10pt;
 }
 
+/* Footer ********************************************************************/
+
 div#footer {
   margin-top: 5px;
   width: 644px;
@@ -92,6 +101,8 @@ div#footer {
   font-size: 9pt;
 }
 
+/* The main wrapper **********************************************************/
+
 div#wrapper {
   width: 844px;
   margin-left: auto;
@@ -101,7 +112,122 @@ div#wrapper {
   border-radius: 0px 0px 15px 15px;
   border: 1px solid #babdb6;
   font-size: 11pt;
+  overflow: auto; /* hack for floating divs inside this wrapper */
 }
+
+/* Home wrapper **************************************************************/
+
+div#home_wrapper {
+    float: left;
+    width: 592px;
+    padding-right: 42px;
+}
+div#home_sidebar {
+    float: right;
+    padding-left: 19px;
+    border-left: 1px solid #babdb6;
+    width: 190px;
+}
+div#home_sidebar h3 {
+    text-align: center;
+    color: #eeeeec;
+    margin-bottom: 9px;
+    padding: 7px;
+    background-color: #babdb6;
+}
+div#home_sidebar img {
+    width: 140px;
+}
+div#home_sidebar a {
+    margin: 0px 25px
+}
+div#home_sidebar a.python {
+    display: block;
+    width: 140px;
+    height: 73px;
+    background: #fff url(../img/python_gray.gif) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.python:hover {
+    background: #fff url(../img/python.gif) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.cherrypy {
+    display: block;
+    width: 140px;
+    height: 73px;
+    background: #fff url(../img/cherrypy_gray.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.cherrypy:hover {
+    background: #fff url(../img/cherrypy.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.mako {
+    display: block;
+    width: 140px;
+    height: 73px;
+    background: #fff url(../img/mako_gray.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.mako:hover {
+    background: #fff url(../img/mako.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.sklearn {
+    display: block;
+    width: 140px;
+    height: 73px;
+    background: #fff url(../img/sklearn_gray.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.sklearn:hover {
+    background: #fff url(../img/sklearn.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.tudelft {
+    display: block;
+    width: 140px;
+    height: 55px;
+    background: #fff url(../img/tudelft_gray.jpg) top left no-repeat;
+    background-size: 140px 55px;
+}
+div#home_sidebar a.tudelft:hover {
+    background: #fff url(../img/tudelft.jpg) top left no-repeat;
+    background-size: 140px 55px;
+}
+div#home_sidebar a.dbl {
+    display: block;
+    width: 140px;
+    height: 55px;
+    background: #fff url(../img/dbl_gray.png) top left no-repeat;
+    background-size: 140px 55px;
+}
+div#home_sidebar a.dbl:hover {
+    background: #fff url(../img/dbl.png) top left no-repeat;
+    background-size: 140px 55px;
+}
+div#home_sidebar a.nbic {
+    display: block;
+    width: 140px;
+    height: 55px;
+    background: #fff url(../img/nbic_gray.png) top left no-repeat;
+    background-size: 140px 55px;
+}
+div#home_sidebar a.nbic:hover {
+    background: #fff url(../img/nbic.png) top left no-repeat;
+    background-size: 140px 55px;
+}
+div#home_sidebar hr.hr_sidebar {
+    border: 1px solid #babdb6;
+}
+div#home_sidebar hr.hr_final {
+    border: 3px solid #babdb6;
+    margin-bottom: 25px;
+}
+
+/* TODO news *****************************************************************/
+
 div.news_item h3 {
   border-top: 1px solid #babdb6;
   margin-bottom: 3px;
@@ -115,28 +241,33 @@ div.news_item p {
   margin-bottom: 5px;
 }
 
+/* Static menu at the top header *********************************************/
 
 div#header_menu {
-  width: 96%;
+  /*width: 96%;*/
+  width: 1000px;
   height: 20px;
   margin: 0px auto;
   margin-bottom: 19px;
   background-color: #555753;
   border-radius: 0px 0px 8px 8px;
-  text-align: right;
+  text-align: left;
   font-family: sans-serif;
   font-size: 11pt;
   padding: 2px 20px;
 }
+
 div#header_menu a {
   color: #babdb6;
   padding-right: 10px;
 }
+
 div#header_menu a.active {
   color: #ffffff;
   font-weight: bold;
 }
 
+/* Colored main menu *********************************************************/
 
 div#main_menu { 
   width: 932px;
@@ -146,6 +277,43 @@ div#main_menu {
   font-family: sans-serif;
   font-size: 12pt;
 }
+
+.home {
+  background-color: #5c3566;
+}
+.projects {
+  background-color: #3465a4;
+}
+.features {
+  background-color: #4e9a06;
+}
+.classification {
+  background-color: #ce5c00;
+}
+
+.menu_item {
+  width: 202px;
+  float: left;
+  color: #d3d7cf;
+  padding: 6px 15px 4px 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.menu_active {
+  width: 206px;
+  height: 15px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  margin-top: -5px;
+  color: #ffffff;
+  border-top: 3px double #babdb6;
+  font-style:oblique;
+}
+.menu_item:hover {
+  text-decoration: underline;
+}
+
+/* Project and login bar *****************************************************/
 
 div#project_bar {
   width: 931px;
@@ -189,84 +357,20 @@ a.signup_button:hover {
   color: #ffffff;
 }
 
-.home {
-  background-color: #5c3566;
-  /*border: 1px solid #3465a4;*/
-}
-.projects {
-  background-color: #3465a4;
-}
-.features {
-  background-color: #4e9a06;
-  /*border: 1px solid #73d216;*/
-}
-.classification {
-  background-color: #ce5c00;
-  /*border: 1px solid #edd400;*/
-}
-
-.menu_item {
-  width: 202px;
-  float: left;
-  color: #d3d7cf;
-  padding: 6px 15px 4px 15px;
-  /*border-right: 2px solid #eeeeec;*/
-  cursor: pointer;
-  text-decoration: none;
-}
-.menu_active {
-  width: 206px;
-  /*background-color: #3465a4;*/
-  height: 15px;
-  padding-bottom: 8px;
-  padding-top: 8px;
-  margin-top: -5px;
-  color: #ffffff;
-  border-top: 3px double #babdb6;
-  font-style:oblique;
-  /*pointer-events: none;
-  cursor: default;*/
-}
-.menu_item:hover {
-  /*background-color: #3465a4;*/
-  text-decoration: underline;
-}
-.menu_item.disabled {
-  color: #babdb6;
-  pointer-events: none;
-  cursor: default;
-  /*background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0, #ccc), color-stop(0.25, #ccc), color-stop(0.25, #bbb), color-stop(0.5, #bbb), color-stop(0.5, #ccc), color-stop(0.75, #ccc), color-stop(0.75, #bbb));*/
-  background-image: -webkit-linear-gradient(left bottom, rgba(186,189,182,0.2) 0%, rgba(186,189,182,0.2) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 50%, rgba(186,189,182,0.2) 50%, rgba(186,189,182,0.2) 75%, rgba(0,0,0,0) 75%);
-  /*background-image: -moz-linear-gradient(left bottom, #ccc 0%, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%);
-  background-image: -ms-linear-gradient(left bottom, #ccc 0%, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%);
-  background-image: -o-linear-gradient(left bottom, #ccc 0%, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%);
-  background-image: linear-gradient(left bottom, #ccc 0%, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%);*/
-  background-size: 30px 30px;
-/*  background-color: #1a82f7; 
-  background-image: url(images/fallback-gradient.png); 
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2F2727), to(#1a82f7));
-  background-image: -webkit-linear-gradient(top, #2F2727, #1a82f7); 
-  background-image:    -moz-linear-gradient(top, #2F2727, #1a82f7);
-  background-image:     -ms-linear-gradient(top, #2F2727, #1a82f7);
-  background-image:      -o-linear-gradient(top, #2F2727, #1a82f7);*/
-}
-.disabled2 {
-  color: #888a85;
-  pointer-events: none;
-  cursor: default;
-  background-image: -webkit-linear-gradient(left bottom, rgba(136,138,133,0.2) 0%, rgba(136,138,133,0.2) 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 50%, rgba(136,138,133,0.2) 50%, rgba(136,138,133,0.2) 75%, rgba(0,0,0,0) 75%);
-  background-size: 30px 30px;
-}
+/* ??? ***********************************************************************/
 
 a.bttn.menu {
   width: 75px;
   text-align: center;
 }
+
+/* Horizontal lines / separators *********************************************/
+
 hr.menu {
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 hr.submit {
-  margin-top: 18px;
+    margin-top: 18px;
 }
 hr.spacer {
     margin: 35px 0px 0px 0px;
