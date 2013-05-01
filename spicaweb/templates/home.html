@@ -6,18 +6,20 @@
 
 <div id="home_wrapper">
     
-    <h1>Welcome to the SPiCa website</h1>
+<h1>Welcome to the SPiCa website</h1>
 
-<div id="introduction" class="news_item"    
-    <p class="story">
+<div id="introduction" class="news_item">
+<p class="story">
 
 SPiCa is a web application that can be used to explore a set of protein
 sequences. After uploading a fasta file with protein sequences, the application
-can be used to calculate a large range of sequence-based features. If labels
+can be used to calculate a range of sequence-based features. If labels
 are also provided for the proteins, the web application can also be used to
 train and test sequence-based classifiers.
 
-    </p>
+</p>
+
+<a href="${root_url + 'about'}">Read more ></a>
 </div>
 
 <hr class="spacer">
@@ -32,7 +34,7 @@ train and test sequence-based classifiers.
  <p class="story">${text}</p>
  % endfor
 
-<a href="${root_url + 'news'}">More news items ></a>
+<a href="${root_url + 'news'}">More news ></a>
 </div>
 
 </div>
