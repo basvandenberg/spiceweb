@@ -11,7 +11,7 @@ from spica import project_management
 import project
 import feature
 import classification
-#import news
+import news
 
 ###############################################################################
 # Paths
@@ -32,6 +32,7 @@ CONFIG_FILE = 'spicaweb.cfg'
 config = ConfigParser.ConfigParser()
 config.read(CONFIG_FILE)
 ROOT_URL = config.get('spicaweb', 'root_url')
+NEWS_F = config.get('spicaweb', 'news_f')
 
 ###############################################################################
 # Authentication decorator
@@ -212,10 +213,13 @@ class Root:
     # info pages
     @cherrypy.expose
     def index(self):
+        
+        n = news.News(NEWS_F)
+        news_items = n.parse(number_of_items=3)
+        print news_items
 
         kw_args = get_template_args()
-        #TODO
-        kw_args['news_collection'] = []
+        kw_args['news_items'] = news_items
         template_name = 'home'
 
         return get_template('%s.html' % (template_name), **kw_args)
@@ -232,7 +236,13 @@ class Root:
     @cherrypy.expose
     def news(self):
         hmi = 0
+
+        n = news.News(NEWS_F)
+        news_items = n.parse()
+
         kw_args = get_template_args(header_menu_index=hmi)
+        kw_args['news_items'] = news_items
+
         template_f = '%s.html' % (header_menu[hmi][0])
         return get_template(template_f, **kw_args)
 

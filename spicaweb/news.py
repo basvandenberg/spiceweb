@@ -1,66 +1,46 @@
-import os
 import datetime
 
-import cherrypy
-
-import spicaweb
 
 class News:
 
-    @cherrypy.expose
-    def index(self):
+    def __init__(self, news_f):
+        self._news_f = news_f
 
-        hmi = 0
+    @property
+    def news_f(self):
+        return self._news_f
 
-        kw_args = spicaweb.get_template_args(header_menu_index=hmi)
-        kw_args['news_collection'] = self.parse_news()
+    def parse(self, number_of_items=None):
+        '''
 
-        template_f = '%s.html' % (spicaweb.header_menu[hmi][0])
+        This function returns the `number_of_items` most recent news item
+        parsed from `news_f'.
 
-        return spicaweb.get_template(template_f, **kw_args)
+        Args:
+            number_of_items (int): The number of (most recent) news items to
+            return. If set to None, all available news items in `news_f` will
+            be returned.
+        '''
+        print 'Start parsing'
+        news_items = []
 
-    def parse_news(self):
-        news_f = os.path.join(spicaweb.news_dir, 'news.txt')
-        news_parser = NewsCollectionParser(news_f)
-        news_collection = news_parser.parse()
-        return news_collection
+        with open(self.news_f, 'r') as fin:
 
-    #@lg_authority.groups('admin')
-    def admin(self):
-        return 'news_admin'
-
-
-class NewsItem:
-
-    def __init__(self, date, title, text, published, highlighted):
-        self.date = date
-        self.title = title
-        self.text = text
-        self.published = published
-        self.highlighted = highlighted
-
-
-class NewsCollectionParser:
-
-    def __init__(self, news_file):
-        self.news_file = news_file
-
-    def parse(self):
-        with open(self.news_file, 'r') as fin:
-
-            news_collection = []
+            news_items = []
             num_items = int(fin.readline())
 
-            for i in xrange(num_items):
+            if(number_of_items is None):
+                number_of_items = num_items
+
+            for i in xrange(min(num_items, number_of_items)):
                 fin.readline()
                 date = datetime.datetime.strptime(fin.readline().strip(),
-                        '%Y-%m-%d')
+                                                  '%Y-%m-%d')
                 title = fin.readline().strip()
                 text = fin.readline().strip()
                 published = eval(fin.readline())
-                highlighted = eval(fin.readline())
 
-                news_item = NewsItem(date, title, text, published, highlighted)
-                news_collection.append(news_item)
+                news_items.append((date, title, text, published))
 
-        return news_collection
+        print news_items
+        return news_items

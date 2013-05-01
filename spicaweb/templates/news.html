@@ -3,14 +3,18 @@
 
 <%block name="main_content">
 
-<div id="main_wrapper">
+<div id="home_wrapper">
 
 <h1>News</h1>
 
-News items.
+ % for (date, title, text, _) in news_items:
+ <h3>${title}</h3>
+ <div class="date">${date.strftime('%d %B %Y')}</div>
+ <p class="story">${text}</p>
+ % endfor
 
 </div>
 
-
+<%include file="sidebar.html" />
 
 </%block>

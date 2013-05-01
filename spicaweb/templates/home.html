@@ -1,16 +1,12 @@
-## login.html
-<%inherit file="base.html"/>
+## home.html
 
-<%block name="stylesheets">
-</%block>
+<%inherit file="base.html"/>
 
 <%block name="main_content">
 
-<a href="https://github.com/basvandenberg/spica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-
 <div id="home_wrapper">
-
-<h1>Welcome to the SPiCa website</h1>
+    
+    <h1>Welcome to the SPiCa website</h1>
 
 <div id="introduction" class="news_item"    
     <p class="story">
@@ -24,45 +20,23 @@ train and test sequence-based classifiers.
     </p>
 </div>
 
+<hr class="spacer">
+
 <h2>News</h2>
 
 <div id="news_items">
-% for news_item in news_collection:
-% if news_item.highlighted:
-    <div class="news_item">
-        <h3>${news_item.title}</h3>
-        <div class="date">${news_item.date.strftime('%d %B %Y')}</div>
-        <p>${news_item.text}</p>
-    </div>
-% endif
-% endfor
-<a href="${root_url + 'news'}">Read more ></a>
+
+ % for (date, title, text, _) in news_items:
+ <h3>${title}</h3>
+ <div class="date">${date.strftime('%d %B %Y')}</div>
+ <p class="story">${text}</p>
+ % endfor
+
+<a href="${root_url + 'news'}">More news items ></a>
 </div>
 
 </div>
 
-<div id="home_sidebar">
-
-    <h3>Funding</h3>
-
-    <a href="http://bioinformatics.tudelft.nl" target="_blank" class="dbl"></a>
-    <hr class="hr_sidebar">
-    <a href="http://www.tudelft.nl" target="_blank" class="tudelft"></a>
-    <hr class="hr_sidebar">
-    <a href="http://www.nbic.nl" target="_blank" class="nbic"></a>
-    <hr class="hr_final">
-
-    <h3>Software</h3>
-
-    <a href="http://www.python.org" target="_blank" class="python"></a>
-    <hr class="hr_sidebar">
-    <a href="http://www.cherrypy.org" target="_blank" class="cherrypy"></a>
-    <hr class="hr_sidebar">
-    <a href="http://www.makotemplates.org/" target="_blank" class="mako"></a>
-    <hr class="hr_sidebar">
-    <a href="http://scikit-learn.org/" target="_blank" class="sklearn"></a>
-    <hr class="hr_final">
-
-</div>
+<%include file="sidebar.html" />
 
 </%block>

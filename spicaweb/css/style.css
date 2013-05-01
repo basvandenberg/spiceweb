@@ -244,17 +244,16 @@ div.news_item p {
 /* Static menu at the top header *********************************************/
 
 div#header_menu {
-  /*width: 96%;*/
-  width: 1000px;
+  width: 900px;
   height: 20px;
   margin: 0px auto;
   margin-bottom: 19px;
   background-color: #555753;
   border-radius: 0px 0px 8px 8px;
-  text-align: left;
+  text-align: right;
   font-family: sans-serif;
   font-size: 11pt;
-  padding: 2px 20px;
+  padding: 2px 40px;
 }
 
 div#header_menu a {
