@@ -7,10 +7,12 @@
 
 <h1>News</h1>
 
- % for (date, title, text, _) in news_items:
- <h3>${title}</h3>
- <div class="date">${date.strftime('%d %B %Y')}</div>
- <p class="story">${text}</p>
+% for (date, title, text, _) in news_items:
+<div class="news_item">
+<h3>${title}</h3>
+<div class="date">${date.strftime('%d %B %Y')}</div>
+<p>${text}</p>
+</div>
  % endfor
 
 </div>

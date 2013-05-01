@@ -135,11 +135,11 @@ div#home_sidebar h3 {
     padding: 7px;
     background-color: #babdb6;
 }
-div#home_sidebar img {
-    width: 140px;
-}
 div#home_sidebar a {
     margin: 0px 25px
+}
+div#home_sidebar a.larger {
+    margin: 0px 15px
 }
 div#home_sidebar a.python {
     display: block;
@@ -187,36 +187,36 @@ div#home_sidebar a.sklearn:hover {
 }
 div#home_sidebar a.tudelft {
     display: block;
-    width: 140px;
-    height: 55px;
+    width: 160px;
+    height: 63px;
     background: #fff url(../img/tudelft_gray.jpg) top left no-repeat;
-    background-size: 140px 55px;
+    background-size: 160px 63px;
 }
 div#home_sidebar a.tudelft:hover {
     background: #fff url(../img/tudelft.jpg) top left no-repeat;
-    background-size: 140px 55px;
+    background-size: 160px 63px;
 }
 div#home_sidebar a.dbl {
     display: block;
-    width: 140px;
-    height: 55px;
+    width: 160px;
+    height: 63px;
     background: #fff url(../img/dbl_gray.png) top left no-repeat;
-    background-size: 140px 55px;
+    background-size: 160px 63px;
 }
 div#home_sidebar a.dbl:hover {
     background: #fff url(../img/dbl.png) top left no-repeat;
-    background-size: 140px 55px;
+    background-size: 160px 63px;
 }
 div#home_sidebar a.nbic {
     display: block;
-    width: 140px;
-    height: 55px;
+    width: 160px;
+    height: 63px;
     background: #fff url(../img/nbic_gray.png) top left no-repeat;
-    background-size: 140px 55px;
+    background-size: 160px 63px;
 }
 div#home_sidebar a.nbic:hover {
     background: #fff url(../img/nbic.png) top left no-repeat;
-    background-size: 140px 55px;
+    background-size: 160px 63px;
 }
 div#home_sidebar hr.hr_sidebar {
     border: 1px solid #babdb6;
