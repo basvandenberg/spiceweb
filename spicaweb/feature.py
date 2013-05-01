@@ -175,16 +175,20 @@ class Feature:
     def ahistogram(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
         class_ids = [l.strip() for l in class_ids.split(',')]
-        fm = self.project_manager.get_feature_matrix()
+        pm = self.project_manager
+        fm = pm.get_feature_matrix()
+        fm_root_dir = pm.fm_dir
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
             filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
-                                         class_ids=class_ids, img_format='svg')
+                                         class_ids=class_ids, img_format='svg',
+                                         root_dir=fm_root_dir)
         else:
             filetype = 'image/png'
             filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
-                                         class_ids=class_ids)
+                                         class_ids=class_ids,
+                                         root_dir=fm_root_dir)
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
@@ -194,18 +198,22 @@ class Feature:
 
         feat_ids = [f.strip() for f in feat_ids.split(',')]
         class_ids = [l.strip() for l in class_ids.split(',')]
-        fm = self.project_manager.get_feature_matrix()
+        pm = self.project_manager
+        fm = pm.get_feature_matrix()
+        fm_root_dir = pm.fm_dir
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
             filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
                                        labeling_name=labeling_name,
-                                       class_ids=class_ids, img_format='svg')
+                                       class_ids=class_ids, img_format='svg',
+                                       root_dir=fm_root_dir)
         else:
             filetype = 'image/png'
             filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
                                        labeling_name=labeling_name,
-                                       class_ids=class_ids, img_format='png')
+                                       class_ids=class_ids, img_format='png',
+                                       root_dir=fm_root_dir)
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
@@ -215,11 +223,14 @@ class Feature:
 
         feat_ids = [f.strip() for f in feat_ids.split(',')]
         class_ids = [l.strip() for l in class_ids.split(',')]
-        fm = self.project_manager.get_feature_matrix()
+        pm = self.project_manager
+        fm = pm.get_feature_matrix()
+        fm_root_dir = pm.fm_dir
 
         filepath = fm.get_clustdist_path(feature_ids=feat_ids,
                                          labeling_name=labeling_name,
-                                         class_ids=class_ids)
+                                         class_ids=class_ids,
+                                         root_dir=fm_root_dir)
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
