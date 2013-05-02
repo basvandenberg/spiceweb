@@ -21,7 +21,6 @@ class News:
             return. If set to None, all available news items in `news_f` will
             be returned.
         '''
-        print 'Start parsing'
         news_items = []
 
         with open(self.news_f, 'r') as fin:
@@ -42,5 +41,4 @@ class News:
 
                 news_items.append((date, title, text, published))
 
-        print news_items
         return news_items
