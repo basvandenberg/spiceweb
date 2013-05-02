@@ -227,20 +227,28 @@ class Feature:
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
 
-        filepath = fm.get_clustdist_path(feature_ids=feat_ids,
-                                         labeling_name=labeling_name,
-                                         class_ids=class_ids,
-                                         root_dir=fm_root_dir)
+        # check feature matrix size
+        (n_objs, n_feats) = fm.feature_matrix.shape
+        if(n_objs > 5000):
+            cherrypy.response.headers['Content-Type'] = 'application/json'
+            msg = 'Too many objects, heatmaps possible for < 5000 objects.'
+            return simplejson.dumps(dict(msg=msg))
 
-        if(figtype == 'svg'):
-            filetype = 'image/svg+xml'
-            filepath += '.svg'
         else:
-            filetype = 'image/png'
-            filepath += '.png'
+            filepath = fm.get_clustdist_path(feature_ids=feat_ids,
+                                             labeling_name=labeling_name,
+                                             class_ids=class_ids,
+                                             root_dir=fm_root_dir)
 
-        # serve the file
-        return serve_file(filepath, filetype, 'attachment')
+            if(figtype == 'svg'):
+                filetype = 'image/svg+xml'
+                filepath += '.svg'
+            else:
+                filetype = 'image/png'
+                filepath += '.png'
+
+            # serve the file
+            return serve_file(filepath, filetype, 'attachment')
 
     @cherrypy.expose
     def calcfeat(self, featvec):
