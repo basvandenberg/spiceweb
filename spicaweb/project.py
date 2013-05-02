@@ -161,7 +161,6 @@ class Project:
         if(example_number < 0 or example_number >= len(self.EXAMPLES)):
             kw_args = self.get_template_args(smi)
             template_f = 'no_such_example.html'
-            print template_f
             return spicaweb.get_template(template_f, **kw_args)
         
         pm = self.project_manager
