@@ -106,11 +106,23 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
     if(hasattr(cherrypy, 'session')):
         project_id = cherrypy.session.get(project.Project.SESSION_PROJECT_KEY,
                 None)
+
+        # HACK added to obtain project ids...
+        config = ConfigParser.ConfigParser()
+        config.read(CONFIG_FILE)
+        project_dir = config.get('spicaweb', 'project_dir')
+        pm = project_management.ProjectManager(project_dir)
+        # first check if there is a user?
+        pm.set_user(user_id)
+        all_project_ids = pm.get_projects()
+
     else:
         project_id = None
+        all_project_ids = None
 
     return {'user_id': user_id,
             'project_id': project_id,
+            'all_project_ids': all_project_ids,
             'header_menu': header_menu,
             'header_menu_index': header_menu_index,
             'main_menu': main_menu,
