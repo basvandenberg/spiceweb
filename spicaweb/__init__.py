@@ -193,11 +193,11 @@ class Root:
             return self.a.change_password()
                                                                                
     @cherrypy.expose                                                            
-    def achange_password(self, password):  
+    def achange_password(self, password_old, password_new):  
         if(self.is_guest_user()):
             return None
         else:
-            return self.a.achange_password(password)
+            return self.a.achange_password(password_old, password_new)
 
     def no_guest_access(self):
         kw_args = get_template_args()
