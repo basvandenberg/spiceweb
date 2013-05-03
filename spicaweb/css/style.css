@@ -305,8 +305,19 @@ div#main_menu {
   padding-top: 8px;
   margin-top: -5px;
   color: #ffffff;
-  border-top: 3px double #babdb6;
   font-style:oblique;
+}
+.menu_active.home {
+  border-top: 3px double #75507b;
+}
+.menu_active.projects {
+  border-top: 3px double #729fcf;
+}
+.menu_active.features {
+  border-top: 3px double #73d216;
+}
+.menu_active.classification {
+  border-top: 3px double #f57900;
 }
 .menu_item:hover {
   text-decoration: underline;
