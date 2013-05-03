@@ -221,8 +221,10 @@ class Project:
 
         elif(data_type == 'labeling'):
             filetype = 'text/plain'
-            fm = pm.get_feature_matrix()
-            filepath = os.path.join(fm.labels_dir, '%s.txt' % (data_name))
+            fe = pm.get_feature_extraction()
+            fm = fe.fm_protein
+            labeling_d = os.path.join(fe.fm_protein_d, fm.LABELING_D)
+            filepath = os.path.join(labeling_d, '%s.txt' % (data_name))
 
         return serve_file(filepath, filetype, 'attachment')
 
