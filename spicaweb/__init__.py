@@ -103,7 +103,7 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
         user_id = None
 
     # retrieve project id from cookie
-    if(hasattr(cherrypy, 'session')):
+    if(user_id and hasattr(cherrypy, 'session')):
         project_id = cherrypy.session.get(project.Project.SESSION_PROJECT_KEY,
                 None)
 
