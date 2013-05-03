@@ -56,52 +56,52 @@
 ## show menu bar with current menu active
 <div id="main_menu">
 % for index, (name, url) in enumerate(main_menu):
-  <a class="menu_item ${name}${' menu_active' if main_menu_index == index else ''}" href="${root_url}${url}">${name}</a>
+    <a class="menu_item ${name}${' menu_active' if main_menu_index == index else ''}" href="${root_url}${url}">${name}</a>
 % endfor
 </div>
 
 ## show current user id and project id when provided in project bar
 ## TODO use the cherry_auth include auth_bar.html and add project id...
 <div id="project_bar">
+
 % if user_id:
-  <div class="login_buttons">
-    <a href="${'%saccount' % (root_url)}" class="signup_button">Account</a>
-    <a href="${'%slogout' % (root_url)}" class="signup_button">Logout</a>
-  </div>
-  <div class="project_item">user: <b>${user_id}</b>
-  </div>
-
-% if (all_project_ids and not all_project_ids == 'None') and len(all_project_ids) > 1:
-  <div class="project_item" id="project_dropdown">
-    <div class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <b class="caret"></b>
-        </a>
-    <ul class="dropdown-menu">
-
-% for pid, _ in all_project_ids:
-        <li><a href="${root_url}${main_menu[1][1]}/details/${pid}">${pid}</a></li>
-% endfor
-
-    </ul>
+    <div class="login_buttons">
+        <a href="${'%saccount' % (root_url)}" class="signup_button">Account</a>
+        <a href="${'%slogout' % (root_url)}" class="signup_button">Logout</a>
     </div>
-  </div>
-%endif
+    <div class="project_item">user: <b>${user_id}</b>
+    </div>
 
 % if project_id and not project_id == 'None':
-  <div class="project_item" id="project_name">
-    project:
-    <a href="${root_url}${main_menu[1][1]}/details/${project_id}">${project_id}</a>
-  </div>
+    <div class="project_item" id="project_name">
+        project:
+        <a href="${root_url}${main_menu[1][1]}/details/${project_id}">${project_id}</a>
+    </div>
+% endif
 
-  </div>
-% endif
+% if (all_project_ids and not all_project_ids == 'None') and len(all_project_ids) > 1:
+    <div class="project_item" id="project_dropdown">
+        <div class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Select project
+                <!--b class="caret"></b-->
+            </a>
+            <ul class="dropdown-menu">
+% for pid, _ in all_project_ids:
+                <li><a href="${root_url}${main_menu[1][1]}/details/${pid}">${pid}</a></li>
+% endfor
+            </ul>
+        </div>
+    </div>
+%endif
+
 % else:
-  <div class="login_buttons">
-    <a href="${'%slogin' % (root_url)}" class="signup_button">Log in</a>
-    <a href="${'%sregister' % (root_url)}" class="signup_button">Create account</a>
-  </div>
+    <div class="login_buttons">
+        <a href="${'%slogin' % (root_url)}" class="signup_button">Log in</a>
+        <a href="${'%sregister' % (root_url)}" class="signup_button">Create account</a>
+    </div>
 % endif
+
 </div>
 
 ## block for the main content
