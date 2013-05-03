@@ -216,7 +216,6 @@ class Root:
         
         n = news.News(NEWS_F)
         news_items = n.parse(number_of_items=3)
-        print news_items
 
         kw_args = get_template_args()
         kw_args['news_items'] = news_items
@@ -291,10 +290,6 @@ class App:
 
     @cherrypy.expose()
     def index(self):
-        print
-        print 'App self.root_url'
-        print self.root_url
-        print
         url = '%sapp/projects/list' % (self.root_url)
         raise cherrypy.HTTPRedirect(url)
 
