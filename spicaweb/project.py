@@ -71,6 +71,13 @@ class Project:
     @cherrypy.expose
     def new(self, project_id=None, fasta_file=None, sequence_type=None):
 
+        print
+        print project_id
+        print sequence_type
+        print fasta_file
+        print type(fasta_file)
+        print
+
         self.fetch_session_data()
         smi = 1
 

@@ -1,7 +1,9 @@
 // generate a job id based on time stamp
 $(document).ready(function() {
 
-    //$("div.error").hide();
+    // registrer bootstrap jasny file upload
+    // not sure if neccesary
+    $('.fileupload').fileupload()
 
     // used to create job id
     var pad = function(num, size) {

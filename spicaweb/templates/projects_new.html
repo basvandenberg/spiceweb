@@ -13,54 +13,64 @@
 ## Initialize new project form
 ###############################################################################
 
-<div class="form_wrapper">
+<h1>New project</h1>
 
-<div id="stylized" class="myform">
-<form id="upload_new" method="post" action="${root_url}app/projects/new" enctype="multipart/form-data">
+<form class="form-horizontal" enctype="multipart/form-data" method="post">
 
-    <h1>New project</h1>
-    <p>Use this form to initialize a new project</p>
-
-    <label>Fasta file
-    <span class="small">Upload sequence data (max. 50MB)</span>
-    </label>
-    <input type="file" name="fasta_file" id="fasta_file" />
-
-    <label>Sequence type
-    <span class="small">Uploading protein or ORF sequences?</span>
-    </label>
-    <div class="radio_options">
-        <input type="radio" id="protein" name="sequence_type" value="prot_seq" checked="checked" />
-        <div class="option_label">Protein (amino acid) sequences</div>
-        <input type="radio" id="orf" name="sequence_type" value="orf_seq" />
-        <div class="option_label">ORF (nucleotide) sequences</div>
+    <div class="control-group">
+        <label class="control-label" for="inputFastaFile">FASTA file</label>
+        <div class="controls">
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-append">
+                    <div class="uneditable-input span3">
+                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Change</span>
+                        <input type="file" name="fasta_file" id="fasta_file"/>
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <label>Project id
-    <span class="small">Minimal 6 characters</span>
-    </label>
-    <input type="text" name="project_id" id="project_id" />
-
-    <div class="spacer"></div>
-% if msg:
-    <div class="msg">${msg}</div>
-% else:
-    <div class="msg"></div>
-% endif
-
-    <div class="button_bar">
-        <input type="submit" class="red" value="Initialize project" />
+    <div class="control-group">
+        <label class="control-label">Sequence type</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="sequence_type" id="protein" value="prot_seq" checked>
+                Protein amino acid sequences
+            </label>
+        </div>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="sequence_type" id="orf" value="orf_seq">
+                ORF nucleotide sequences
+            </label>
+        </div>
     </div>
 
-    <div>
-    <h1>Or load an example project:</h1>
-    <a href="load_example/0">Protein localization</a><br />
-    <a href="load_example/1">Protein production</a><br />
+    <div class="control-group">
+        <label class="control-label">Project id</label>
+        <div class="controls">
+            <input type="text" name="project_id" id="project_id"\>
+        </div>
     </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-danger" type="submit">Initialize project</button>
+        </div>
+    </div>
+
 </form>
-</div>
 
-
+<div>
+<h1>Or load an example project</h1>
+<a href="load_example/0">Protein localization</a><br />
+<a href="load_example/1">Protein production</a><br />
 </div>
 
 </%block>
