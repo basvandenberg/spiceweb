@@ -1,14 +1,19 @@
 <%
 uri_root = '%s%s' % (root_url, main_menu[main_menu_index][1])
 uris = ['%s%s' % (uri_root, sub_menu[0]), '%s%s' % (uri_root, sub_menu[1])]
-icons = ['list', 'add']
+icons = ['icon-list', 'icon-plus']
 %>
 
+<div class="btn-toolbar">
+    <div class="btn-group">
 % for index, uri in enumerate(uris):
 % if (index == sub_menu_index):
-    <a href="${uri}" class="bttn blue icon ${icons[index]}">${sub_menu[index]}</a>
+        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
 % else:
-    <a href="${uri}" class="bttn icon ${icons[index]}">${sub_menu[index]}</a>
+        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
 % endif
 % endfor
+    </div>
+</div>
+
 <hr class="menu" />

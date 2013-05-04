@@ -26,16 +26,15 @@ classifiers if protein labels are provided.
 
 <h2>News</h2>
 
-<div id="news_items">
-
  % for (date, title, text, _) in news_items:
+ <div class="news_item">
  <h3>${title}</h3>
  <div class="date">${date.strftime('%d %B %Y')}</div>
  <p class="story">${text}</p>
+ </div>
  % endfor
 
 <a href="${root_url + 'news'}">More news ></a>
-</div>
 
 </div>
 

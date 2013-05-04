@@ -82,9 +82,8 @@
 % if (all_project_ids and not all_project_ids == 'None') and len(all_project_ids) > 1:
     <div class="project_item" id="project_dropdown">
         <div class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                Select project
-                <!--b class="caret"></b-->
+            <a class="dropdown-toggle btn btn-link btn-project-bar" data-toggle="dropdown" href="#">
+                <i class="icon-chevron-down"></i> select project
             </a>
             <ul class="dropdown-menu">
 % for pid, _ in all_project_ids:
