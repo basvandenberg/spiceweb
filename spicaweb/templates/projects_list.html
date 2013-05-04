@@ -3,14 +3,11 @@
 <%block name="scripts">
   <script type="application/javascript" src="${'%sjs/scripts_project_list.js' % (root_url)}"></script>
 </%block>
-<%block name="stylesheets">
-  <link rel="stylesheet" type="text/css" href="${'%scss/style_project_list.css' % (root_url)}" />
-</%block>
 
 <%block name="main_content">
 
 ## delete project dialog
-<div id="dialog-confirm" title="Delete project?">
+<div id="dialog-confirm" class='dialog' title="Delete project?">
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The project will be permanently deleted and cannot be recovered. Are you sure?</p>
 </div>
 
@@ -41,7 +38,7 @@ def uri_details(pid):
 %>
   <td><a href="${uri_details(name)}">${name}</a></td>
   <td>${init}</td>
-  <td class="icon-button"><button class="delete" id="${name}">delete</button></td>
+  <td><a href='#' class="delete" id="${name}">delete</a></td>
 </tr>
 % endfor
 </tbody>

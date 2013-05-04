@@ -25,7 +25,7 @@ $(document).ready(function() {
  
         $( ".dialog#" + data_name ).dialog({
             autoOpen: true,
-            height: 200,
+            height: 210,
             width: 400,
             modal: true,
             buttons: {

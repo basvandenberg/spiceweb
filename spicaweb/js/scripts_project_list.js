@@ -1,16 +1,17 @@
 $(document).ready(function() {
-    $("button.delete")
-    .button({
-        icons: {
-            primary: "ui-icon-trash"
-        },
-        text: false
-    })
+    //$("button.delete")
+    //.button({
+    //    icons: {
+    //        primary: "ui-icon-trash"
+    //    },
+    //    text: false
+    //})
+    $("a.delete")
     .click(function() {
         var pid = $(this).attr("id");
         $( "#dialog-confirm" ).dialog({
             resizable: false,
-            height:160,
+            height: 200,
             modal: true,
             buttons: {
                 "Delete project": function() {
