@@ -13,7 +13,7 @@
 ## List with available feature categories
 ###############################################################################
 
-<h3>Predefined features</h3>
+<h2>Sequence-based features</h2>
 
 <table id="sortTable" class="tablesorter">
 <thead>
@@ -81,7 +81,7 @@ result = '<div class="text">, </div>'.join(divs)
 
 <hr class="spacer" />
 
-<h3>Custom features</h3>
+<h2>Uploaded features</h2>
 
 <table id="sortTable" class="tablesorter">
 <thead>
@@ -108,36 +108,5 @@ result = '<div class="text">, </div>'.join(divs)
 
 % endif
 
-###############################################################################
-## Upload custom feature form
-###############################################################################
-
-<hr class="spacer" />
-
-<h3>Upload custom features</h3>
-
-<div class="form_wrapper">
-<div id="stylized" class="myform">
-<form id="upload_new" method="post" action="${root_url}app/features/list" enctype="multipart/form-data">
-
-    <h1>Custom features form</h1>
-    <p>Use this form to upload a feature matrix with your own calculated features</p>
-
-    <label>Object ids
-    <span class="small">Upload a file with object ids</span>
-    </label>
-    <input type="file" name="object_ids_f" id="object_ids_f" />
-
-    <label>Feature matrix
-    <span class="small">Upload feature matrix file</span>
-    </label>
-    <input type="file" name="feature_matrix_f" id="feature_matrix_f" />
-
-    <button type="submit" class="red">Upload</button>
-    <div class="spacer"></div>
-
-</form>
-</div>
-</div>
 
 </%block>

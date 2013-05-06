@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     // registrer bootstrap jasny file upload
     // not sure if neccesary
-    $('.fileupload').fileupload();
+    //$('.fileupload').fileupload();
 
     // enable popover info box
     $('.info-button').popover({trigger: "hover", html: "true"});

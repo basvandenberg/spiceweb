@@ -368,6 +368,9 @@ hr.submit {
 hr.spacer {
     margin: 35px 0px 0px 0px;
 }
+hr.spacer_both {
+    margin: 35px 0px 35px 0px;
+}
 
 /* dialogs *******************************************************************/
 .dialog {

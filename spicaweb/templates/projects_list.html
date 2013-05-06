@@ -11,6 +11,7 @@
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The project will be permanently deleted and cannot be recovered. Are you sure?</p>
 </div>
 
+
 <%include file="projects_bar.html" />
 
 <%
@@ -19,6 +20,7 @@ def uri_details(pid):
     return '%s%s/%s' % (uri_root, sub_menu[2], pid)
 %>
 
+<h2>Projects</h2>
 
 % if len(projects) > 0:
 ## List projects
