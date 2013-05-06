@@ -5,6 +5,7 @@ icons = ['icon-list', 'icon-plus']
 %>
 
 <div class="btn-toolbar">
+
     <div class="btn-group">
 % for index, uri in enumerate(uris):
 % if (index == sub_menu_index):
@@ -14,6 +15,25 @@ icons = ['icon-list', 'icon-plus']
 % endif
 % endfor
     </div>
+
+% if (all_project_ids and not all_project_ids == 'None'):
+    <div class="btn-group">
+% if (len(all_project_ids) == 1):
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}/details/${pid}">${project_id}</a>
+% elif (len(all_project_ids) > 1):
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}/details/${project_id}">${project_id}</a>
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+% for pid, _ in all_project_ids:
+            <li><a href="${root_url}${main_menu[1][1]}/details/${pid}">${pid}</a></li>
+% endfor
+        </ul>
+% endif
+    </div>
+% endif
+
 </div>
 
 <hr class="menu" />
