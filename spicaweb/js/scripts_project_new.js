@@ -6,7 +6,7 @@ $(document).ready(function() {
     $('.fileupload').fileupload();
 
     // enable popover info box
-    $('.info-button').popover({trigger: "hover"});
+    $('.info-button').popover({trigger: "hover", html: "true"});
 
     // used to create job id
     var pad = function(num, size) {
@@ -37,7 +37,6 @@ $(document).ready(function() {
     // check form input, before submit
     $("form#create-new-project").submit(function(){
 
-        $("form#create-new-project>button").button('loading');
 
         var isFormValid = true;
 
@@ -51,6 +50,9 @@ $(document).ready(function() {
         if(fasta_file == '') {
             form_alert("create-new-project", "No fasta file selected");
             isFormValid = false;
+        }
+        if(isFormValid) {
+            $("form#create-new-project>button").button('loading');
         }
 
         return isFormValid;
