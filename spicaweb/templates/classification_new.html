@@ -9,51 +9,63 @@
 
 <%include file="classification_bar.html" />
 
-<div class="form_wrapper">
-<div id="stylized" class="myform">
-<form id="classification" method="post" enctype="multipart/form-data">
+<div class="well">
+<form id="new-classifier" class="form-horizontal" enctype="multipart/form-data" method="post">
 
-    <h1>New classifier</h1>
-    <p>Use this form to start a new classification performance test</p>
+    <legend>New classifier</legend>
 
-    <label>Cross validation
-    <span class="small">Number of cross-validation loops</span>
-    </label>
-    <input id="n_fold_cv" name="n_fold_cv" value="10"/>
+    <div class="control-group">
+        <label class="control-label">Cross-validation loops
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select ..." title="" data-original-title="Number of CV-loops">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <select id="n_fold_cv" name="n_fold_cv">
+              <option>3</option>
+              <option>5</option>
+              <option>10</option>
+            </select>
+        </div>
+    </div>
 
-    <label>Classifier
-    <span class="small">Type of classifier to use</span>
-    </label>
-    <select id="cl_type" name=cl_type />
-        <optgroup label="Support Vector Classifiers">
-            <option value="linearsvc">SVM (linear)</option>
-            <option value="svc_rbf">SVM (RBF)</option>
-        </optgroup>
-        <optgroup label="Nearest Neighbor Classifiers">
-            <option value="kn_uniform">k-Nearest neighbor classifier (uniform weights)</option>
-            <option value="kn_distance">k-Nearest neighbor classifier (distance-based weights)</option>
-            <option value="nc">Nearest centroid classifier</option>
-        </optgroup>
-        <optgroup label="Naive Bayes">
-            <option value="gnb">Gaussian naive bayes</option>
-            <!--option value="mnb">Multinomial naive bayes</option-->
-            <!--option value="bnb">Bernoulli naive bayes</option-->
-        </optgroup>
-        <optgroup label="Linear Discriminant Analysis">
-            <option value="lda">LDA classifier</option>
-            <option value="qda">QDA classifier</option>
-        </optgroup>
-        <optgroup label="Tree classifiers">
-            <option value="dtree">Decision Tree</option>
-            <option value="rforest">Random Forest</option>
-        </optgroup>
-    </select>
-
-    <button type="submit" class="red">Run</button>
-    <div class="spacer"></div>
+    <div class="control-group">
+        <label class="control-label">Classifier
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select ..." title="" data-original-title="Classifier">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <select id="cl_type" name=cl_type />
+                <optgroup label="Support Vector Classifiers">
+                    <option value="linearsvc">SVM (linear)</option>
+                    <option value="svc_rbf">SVM (RBF)</option>
+                </optgroup>
+                <optgroup label="Nearest Neighbor Classifiers">
+                    <option value="kn_uniform">k-Nearest neighbor classifier (uniform weights)</option>
+                    <option value="kn_distance">k-Nearest neighbor classifier (distance-based weights)</option>
+                    <option value="nc">Nearest centroid classifier</option>
+                </optgroup>
+                <optgroup label="Naive Bayes">
+                    <option value="gnb">Gaussian naive bayes</option>
+                    <!--option value="mnb">Multinomial naive bayes</option-->
+                    <!--option value="bnb">Bernoulli naive bayes</option-->
+                </optgroup>
+                <optgroup label="Linear Discriminant Analysis">
+                    <option value="lda">LDA classifier</option>
+                    <option value="qda">QDA classifier</option>
+                </optgroup>
+                <optgroup label="Tree classifiers">
+                    <option value="dtree">Decision Tree</option>
+                    <option value="rforest">Random Forest</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+    
+    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run</button>
 
 </form>
-</div>
 </div>
 
 </%block>

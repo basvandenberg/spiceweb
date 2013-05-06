@@ -10,12 +10,8 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
 
 $(document).ready(function() {
 
-    // cross-validation n input spinner
-    $( "#nfold" ).spinner({
-        min: 3,
-        max: 10,
-        step: 1,
-    });
+    // enable popover info box
+    $('.info-button').popover({trigger: "hover", html: "true"});
 
     // run button
     $('button[type="submit"]').click(function(event) {
@@ -26,15 +22,14 @@ $(document).ready(function() {
         // check if more than one labels are selected
         var class_ids = selected_classes();
         if(class_ids.length < 2) {
-            // TODO turn this into showing error message on page
-            alert('More then one label should be selected.');
+            form_alert('new-classifier', 'At least two labels should be selected. Use the filter on the right to select two or more labels.');
             return false;
         }
         
         // check if one or more features are selected
         var feat_ids = selected_features();
         if(feat_ids.length < 1) {
-            alert('At least one feature should be selected.');
+            form_alert('new-classifier', 'At least one feature should be selected. Use the filter on the right to select one or more features.');
             return false;
         }
 
@@ -56,3 +51,16 @@ $(document).ready(function() {
         window.location.href=url;
     });
 });
+
+// hide alerts
+function hide_alerts() {
+    $("form > div.alert").remove()
+}
+
+// show alert msg above the submit button of the form with form_id
+function form_alert(form_id, msg) {
+    hide_alerts();
+    $("form#" + form_id + "> :submit").before(
+    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p></div>'
+    );
+}
