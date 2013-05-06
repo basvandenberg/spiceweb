@@ -13,12 +13,18 @@
 ## Initialize new project form
 ###############################################################################
 
-<h1>New project</h1>
+<div class="well">
 
-<form class="form-horizontal" enctype="multipart/form-data" method="post">
+<form id="create-new-project" class="form-horizontal" enctype="multipart/form-data" method="post">
+
+    <legend>New project</legend>
 
     <div class="control-group">
-        <label class="control-label" for="inputFastaFile">FASTA file</label>
+        <label class="control-label" for="inputFastaFile">FASTA file 
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
         <div class="controls">
             <div class="fileupload fileupload-new" data-provides="fileupload">
                 <div class="input-append">
@@ -28,7 +34,7 @@
                     <span class="btn btn-file">
                         <span class="fileupload-new">Select file</span>
                         <span class="fileupload-exists">Change</span>
-                        <input type="file" name="fasta_file" id="fasta_file"/>
+                        <input type="file" name="fasta_file" id="fasta_file" />
                     </span>
                     <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                 </div>
@@ -37,40 +43,85 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label">Sequence type</label>
+        <label class="control-label">Sequence type 
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
         <div class="controls">
             <label class="radio">
-                <input type="radio" name="sequence_type" id="protein" value="prot_seq" checked>
+                <input type="radio" name="sequence_type" id="protein" value="prot_seq" checked="checked" />
                 Protein amino acid sequences
             </label>
         </div>
         <div class="controls">
             <label class="radio">
-                <input type="radio" name="sequence_type" id="orf" value="orf_seq">
+                <input type="radio" name="sequence_type" id="orf" value="orf_seq" />
                 ORF nucleotide sequences
             </label>
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label">Project id</label>
+        <label class="control-label">Project id 
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
         <div class="controls">
-            <input type="text" name="project_id" id="project_id"\>
+            <input class="input-xlarge" type="text" name="project_id" id="project_id" required="required" />
         </div>
     </div>
 
-    <div class="control-group">
-        <div class="controls">
-            <button class="btn btn-danger" type="submit">Initialize project</button>
-        </div>
-    </div>
+% if msg:
+    <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
+% endif
+
+    <button class="btn btn-danger" type="submit" data-loading-text="Loading...">Initialize project</button>
 
 </form>
 
-<div>
-<h1>Or load an example project</h1>
+</div>
+
+###############################################################################
+## Load example project
+###############################################################################
+
+<div class="well">
+
+<form id="load-example-project" class="form-horizontal" enctype="multipart/form-data" method="post">
+
+    <legend>Load example project</legend>
+
+    <div class="control-group" id="radio-example-project">
+        <label class="control-label">Example project 
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="project_index" id="0" value="yeast_translation" checked="checked" />
+                Yeast translation
+            </label>
+        </div>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="project_index" id="1" value="human_localization" />
+                Human localization
+            </label>
+        </div>
+    </div>
+
+    <button class="btn btn-danger" type="submit">Load project</button>
+</form>
+
+</div>
+
+<!--div>
+<h2>Load example project</h2>
 <a href="load_example/0">Protein localization</a><br />
 <a href="load_example/1">Protein production</a><br />
-</div>
+</div-->
 
 </%block>

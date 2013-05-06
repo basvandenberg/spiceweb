@@ -3,7 +3,10 @@ $(document).ready(function() {
 
     // registrer bootstrap jasny file upload
     // not sure if neccesary
-    $('.fileupload').fileupload()
+    $('.fileupload').fileupload();
+
+    // enable popover info box
+    $('.info-button').popover({trigger: "hover"});
 
     // used to create job id
     var pad = function(num, size) {
@@ -27,23 +30,64 @@ $(document).ready(function() {
 
     // put the project id in the project id input field
     $("input#project_id").val(projectId)
-    
-    // TODO check new projectid on change
-    $("input#project_id").live("change", function() {
-        if(isValidprojectid($(this).val())) {
-            correctNewProjectId = true;
-            $("div#new_projectid_error").hide();
+ 
+    // 
+    $("form#create-new-project>button").button();
+   
+    // check form input, before submit
+    $("form#create-new-project").submit(function(){
+
+        $("form#create-new-project>button").button('loading');
+
+        var isFormValid = true;
+
+        var project_id = $("input#project_id").val()
+        if(!isValidprojectid(project_id)) {
+            form_alert("create-new-project", "Incorrect project id");
+            isFormValid = false;
         }
-        else {
-            correctNewProjectId = false;
-            $("div#new_projectid_error").show();
+
+        var fasta_file = $("span.fileupload-preview").html();
+        if(fasta_file == '') {
+            form_alert("create-new-project", "No fasta file selected");
+            isFormValid = false;
         }
+
+        return isFormValid;
     });
 
+    // submit load example project
+    $("form#load-example-project").submit(function(e) {
+        e.preventDefault();
+        var project_index = $("form#load-example-project input:radio[name='project_index']:checked").attr('id');
+        var url = get_url_root() + '/load_example/' + project_index;
+        window.location.href = url;
+    });
 });
+
+function get_url_root() {
+    var path = window.location.href;
+    var path_list = path.split('/');
+    path_list.pop();
+    var root_url = path_list.join('/');
+    return root_url;
+}
+
+// hide alerts
+function hide_alerts() {
+    $("form > div.alert").remove()
+}
+
+// show alert msg above the submit button of the form with form_id
+function form_alert(form_id, msg) {
+    hide_alerts();
+    $("form#" + form_id + "> :submit").before(
+    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p></div>'
+    );
+}
 
 // check project id
 function isValidprojectid(projectid) {
-    return /^[0-9a-zA-Z_]+$/.test(projectid);
+    return /^([0-9a-zA-Z_-]){4,30}$/.test(projectid);
 }
 
