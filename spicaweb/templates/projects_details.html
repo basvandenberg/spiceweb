@@ -123,23 +123,58 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 lname = 'labeling%i' % (index + 1)
 %>
 
-## upload form
-<button type="submit" class="upload labeling red noform" id="${lname}">Upload labeling</button>
+<hr class="separator">
 
-<div class="labeling">
-<!--a href="#" class="upload labeling" id="${lname}">upload additional labeling file</a-->
-</div>
+<form id="upload-labeling" class="form-horizontal" enctype="multipart/form-data" method="post">
 
-<div class="dialog labeling" id="${lname}" title="Upload labeling file">
-    <form class="upload labeling" id=${lname} action="${root_url}app/projects/upload" method="post" enctype="multipart/form-data">
-      <label for="data_name">Labeling name</label>
-      <input type="text" name="data_name" id="data_name" value="${lname}" class="text ui-corner-all">
-      <label for="data_file">Labeling file</label>
-      <input type="file" name="data_file" id="data_file" class="text ui-widget-cmntent ui-corner-all" />
-      <input type="hidden" name="data_type" value="labeling" />
-    </form>
-</div>
+    <legend>Upload labeling</legend>
+
+    <!-- labeling name input text field -->
+    <div class="control-group">
+        <label class="control-label" for="data_name">Labeling name
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a name for this labeling" title="" data-original-title="Labeling name">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <input class="input-xlarge" type="text" name="data_name" id="data_name" required="required" />
+        </div>            
+    </div>
+
+    <!-- labeling file input file chooser -->
+    <div class="control-group">
+        <label class="control-label" for="data_file">Labeling file 
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a labeling file. The first line should contain a tab-separated list of class names. The rest of the lines should contain a tab-separated protein id and corresponding class index per line. Consult the documentation for more information on this subject." title="" data-original-title="Labeling file">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-append">
+                    <div class="uneditable-input span3">
+                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Change</span>
+                        <input type="file" name="data_file" id="data_file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- hidden data type input -->
+    <input type="hidden" name="data_type" value="labeling" />
 
 
+% if msg_lab:
+    <div class="alert alert-block alert-error fade in"><p>${msg_lab}</p></div>
+% endif
+
+    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+
+</form>
 
 </%block>

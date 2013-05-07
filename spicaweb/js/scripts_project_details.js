@@ -10,6 +10,37 @@ function get_url_root() {
 
 $(document).ready(function() {
 
+    // enable popover info box
+    $('.info-button').popover({trigger: "hover", html: "true"});
+
+    // 
+    $("form#create-new-project>button").button();
+   
+    // check form input, before submit
+    $("form#upload-labeling").submit(function(e){
+
+        // check labeling name
+        var isFormValid = true;
+
+        var labeling_name = $("form#upload-labeling input#data_name").val()
+        var labeling_file = $("form#upload-labeling span.fileupload-preview").html();
+        if(!isValidLabelingName(labeling_name)) {
+            form_alert("upload-labeling", "Incorrect labeling name");
+            isFormValid = false;
+        }
+        else if(labeling_file == '') {
+            form_alert("upload-labeling", "No labeling file selected");
+            isFormValid = false;
+        }
+        else {
+            $("form#upload-labeling>button").button('loading');
+        }
+
+        return isFormValid;
+    });
+
+
+
     $('a.download').bind('click', function(event) {
         var data_type = $(this).parent().attr('class');
         var data_name = $(this).attr('id');
@@ -57,3 +88,20 @@ $(document).ready(function() {
     });
 });
 
+// hide alerts
+function hide_alerts() {
+    $("form > div.alert").remove()
+}
+
+// show alert msg above the submit button of the form with form_id
+function form_alert(form_id, msg) {
+    hide_alerts();
+    $("form#" + form_id + "> :submit").before(
+    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p></div>'
+    );
+}
+
+// check labeling name
+function isValidLabelingName(projectid) {
+    return /^([0-9a-zA-Z_-]){1,30}$/.test(projectid);
+}

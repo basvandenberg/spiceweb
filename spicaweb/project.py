@@ -116,7 +116,15 @@ class Project:
         return spicaweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def details(self, project_id, msg_data=None, msg_labeling=None):
+    def details(self, project_id, data_type=None, data_name=None,
+                data_file=None):
+
+        print
+        print project_id
+        print data_type
+        print data_name
+        print data_file
+        print
 
         self.fetch_session_data()
         smi = 2
@@ -134,18 +142,103 @@ class Project:
         # reset the session data, using the new project id
         self.fetch_session_data()
 
-        # TODO try this, except no project, than redirect...?
+        msg_lab = ''
+        msg_seq = ''
+
+        # in case of a data file upload
+        if((data_type and data_name) and data_file):
+
+            pm = self.project_manager
+
+            # the upload labeling case
+            if(data_type == 'labeling'):
+
+                # check labeling input data
+                if(data_file.file is None):
+                    msg_lab = 'No labeling file provided'
+                elif(' ' in data_name):
+                    msg_lab = 'Spaces are not allowed in the project id'
+                elif not(re.match('^[A-Za-z0-9_-]*$', data_name)):
+                    msg_lab = 'Only characters, digits, dashes, and ' +\
+                                'underscores are allowed in a project id'
+
+                # if no incorrect input data
+                else:
+                    # try to add the labeling, storing errors in msg_lab
+                    try:
+                        msg_lab = pm.add_labeling(data_name, data_file.file)
+                    except Exception:
+                        print(traceback.format_exc())
+                        msg_lab = 'Error adding labeling'
+
+                # chop labeling message to reasonable size
+                if(len(msg_lab) > 100):
+                    msg_lab = msg_lab[:100] + '...' 
+
+            # the upload sequence data case
+            elif(data_type == 'data_source'):
+                
+                # check sequence input data    
+                if(data_file.file == None):
+                    msg_seq = 'No file provided.'
+
+                # if no incorrect input data
+                else:
+                    # try to add sequence data
+                    try:
+                        msg_seq = pm.add_data_source(data_name, data_file.file)
+                    except Exception:
+                        msg_seq = 'Error adding sequence data.'
+
         fe = self.project_manager.get_feature_extraction()
 
         kw_args = self.get_template_args(smi)
         kw_args['fe'] = fe
         kw_args['data_sources'] = ['prot_seq', 'orf_seq', 'ss_seq', 'sa_seq']
-        kw_args['msg_data'] = msg_data
-        kw_args['msg_labeling'] = msg_labeling
+        kw_args['msg_lab'] = msg_lab
+        kw_args['msg_seq'] = msg_seq
 
         template_f = self.get_template_f(smi)
 
         return spicaweb.get_template(template_f, **kw_args)
+
+    '''
+    # handle upload of data file, redirect to project details
+    @cherrypy.expose
+    def upload(self, data_type, data_name, data_file):
+
+        # TODO get_feature_extraction() get called twice, which could be a bit
+        # expensive for larger data sets... check this, improve
+
+        smi = 2
+
+        self.fetch_session_data()
+        pm = self.project_manager
+
+        msg_data = ''
+        msg_labeling = ''
+
+        if(data_type == 'data_source'):
+            if(data_file.file == None):
+                msg_data = 'No file provided.'
+            else:
+                msg_data = pm.add_data_source(data_name, data_file.file)
+        elif(data_type == 'labeling'):
+            if(data_file.file == None):
+                msg_labeling = 'No file provided.'
+            else:
+                msg_labeling = pm.add_labeling(data_name, data_file.file)
+        else:
+            msg_data = 'Unexpected upload error.'
+
+        if(len(msg_labeling) > 100):
+            msg_labeling = msg_labeling[:100] + '...' 
+
+        # redirect to the project details page
+        url = '%s/%s?msg_data=%s&msg_labeling=%s' %\
+            (self.get_url(smi), pm.project_id, msg_data, msg_labeling)
+        raise cherrypy.HTTPRedirect(url)
+    '''
 
     @cherrypy.expose
     def load_example(self, example_number):
@@ -227,42 +320,6 @@ class Project:
             filepath = os.path.join(labeling_d, '%s.txt' % (data_name))
 
         return serve_file(filepath, filetype, 'attachment')
-
-    # handle upload of data file, redirect to project details
-    @cherrypy.expose
-    def upload(self, data_type, data_name, data_file):
-
-        # TODO get_feature_extraction() get called twice, which could be a bit
-        # expensive for larger data sets... check this, improve
-
-        smi = 2
-
-        self.fetch_session_data()
-        pm = self.project_manager
-
-        msg_data = ''
-        msg_labeling = ''
-
-        if(data_type == 'data_source'):
-            if(data_file.file == None):
-                msg_data = 'No file provided.'
-            else:
-                msg_data = pm.add_data_source(data_name, data_file.file)
-        elif(data_type == 'labeling'):
-            if(data_file.file == None):
-                msg_labeling = 'No file provided.'
-            else:
-                msg_labeling = pm.add_labeling(data_name, data_file.file)
-        else:
-            msg_data = 'Unexpected upload error.'
-
-        if(len(msg_labeling) > 100):
-            msg_labeling = msg_labeling[:100] + '...' 
-
-        # redirect to the project details page
-        url = '%s/%s?msg_data=%s&msg_labeling=%s' %\
-            (self.get_url(smi), pm.project_id, msg_data, msg_labeling)
-        raise cherrypy.HTTPRedirect(url)
 
     @cherrypy.expose
     def delete(self, project_id):

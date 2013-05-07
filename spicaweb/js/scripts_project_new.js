@@ -1,10 +1,6 @@
 // generate a job id based on time stamp
 $(document).ready(function() {
 
-    // registrer bootstrap jasny file upload
-    // not sure if neccesary
-    //$('.fileupload').fileupload();
-
     // enable popover info box
     $('.info-button').popover({trigger: "hover", html: "true"});
 
