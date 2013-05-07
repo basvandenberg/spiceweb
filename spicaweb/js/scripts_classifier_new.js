@@ -22,14 +22,14 @@ $(document).ready(function() {
         // check if more than one labels are selected
         var class_ids = selected_classes();
         if(class_ids.length < 2) {
-            form_alert('new-classifier', 'At least two labels should be selected. Use the filter on the right to select two or more labels.');
+            form_alert('new-classifier', 'At least two labels should be selected. Use the label filter in the right window to select two or more labels.');
             return false;
         }
         
         // check if one or more features are selected
         var feat_ids = selected_features();
         if(feat_ids.length < 1) {
-            form_alert('new-classifier', 'At least one feature should be selected. Use the filter on the right to select one or more features.');
+            form_alert('new-classifier', 'At least one feature should be selected. Use the feature filter in the right window to select one or more features.');
             return false;
         }
 
@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 // hide alerts
 function hide_alerts() {
-    $("form > div.alert").remove()
+    $("form > div.alert-error").remove()
 }
 
 // show alert msg above the submit button of the form with form_id

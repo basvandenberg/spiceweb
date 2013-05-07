@@ -33,7 +33,7 @@ $(document).ready(function() {
     // hide feature categories by default
     $(".filter_select:gt(0)").animate({height:'toggle'});
 
-    toggle_showhide();
+    //toggle_showhide();
 
 });
 
