@@ -526,32 +526,10 @@ div.text.disabled {
     cursor: move;
     position: relative;
 }
-#sortable li button.ui-button {
-    height: 22px;
-    width: 22px;
-    position: absolute;
-    top: 6px;
-}
-#sortable li button#close {
-    right: 36px;
-}
-#sortable li button#save {
-    width: 45px;
-    right: 60px;
-}
-#sortable li button span.ui-button-text {
-    font-size:10px;
-    padding:0px;
-    padding-left:14px;
-}
-#sortable li button span.ui-icon-disk {
-    left: 4px;
-}
 .hist {
     margin: 10px;
     width: 730px;
     height: 266px;
-    text-align: center;
     border: 1px solid #d3d7cf;
     border-radius: 4px;
 }
@@ -559,37 +537,17 @@ div.text.disabled {
 /* scatter & heatmap *********************************************************/
 
 #scatter {
-    position:relative;
-    margin: 0 50px;
-    padding: 4px 0;
+    margin: 10px;
+    width: 539px;
+    height: 546px;
+    border: 1px solid #d3d7cf;
+    border-radius: 4px;
+    padding: 20px;
 }
 #heatmap {
     position:relative;
     margin: 0px 10px;
     padding: 28px 0px;
-}
-#scatter button, #heatmap button {
-    position: absolute;
-    top: 0px;
-    right: 22px;
-}
-#scatter button.ui-button, #heatmap button.ui-button {
-    height: 22px;
-    width: 22px;
-    position: absolute;
-    top: 6px;
-}
-#scatter button#save, #heatmap button#save {
-    width: 45px;
-    right: 24px;
-}
-#scatter button span.ui-button-text, #heatmap button span.ui-button-text {
-    font-size:10px;
-    padding:0px;
-    padding-left:14px;
-}
-#scatter button span.ui-icon-disk, #heatmap button span.ui-icon-disc {
-    left: 4px;
 }
 
 /* Feature filter ************************************************************/
