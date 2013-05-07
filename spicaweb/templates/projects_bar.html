@@ -21,7 +21,18 @@ icons = ['icon-list', 'icon-plus']
 % if (len(all_project_ids) == 1):
         <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}/details/${pid}">${project_id}</a>
 % elif (len(all_project_ids) > 1):
+
+<%
+print project_id
+print type(project_id)
+%>
+
+
+% if project_id is None:
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}/details/${all_project_ids[0][0]}">${all_project_ids[0][0]}</a>
+% else:
         <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}/details/${project_id}">${project_id}</a>
+% endif
         <button class="btn dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>
