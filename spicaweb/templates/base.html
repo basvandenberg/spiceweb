@@ -207,6 +207,10 @@ available = [f.uid for f in fe.available_protein_feature_vectors()]
 custom_feats = fm.get_custom_features()
 %>
 
+% if (len(available) + len(custom_feats) == 0):
+    <div class="alert alert-info"><p><strong>Info: </strong>There are no features available yet. Features can be calculated in the features section</p></div>
+% endif
+
 % for featvec in fe.fv_dict_protein.values():
 % if (featvec.uid in available):
   <div class="filter_subheader">
