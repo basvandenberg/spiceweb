@@ -31,6 +31,16 @@ a {
     color: #3465a4;
 }
 a:hover {
+    text-decoration: underline;
+}
+a.my-btn-link {
+    text-decoration: none;
+    padding: 0;
+    font-size: 9pt;
+    line-height: 15px;
+    color: #3465a4;
+}
+a.my-btn-link:hover {
     text-decoration:underline;
 }
 
@@ -348,11 +358,6 @@ a.signup_button:hover {
     background-color: #729fcf;
     color: #ffffff;
 }
-.btn-project-bar {
-    padding: 0;
-    font-size: 9pt;
-    line-height: 15px;
-}
 
 /* Horizontal lines / separators *********************************************/
 
@@ -413,7 +418,7 @@ hr.spacer_both {
 table.tablesorter {
     font-family:arial;
     margin:10px 0pt 15px;
-    font-size: 8pt;
+    font-size: 9pt;
     text-align: left;
     width: 100%;
     border-collapse:collapse;

@@ -13,10 +13,10 @@ $(document).ready(function() {
     // enable popover info box
     $('.info-button').popover({trigger: "hover", html: "true"});
 
-    // 
+    // register button, to enable loading state
     $("form#create-new-project>button").button();
    
-    // check form input, before submit
+    // check form input upload labeling file, before submit
     $("form#upload-labeling").submit(function(e){
 
         // check labeling name
@@ -39,8 +39,27 @@ $(document).ready(function() {
         return isFormValid;
     });
 
+    // check form input upload sequence data form, before submit
+    $("form.upload-seqs").submit(function(e){
 
+        var form_id = $(this).attr('id')
 
+        // check labeling name
+        var isFormValid = true;
+
+        var labeling_file = $(this).find("span.fileupload-preview").html();
+        if(labeling_file == '') {
+            form_alert(form_id, "No sequence fasta file selected");
+            isFormValid = false;
+        }
+        else {
+            $(this).find("button").button('loading');
+        }
+
+        return isFormValid;
+    });
+
+    // bind ajax download call to links
     $('a.download').bind('click', function(event) {
         var data_type = $(this).parent().attr('class');
         var data_name = $(this).attr('id');
@@ -48,43 +67,6 @@ $(document).ready(function() {
                 '&data_name=' + data_name;
         event.preventDefault();
         window.location.href=url;
-    });
-
-    $('.upload').bind('click', function() {
-        
-        var data_name = $(this).attr('id')
- 
-        $( ".dialog#" + data_name ).dialog({
-            autoOpen: true,
-            height: 210,
-            width: 400,
-            modal: true,
-            buttons: {
-                "Upload file": function() {
-                    var url = get_url_root() + '/upload';
-                    $(".upload#" + data_name).attr('action', url);
-                    $(".upload#" + data_name).submit();
-                    $( this ).dialog( "close" );
-                },
-                Cancel: function() {
-                    $( this ).dialog( "close" );
-                }
-            },
-            close: function() {
-            }
-        });
- 
-        $( ".upload#" + data_name )
-            .click(function() {
-                $( ".dialog#" + data_name ).dialog( "open" );
-            });
-
-        $( "input#lname" )
-            .change(function() {
-                var lab_id = $("input#data_name").val();
-                $("a.upload.labeling").attr("id", lab_id);
-                $("form.upload.labeling").attr("id", lab_id);
-            });
     });
 });
 

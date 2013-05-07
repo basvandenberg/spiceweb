@@ -26,8 +26,8 @@
 
 <h3>Available protein data</h3>
 
-% if msg_data:
-<div id="msg_data" class="msg">${msg_data}</div>
+% if msg_seq:
+    <div class="alert alert-block alert-error fade in"><p>${msg_seq}</p></div>
 % endif
 
 ## data table
@@ -44,24 +44,74 @@
 
 % for ds in [d for d in fe.protein_data_set.data_sources if d.uid in data_sources]:
 <tr>
-  <td id="status" class="${'done' if ds.available() else 'notdone'}"></td>
-  <td>${ds.name}</td>
+    <td id="status" class="${'done' if ds.available() else 'notdone'}"></td>
+    <td>${ds.name}</td>
 % if ds.available():
-  <td class="data_source"><a href="#" class="download" id="${ds.uid}">download</a></td>
+    <td class="data_source"><a href="#" class="download" id="${ds.uid}">download</a></td>
 % else:
-  <td class="data_source"><a href="#" class="upload" id="${ds.uid}">upload</a>
+  <!--td class="data_source"><a href="#" class="upload" id="${ds.uid}">upload</a-->
+    <td class="data_source"><a href="#myModal" class="btn btn-link my-btn-link" data-toggle="modal" id="${ds.uid}">upload</a>
 
 ## upload dialog
-<div class="dialog" id="${ds.uid}" title="Upload ${ds.name} file">
-    <form action="#" class="upload" id="${ds.uid}" method="post" enctype="multipart/form-data">
-        <label for="data_file">Data file</label>
-        <input id="data_file" type="file" name="data_file" class="text ui-widget-cmntent ui-corner-all" />
-        <input id="data_name" type="hidden" name="data_name" value="${ds.uid}">
-        <input id="data_type" type="hidden" name="data_type" value="data_source" />
-    </form>
-</div>
+<!--div class="dialog" id="${ds.uid}" title="Upload ${ds.name} file"-->
+    <!--form action="#" class="upload" id="${ds.uid}" method="post" enctype="multipart/form-data"-->
+        <!--label for="data_file">Data file</label-->
+        <!--input id="data_file" type="file" name="data_file" class="text ui-widget-cmntent ui-corner-all" /-->
+        <!--input id="data_name" type="hidden" name="data_name" value="${ds.uid}"-->
+        <!--input id="data_type" type="hidden" name="data_type" value="data_source" /-->
+    <!--/form-->
+<!--/div-->
 
-  </td>
+<!-- Button to trigger modal -->
+<!--a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a-->
+ 
+        <!-- Modal -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel">Upload ${ds.name} file</h3>
+            </div>
+            <div class="modal-body">
+
+                <form id="upload-${ds.uid}" class="form-horizontal upload-seqs" enctype="multipart/form-data" method="post">
+
+                    <!-- labeling file input file chooser -->
+                    <div class="control-group">
+                        <label class="control-label" for="data_file">Labeling file 
+                            <a href="#" class="info-button" data-toggle="popover" data-placement="bottom" data-content="Provide a FASTA file with ${ds.name}s. More information can be found in the documentation." title="">
+                                <i class="icon-info-sign"></i>
+                            </a>
+                        </label>
+                        <div class="controls">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="input-append">
+                                    <div class="uneditable-input span3">
+                                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                                    </div>
+                                    <span class="btn btn-file">
+                                        <span class="fileupload-new">Select file</span>
+                                        <span class="fileupload-exists">Change</span>
+                                        <input type="file" name="data_file" id="data_file" />
+                                    </span>
+                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- hidden data type input -->
+                    <input id="data_name" type="hidden" name="data_name" value="${ds.uid}">
+                    <input id="data_type" type="hidden" name="data_type" value="data_source" />
+                    <!-- submit -->
+                    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+                </form>
+
+            </div>
+            <!--div class="modal-footer"-->
+                <!--button class="btn" data-dismiss="modal" aria-hidden="true">Close</button-->
+                <!--button class="btn btn-primary">Save changes</button-->
+            <!--/div-->
+        </div>
+    </td>
 
 % endif
 </tr>
@@ -114,10 +164,6 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 
 </tbody>
 </table>
-
-% if msg_labeling:
-<div id="msg_labeling" class="msg">${msg_labeling}</div>
-% endif
 
 <%
 lname = 'labeling%i' % (index + 1)

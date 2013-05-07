@@ -119,13 +119,6 @@ class Project:
     def details(self, project_id, data_type=None, data_name=None,
                 data_file=None):
 
-        print
-        print project_id
-        print data_type
-        print data_name
-        print data_file
-        print
-
         self.fetch_session_data()
         smi = 2
         
@@ -189,6 +182,9 @@ class Project:
                         msg_seq = pm.add_data_source(data_name, data_file.file)
                     except Exception:
                         msg_seq = 'Error adding sequence data.'
+
+            if(msg_seq[:13] == 'Error in data'):
+                msg_seq = msg_seq + '<br /><br />NOTE:<ul><li>Secundary structure sequences should consist of the letters C, H, and E (same as output psipred)</li><li>Solvent accessibility sequences should consist of the letters B (buried), and E (exposed)</li></ul>'
 
         fe = self.project_manager.get_feature_extraction()
 
