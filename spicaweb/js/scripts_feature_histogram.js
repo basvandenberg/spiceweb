@@ -6,7 +6,27 @@ var max_num_features = Infinity;
 
 function updateContent(labeling_name, class_ids, feat_ids, changed_classes, changed_features) {
 
-    // TODO change this...
+    if(feat_ids.length == 0) {
+        $("div#feat_error").remove()
+        $("ul.histograms").before(
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one ore more features using the feature filter in the right panel.</p></div>'
+        );
+    }
+    else {
+        $("div#feat_error").remove()
+    }
+
+    if(class_ids.length < 1) {
+        $("div#class_error").remove()
+        $("ul.histograms").before(
+            '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one or more labels using the label filter in the right panel</p></div>'
+        );
+    }
+    else {
+        $("div#class_error").remove()
+    }
+
+    // TODO change this... update? using function parameters?
     $("ol.feats li").each(function () {
         var currentId = $(this).attr('id');
         var hist_li = $("li.hist#" + currentId);
@@ -29,51 +49,38 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
 // obtain histogram and show
 function show_hist(cid) {
 
-    $('#sortable')
-        .append($('<li>').attr({"id": cid, "class": "hist"})
-        .append($('<img>').attr({"id": "load_" + cid, 'src': '/spica/img/load.gif'}))) // TODO get url from setting
-
+    // obtain labels selected
     var labels = $("#labels_selected .label div").map(function () {
         return $(this).html();
     });
+
+    // remove histograms if no class labels are selected
     if(labels.length < 1) {
-        // TODO
         $("li.hist").hide('fast', function(){$("li.hist").remove();});
         $("li.loadhist").hide('fast', function(){$("li.loadhist").remove();});
     }
     else {
+
+        $('#sortable').append(
+            $('<li>').attr(
+                {"id": cid, "class": "hist"}
+            )
+        );
+
+        // construct post data
         var labels_str = labels.get().join(",");
         var labeling = $("select#labeling_select").val()
         var postdata = {labeling_name: labeling, labels: labels_str};
         
-        $('<img>')
-            .attr({'src':'ahistogram?feat_ids=' + cid + '&labeling_name=' + labeling + '&class_ids=' + labels_str + '&figtype=png'})
-            .load(function() {
-                $("img#load_" + cid).remove()
-                $("li.hist#" + cid)
-                    .attr("class", "hist")
-                    .append (
-                        $('<button>')
-                            .button({icons: {primary: "ui-icon-circle-close"},text: false})
-                            .attr('id', 'close')
-                            .bind('click', function() {
-                                $("li.hist#" + cid).hide('fast', function(){ $("#" + cid).remove(); });
-                                $("select.feats option#" + cid).attr("selected", false)
-                            })
-                    )
-                    .append (
-                        $('<button>')
-                            .html('svg')
-                            .button({icons: {primary: "ui-icon-disk"}})
-                            .attr('id', 'save')
-                            .bind('click', function() {
-                                url = 'ahistogram?feat_ids=' + cid + '&labeling_name=' + labeling + '&class_ids=' + labels_str + '&figtype=svg';
-                                alert(url)
-                                window.location.href=url;
-                            })
-                    )
-            })
-            .appendTo($("li.hist#" + cid))
+        // append load box to sortable list
+        $('<img>').attr(
+            {'src':'ahistogram?feat_ids=' + cid + 
+                                   '&labeling_name=' + labeling + 
+                                   '&class_ids=' + labels_str + 
+                                   '&figtype=png'}
+        ).load(function() {
+            
+        }).appendTo($("li.hist#" + cid))
 
         
         return false;

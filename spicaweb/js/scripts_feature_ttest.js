@@ -1,16 +1,30 @@
 // global settings
-var min_num_classes = 1;
-var max_num_classes = 7;
-var min_num_features = 1;
-var max_num_features = Infinity;
+//var min_num_classes = 1;
+//var max_num_classes = 7;
+//var min_num_features = 1;
+//var max_num_features = Infinity;
 
 function updateContent(labeling_name, class_ids, feat_ids, changed_classes, changed_features) {
 
-    // fetch (TODO check if needed... only when class selection changes..)
-    if(class_ids.length != 2) {
-        $("tbody#ttest_table").html('<td colspan="4">Two classes (labels) should be selected.</td>')
+    if(feat_ids.length == 0) {
+        $("div#feat_error").remove()
+        $("table.ttest").before(
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one ore more features using the feature filter in the right panel.</p></div>'
+        );
     }
     else {
+        $("div#feat_error").remove()
+    }
+
+    if(class_ids.length != 2) {
+        $("div#class_error").remove()
+        $("table.ttest").before(
+            '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Two class labels should be selected. Use the label filter on the right panel to select two labels</p></div>'
+        );
+        
+    }
+    else {
+        $("div#class_error").remove()
         if(changed_classes) {
             class_ids = class_ids.join(',')
             var postdata = {labeling_name: labeling_name, class_ids: class_ids};

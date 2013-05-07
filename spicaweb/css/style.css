@@ -547,14 +547,13 @@ div.text.disabled {
 #sortable li button span.ui-icon-disk {
     left: 4px;
 }
-.loadhist {
+.hist {
     margin: 10px;
-    width: 614px;
-    height: 79px;
+    width: 730px;
+    height: 266px;
     text-align: center;
-    padding-top: 105px;
-    border: 3px solid #d3d7cf;
-    border-radius: 6px;
+    border: 1px solid #d3d7cf;
+    border-radius: 4px;
 }
 
 /* scatter & heatmap *********************************************************/
