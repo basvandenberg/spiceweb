@@ -545,9 +545,10 @@ div.text.disabled {
     padding: 20px;
 }
 #heatmap {
-    position:relative;
-    margin: 0px 10px;
-    padding: 28px 0px;
+    margin: 10px;
+    border: 1px solid #d3d7cf;
+    border-radius: 4px;
+    padding: 20px;
 }
 
 /* Feature filter ************************************************************/
