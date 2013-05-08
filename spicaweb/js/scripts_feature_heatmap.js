@@ -31,6 +31,12 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
 
     if(feat_ids.length > 1 && class_ids.length > 0){
 
+        // first remove... this is a HACK, updateContent is requested too often... check this.
+        $("div#class_info").remove()
+        $("div#heatmap").before(
+            '<div id="class_info" class="alert alert-info alert-error fade in"><p><strong>Be patient... </strong>Clustering in progress. Depending on the feature matrix size, this can take a minute or two.</p></div>'
+        );
+
         $("div#heatmap img").replaceWith(
             $('<img>')
                 .attr({'src':'aheatmap?feat_ids=' + feat_ids + 
@@ -38,6 +44,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
                                      '&class_ids=' + class_ids + 
                                      '&figtype=png'})
                 .load(function() {
+                    $("div#class_info").remove()
                 })
             )
         return false;

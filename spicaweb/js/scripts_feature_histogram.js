@@ -26,6 +26,23 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $("div#class_error").remove()
     }
 
+    var count = 0;
+
+    // count number of hist updates, for progress bar
+    $("ol.feats li").each(function () {
+        var currentId = $(this).attr('id');
+        var hist_li = $("li.hist#" + currentId);
+        if($(this).hasClass('ui-selected')) {
+            if(hist_li.length == 0) {
+                count += 1
+            }
+            else if(changed_classes) {
+                count += 1
+            }
+        }
+    });
+    var step = 100 / count;
+
     // add/update/remove histograms based on feature and label selection
     $("ol.feats li").each(function () {
         var currentId = $(this).attr('id');
@@ -48,11 +65,6 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
 
 // obtain histogram and show
 function show_hist(cid, class_ids) {
-
-    // obtain labels selected
-    //var labels = $("#labels_selected .label div").map(function () {
-    //    return $(this).html();
-    //});
 
     // remove histograms if no class labels are selected
     if(class_ids.length < 1) {

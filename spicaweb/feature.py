@@ -217,22 +217,20 @@ class Feature:
         pm = self.project_manager
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
-
-        print
-        print class_ids
-        print labeling_name
-        print feat_ids
+        fe = pm.get_feature_extraction()
+        featname_dict = fe.protein_feat_id_to_name_dict()
+        fvec, _ = fe.protein_feat_id_to_name_dict()[feat_ids]
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
             filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
                                          class_ids=class_ids, img_format='svg',
-                                         root_dir=fm_root_dir)
+                                         root_dir=fm_root_dir, title=fvec)
         else:
             filetype = 'image/png'
             filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
                                          class_ids=class_ids,
-                                         root_dir=fm_root_dir)
+                                         root_dir=fm_root_dir, title=fvec)
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
@@ -245,19 +243,25 @@ class Feature:
         pm = self.project_manager
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
+        fe = pm.get_feature_extraction()
+        featname_dict = fe.protein_feat_id_to_name_dict()
+        fvec0, _ = fe.protein_feat_id_to_name_dict()[feat_ids[0]]
+        fvec1, _ = fe.protein_feat_id_to_name_dict()[feat_ids[1]]
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
             filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
                                        labeling_name=labeling_name,
                                        class_ids=class_ids, img_format='svg',
-                                       root_dir=fm_root_dir)
+                                       root_dir=fm_root_dir, feat0_pre=fvec0,
+                                       feat1_pre=fvec1)
         else:
             filetype = 'image/png'
             filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
                                        labeling_name=labeling_name,
                                        class_ids=class_ids, img_format='png',
-                                       root_dir=fm_root_dir)
+                                       root_dir=fm_root_dir, feat0_pre=fvec0,
+                                       feat1_pre=fvec1)
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')

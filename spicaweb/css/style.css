@@ -533,6 +533,9 @@ div.text.disabled {
     border: 1px solid #d3d7cf;
     border-radius: 4px;
 }
+li.hist {
+    margin-bottom: 15px;
+}
 
 /* scatter & heatmap *********************************************************/
 
