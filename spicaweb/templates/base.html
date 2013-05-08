@@ -208,7 +208,7 @@ custom_feats = fm.get_custom_features()
 %>
 
 % if (len(available) + len(custom_feats) == 0):
-    <div class="alert alert-info"><p><strong>Info: </strong>There are no features available yet. Features can be calculated in the features section</p></div>
+    <div class="alert alert-info"><p><strong>Info: </strong>There are no features available yet. Features can be calculated in the <a href="${root_url}${main_menu[2][1]}${sub_menu[0]}">feature list</a> section.</p></div>
 % endif
 
 % for featvec in fe.fv_dict_protein.values():

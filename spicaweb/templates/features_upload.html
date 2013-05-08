@@ -20,31 +20,8 @@
     <legend>Upload your own feature matrix</legend>
 
     <div class="control-group">
-        <label class="control-label" for="object_ids_f">Protein ids file 
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="This should be a text file with protein ids in the same order as the feature matrix rowsould be in the order of the rows in the feature matrix." title="" data-original-title="Protein ids file">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
-        <div class="controls" id="object_ids">
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-                <div class="input-append">
-                    <div class="uneditable-input span3">
-                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
-                    </div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Select file</span>
-                        <span class="fileupload-exists">Change</span>
-                        <input type="file" name="object_ids_f" id="object_ids_f" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="control-group">
         <label class="control-label" for="feature_matrix_f">Feature matrix file 
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select the text file that contains the feature matrix data. The feature matrix should be in numpy format." title="" data-original-title="Feature matrix file">
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a text file that contains the feature matrix data. The feature matrix should be in numpy format. The rows are the objects, so the number of rows should match the number of proteins in this project, the columns are the features." title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
         </label>
@@ -65,6 +42,29 @@
         </div>
     </div>
 
+    <div class="control-group">
+        <label class="control-label" for="object_ids_f">Protein ids file 
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a text file with protein ids in the same order as the feature matrix rows. Each line should contain only one protein id and the number the ids should match the protein ids in this project." title="" data-original-title="">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls" id="object_ids">
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-append">
+                    <div class="uneditable-input span3">
+                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Change</span>
+                        <input type="file" name="object_ids_f" id="object_ids_f" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 % if msg:
     <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
 % endif

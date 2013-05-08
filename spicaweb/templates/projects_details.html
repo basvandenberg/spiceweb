@@ -69,7 +69,7 @@
         <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 id="myModalLabel">Upload ${ds.name} file</h3>
+                <h3 id="myModalLabel">Upload ${ds.name.lower()} file</h3>
             </div>
             <div class="modal-body">
 
@@ -77,8 +77,8 @@
 
                     <!-- labeling file input file chooser -->
                     <div class="control-group">
-                        <label class="control-label" for="data_file">Labeling file 
-                            <a href="#" class="info-button" data-toggle="popover" data-placement="bottom" data-content="Provide a FASTA file with ${ds.name}s. More information can be found in the documentation." title="">
+                        <label class="control-label" for="data_file">FASTA file
+                            <a href="#" class="info-button" data-toggle="popover" data-placement="bottom" data-content="Select a FASTA file with ${ds.name.lower()}s." title="">
                                 <i class="icon-info-sign"></i>
                             </a>
                         </label>
@@ -178,7 +178,7 @@ lname = 'labeling%i' % (index + 1)
     <!-- labeling name input text field -->
     <div class="control-group">
         <label class="control-label" for="data_name">Labeling name
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a name for this labeling" title="" data-original-title="Labeling name">
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a name for this labeling" title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
         </label>
@@ -190,7 +190,7 @@ lname = 'labeling%i' % (index + 1)
     <!-- labeling file input file chooser -->
     <div class="control-group">
         <label class="control-label" for="data_file">Labeling file 
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a labeling file. The first line should contain a tab-separated list of class names. The rest of the lines should contain a tab-separated protein id and corresponding class index per line. Consult the documentation for more information on this subject." title="" data-original-title="Labeling file">
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a labeling file. The first line should contain a tab-separated list of class names. The rest of the lines should contain a tab-separated protein id and corresponding class index per line. Consult the documentation for more information on this subject." title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
         </label>
