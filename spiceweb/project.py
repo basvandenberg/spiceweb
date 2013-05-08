@@ -326,5 +326,6 @@ class Project:
         self.project_manager.delete_project(project_id)
 
         # remove project id from session if it is the currently active one
-        if(cherrypy.session[self.SESSION_PROJECT_KEY] == project_id):
+        if(self.SESSION_PROJECT_KEY in cherrypy.session and
+           cherrypy.session[self.SESSION_PROJECT_KEY] == project_id):
             cherrypy.session[self.SESSION_PROJECT_KEY] = None
