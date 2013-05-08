@@ -183,7 +183,7 @@ class Classification:
         str_data1 = '<ul id="labels_unselected" ' +\
                 'class="ui-helper-reset ui-helper-clearfix label_list">\n'
         for class_name in class_names:
-            str_data1 += '  <li class="label ui-widget-content">\n'
+            str_data1 += '  <li class="class_label ui-widget-content">\n'
             str_data1 += '    <div>%s</div>\n' % (class_name)
             str_data1 += '    <a href="#" ' +\
                     'class="ui-icon ui-icon-triangle-1-w"></a>\n'

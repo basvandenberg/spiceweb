@@ -175,7 +175,7 @@ num_select = 0
 
     <ul id="labels_selected" class="ui-helper-reset label_list select">
 % for class_name in cur_labeling.class_names[:num_select]:
-        <li class="label ui-widget-content">
+        <li class="class_label ui-widget-content">
             <div>${class_name}</div>
             <a href="#" class="ui-icon ui-icon-triangle-1-e"></a>
         </li>
@@ -184,7 +184,7 @@ num_select = 0
 
     <ul id="labels_unselected" class="ui-helper-reset ui-helper-clearfix label_list">
 % for class_name in cur_labeling.class_names[num_select:]:
-        <li class="label ui-widget-content">
+        <li class="class_label ui-widget-content">
             <div>${class_name}</div>
             <a href="#" class="ui-icon ui-icon-triangle-1-w"></a>
         </li>

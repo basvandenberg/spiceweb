@@ -75,7 +75,7 @@ function selected_features() {
 }
 
 function selected_classes() {
-    var class_ids = $("#labels_selected .label div")
+    var class_ids = $("#labels_selected .class_label div")
         .map(function () {
             return $(this).html();
         });

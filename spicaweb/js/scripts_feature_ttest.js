@@ -17,6 +17,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
     }
 
     if(class_ids.length != 2) {
+        emptyTable();
         $("div#class_error").remove()
         $("table.ttest").before(
             '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Two class labels should be selected. Use the label filter on the right panel to select two labels</p></div>'
@@ -40,6 +41,10 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
             updateTable();
         }
     }
+}
+
+function emptyTable() {
+    $("tbody>tr").hide();
 }
 
 function updateTable() {
