@@ -131,7 +131,7 @@
 
 <hr class="spacer" />
 
-<h3>Available label files</h3>
+<h3>Available labeling files</h3>
 
 <%
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
@@ -178,7 +178,7 @@ lname = 'labeling%i' % (index + 1)
     <!-- labeling name input text field -->
     <div class="control-group">
         <label class="control-label" for="data_name">Labeling name
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a name for this labeling" title="" data-original-title="">
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a unique labeling name. Only alphanumeric characters, underscores, and dashes can be used." title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
         </label>
@@ -190,7 +190,7 @@ lname = 'labeling%i' % (index + 1)
     <!-- labeling file input file chooser -->
     <div class="control-group">
         <label class="control-label" for="data_file">Labeling file 
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a labeling file. The first line should contain a tab-separated list of class names. The rest of the lines should contain a tab-separated protein id and corresponding class index per line. Consult the documentation for more information on this subject." title="" data-original-title="">
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a labeling file. The first line should contain a tab-separated list of class names. The rest of the lines should contain a tab-separated protein id and corresponding class index per line. Consult the documentation for more information on this subject." title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
         </label>
