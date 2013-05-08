@@ -37,9 +37,15 @@ def uri_details(pid):
 <tr id="$row_i}">
 <%
 (name, init) = projects[row_i]
+init_tokens = init.split('_')
+print init_tokens
+# not so nice, use date to format this...
+init_str = '%s-%s-%s' % (init_tokens[0][:4], init_tokens[0][4:6],
+                         init_tokens[0][6:8])
+init_str += ' - %s:%s' % (init_tokens[1][:2], init_tokens[1][2:4])
 %>
   <td><a href="${uri_details(name)}">${name}</a></td>
-  <td>${init}</td>
+  <td>${init_str}</td>
   <td><a href='#' class="delete" id="${name}">delete</a></td>
 </tr>
 % endfor
