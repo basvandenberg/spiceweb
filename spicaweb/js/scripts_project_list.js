@@ -1,30 +1,14 @@
 $(document).ready(function() {
-    //$("button.delete")
-    //.button({
-    //    icons: {
-    //        primary: "ui-icon-trash"
-    //    },
-    //    text: false
-    //})
-    $("a.delete")
-    .click(function() {
-        var pid = $(this).attr("id");
-        $( "#dialog-confirm" ).dialog({
-            resizable: false,
-            height: 200,
-            modal: true,
-            buttons: {
-                "Delete project": function() {
-                    var postdata = {project_id: pid};
-                    $.post('delete', postdata, function() {
-                        location.reload();
-                    });
-                    $( this ).dialog( "close" );
-                },
-                Cancel: function() {
-                    $( this ).dialog( "close" );
-                }
-            }
+
+    $("div.delete-project").on('shown', function() {
+
+        $(this).find("button.delete-project").click(function() {
+            var pid = $(this).attr("id");
+            var postdata = {project_id: pid};
+            $.post('delete', postdata, function() {
+                location.reload();
+            });
         });
+
     });
 });

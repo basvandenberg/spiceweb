@@ -6,12 +6,6 @@
 
 <%block name="main_content">
 
-## delete project dialog
-<div id="dialog-confirm" class='dialog' title="Delete project?">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The project will be permanently deleted and cannot be recovered. Are you sure?</p>
-</div>
-
-
 <%include file="projects_bar.html" />
 
 <%
@@ -44,9 +38,25 @@ init_str = '%s-%s-%s' % (init_tokens[0][:4], init_tokens[0][4:6],
                          init_tokens[0][6:8])
 init_str += ' - %s:%s' % (init_tokens[1][:2], init_tokens[1][2:4])
 %>
-  <td><a href="${uri_details(name)}">${name}</a></td>
-  <td>${init_str}</td>
-  <td><a href='#' class="delete" id="${name}">delete</a></td>
+    <td><a href="${uri_details(name)}">${name}</a></td>
+    <td>${init_str}</td>
+    <!--td><a href='#' class="delete" id="${name}">delete</a></td-->
+    <td><a href="#delete-${name}-modal" class="btn btn-link my-btn-link delete-project" data-toggle="modal" id="${name}">delete</a>
+        <!-- Modal -->
+        <div id="delete-${name}-modal" class="modal hide fade delete-project" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="myModalLabel">Delete project ${name}?</h3>
+          </div>
+          <div class="modal-body">
+            <p>The project ${name} will be permanently deleted and cannot be recovered. Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button id="${name}" class="btn btn-danger delete-project">Delete</button>
+          </div>
+        </div>
+    </td>
 </tr>
 % endfor
 </tbody>
@@ -54,6 +64,15 @@ init_str += ' - %s:%s' % (init_tokens[1][:2], init_tokens[1][2:4])
 % else:
 <p>No projects available.</p>
 % endif
+
+<!-- Button to trigger delete modal -->
+<!--a href="#myModal" role="button" class="btn btn-link" data-toggle="modal">Launch demo modal</a-->
+ 
+
+## delete project dialog
+<div id="dialog-confirm" class='dialog' title="Delete project?">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The project will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
 
 </%block>
 
