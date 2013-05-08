@@ -6,7 +6,7 @@ import traceback
 import cherrypy
 from cherrypy.lib.static import serve_file
 
-import spicaweb
+import spiceweb
 
 
 class Project:
@@ -46,7 +46,7 @@ class Project:
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
 
     def get_template_args(self, smi):
-        return spicaweb.get_template_args(main_menu_index=self.mmi,
+        return spiceweb.get_template_args(main_menu_index=self.mmi,
                                           sub_menu_index=smi)
 
     @cherrypy.expose
@@ -66,7 +66,7 @@ class Project:
 
         template_f = self.get_template_f(smi)
 
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def new(self, project_id=None, fasta_file=None, sequence_type=None):
@@ -113,7 +113,7 @@ class Project:
 
         template_f = self.get_template_f(smi)
 
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def details(self, project_id, data_type=None, data_name=None,
@@ -127,7 +127,7 @@ class Project:
         if not(project_id in existing_projects):
             kw_args = self.get_template_args(smi)
             template_f = 'no_such_project.html'
-            return spicaweb.get_template(template_f, **kw_args)
+            return spiceweb.get_template(template_f, **kw_args)
 
         # store project id in session
         cherrypy.session[self.SESSION_PROJECT_KEY] = project_id
@@ -196,7 +196,7 @@ class Project:
 
         template_f = self.get_template_f(smi)
 
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     '''
     # handle upload of data file, redirect to project details
@@ -250,12 +250,12 @@ class Project:
         if(example_number < 0 or example_number >= len(self.EXAMPLES)):
             kw_args = self.get_template_args(smi)
             template_f = 'no_such_example.html'
-            return spicaweb.get_template(template_f, **kw_args)
+            return spiceweb.get_template(template_f, **kw_args)
         
         pm = self.project_manager
         (pid, seq_f, seq_type, labeling_f) = self.EXAMPLES[example_number]
 
-        root_d = spicaweb.spicaweb_dir
+        root_d = spiceweb.spiceweb_dir
         seq_f = os.path.join(root_d, self.EXAMPLE_DIR, pid, seq_f)
         labeling_f = os.path.join(root_d, self.EXAMPLE_DIR, pid, labeling_f)
         error_msg = pm.start_example_project(pid, seq_f, seq_type, labeling_f)

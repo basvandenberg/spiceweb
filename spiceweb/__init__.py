@@ -5,8 +5,7 @@ import cherrypy
 from mako.lookup import TemplateLookup
 
 from cherrypy_auth import auth
-from spica import project_management
-#from spica import job_management
+from spice import project_management
 
 import project
 import feature
@@ -17,22 +16,22 @@ import news
 # Paths
 ###############################################################################
 
-# path to spicaweb module
-spicaweb_dir = os.path.dirname(os.path.abspath(__file__))
+# path to spiceweb module
+spiceweb_dir = os.path.dirname(os.path.abspath(__file__))
 
 # path to template directories
-tmpl_d = os.path.join(spicaweb_dir, 'templates')
+tmpl_d = os.path.join(spiceweb_dir, 'templates')
 auth_tmpl_d = os.path.join(os.path.dirname(os.path.abspath(auth.__file__)),
                            'template/mako')
 
 # config file name
-CONFIG_FILE = 'spicaweb.cfg'
+CONFIG_FILE = 'spiceweb.cfg'
 
 # read root url from config
 config = ConfigParser.ConfigParser()
 config.read(CONFIG_FILE)
-ROOT_URL = config.get('spicaweb', 'root_url')
-NEWS_F = config.get('spicaweb', 'news_f')
+ROOT_URL = config.get('spiceweb', 'root_url')
+NEWS_F = config.get('spiceweb', 'news_f')
 
 ###############################################################################
 # Authentication decorator
@@ -110,7 +109,7 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
         # HACK added to obtain project ids...
         config = ConfigParser.ConfigParser()
         config.read(CONFIG_FILE)
-        project_dir = config.get('spicaweb', 'project_dir')
+        project_dir = config.get('spiceweb', 'project_dir')
         pm = project_management.ProjectManager(project_dir)
         # first check if there is a user?
         pm.set_user(user_id)
@@ -142,10 +141,10 @@ class Root:
 
     def __init__(self):
 
-        # read spicaweb config file
+        # read spiceweb config file
         config = ConfigParser.ConfigParser()
         config.read(CONFIG_FILE)
-        self.project_dir = config.get('spicaweb', 'project_dir')
+        self.project_dir = config.get('spiceweb', 'project_dir')
         title = config.get('auth', 'title')
         db_file = config.get('sqlite', 'db_file')
         smtp_server = config.get('email', 'smtp_server')
@@ -316,4 +315,3 @@ class App:
         template_name = 'project_not_exist'
         return get_template('%s.html' % (template_name), **kw_args)
 
-#app = cherrypy.tree.mount(Root(), '/spica', 'prod.cfg')

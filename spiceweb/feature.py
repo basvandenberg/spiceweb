@@ -3,7 +3,7 @@ import simplejson
 import cherrypy
 from cherrypy.lib.static import serve_file
 
-import spicaweb
+import spiceweb
 from project import Project
 
 
@@ -36,14 +36,14 @@ class Feature:
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
 
     def get_template_args(self, smi):
-        return spicaweb.get_template_args(main_menu_index=self.mmi,
+        return spiceweb.get_template_args(main_menu_index=self.mmi,
                                           sub_menu_index=smi)
 
     # Duplicate method in classification.py
     def no_project_selected(self):
         kw_args = self.get_template_args(0)
         template_f = 'no_project_selected.html'
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def index(self):
@@ -74,7 +74,7 @@ class Feature:
 
         template_f = self.get_template_f(smi)
 
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
     
     @cherrypy.expose
     def upload(self, object_ids_f=None, feature_matrix_f=None):
@@ -110,7 +110,7 @@ class Feature:
                 kw_args['msg'] = error_msg
 
         template_f = self.get_template_f(smi)
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def ttest(self):
@@ -146,7 +146,7 @@ class Feature:
 
         template_f = self.get_template_f(smi)
 
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     #
     # ajax functions

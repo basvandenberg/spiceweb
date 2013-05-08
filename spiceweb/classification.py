@@ -5,7 +5,7 @@ import numpy
 import cherrypy
 from cherrypy.lib.static import serve_file
 
-import spicaweb
+import spiceweb
 from project import Project
 
 class Classification:
@@ -57,19 +57,19 @@ class Classification:
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
 
     def get_template_args(self, smi):
-        return spicaweb.get_template_args(main_menu_index=self.mmi, 
+        return spiceweb.get_template_args(main_menu_index=self.mmi, 
                 sub_menu_index=smi)
 
     # Duplicate method in feature.py
     def no_project_selected(self):
         kw_args = self.get_template_args(0)
         template_f = 'no_project_selected.html'
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     def no_such_classifier(self):
         kw_args = self.get_template_args(0)
         template_f = 'no_such_classifier.html'
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def index(self):
@@ -87,7 +87,7 @@ class Classification:
         kw_args = self.get_template_args(smi)
         template_f = self.get_template_f(smi)
 
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def new(self, cl_type=None, n_fold_cv=None, labeling_name=None,
@@ -127,7 +127,7 @@ class Classification:
 
             template_f = self.get_template_f(smi)
 
-            return spicaweb.get_template(template_f, **kw_args)
+            return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
     def details(self, cl_id):
@@ -161,7 +161,7 @@ class Classification:
 
         template_f = self.get_template_f(smi)
 
-        return spicaweb.get_template(template_f, **kw_args)
+        return spiceweb.get_template(template_f, **kw_args)
 
     ###########################################################################
     # ajax calls
