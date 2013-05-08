@@ -184,23 +184,26 @@ class Feature:
 
         cherrypy.response.headers['Content-Type'] = 'application/json'
 
-        #fe = self.project_manager.get_feature_extraction()
-        fm = self.project_manager.get_feature_matrix()
         label0, label1 = class_ids.split(',')
+
+        # obtain table data
+        fm = self.project_manager.get_feature_matrix()
         ttest_data = fm.ttest(labeling_name, label0.strip(), label1.strip())
-        #featid_to_name = fe.protein_feat_id_to_name_dict()
+
+        # obtain feature id to name and feature vector name mapping
+        fe = self.project_manager.get_feature_extraction()
+        featname_dict = fe.protein_feat_id_to_name_dict()
 
         # create html table
         str_data = ''
         for index, (tval, pval) in enumerate(ttest_data):
 
             fid = fm.feature_ids[index]
+            fvec, fname = featname_dict[fid]
 
             str_data += '<tr id=%s>\n' % (fid)
-            featname = fm.feature_names[fid]
-            #str_data += '  <td>%s</td>\n' % (catname.capitalize())
-            str_data += '<td>TODO feature vector name</td>'
-            str_data += '  <td>%s</td>\n' % (fm.feature_names[fid])
+            str_data += '<td>%s</td>' % (fvec.capitalize())
+            str_data += '  <td>%s</td>\n' % (fname.capitalize())
             str_data += '  <td class="n">%.2f</td>\n' % (tval)
             str_data += '  <td class="n">%.15f</td>\n' % (pval)
             str_data += '</tr>\n'
@@ -214,6 +217,11 @@ class Feature:
         pm = self.project_manager
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
+
+        print
+        print class_ids
+        print labeling_name
+        print feat_ids
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'

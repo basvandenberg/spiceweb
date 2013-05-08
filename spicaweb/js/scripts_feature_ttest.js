@@ -1,8 +1,7 @@
-// global settings
-//var min_num_classes = 1;
-//var max_num_classes = 7;
-//var min_num_features = 1;
-//var max_num_features = Infinity;
+$(document).ready(function() {
+    $("table#ttest").tablesorter();
+});
+
 
 function updateContent(labeling_name, class_ids, feat_ids, changed_classes, changed_features) {
 
@@ -32,8 +31,8 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
             $.post('attest', postdata, 
                 function(data) {
                     $("tbody#ttest_table").html(data['ttest_table'])
-                    $("#sortTable").trigger("update");
                     updateTable();
+                    $("table#ttest").trigger("update");
                 });
                 return false;
         }

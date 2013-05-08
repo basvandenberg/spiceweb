@@ -39,7 +39,7 @@ $(document).ready(function() {
         class_ids = class_ids.join(',');
         
         // obtain form values
-        var n_fold_cv = $("input#n_fold_cv").val();
+        var n_fold_cv = $("select#n_fold_cv").val();
         var cl_type = $("select#cl_type").val();
         
         // build url and send

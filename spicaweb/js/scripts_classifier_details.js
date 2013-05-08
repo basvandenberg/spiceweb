@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 function update_progress() {
-    var ta = $("textarea.progress");
+    var ta = $("textarea.job_progress");
     var tb = $("textarea.error_txt");
     var cl_id = ta.attr('id');
     var postdata = {cl_id: cl_id};

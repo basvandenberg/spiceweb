@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $("table#project").tablesorter();
+
     $("div.delete-project").on('shown', function() {
 
         $(this).find("button.delete-project").click(function() {

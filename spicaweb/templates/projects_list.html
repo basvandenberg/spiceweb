@@ -18,7 +18,7 @@ def uri_details(pid):
 
 % if len(projects) > 0:
 ## List projects
-<table id="sortTable" class="tablesorter">
+<table id="project" class="tablesorter">
 <thead>
 <tr>
   <th>project id</th>
@@ -32,7 +32,6 @@ def uri_details(pid):
 <%
 (name, init) = projects[row_i]
 init_tokens = init.split('_')
-print init_tokens
 # not so nice, use date to format this...
 init_str = '%s-%s-%s' % (init_tokens[0][:4], init_tokens[0][4:6],
                          init_tokens[0][6:8])

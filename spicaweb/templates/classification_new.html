@@ -28,7 +28,7 @@
             <select id="n_fold_cv" name="n_fold_cv">
               <option>3</option>
               <option>5</option>
-              <option>10</option>
+              <option selected="selected">10</option>
             </select>
         </div>
     </div>
@@ -41,23 +41,23 @@
         </label>
         <div class="controls">
             <select id="cl_type" name=cl_type />
-                <optgroup label="Support Vector Classifiers">
-                    <option value="linearsvc">SVM (linear)</option>
-                    <option value="svc_rbf">SVM (RBF)</option>
+                <optgroup label="Linear Discriminant Analysis">
+                    <option value="lda">LDA classifier</option>
+                    <option value="qda">QDA classifier</option>
                 </optgroup>
                 <optgroup label="Nearest Neighbor Classifiers">
                     <option value="kn_uniform">k-Nearest neighbor classifier (uniform weights)</option>
                     <option value="kn_distance">k-Nearest neighbor classifier (distance-based weights)</option>
                     <option value="nc">Nearest centroid classifier</option>
                 </optgroup>
+                <optgroup label="Support Vector Classifiers">
+                    <option value="linearsvc">SVM (linear)</option>
+                    <option value="svc_rbf">SVM (RBF)</option>
+                </optgroup>
                 <optgroup label="Naive Bayes">
                     <option value="gnb">Gaussian naive bayes</option>
                     <!--option value="mnb">Multinomial naive bayes</option-->
                     <!--option value="bnb">Bernoulli naive bayes</option-->
-                </optgroup>
-                <optgroup label="Linear Discriminant Analysis">
-                    <option value="lda">LDA classifier</option>
-                    <option value="qda">QDA classifier</option>
                 </optgroup>
                 <optgroup label="Tree classifiers">
                     <option value="dtree">Decision Tree</option>

@@ -5,10 +5,6 @@ $(document).ready(function() {
 
     setInterval('update_status();update_results(false);', 60000);
 
-    // call the tablesorter plugin TODO does not work
-    $("table#classResults").tablesorter({
-        
-    });
 
 }); 
 
@@ -24,15 +20,8 @@ function update_results(select_also) {
     var postdata = {};
     $.post('result_tables', postdata, 
         function(data) {
-            if(select_also) {
-                //$("div#score_select").html(data['score_select']);
-                //$("select#score").change(function() {
-                //    select_score();
-                //});
-            }
             $("div#classifier_results").html(data['result_tables']);
-            $("table#classResults").trigger("update");
-            //select_score();
+            $("table#classResults").tablesorter();
         });
         return false;
 }

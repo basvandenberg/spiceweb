@@ -716,7 +716,7 @@ textarea {
   max-width: 640px;
   border: 1px solid #d3d7cf;
 }
-textarea.progress {
+textarea.job_progress {
   font-size: 9pt;
   font-family: 'Ubuntu Mono', sans-serif; 
 }

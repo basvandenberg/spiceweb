@@ -2,7 +2,6 @@
 <%inherit file="base.html"/>
 
 <%block name="scripts">
-  <script type="application/javascript" src="${'%sjs/jquery.tablesorter.min.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/scripts_feature_ttest.js' % (root_url)}"></script>
   <script type="text/javascript">
 $(document).ready(function(){ $("#sortTable").tablesorter(); }); 
@@ -13,7 +12,7 @@ $(document).ready(function(){ $("#sortTable").tablesorter(); });
 
 <%include file="features_bar.html" />
 
-<table id="sortable" class="tablesorter ttest">
+<table id="ttest" class="tablesorter ttest">
 <thead>
 <tr>
   <th>category</th>

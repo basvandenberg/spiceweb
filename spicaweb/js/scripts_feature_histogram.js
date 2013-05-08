@@ -26,17 +26,17 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $("div#class_error").remove()
     }
 
-    // TODO change this... update? using function parameters?
+    // add/update/remove histograms based on feature and label selection
     $("ol.feats li").each(function () {
         var currentId = $(this).attr('id');
         var hist_li = $("li.hist#" + currentId);
         if($(this).hasClass('ui-selected')) {
             if(hist_li.length == 0) {
-                show_hist(currentId);
+                show_hist(currentId, class_ids);
             }
             else if(changed_classes) {
                 $("li.hist#" + currentId).remove();
-                show_hist(currentId);
+                show_hist(currentId, class_ids);
             }
         }
         else {
@@ -47,15 +47,15 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
 }
 
 // obtain histogram and show
-function show_hist(cid) {
+function show_hist(cid, class_ids) {
 
     // obtain labels selected
-    var labels = $("#labels_selected .label div").map(function () {
-        return $(this).html();
-    });
+    //var labels = $("#labels_selected .label div").map(function () {
+    //    return $(this).html();
+    //});
 
     // remove histograms if no class labels are selected
-    if(labels.length < 1) {
+    if(class_ids.length < 1) {
         $("li.hist").hide('fast', function(){$("li.hist").remove();});
         $("li.loadhist").hide('fast', function(){$("li.loadhist").remove();});
     }
@@ -68,7 +68,7 @@ function show_hist(cid) {
         );
 
         // construct post data
-        var labels_str = labels.get().join(",");
+        var labels_str = class_ids.join(",");
         var labeling = $("select#labeling_select").val()
         var postdata = {labeling_name: labeling, labels: labels_str};
         
