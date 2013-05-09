@@ -15,8 +15,8 @@ class Project:
 
     EXAMPLE_DIR = 'example_projects'
     EXAMPLES = [
-        ('localization', 'protein.fsa', 'prot_seq', 'localization.txt'),
-        ('production', 'orf.fsa', 'orf_seq', 'production.txt')
+        ('production', 'orf.fsa', 'orf_seq', 'production.txt'),
+        ('localization', 'protein.fsa', 'prot_seq', 'localization.txt')
     ]
 
     def __init__(self, auth, project_manager, root_url, main_menu,
@@ -197,44 +197,6 @@ class Project:
         template_f = self.get_template_f(smi)
 
         return spiceweb.get_template(template_f, **kw_args)
-
-    '''
-    # handle upload of data file, redirect to project details
-    @cherrypy.expose
-    def upload(self, data_type, data_name, data_file):
-
-        # TODO get_feature_extraction() get called twice, which could be a bit
-        # expensive for larger data sets... check this, improve
-
-        smi = 2
-
-        self.fetch_session_data()
-        pm = self.project_manager
-
-        msg_data = ''
-        msg_labeling = ''
-
-        if(data_type == 'data_source'):
-            if(data_file.file == None):
-                msg_data = 'No file provided.'
-            else:
-                msg_data = pm.add_data_source(data_name, data_file.file)
-        elif(data_type == 'labeling'):
-            if(data_file.file == None):
-                msg_labeling = 'No file provided.'
-            else:
-                msg_labeling = pm.add_labeling(data_name, data_file.file)
-        else:
-            msg_data = 'Unexpected upload error.'
-
-        if(len(msg_labeling) > 100):
-            msg_labeling = msg_labeling[:100] + '...' 
-
-        # redirect to the project details page
-        url = '%s/%s?msg_data=%s&msg_labeling=%s' %\
-            (self.get_url(smi), pm.project_id, msg_data, msg_labeling)
-        raise cherrypy.HTTPRedirect(url)
-    '''
 
     @cherrypy.expose
     def load_example(self, example_number):
