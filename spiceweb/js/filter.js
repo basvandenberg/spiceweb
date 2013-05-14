@@ -56,7 +56,7 @@ function update(changed_classes, changed_features) {
 
     // store the selection in a cookie
     // TODO get url from settings or var??? now it only works for one link 'depth'
-    var cookie_params = {expires: 365, path: '../..'}
+    var cookie_params = {expires: 365, path: '/'}
     $.cookie(pn + ".labeling_name", sl, cookie_params);
     $.cookie(pn + ".class_ids", sc, cookie_params);
     $.cookie(pn + ".feat_ids", sf, cookie_params);
