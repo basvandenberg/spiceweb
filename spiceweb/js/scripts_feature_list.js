@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("table#feature").tablesorter();
+    //$("table#feature").tablesorter();
 
     // bind feature calculation ajax calls to links
     $('a.calc').bind('click', function(event) {
