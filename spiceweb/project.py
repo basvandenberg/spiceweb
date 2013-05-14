@@ -15,7 +15,7 @@ class Project:
 
     EXAMPLE_DIR = 'example_projects'
     EXAMPLES = [
-        ('production', 'orf.fsa', 'orf_seq', 'production.txt'),
+        ('yeast-translation', 'orf.fsa', 'orf_seq', 'translation.txt'),
         ('localization', 'protein.fsa', 'prot_seq', 'localization.txt')
     ]
 
