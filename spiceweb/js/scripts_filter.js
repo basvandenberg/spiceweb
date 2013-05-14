@@ -38,7 +38,7 @@ $(document).ready(function() {
 });
 
 function project_name() {
-    return $("div#project_name>b").text();
+    return $("div#project_name>a").text();
 }
 
 function update(changed_classes, changed_features) {
@@ -55,8 +55,8 @@ function update(changed_classes, changed_features) {
     var pn = project_name();
 
     // store the selection in a cookie
-    // TODO get url from settings or var
-    var cookie_params = {expires: 7, path: '/spica/app'}
+    // TODO get url from settings or var??? now it only works for one link 'depth'
+    var cookie_params = {expires: 365, path: '../..'}
     $.cookie(pn + ".labeling_name", sl, cookie_params);
     $.cookie(pn + ".class_ids", sc, cookie_params);
     $.cookie(pn + ".feat_ids", sf, cookie_params);
@@ -263,12 +263,12 @@ function toggle_showhide() {
 
     var newright = '-300px';
     // TODO get url from settings or var
-    var img = "#555753 url(/spica/img/show.png) top left no-repeat";
+    var img = "#555753 url(../../img/show.png) top left no-repeat";
 
     if($('#filterwrapper').css('right') == '-300px'){
         newright = '0px';
         // TODO get url from settings or var
-        img = "#555753 url(/spica/img/hide.png) top left no-repeat";
+        img = "#555753 url(../../img/hide.png) top left no-repeat";
     }
 
     $("#filterwrapper").animate({
