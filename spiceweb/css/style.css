@@ -529,12 +529,12 @@ div.text.disabled {
 .hist {
     margin: 10px;
     width: 730px;
-    height: 266px;
+    height: 280px;
     border: 1px solid #d3d7cf;
     border-radius: 4px;
 }
 li.hist {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 /* scatter & heatmap *********************************************************/
