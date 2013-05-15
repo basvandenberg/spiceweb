@@ -16,8 +16,8 @@ class Project:
     EXAMPLE_DIR = 'example_projects'
     EXAMPLES = [
         ('yeast-translation', 'orf.fsa', 'orf_seq', 'translation.txt'),
-        ('ecoli-solubility', 'protein.fsa', 'prot_seq', 'solubility.txt'),
-        ('human-localization', 'protein.fsa', 'prot_seq', 'localization.txt')
+        ('human-localization', 'protein.fsa', 'prot_seq', 'localization.txt'),
+        ('ecoli-solubility', 'protein.fsa', 'prot_seq', 'solubility.txt')
     ]
 
     def __init__(self, auth, project_manager, root_url, main_menu,
