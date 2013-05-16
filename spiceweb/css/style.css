@@ -65,20 +65,27 @@ div#header div#title {
     position: absolute;
     left: 20px;
     top: 10px;
-    font-size:23pt;
+    font-size: 23pt;
     color: #eeeeec;
 }
 div#header div#subtitle {
     position: absolute;
     left: 20px;
     bottom: 6px;
-    font-size:13pt;
+    font-size: 13pt;
 }
 div#header div#version {
     position: absolute;
-    right: 7px;
+    right: 51px;
     bottom: 5px;
-    font-size:10pt;
+    font-size: 10pt;
+}
+div#header div#beta {
+    position: absolute;
+    right: 11px;
+    bottom: 7px;
+    font-size: 13pt;
+    color: #888a85;
 }
 
 /* Footer ********************************************************************/
