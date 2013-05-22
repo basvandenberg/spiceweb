@@ -30,7 +30,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
             var postdata = {labeling_name: labeling_name, class_ids: class_ids};
             $.post('attest', postdata, 
                 function(data) {
-                    $("tbody#ttest_table").html(data['ttest_table'])
+                    $("tbody#ttest_table").html(data.ttest_table);
                     updateTable();
                     $("table#ttest").trigger("update");
                 });
