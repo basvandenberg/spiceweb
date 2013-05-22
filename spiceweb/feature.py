@@ -203,7 +203,7 @@ class Feature:
 
             str_data += '<tr id=%s>\n' % (fid)
             str_data += '<td>%s</td>' % (fvec.capitalize())
-            str_data += '  <td>%s</td>\n' % (fname.capitalize())
+            str_data += '  <td>%s</td>\n' % (fname)
             str_data += '  <td class="n">%.2f</td>\n' % (tval)
             str_data += '  <td class="n">%.15f</td>\n' % (pval)
             str_data += '</tr>\n'
