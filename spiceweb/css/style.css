@@ -185,6 +185,28 @@ div#home_sidebar a.sklearn:hover {
     background: #fff url(../img/sklearn.png) top left no-repeat;
     background-size: 140px 73px;
 }
+div#home_sidebar a.bootstrap {
+    display: block;
+    width: 140px;
+    height: 73px;
+    background: #fff url(../img/bootstrap_gray.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.bootstrap:hover {
+    background: #fff url(../img/bootstrap.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.jquery {
+    display: block;
+    width: 140px;
+    height: 73px;
+    background: #fff url(../img/jquery_gray.png) top left no-repeat;
+    background-size: 140px 73px;
+}
+div#home_sidebar a.jquery:hover {
+    background: #fff url(../img/jquery.png) top left no-repeat;
+    background-size: 140px 73px;
+}
 div#home_sidebar a.tudelft {
     display: block;
     width: 160px;
