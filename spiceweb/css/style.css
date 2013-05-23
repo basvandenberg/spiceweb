@@ -76,14 +76,14 @@ div#header div#subtitle {
 }
 div#header div#version {
     position: absolute;
-    right: 51px;
+    right: 11px;
     bottom: 5px;
     font-size: 10pt;
 }
 div#header div#beta {
     position: absolute;
     right: 11px;
-    bottom: 7px;
+    bottom: 23px;
     font-size: 13pt;
     color: #888a85;
 }
@@ -386,6 +386,12 @@ a.signup_button:hover {
     border-bottom: 0;
     background-color: #729fcf;
     color: #ffffff;
+}
+
+/* Home page carousel ********************************************************/
+
+div#myCarousel {
+    margin-top: 20px;
 }
 
 /* Horizontal lines / separators *********************************************/

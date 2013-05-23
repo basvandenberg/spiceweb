@@ -24,7 +24,7 @@
 
 <hr class="spacer" />
 
-<h3>Available protein data</h3>
+<h3>Protein sequence data</h3>
 
 % if msg_seq:
     <div class="alert alert-block alert-error fade in"><p>${msg_seq}</p></div>
@@ -49,22 +49,8 @@
 % if ds.available():
     <td class="data_source"><a href="#" class="download" id="${ds.uid}">download</a></td>
 % else:
-  <!--td class="data_source"><a href="#" class="upload" id="${ds.uid}">upload</a-->
     <td class="data_source"><a href="#myModal" class="btn btn-link my-btn-link" data-toggle="modal" id="${ds.uid}">upload</a>
 
-## upload dialog
-<!--div class="dialog" id="${ds.uid}" title="Upload ${ds.name} file"-->
-    <!--form action="#" class="upload" id="${ds.uid}" method="post" enctype="multipart/form-data"-->
-        <!--label for="data_file">Data file</label-->
-        <!--input id="data_file" type="file" name="data_file" class="text ui-widget-cmntent ui-corner-all" /-->
-        <!--input id="data_name" type="hidden" name="data_name" value="${ds.uid}"-->
-        <!--input id="data_type" type="hidden" name="data_type" value="data_source" /-->
-    <!--/form-->
-<!--/div-->
-
-<!-- Button to trigger modal -->
-<!--a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a-->
- 
         <!-- Modal -->
         <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -106,10 +92,6 @@
                 </form>
 
             </div>
-            <!--div class="modal-footer"-->
-                <!--button class="btn" data-dismiss="modal" aria-hidden="true">Close</button-->
-                <!--button class="btn btn-primary">Save changes</button-->
-            <!--/div-->
         </div>
     </td>
 
@@ -131,7 +113,7 @@
 
 <hr class="spacer" />
 
-<h3>Available labeling files</h3>
+<h3>Labelings</h3>
 
 <%
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
