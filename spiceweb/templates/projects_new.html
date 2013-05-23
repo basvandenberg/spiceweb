@@ -20,7 +20,7 @@
     <legend>Create new project</legend>
 
     <div class="control-group">
-        <label class="control-label" for="inputFastaFile">FASTA file 
+        <label class="control-label" for="inputFastaFile">FASTA file*
             <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a FASTA file with either protein amino acid sequences or open reading frame nucleotide sequences. Note that the sequences should be <b>upper case</b> and that <b>50MB</b> is the maximum allowed file size." title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label">Sequence type 
+        <label class="control-label">Sequence type*
             <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select if the sequences in the FASTA file contain amino acid or nucleotide sequences." title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
@@ -63,7 +63,7 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label">Project id 
+        <label class="control-label">Project id*
             <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a unique id for your project. It should be at least 4 characters long. Only alphanumeric characters, dashes, and underscores can be used." title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
@@ -72,6 +72,48 @@
             <input class="input-xlarge" type="text" name="project_id" id="project_id" required="required" />
         </div>
     </div>
+
+    <hr class="small"\>
+
+    <div class="control-group">
+        <label class="control-label">Reference set
+            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Check this option if you want to compare your protein set to the proteome of a selected organism. A select box will appear in which you can select the organism." title="" data-original-title="">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" name="use_reference" />
+                Use a proteome reference data set
+            </label>
+        </div>
+    </div>
+ 
+    <!-- collapsable part -->
+    <div id="taxon_select" class="collapse in">
+
+        <div class="control-group">
+            <label class="control-label">Taxon domain
+            </label>
+            <div class="controls">
+                <select id="taxon_domain" name="taxon_domain">
+    % for (taxon_name, taxon_ancestor) in taxon_categories:
+                    <option value="${taxon_ancestor}">${taxon_name}</option>
+    % endfor
+                </select>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Taxon
+            </label>
+            <div class="controls">
+                <select id="taxon" name="taxon" class="input-block-level">
+                </select>
+            </div>
+        </div>
+
+    </div> <!-- collapse -->
 
 % if msg:
     <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>

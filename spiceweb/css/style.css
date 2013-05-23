@@ -397,7 +397,7 @@ div#myCarousel {
 /* Horizontal lines / separators *********************************************/
 
 hr {
-  border: 1px solid #babdb6;
+    border: 1px solid #babdb6;
 }
 hr.menu {
     margin-bottom: 18px;
@@ -410,6 +410,10 @@ hr.spacer {
 }
 hr.spacer_both {
     margin: 35px 0px 35px 0px;
+}
+hr.small {
+    border: 1px solid #d3d7cf;
+    width: 156px;
 }
 
 /* dialogs *******************************************************************/

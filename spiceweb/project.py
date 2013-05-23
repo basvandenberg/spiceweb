@@ -2,6 +2,8 @@ import os
 import re
 import zipfile
 import traceback
+import urllib2
+import simplejson
 
 import cherrypy
 from cherrypy.lib.static import serve_file
@@ -71,17 +73,32 @@ class Project:
         return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def new(self, project_id=None, fasta_file=None, sequence_type=None):
+    def new(self, project_id=None, fasta_file=None, sequence_type=None,
+            use_reference=None, taxon_domain=None, taxon=None):
 
         self.fetch_session_data()
         smi = 1
 
         kw_args = self.get_template_args(smi)
 
+        # does this stay the same over time???
+        # taxon domain and corresponding uniprot ancestor numbers
+        kw_args['taxon_categories'] = [
+            ('Bacteria', 2), 
+            ('Archea', 2157),
+            ('Eukaryota', 2759),
+            ('Viruses', 10239)
+        ]
+
         error_msg = None
 
         # start a new project
         if((fasta_file and sequence_type) and project_id):
+
+            # taxon domain is not used...
+            taxon_id = None
+            if not(use_reference is None):
+                taxon_id = int(taxon)
 
             if(fasta_file.file is None):
                 error_msg = 'No fasta file provided'
@@ -96,7 +113,8 @@ class Project:
                 try:
                     # initiate new project
                     error_msg = self.project_manager.start_new_project(
-                            project_id, fasta_file, sequence_type)
+                            project_id, fasta_file, sequence_type,
+                            reference_taxon=taxon_id)
                 except:
                     print(traceback.format_exc())
                     error_msg = 'Error creating new project'
@@ -244,6 +262,61 @@ class Project:
     #
     # ajax methods
     #
+
+    @cherrypy.expose
+    def taxon_list(self, taxon_domain=None):
+
+        taxon_id = int(taxon_domain)
+
+        top_lists = {
+            2: [(562, 'Escherichia coli')],
+            2157: [],
+            2759: [(559292, 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)'),
+                   (7227, 'Drosophila melanogaster'),
+                   (284812, 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)'),
+                   (6239, 'Caenorhabditis elegans')],
+            10239: []
+
+        }
+
+        top_list = top_lists[taxon_id]
+
+        # obtain all taxons of this domain from uniprot
+        url = 'http://www.uniprot.org/taxonomy/' +\
+              '?query=complete:yes+ancestor:%i&format=tab' % (taxon_id)
+        response = urllib2.urlopen(url)
+        full_taxon_list = response.read()
+
+        # parse result, fetch ids and names
+        ids = []
+        names = []
+        first_line = True
+        for line in full_taxon_list.split('\n'):
+            if(len(line.strip()) > 0):
+                if(first_line):
+                    first_line = False
+                else:
+                    tokens = line.split('\t')
+                    ids.append(int(tokens[0]))
+                    names.append(tokens[2])
+
+        # turn it into select list, would be nicer to let javascript do this
+        select_str = ''
+        
+        if(len(top_list) > 0):
+            print top_list
+            select_str += '<optgroup label="Often used">\n'
+            for i, name in top_list:
+                select_str += '<option value="%i">%s (taxon id: %i)</option>\n' % (i, name, i)
+            select_str += '</optgroup>\n'        
+
+        select_str += '<optgroup label="All uniprot complete proteome taxonomies">\n'
+        for i, name in zip(ids, names):
+            select_str += '<option value="%i">%s (taxon id: %i)</option>\n' % (i, name, i)
+        select_str += '</optgroup>\n'        
+
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return simplejson.dumps(dict(taxon_list=select_str))
 
     @cherrypy.expose
     def download(self, data_type='project', data_name=None):
