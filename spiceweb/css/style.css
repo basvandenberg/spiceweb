@@ -390,8 +390,8 @@ a.signup_button:hover {
 
 /* Home page carousel ********************************************************/
 
-div#myCarousel {
-    margin-top: 20px;
+img#home_img {
+    margin-top: 10px;
 }
 
 /* Horizontal lines / separators *********************************************/
