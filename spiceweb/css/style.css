@@ -411,10 +411,6 @@ hr.spacer {
 hr.spacer_both {
     margin: 35px 0px 35px 0px;
 }
-hr.small {
-    border: 1px solid #d3d7cf;
-    width: 156px;
-}
 
 /* dialogs *******************************************************************/
 .dialog {
