@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial 1: Yeast expression &mdash; SPiCE 0.1 documentation</title>
+    <title>Tutorial 1: Getting started &mdash; SPiCE 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="next" title="&lt;no title&gt;" href="user_accounts.html" />
     <link rel="prev" title="Welcome to the SPiCe documentation!" href="index.html" /> 
   </head>
   <body>
@@ -49,6 +50,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="user_accounts.html" title="&lt;no title&gt;"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="index.html" title="Welcome to the SPiCe documentation!"
              accesskey="P">previous</a> |</li>
     
@@ -60,8 +64,26 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tutorial 1: Yeast expression</a><ul>
-<li><a class="reference internal" href="#load-yeast-expression-example-project">Load yeast-expression example project</a></li>
+<li><a class="reference internal" href="#">Tutorial 1: Getting started</a><ul>
+<li><a class="reference internal" href="#projects-section">Projects section</a><ul>
+<li><a class="reference internal" href="#create-example-projects">Create example projects</a></li>
+<li><a class="reference internal" href="#activating-projects">Activating projects</a></li>
+<li><a class="reference internal" href="#project-details">Project details</a></li>
+<li><a class="reference internal" href="#protein-sequece-data">Protein sequece data</a></li>
+<li><a class="reference internal" href="#protein-labelings">Protein labelings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#features-section">Features section</a><ul>
+<li><a class="reference internal" href="#feature-calculation">Feature calculation</a></li>
+<li><a class="reference internal" href="#upload-a-feature-matrix">Upload a feature matrix</a></li>
+<li><a class="reference internal" href="#filter-sidebar">Filter sidebar</a></li>
+<li><a class="reference internal" href="#feature-statistics">Feature statistics</a></li>
+<li><a class="reference internal" href="#histograms">Histograms</a></li>
+<li><a class="reference internal" href="#scatter-plots">Scatter plots</a></li>
+<li><a class="reference internal" href="#clustered-heat-map">Clustered heat map</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#classification">Classification</a></li>
 </ul>
 </li>
 </ul>
@@ -69,6 +91,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Welcome to the SPiCe documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="user_accounts.html"
+                        title="next chapter">&lt;no title&gt;</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/tutorial1.txt"
@@ -95,22 +120,147 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="tutorial-1-yeast-expression">
-<h1>Tutorial 1: Yeast expression<a class="headerlink" href="#tutorial-1-yeast-expression" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="load-yeast-expression-example-project">
-<h2>Load yeast-expression example project<a class="headerlink" href="#load-yeast-expression-example-project" title="Permalink to this headline">¶</a></h2>
-<p>To load the example project, go to the <em>Project</em> tab and click on the
+  <div class="section" id="tutorial-1-getting-started">
+<h1>Tutorial 1: Getting started<a class="headerlink" href="#tutorial-1-getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The first tutorial will show you the basic elements of the web site using the
+available example projects. The following tutorials will show you how to start
+a project with your own data.</p>
+<div class="section" id="projects-section">
+<h2>Projects section<a class="headerlink" href="#projects-section" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-example-projects">
+<h3>Create example projects<a class="headerlink" href="#create-example-projects" title="Permalink to this headline">¶</a></h3>
+<p>To load an example project, go to the <em>Project</em> tab and click on the
 <strong>Create</strong> button.</p>
 <a class="reference internal image-reference" href="_images/t1_0_create_0.png"><img alt="_images/t1_0_create_0.png" class="align-center" src="_images/t1_0_create_0.png" style="width: 500px;" /></a>
-<p>Scroll down to the <em>Load example project</em> section, select the
-<em>yeast-expression</em> option, and click on the <strong>Load example</strong> button.</p>
+<p>The <em>Load example project</em> section at the bottom of the page shows a list of
+example projects. Select one of the projects, for example the
+<em>yeast-expression</em> project, and click on the <strong>Load project</strong> button to
+initiate the example project.</p>
 <a class="reference internal image-reference" href="_images/t1_0_create_1.png"><img alt="_images/t1_0_create_1.png" class="align-center" src="_images/t1_0_create_1.png" style="width: 500px;" /></a>
-<p>You will now be redirected to your list of projects, which should now contain
-the <em>yeast-expression</em> project. The second column shows the project initiation
-date. The <em>delete</em> link in the last column can be used to delete the project,
-this will delete all files related to the project, so be carefull.</p>
-<p>Click on the <em>yeast-project</em> link to go to the project details page.</p>
+</div>
+<div class="section" id="activating-projects">
+<h3>Activating projects<a class="headerlink" href="#activating-projects" title="Permalink to this headline">¶</a></h3>
+<p>After project creation, you will be redirected to the list of available
+projects, which should now contain the created example project. For the figure
+below, a second example project was loaded, so that the table shows two
+available projects.</p>
+<p>The projects table provides a link to the project&#8217;s details page in the first
+column, the project initiation time in the second column, and a <em>delete</em> link
+in the third column. The <em>delete</em> link will delete all files related to the
+project, so be carefull with that.</p>
 <a class="reference internal image-reference" href="_images/t1_0_create_2.png"><img alt="_images/t1_0_create_2.png" class="align-center" src="_images/t1_0_create_2.png" style="width: 500px;" /></a>
+<p>Notice that the <em>user bar</em>, situated underneeth the main tabs, indicates which
+project is currently active. Clicking the link will redirected you to the
+details page of that project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_3.png"><img alt="_images/t1_0_create_3.png" class="align-center" src="_images/t1_0_create_3.png" style="width: 500px;" /></a>
+<p>If you have multiple projects, an additional <em>select project</em> link will appear,
+which allows you to activate another project. It is important to notice that
+the <em>features</em> and <em>classification</em> sites will always show the data of the
+active project. Remember that the <em>user bar</em> always shows you which project is
+active.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_4.png"><img alt="_images/t1_0_create_4.png" class="align-center" src="_images/t1_0_create_4.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="project-details">
+<h3>Project details<a class="headerlink" href="#project-details" title="Permalink to this headline">¶</a></h3>
+<p>Activating a new project will always redirect you to that project&#8217;s details
+page. On this page, the active button (blue) shows the name of the project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_5.png"><img alt="_images/t1_0_create_5.png" class="align-center" src="_images/t1_0_create_5.png" style="width: 500px;" /></a>
+<p>If you have multiple projects, this button turns into a drop-down button where
+you can select one of the projects (the same as in the <em>user bar</em>).</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_6.png"><img alt="_images/t1_0_create_6.png" class="align-center" src="_images/t1_0_create_6.png" style="width: 500px;" /></a>
+<p>If you click the <strong>Download</strong> button on the right, all data of the currently
+active project will be zipped into a zip-file and downloaded to your computer.
+The zip-file contains all project data: the sequence data, calculated features
+data, and trained classifiers data.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_7.png"><img alt="_images/t1_0_create_7.png" class="align-center" src="_images/t1_0_create_7.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="protein-sequece-data">
+<h3>Protein sequece data<a class="headerlink" href="#protein-sequece-data" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Protein sequence data</em> shows the available sequence data for this project.
+In this case, both ORF (nucleotide) and protein (amino acid) sequences are
+available. With the <em>download</em> link you can download the corresponding fasta
+files to your computer. If you have fasta files with (predicted) secondary
+structure or solvent accessibility sequences, you can use the <em>upload</em> links to
+upload them.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_8.png"><img alt="_images/t1_0_create_8.png" class="align-center" src="_images/t1_0_create_8.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="protein-labelings">
+<h3>Protein labelings<a class="headerlink" href="#protein-labelings" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Labeling</em> table shows the available labelings for this project. A labeling
+is a mapping from each protein to a label, thereby separating the set of
+proteins into different classes. For example, the <em>expression</em> labeling of the
+<em>yeast-expression</em> splits the 2000 proteins into two classes: 1000 proteins
+with the label <em>low</em>, and 1000 proteins with the label <em>high</em>.  All projects
+obtain a default labeling upon project creation. This is the <em>one_class</em>
+labeling, in which all proteins obtain the same label (<em>all</em>).</p>
+<p>For every labeling, the table shows: the name of the labeling in the first
+column; the different classes and the number of proteins per class in the
+second column, the number of classes in the third column, and a <em>download</em> link
+in the third column.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_9.png"><img alt="_images/t1_0_create_9.png" class="align-center" src="_images/t1_0_create_9.png" style="width: 500px;" /></a>
+<p>Use the form below the table to upload additional labeling files.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_10.png"><img alt="_images/t1_0_create_10.png" class="align-center" src="_images/t1_0_create_10.png" style="width: 500px;" /></a>
+</div>
+</div>
+<div class="section" id="features-section">
+<h2>Features section<a class="headerlink" href="#features-section" title="Permalink to this headline">¶</a></h2>
+<p>The <em>features</em> section provides feature calculation and visualization of the
+feature data.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_11.png"><img alt="_images/t1_0_create_11.png" class="align-center" src="_images/t1_0_create_11.png" style="width: 500px;" /></a>
+<p>A list with sequence-based feature categories is shown in the table. The first
+column gives the name of the feature category. The second shows what sequence
+data is required to calculate the features of this category. If the features
+are not calculated yet, the third column provides a <em>calculate</em> link that will
+start feature calculation. In the second column, the sequence data that is not
+available is grayed out.  The feature <em>calculate</em> link is disabled if not all
+sequence data is available.</p>
+<div class="section" id="feature-calculation">
+<h3>Feature calculation<a class="headerlink" href="#feature-calculation" title="Permalink to this headline">¶</a></h3>
+<p>Clicking the <em>calculate</em> link will put a feature calculate job in the job
+queue on the compute server. The color of the first color indicates the current
+status of the job: yellow for waiting in the queue, blue for running, red if an
+error occured, and green if the features are successfully calculated.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_12.png"><img alt="_images/t1_0_create_12.png" class="align-center" src="_images/t1_0_create_12.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="upload-a-feature-matrix">
+<h3>Upload a feature matrix<a class="headerlink" href="#upload-a-feature-matrix" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>Upload</strong> button can be used to upload your own feature matrix. The
+<em>upload feature matrix</em> form allows users to upload a matrix file containing
+the feature values and a text file with protein ids.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_13.png"><img alt="_images/t1_0_create_13.png" class="align-center" src="_images/t1_0_create_13.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="filter-sidebar">
+<h3>Filter sidebar<a class="headerlink" href="#filter-sidebar" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/t1_0_create_14.png"><img alt="_images/t1_0_create_14.png" class="align-center" src="_images/t1_0_create_14.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_15.png"><img alt="_images/t1_0_create_15.png" class="align-center" src="_images/t1_0_create_15.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_16.png"><img alt="_images/t1_0_create_16.png" class="align-center" src="_images/t1_0_create_16.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_17.png"><img alt="_images/t1_0_create_17.png" class="align-center" src="_images/t1_0_create_17.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_18.png"><img alt="_images/t1_0_create_18.png" class="align-center" src="_images/t1_0_create_18.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="feature-statistics">
+<h3>Feature statistics<a class="headerlink" href="#feature-statistics" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/t1_0_create_19.png"><img alt="_images/t1_0_create_19.png" class="align-center" src="_images/t1_0_create_19.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="histograms">
+<h3>Histograms<a class="headerlink" href="#histograms" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/t1_0_create_20.png"><img alt="_images/t1_0_create_20.png" class="align-center" src="_images/t1_0_create_20.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="scatter-plots">
+<h3>Scatter plots<a class="headerlink" href="#scatter-plots" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/t1_0_create_21.png"><img alt="_images/t1_0_create_21.png" class="align-center" src="_images/t1_0_create_21.png" style="width: 500px;" /></a>
+</div>
+<div class="section" id="clustered-heat-map">
+<h3>Clustered heat map<a class="headerlink" href="#clustered-heat-map" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/t1_0_create_22.png"><img alt="_images/t1_0_create_22.png" class="align-center" src="_images/t1_0_create_22.png" style="width: 500px;" /></a>
+</div>
+</div>
+<div class="section" id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/t1_0_create_23.png"><img alt="_images/t1_0_create_23.png" class="align-center" src="_images/t1_0_create_23.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_24.png"><img alt="_images/t1_0_create_24.png" class="align-center" src="_images/t1_0_create_24.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_25.png"><img alt="_images/t1_0_create_25.png" class="align-center" src="_images/t1_0_create_25.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_26.png"><img alt="_images/t1_0_create_26.png" class="align-center" src="_images/t1_0_create_26.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/t1_0_create_27.png"><img alt="_images/t1_0_create_27.png" class="align-center" src="_images/t1_0_create_27.png" style="width: 500px;" /></a>
 </div>
 </div>
 
@@ -126,6 +276,9 @@ this will delete all files related to the project, so be carefull.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="user_accounts.html" title="&lt;no title&gt;"
+             >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to the SPiCe documentation!"
              >previous</a> |</li>
