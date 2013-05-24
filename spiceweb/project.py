@@ -22,6 +22,25 @@ class Project:
         ('human-localization', 'protein.fsa', 'prot_seq', 'localization.txt'),
         ('ecoli-solubility', 'protein.fsa', 'prot_seq', 'solubility.txt')
     ]
+    TAXON_DOMAINS = [
+        ('Bacteria', 2), 
+        ('Archea', 2157),
+        ('Eukaryota', 2759),
+        ('Viruses', 10239)
+    ]
+    FAVO_TAXONS = {
+        2: [
+            (562, 'Escherichia coli')
+        ],
+        2157: [],
+        2759: [
+            (559292, 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)'),
+            (7227, 'Drosophila melanogaster'),
+            (284812, 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)'),
+            (6239, 'Caenorhabditis elegans')
+        ],
+        10239: []
+    }
 
     def __init__(self, auth, project_manager, root_url, main_menu,
                  main_menu_index, sub_menu):
@@ -83,12 +102,7 @@ class Project:
 
         # does this stay the same over time???
         # taxon domain and corresponding uniprot ancestor numbers
-        kw_args['taxon_categories'] = [
-            ('Bacteria', 2), 
-            ('Archea', 2157),
-            ('Eukaryota', 2759),
-            ('Viruses', 10239)
-        ]
+        kw_args['taxon_domains'] = self.TAXON_DOMAINS
 
         error_msg = None
 
@@ -268,17 +282,7 @@ class Project:
 
         taxon_id = int(taxon_domain)
 
-        top_lists = {
-            2: [(562, 'Escherichia coli')],
-            2157: [],
-            2759: [(559292, 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)'),
-                   (7227, 'Drosophila melanogaster'),
-                   (284812, 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)'),
-                   (6239, 'Caenorhabditis elegans')],
-            10239: []
-
-        }
-
+        top_lists = self.FAVO_TAXONS
         top_list = top_lists[taxon_id]
 
         # obtain all taxons of this domain from uniprot
@@ -305,7 +309,7 @@ class Project:
         
         if(len(top_list) > 0):
             print top_list
-            select_str += '<optgroup label="Often used">\n'
+            select_str += '<optgroup label="Short list">\n'
             for i, name in top_list:
                 select_str += '<option value="%i">%s (taxon id: %i)</option>\n' % (i, name, i)
             select_str += '</optgroup>\n'        

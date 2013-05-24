@@ -110,7 +110,8 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
         config = ConfigParser.ConfigParser()
         config.read(CONFIG_FILE)
         project_dir = config.get('spiceweb', 'project_dir')
-        pm = project_management.ProjectManager(project_dir)
+        ref_data_dir = config.get('spiceweb', 'ref_data_dir')
+        pm = project_management.ProjectManager(project_dir, ref_data_dir)
         # first check if there is a user?
         pm.set_user(user_id)
         all_project_ids = pm.get_projects()
@@ -145,6 +146,7 @@ class Root:
         config = ConfigParser.ConfigParser()
         config.read(CONFIG_FILE)
         self.project_dir = config.get('spiceweb', 'project_dir')
+        self.ref_data_dir = config.get('spiceweb', 'ref_data_dir')
         title = config.get('auth', 'title')
         db_file = config.get('sqlite', 'db_file')
         smtp_server = config.get('email', 'smtp_server')
@@ -171,7 +173,7 @@ class Root:
         # the following are only accessible by authenticated users
         self.account = self.a.account
 
-        self.app = App(self.a, ROOT_URL, self.project_dir)
+        self.app = App(self.a, ROOT_URL, self.project_dir, self.ref_data_dir)
         #self.news = news.News()
 
     # wrappers to disallow access for guest account
@@ -285,9 +287,9 @@ class Root:
 
 @cherrypy.tools.authenticate()
 class App:
-    def __init__(self, authentication, root_url, projects_dir):
+    def __init__(self, authentication, root_url, projects_dir, ref_data_dir):
 
-        pm = project_management.ProjectManager(projects_dir)
+        pm = project_management.ProjectManager(projects_dir, ref_data_dir)
         self.root_url = root_url
 
         self.projects = project.Project(authentication, pm, self.root_url,
