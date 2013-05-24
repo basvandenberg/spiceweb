@@ -394,6 +394,15 @@ img#home_img {
     margin-top: 10px;
 }
 
+/* references ****************************************************************/
+
+div.references {
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    border-top: 1px solid #bdb7cf;
+    margin-top: 20px;
+}
+
 /* Horizontal lines / separators *********************************************/
 
 hr {

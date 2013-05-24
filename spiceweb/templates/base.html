@@ -57,6 +57,8 @@
 % for index, (name, url) in enumerate(header_menu):
 % if header_menu_index == index:
   <a href=${root_url}${url} class="active">${name}</a>
+% elif name == 'documentation':
+  <a href=${root_url}${url} target="_tab">${name}</a>
 % else:
   <a href=${root_url}${url}>${name}</a>
 % endif
