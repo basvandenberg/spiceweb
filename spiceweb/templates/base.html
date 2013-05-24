@@ -215,16 +215,16 @@ custom_feats = fm.get_custom_features()
 
 % for featvec in fe.fv_dict_protein.values():
 % if (featvec.uid in available):
-  <div class="filter_subheader">
-    <div class="filter_subtitle">${featvec.name.title()}</div>
-    <div class="filter_showcat" id="${featvec.uid}">show / hide</div>
-  </div>
-  <div class="filter_select" id="${featvec.uid}">
-    <div class="filter_select_bar">
-      <div id="${featvec.uid}" class="filter_select_all sel inline">Select all</div>
-      <div class="inline"> | </div>
-      <div id="${featvec.uid}" class="filter_deselect_all sel inline">Deselect all</div>
+    <div class="filter_subheader">
+        <div class="filter_subtitle">${featvec.name.title()}<span class="numselected ${featvec.uid}"> (0)</span></div>
     </div>
+    <div class="filter_showcat" id="${featvec.uid}">show / hide</div>
+        <div class="filter_select_bar">
+            <div id="${featvec.uid}" class="filter_select_all sel inline">Select all</div>
+            <div class="inline"> | </div>
+            <div id="${featvec.uid}" class="filter_deselect_all sel inline">Deselect all</div>
+        </div>
+    <div class="filter_select" id="${featvec.uid}">
 
 <%
 name_dict = fe.protein_feat_id_to_name_dict()
@@ -233,34 +233,34 @@ feat_names = featvec.feat_names
 features = zip(feat_ids, feat_names)
 %>
 
-    <ol class="feats selectable" id="${featvec.uid}">
+        <ol class="feats selectable" id="${featvec.uid}">
 % for index, (feat_id, feat_name) in enumerate(features):
-      <li class="feat ui-widget-content" id="${feat_id}">${feat_name}</li>
+            <li class="feat ui-widget-content" id="${feat_id}">${feat_name}</li>
 % endfor
-    </ol>
-  </div>
+        </ol>
+    </div>
 % endif
 % endfor
 
 ## custom features
 
 % for custom_featvec_id in custom_feats.keys():
-  <div class="filter_subheader">
-    <div class="filter_subtitle">${custom_featvec_id}</div>
-    <div class="filter_showcat" id="${custom_featvec_id}">show / hide</div>
-  </div>
-  <div class="filter_select" id="${custom_featvec_id}">
-    <div class="filter_select_bar">
-      <div id="${custom_featvec_id}" class="filter_select_all sel inline">Select all</div>
-      <div class="inline"> | </div>
-      <div id="${custom_featvec_id}" class="filter_deselect_all sel inline">Deselect all</div>
+    <div class="filter_subheader">
+        <div class="filter_subtitle">${custom_featvec_id}<span class="numselected ${custom_featvec_id}">(0)</span></div>
     </div>
-    <ol class="feats selectable" id="${custom_featvec_id}">
+    <div class="filter_showcat" id="${custom_featvec_id}">show / hide</div>
+        <div class="filter_select_bar">
+            <div id="${custom_featvec_id}" class="filter_select_all sel inline">Select all</div>
+            <div class="inline"> | </div>
+            <div id="${custom_featvec_id}" class="filter_deselect_all sel inline">Deselect all</div>
+        </div>
+    <div class="filter_select" id="${custom_featvec_id}">
+        <ol class="feats selectable" id="${custom_featvec_id}">
 % for feat_id in custom_feats[custom_featvec_id]:
-      <li class="feat ui-widget-content" id="${feat_id}">${feat_id}</li>
+            <li class="feat ui-widget-content" id="${feat_id}">${feat_id}</li>
 % endfor
-    </ol>
-  </div>
+        </ol>
+    </div>
 % endfor
 
 </div>

@@ -65,11 +65,15 @@ function update(changed_classes, changed_features) {
 function selected_features() {
     var feat_ids = []
     $('ol.feats').each(function(index) {
+        var count = 0;
+        var feat_id = $(this).attr('id');
         $(this)
             .children(".ui-selected")
             .map(function(){ 
                 feat_ids.push(this.id);
+                count = count + 1;
             });
+        $('span.numselected.' + feat_id).html(' (' + count + ')')
     });
     return feat_ids
 }
