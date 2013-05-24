@@ -1,25 +1,24 @@
 {% extends "!layout.html" %}
 
 {% block rootrellink %}
-    <li><a href="http://helix.ewi.tudelft.nl/spica">SPiCa</a> &raquo;</li>
     {{ super() }}
 {% endblock %}
 
 {% block extraheader %}
-    <link rel="stylesheet" type="text/css" href="_static/spica_header.css" />
+    <link rel="stylesheet" type="text/css" href="_static/spice_header.css" />
     {{ super() }}
 {% endblock %}
 
 {% block header %}
-    <div id="header_menu">
+    <!--div id="header_menu">
         <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
         <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
         <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
         <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
         <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
-    </div>
+    </div-->
     <div id="header" class="home">
-        <div id="title"><a href="http://helix.ewi.tudelft.nl/spica">SPiCa</a></div>
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spica"-->SPiCa<!--/a--></div>
         <div id="subtitle">Sequence-based Protein Classification</div>
         <div id="version">version 0.1</div>
     </div>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# SPiCa documentation build configuration file, created by
+# SPiCE documentation build configuration file, created by
 # sphinx-quickstart on Fri Mar 29 13:22:17 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'SPiCa'
+project = u'SPiCE'
 copyright = u'2013, Bastiaan van den Berg'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -91,7 +91,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'spicadoc'
+html_theme = 'spicedoc'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -167,7 +167,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'SPiCadoc'
+htmlhelp_basename = 'SPiCEdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -186,7 +186,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'SPiCa.tex', u'SPiCa Documentation',
+  ('index', 'SPiCe.tex', u'SPiCe Documentation',
    u'Bastiaan van den Berg', 'manual'),
 ]
 
@@ -216,7 +216,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'spica', u'SPiCa Documentation',
+    ('index', 'spice', u'SPiCE Documentation',
      [u'Bastiaan van den Berg'], 1)
 ]
 
@@ -230,8 +230,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'SPiCa', u'SPiCa Documentation',
-   u'Bastiaan van den Berg', 'SPiCa', 'One line description of project.',
+  ('index', 'SPiCE', u'SPiCE Documentation',
+   u'Bastiaan van den Berg', 'SPiCE', 'One line description of project.',
    'Miscellaneous'),
 ]
 
