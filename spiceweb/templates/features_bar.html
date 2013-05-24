@@ -4,6 +4,7 @@ uris = []
 for sm in sub_menu:
     uris.append('%s%s' % (uri_root, sm))
 icons = ['icon-list', 'icon-upload', 'icon', 'icon', 'icon', 'icon']
+menu_names = ['Features', 'Upload']
 %>
 
 <div class="btn-toolbar">
@@ -12,9 +13,9 @@ icons = ['icon-list', 'icon-upload', 'icon', 'icon', 'icon', 'icon']
 % for index, uri in enumerate(uris):
 % if (index < 2):
 % if (index == sub_menu_index):
-        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
+        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % else:
-        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
+        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % endif
 % endif
 % endfor
