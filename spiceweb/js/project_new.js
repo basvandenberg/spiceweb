@@ -66,7 +66,7 @@ $(document).ready(function() {
         if(isFormValid) {
             var ref_checked = $("input[name=use_reference ]:checked")
             if(ref_checked.length) {
-                form_info("create-new-project", "Pleas be patient, the reference set will be downloaded from UniProt, this can take some time..."
+                form_info("create-new-project", "Please be patient, the data set is being loaded, this can take some time..."
                 );   
             }
             $("form#create-new-project>button").button('loading');
