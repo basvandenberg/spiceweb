@@ -287,7 +287,10 @@ class Project:
 
         taxon_tuples = []
         if(os.path.exists(f)):
-            taxon_tuples = file_io.read_tuple_list(f, (int, str))
+            with open(f, 'r') as fin:
+                for line in fin:
+                    tokens = line.split()
+                    taxon_tuples.append(int(tokens[0]), ' '.join(tokens[1:]))
 
         ids_favo = []
         if(os.path.exists(f_favo)):
