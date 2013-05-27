@@ -2,13 +2,14 @@ import os
 import re
 import zipfile
 import traceback
-import urllib2
+#import urllib2
 import simplejson
 
 import cherrypy
 from cherrypy.lib.static import serve_file
 
 import spiceweb
+from spice import file_io
 
 
 class Project:
@@ -28,19 +29,6 @@ class Project:
         ('Eukaryota', 2759),
         ('Viruses', 10239)
     ]
-    FAVO_TAXONS = {
-        2: [
-            (562, 'Escherichia coli')
-        ],
-        2157: [],
-        2759: [
-            (559292, 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)'),
-            (7227, 'Drosophila melanogaster'),
-            (284812, 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)'),
-            (6239, 'Caenorhabditis elegans')
-        ],
-        10239: []
-    }
 
     def __init__(self, auth, project_manager, root_url, main_menu,
                  main_menu_index, sub_menu):
@@ -280,18 +268,33 @@ class Project:
     @cherrypy.expose
     def taxon_list(self, taxon_domain=None):
 
+        self.fetch_session_data()
+        pm = self.project_manager
+
         taxon_id = int(taxon_domain)
 
-        top_lists = self.FAVO_TAXONS
-        top_list = top_lists[taxon_id]
+        #top_lists = self.FAVO_TAXONS
+        #top_list = top_lists[taxon_id]
 
         # obtain all taxons of this domain from uniprot
-        url = 'http://www.uniprot.org/taxonomy/' +\
-              '?query=complete:yes+ancestor:%i&format=tab' % (taxon_id)
-        response = urllib2.urlopen(url)
-        full_taxon_list = response.read()
+        #url = 'http://www.uniprot.org/taxonomy/' +\
+        #      '?query=complete:yes+ancestor:%i&format=tab' % (taxon_id)
+        #response = urllib2.urlopen(url)
+        #full_taxon_list = response.read()
+
+        f = os.path.join(pm.ref_data_dir, '%i.txt' % (taxon_id))
+        f_favo = os.path.join(pm.ref_data_dir, '%i_favo.txt' % (taxon_id))
+
+        taxon_tuples = []
+        if(os.path.exists(f)):
+            taxon_tuples = file_io.read_tuple_list(f, (int, str))
+
+        ids_favo = []
+        if(os.path.exists(f_favo)):
+            ids_favo = [int(i) for i in file_io.read_ids(f_favo)]
 
         # parse result, fetch ids and names
+        '''
         ids = []
         names = []
         first_line = True
@@ -303,19 +306,20 @@ class Project:
                     tokens = line.split('\t')
                     ids.append(int(tokens[0]))
                     names.append(tokens[2])
+        '''
 
         # turn it into select list, would be nicer to let javascript do this
         select_str = ''
         
-        if(len(top_list) > 0):
-            print top_list
+        if(len(ids_favo) > 0):
+            taxon_dict = dict(taxon_tuples)
             select_str += '<optgroup label="Short list">\n'
-            for i, name in top_list:
-                select_str += '<option value="%i">%s (taxon id: %i)</option>\n' % (i, name, i)
+            for i in ids_favo:
+                select_str += '<option value="%i">%s (taxon id: %i)</option>\n' % (i, taxon_dict[i], i)
             select_str += '</optgroup>\n'        
 
         select_str += '<optgroup label="All uniprot complete proteome taxonomies">\n'
-        for i, name in zip(ids, names):
+        for i, name in taxon_tuples:
             select_str += '<option value="%i">%s (taxon id: %i)</option>\n' % (i, name, i)
         select_str += '</optgroup>\n'        
 
