@@ -37,16 +37,28 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
             '<div id="class_info" class="alert alert-info alert-error fade in"><p><strong>Be patient... </strong>Clustering in progress. Depending on the feature matrix size, this can take a minute or two.</p></div>'
         );
 
-        $("div#heatmap img").replaceWith(
-            $('<img>')
-                .attr({'src':'aheatmap?feat_ids=' + feat_ids + 
-                                     '&labeling_name=' + labeling_name + 
-                                     '&class_ids=' + class_ids + 
-                                     '&figtype=png'})
-                .load(function() {
-                    $("div#class_info").remove()
-                })
-            )
-        return false;
+        var check_data = {labeling_name: labeling_name, class_ids: class_ids};
+        var msg = "";
+        $.post("acheck_heatmap_size", check_data, function(data) {
+            msg = data.msg;
+            if(msg != "") {
+                $("div#class_info").remove();
+                $("div#heatmap").before('<div id="class_info" class="alert alert-info fade in"><p><strong>Info: </strong>' + msg + '</p></div>');
+            }
+            else  {
+                $("div#heatmap img").replaceWith($('<img>')
+                    .attr({
+                        'src':'aheatmap?feat_ids=' + feat_ids + 
+                                      '&labeling_name=' + labeling_name + 
+                                      '&class_ids=' + class_ids + 
+                                      '&figtype=png'
+                    })
+                    .load(function(data) {
+                        $("div#class_info").remove();
+                    })
+                )
+            }
+        });
+
     }
 }

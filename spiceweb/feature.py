@@ -267,36 +267,51 @@ class Feature:
         return serve_file(filepath, filetype, 'attachment')
 
     @cherrypy.expose
+    def acheck_heatmap_size(self, **data):
+        
+        max_proteins = 3000
+
+        labeling_name = data['labeling_name']
+        class_ids = data['class_ids[]']
+        if not(isinstance(class_ids, list)):
+            class_ids = [class_ids]
+
+        pm = self.project_manager
+        objs = pm.get_feature_matrix().object_indices(labeling_name, class_ids)
+        
+        if(len(objs) > max_proteins):
+            msg = 'Heatmaps are only possible for %i proteins or less.'\
+                  % (max_proteins)
+        else:
+            msg = ''
+
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return simplejson.dumps(dict(msg=msg))
+
+    @cherrypy.expose
     def aheatmap(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
         feat_ids = [f.strip() for f in feat_ids.split(',')]
         class_ids = [l.strip() for l in class_ids.split(',')]
+        
         pm = self.project_manager
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
 
-        # check feature matrix size
-        (n_objs, n_feats) = fm.feature_matrix.shape
-        if(n_objs > 5000):
-            cherrypy.response.headers['Content-Type'] = 'application/json'
-            msg = 'Too many objects, heatmaps possible for < 5000 objects.'
-            return simplejson.dumps(dict(msg=msg))
+        filepath = fm.get_clustdist_path(feature_ids=feat_ids,
+                                         labeling_name=labeling_name,
+                                         class_ids=class_ids,
+                                         root_dir=fm_root_dir)
 
+        if(figtype == 'svg'):
+            filetype = 'image/svg+xml'
+            filepath += '.svg'
         else:
-            filepath = fm.get_clustdist_path(feature_ids=feat_ids,
-                                             labeling_name=labeling_name,
-                                             class_ids=class_ids,
-                                             root_dir=fm_root_dir)
+            filetype = 'image/png'
+            filepath += '.png'
 
-            if(figtype == 'svg'):
-                filetype = 'image/svg+xml'
-                filepath += '.svg'
-            else:
-                filetype = 'image/png'
-                filepath += '.png'
-
-            # serve the file
-            return serve_file(filepath, filetype, 'attachment')
+        # serve the file
+        return serve_file(filepath, filetype, 'attachment')
 
     @cherrypy.expose
     def calcfeat(self, featvec):
