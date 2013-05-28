@@ -19,8 +19,8 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
     }
 
     if(class_ids.length < 1) {
-        $("div#heatmap img").replaceWith($('<img>'))
-        $("div#class_error").remove()
+        $("div#heatmap img").replaceWith($('<img>'));
+        $("div#class_error").remove();
         $("div#heatmap").before(
             '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one or more labels using the label filter in the right panel</p></div>'
         );
@@ -42,6 +42,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $.post("acheck_heatmap_size", check_data, function(data) {
             msg = data.msg;
             if(msg != "") {
+                $("div#heatmap img").replaceWith($('<img>'));
                 $("div#class_info").remove();
                 $("div#heatmap").before('<div id="class_info" class="alert alert-info fade in"><p><strong>Info: </strong>' + msg + '</p></div>');
             }
