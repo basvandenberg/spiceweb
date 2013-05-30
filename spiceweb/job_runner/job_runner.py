@@ -14,7 +14,7 @@ from operator import itemgetter
 project_dir = '/home/bastiaan/Develop/spiceweb_test/projects'
 
 # define log output files
-log_dir = '/home/bastiaan/Develop/spice/spice/job_runner'
+log_dir = '/home/bastiaan/Develop/spiceweb/spiceweb/job_runner'
 pid_f = os.path.join(log_dir, 'daemon.pid')
 
 # pause between checking for jobs in queue

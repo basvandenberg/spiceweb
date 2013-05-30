@@ -12,6 +12,27 @@
 
 @import url("basic.css");
 
+/* -- doc stuff -------------------------------------------------------------*/
+
+.bodywrapper p {
+    font-family: 'Raleway', sans-serif;
+    text-align: justify;
+    font-size: 11pt;
+    line-height: 20px;
+    color: #333;
+}
+img {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+h3 {
+    font-weight: normal;
+    text-decoration: underline;
+}
+h1, h2, h3 {
+    font-family: 'Ubuntu';
+}
+
 /* -- spice header---------------------------------------------------------- */
 
 div#header {
