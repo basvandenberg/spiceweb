@@ -49,7 +49,7 @@ def authenticate():
         except(KeyError):
             #if(user is None):
             # go to login, should not happen anymore...
-            raise cherrypy.HTTPRedirect('%slogin' % (ROOT_URL))
+            raise cherrypy.HTTPRedirect('%s' % (ROOT_URL))
 
 # add the authentication decorator as a tool
 cherrypy.tools.authenticate = cherrypy.Tool('before_handler', authenticate)
@@ -106,7 +106,10 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
         user_id = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
         if(user_id is None):
             #user_id = cherrypy.session.id
-            user_id = cherrypy.request.cookie['spice.session'].value
+            try:
+                user_id = cherrypy.request.cookie['spice.session'].value
+            except KeyError:
+                user_id = None
     else:
         user_id = None
 
