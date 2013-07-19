@@ -22,6 +22,7 @@
   <script type="application/javascript" src="${'%sjs/bootstrap.min.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/bootstrap-fileupload.min.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/jquery.tablesorter.min.js' % (root_url)}"></script>
+  <script type="application/javascript" src="${'%sjs/spice.js' % (root_url)}"></script>
 % if show_filter:
   <script type="application/javascript" src="${'%sjs/filter.js' % (root_url)}"></script>
 % endif
@@ -84,13 +85,41 @@
 ## TODO use the cherry_auth include auth_bar.html and add project id...
 <div id="project_bar">
 
-% if user_id:
+% if user_id and '@' in user_id:
     <div class="login_buttons">
         <a href="${'%saccount' % (root_url)}" class="signup_button">Account</a>
         <a href="${'%slogout' % (root_url)}" class="signup_button">Logout</a>
     </div>
     <div class="project_item">user: <b>${user_id}</b>
     </div>
+% endif
+
+% if not user_id or (user_id and not '@' in user_id):
+    <div class="login_buttons">
+        <a href="${'%slogin' % (root_url)}" class="signup_button">Log in</a>
+        <a href="${'%sregister' % (root_url)}" class="signup_button">Create account</a>
+    </div>
+% endif
+
+% if user_id and not '@' in user_id:
+    <div class="project_item">user: <b>test user</b> <a href="#"
+class="info-button" data-toggel="popover" data-trigger="click"
+data-placement="bottom" data-content="
+<p>
+You are not logged in, but can still use the website as a test user. 
+However: <br /><br />
+1) <u><strong>data will not be stored</strong></u> for more than a day<br />
+2) data will only be accessible on the computer you are currently using (if
+cookies are enabled)<br />
+</p>
+<p>
+If you want your data to be retained and be accessible from anywhere, please
+<strong>login</strong> to your account or <strong>create</strong> a new
+account.
+</p>" 
+title="" data-original-title=""> <i class="icon-info-sign"></i> </a>
+</div>
+% endif
 
 % if project_id and not project_id == 'None':
     <div class="project_item" id="project_name">
@@ -114,12 +143,6 @@
     </div>
 %endif
 
-% else:
-    <div class="login_buttons">
-        <a href="${'%slogin' % (root_url)}" class="signup_button">Log in</a>
-        <a href="${'%sregister' % (root_url)}" class="signup_button">Create account</a>
-    </div>
-% endif
 
 </div>
 

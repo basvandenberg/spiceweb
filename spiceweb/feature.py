@@ -25,6 +25,8 @@ class Feature:
 
     def fetch_session_data(self):
         self.user_id = self.auth.get_user()
+        if(self.user_id is None):
+            self.user_id = cherrypy.session.id
         self.project_id = self.get_project_id()
         self.project_manager.set_user(self.user_id)
         self.project_manager.set_project(self.project_id)
