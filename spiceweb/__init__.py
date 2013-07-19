@@ -43,8 +43,11 @@ def authenticate():
     '''
     user = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
     if(user is None):
-        user = cherrypy.session.id
-        if(user is None):
+        #user = cherrypy.session.id
+        try:
+            user = cherrypy.request.cookie['spice.session'].value
+        except(KeyError):
+            #if(user is None):
             # go to login, should not happen anymore...
             raise cherrypy.HTTPRedirect('%slogin' % (ROOT_URL))
 
@@ -102,7 +105,8 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
     if(hasattr(cherrypy, 'session')):
         user_id = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
         if(user_id is None):
-            user_id = cherrypy.session.id
+            #user_id = cherrypy.session.id
+            user_id = cherrypy.request.cookie['spice.session'].value
     else:
         user_id = None
 
@@ -142,7 +146,6 @@ def get_template_args(main_menu_index=0, sub_menu_index=-1,
 # The Root class
 ###############################################################################
 
-@cherrypy.tools.authenticate()
 class Root:
 
     def __init__(self):
