@@ -9,7 +9,7 @@ import cherrypy
 from cherrypy.lib.static import serve_file
 
 import spiceweb
-from spice.util import file_io
+from util import file_io
 
 
 class Project:
