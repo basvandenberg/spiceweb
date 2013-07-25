@@ -63,9 +63,12 @@ class Feature:
             return self.no_project_selected()
 
         pm = self.project_manager
+        fe = pm.get_feature_extraction()
+
         kw_args = self.get_template_args(smi)
 
-        kw_args['fe'] = pm.get_feature_extraction()
+        kw_args['fe'] = fe
+        kw_args['featcats'] = fe.PROTEIN_FEATURE_CATEGORIES
         kw_args['feat_status'] = pm.get_feat_calc_status()
 
         template_f = self.get_template_f(smi)
@@ -73,7 +76,7 @@ class Feature:
         return spiceweb.get_template(template_f, **kw_args)
     
     @cherrypy.expose
-    def calculate(self):
+    def calculate(self, featcat_id=None):
 
         smi = 1
 
@@ -81,12 +84,15 @@ class Feature:
 
         if(self.project_id is None):
             return self.no_project_selected()
-
+        
         pm = self.project_manager
         kw_args = self.get_template_args(smi)
 
-        # TODO add kw_args
-        
+        if not(featcat_id is None):
+            # check if feature is allready available
+            #kw_args['error_msg'] = 'These features are allready available'
+            self.project_manager.run_feature_extraction([featcat_id])
+
         template_f = self.get_template_f(smi)
         return spiceweb.get_template(template_f, **kw_args)
 
@@ -326,7 +332,3 @@ class Feature:
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
-
-    @cherrypy.expose
-    def acalcfeat(self, featcat_id):
-        self.project_manager.run_feature_extraction([featcat_id])

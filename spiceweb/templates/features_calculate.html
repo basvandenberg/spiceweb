@@ -9,4 +9,26 @@
 
 <%include file="features_bar.html" />
 
+<div class="well">
+
+<form id="aac" class="form-inline" enctype="multipart/form-data" method="post">
+
+    <legend>Amino acid composition</legend>
+
+    <label class="select">Number of sections
+        <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="" title="" data-original-title="">
+            <i class="icon-info-sign"></i>
+        </a>
+    </label>
+    <select class="param input-mini">
+      <option selected="selected">1</option>
+% for i in xrange(2, 11):
+      <option>${i}</option>
+% endfor
+    </select>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
 </%block>

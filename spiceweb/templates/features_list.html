@@ -9,4 +9,102 @@
 
 <%include file="features_bar.html" />
 
+## Table with calculated feature categories
+
+<h2>Sequence based features</h2>
+
+<%
+categorized_featids = fe.categorized_protein_feature_ids()
+%>
+
+% if len(categorized_featids) > 0:
+
+<table id="running" class="tablesorter">
+<thead>
+    <tr>
+        <th>feature categorie</th>
+        <th>parameters</th>
+    </tr>
+</thead>
+<tbody>
+
+% for featcat_id in fe.PROTEIN_FEATURE_CATEGORY_IDS:
+% if featcat_id in categorized_featids.keys():
+
+
+## this is a bit of a hack to get the features cats sorted by their parameters
+<%
+fcat = featcats[featcat_id]
+param_types = fcat.param_types  # [int, ...]
+param_keys = categorized_featids[featcat_id].keys()
+param_splits = [k.split(':') for k in param_keys]
+param_lists = []
+for s in param_splits:
+    values = []
+    for index, item in enumerate(s):
+        values.append(param_types[index](item))
+    param_lists.append(values)
+import operator
+param_keys_values = sorted(zip(param_keys, param_lists), key=operator.itemgetter(1))
+sorted_keys = [k for k, _ in param_keys_values]
+%>
+
+% for param_setting in sorted_keys:
+<%
+fcat = featcats[featcat_id]
+param_col = ', '.join(['%s: %s' % (n, v)
+                      for n, v in zip(fcat.param_names, param_setting.split(':'))])
+%>
+    <tr>
+        <td>${fcat.fc_name.title()}</td>
+        <td>${param_col}</td>
+    </tr>
+% endfor
+
+% endif
+% endfor
+
+</tbody>
+</table>
+    
+% else:
+    <p>No calculated feature available yet.</p>
+% endif
+
+
+## Tables with running/waiting/error jobs
+
+% for status in ['running', 'waiting', 'error']:
+
+% if (len(feat_status[status]) > 0):
+<h3>${status.title()} jobs</h3>
+
+<table id="running" class="tablesorter">
+<thead>
+    <tr>
+        <th>feature categorie</th>
+        <th>parameters</th>
+        <th>initiation time</th>
+    </tr>
+</thead>
+<tbody>
+% for (featcat, init_time) in feat_status[status]:
+<%
+fcat_id, param_str = featcat.split('_')
+fcat = featcats[fcat_id]
+param_col = ', '.join(['%s: %s' % (n, v)
+                      for n, v in zip(fcat.param_names, param_str.split(':'))])
+%>
+    <tr>
+        <td>${fcat.fc_name.title()}</td>
+        <td>${param_col}</td>
+        <td>${init_time}</td>
+    </tr>
+% endfor
+</tbody>
+</table>
+% endif
+
+% endfor
+
 </%block>

@@ -10,6 +10,6 @@ $(document).ready(function() {
         return false;
     });
 
-    setTimeout("location.reload();", 10000);
+    setTimeout("location.reload();", 60000);
 });
 
