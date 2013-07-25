@@ -26,14 +26,12 @@ $(document).ready(function() {
   
     // button to show/hide feature category
     $(".filter_showcat").click(function() {
-        var currentId = $(this).attr('id');
-        $("div#" + currentId + ".filter_select").animate({height:'toggle'});
+        var currentId = $(this).parent().attr('id');
+        $("div." + currentId + ".filter_select").animate({height:'toggle'});
     });
 
     // hide feature categories by default
     $(".filter_select:gt(0)").animate({height:'toggle'});
-
-    //toggle_showhide();
 
 });
 
@@ -66,14 +64,15 @@ function selected_features() {
     var feat_ids = []
     $('ol.feats').each(function(index) {
         var count = 0;
-        var feat_id = $(this).attr('id');
+        var featcat_id = $(this).parent().parent().attr('id');
         $(this)
             .children(".ui-selected")
             .map(function(){ 
                 feat_ids.push(this.id);
                 count = count + 1;
             });
-        $('span.numselected.' + feat_id).html(' (' + count + ')')
+        $('div#' + featcat_id).find('span.numselected').html(' (' + count + ')')
+        //$('span.numselected.' + featcat_id).html(' (' + count + ')')
     });
     return feat_ids
 }
@@ -148,15 +147,13 @@ function init_feature_filter(feat_ids) {
 
     // select all features of category
     $(".filter_select_all").click(function() {
-        var currentId = $(this).attr('id');
-        $("ol#" + currentId + ".feats").find("li").addClass("ui-selected");
+        $(this).parent().parent().find("li").addClass("ui-selected");
         update(false, true);
     });
   
     // deselect all features of category
     $(".filter_deselect_all").click(function() {
-        var currentId = $(this).attr('id');
-        $("ol#" + currentId + ".feats").find("li").removeClass("ui-selected");
+        $(this).parent().parent().find("li").removeClass("ui-selected");
         update(false, true);
     });
 }
@@ -282,15 +279,3 @@ function toggle_showhide() {
         $("#filterwrapper #filterbar").css("background", img);
       });
 }
-
-// hide on click outside div
-// TODO fix this thing...
-/*$(document).mouseup(function (e)
-{
-    var test = $("#filterwrapper").css('right')
-    if($('#filterwrapper').css('right') == '0px') {
-        if ($("#filterwrapper").has(e.target).length == 0) {
-            toggle_showhide();
-        }
-    }
-});*/

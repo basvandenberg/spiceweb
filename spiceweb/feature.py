@@ -53,7 +53,7 @@ class Feature:
         raise cherrypy.HTTPRedirect(self.get_url(0))
 
     @cherrypy.expose
-    def list(self, object_ids_f=None, feature_matrix_f=None):
+    def list(self):
 
         smi = 0
 
@@ -65,24 +65,35 @@ class Feature:
         pm = self.project_manager
         kw_args = self.get_template_args(smi)
 
-        # upload custom feature matrix
-        error_msg = None
-        if(object_ids_f and feature_matrix_f):
-            error_msg = pm.add_custom_features(self.project_id, object_ids_f,
-                                               feature_matrix_f)
-
         kw_args['fe'] = pm.get_feature_extraction()
         kw_args['feat_status'] = pm.get_feat_calc_status()
-        kw_args['error_msg'] = error_msg
 
         template_f = self.get_template_f(smi)
 
         return spiceweb.get_template(template_f, **kw_args)
     
     @cherrypy.expose
-    def upload(self, object_ids_f=None, feature_matrix_f=None):
+    def calculate(self):
 
         smi = 1
+
+        self.fetch_session_data()
+
+        if(self.project_id is None):
+            return self.no_project_selected()
+
+        pm = self.project_manager
+        kw_args = self.get_template_args(smi)
+
+        # TODO add kw_args
+        
+        template_f = self.get_template_f(smi)
+        return spiceweb.get_template(template_f, **kw_args)
+
+    @cherrypy.expose
+    def upload(self, object_ids_f=None, feature_matrix_f=None):
+
+        smi = 2
 
         self.fetch_session_data()
 
@@ -117,22 +128,22 @@ class Feature:
 
     @cherrypy.expose
     def ttest(self):
-        smi = 2
-        return self.show_feature_data(smi)
-
-    @cherrypy.expose
-    def histogram(self):
         smi = 3
         return self.show_feature_data(smi)
 
     @cherrypy.expose
-    def scatter(self):
+    def histogram(self):
         smi = 4
         return self.show_feature_data(smi)
 
     @cherrypy.expose
-    def heatmap(self):
+    def scatter(self):
         smi = 5
+        return self.show_feature_data(smi)
+
+    @cherrypy.expose
+    def heatmap(self):
+        smi = 6
         return self.show_feature_data(smi)
 
     def show_feature_data(self, smi):
@@ -317,5 +328,5 @@ class Feature:
         return serve_file(filepath, filetype, 'attachment')
 
     @cherrypy.expose
-    def calcfeat(self, featvec):
-        self.project_manager.run_feature_extraction([featvec])
+    def acalcfeat(self, featcat_id):
+        self.project_manager.run_feature_extraction([featcat_id])

@@ -659,6 +659,9 @@ li.hist {
     display: inline;
     float: left;
 }
+.filter_subtitle_param {
+    font-size: 12px;
+}
 .filter_showcat {
     font-size: 13px;
     color: #3465a4;

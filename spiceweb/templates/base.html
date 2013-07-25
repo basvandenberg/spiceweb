@@ -228,42 +228,79 @@ num_select = 0
 <div class="filter_header">Feature filter</div>
 
 <%
+
+all_sorted_featcat_ids = fe.PROTEIN_FEATURE_CATEGORY_IDS
+all_featcats = fe.PROTEIN_FEATURE_CATEGORIES
+categorized_featids = fe.categorized_protein_feature_ids()
 fm = fe.fm_protein
-fid2name = fe.protein_feat_id_to_name_dict()
-available = [f.uid for f in fe.available_protein_feature_vectors()]
+featid_name_map = fm.feature_names
 custom_feats = fm.get_custom_features()
+
+#fid2name = fe.protein_feat_id_to_name_dict()
+#available = [f.uid for f in fe.available_protein_feature_vectors()]
+
 %>
 
-% if (len(available) + len(custom_feats) == 0):
+% if (len(categorized_featids) + len(custom_feats) == 0):
     <div class="alert alert-info"><p><strong>Info: </strong>There are no features available yet. Features can be calculated in the <a href="${root_url}${main_menu[2][1]}${sub_menu[0]}">feature list</a> section.</p></div>
 % endif
 
-% for featvec in fe.fv_dict_protein.values():
-% if (featvec.uid in available):
-    <div class="filter_subheader">
-        <div class="filter_subtitle">${featvec.name.title()}<span class="numselected ${featvec.uid}"> (0)</span></div>
-    </div>
-    <div class="filter_showcat" id="${featvec.uid}">show / hide</div>
-        <div class="filter_select_bar">
-            <div id="${featvec.uid}" class="filter_select_all sel inline">Select all</div>
-            <div class="inline"> | </div>
-            <div id="${featvec.uid}" class="filter_deselect_all sel inline">Deselect all</div>
-        </div>
-    <div class="filter_select" id="${featvec.uid}">
+## % for featvec in fe.fv_dict_protein.values():
+## % if (featvec.uid in available):
+
+## featcat_id is used multiple times as id in next part...
+
+% for featcat_id in all_sorted_featcat_ids:
+% if featcat_id in categorized_featids.keys():
+
+% for param_setting in sorted(categorized_featids[featcat_id].keys()):
 
 <%
-name_dict = fe.protein_feat_id_to_name_dict()
-feat_ids = featvec.feat_ids
-feat_names = featvec.feat_names
+featcat = all_featcats[featcat_id]
+p_types = featcat.param_types
+p_names = featcat.param_names
+p_values = [t(p) for (t, p) in zip(p_types, param_setting.split(":"))]
+param_strings = ["- %s: %s" % (n, str(v)) for (n, v) in zip(p_names, p_values)]
+fid = "%s_%s" % (featcat_id, param_setting)
+%>
+    <div class="featcat_wrapper" id="${fid}">    
+
+    <div class="filter_subheader">
+        <div class="filter_subtitle">${all_featcats[featcat_id].fc_name}
+            <span class="numselected"> (0)</span>
+        </div>
+    </div>
+% for param_str in param_strings:
+    <div class="filter_subheader">
+        <div class="filter_subtitle_param">${param_str}</div>
+    </div>
+% endfor
+    <div class="filter_showcat">show / hide</div>
+    <div class="filter_select_bar">
+        <div class="filter_select_all sel inline">Select all</div>
+        <div class="inline"> | </div>
+        <div class="filter_deselect_all sel inline">Deselect all</div>
+    </div>
+    <div class="${fid} filter_select">
+
+        <ol class="feats selectable">
+
+<%
+feat_ids = categorized_featids[featcat_id][param_setting]
+feat_names = [featid_name_map[i] for i in feat_ids]
 features = zip(feat_ids, feat_names)
 %>
 
-        <ol class="feats selectable" id="${featvec.uid}">
 % for index, (feat_id, feat_name) in enumerate(features):
             <li class="feat ui-widget-content" id="${feat_id}">${feat_name}</li>
 % endfor
         </ol>
     </div>
+
+    <!-- featcat_wrapper -->
+    </div>
+% endfor
+
 % endif
 % endfor
 

@@ -69,7 +69,8 @@ main_menu = [('home', ''),
 sub_menus = [
     [],
     ['list', 'new', 'details'],
-    ['list', 'upload', 'ttest', 'histogram', 'scatter', 'heatmap'],
+    ['list', 'calculate', 'upload', 'ttest', 'histogram', 'scatter',
+     'heatmap'],
     ['list', 'new', 'details']
 ]
 
