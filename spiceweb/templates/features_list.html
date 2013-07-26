@@ -37,7 +37,7 @@ categorized_featids = fe.categorized_protein_feature_ids()
 fcat = featcats[featcat_id]
 param_types = fcat.param_types  # [int, ...]
 param_keys = categorized_featids[featcat_id].keys()
-param_splits = [k.split(':') for k in param_keys]
+param_splits = [k.split('-') for k in param_keys]
 param_lists = []
 for s in param_splits:
     values = []
@@ -53,7 +53,7 @@ sorted_keys = [k for k, _ in param_keys_values]
 <%
 fcat = featcats[featcat_id]
 param_col = ', '.join(['%s: %s' % (n, v)
-                      for n, v in zip(fcat.param_names, param_setting.split(':'))])
+                      for n, v in zip(fcat.param_names, param_setting.split('-'))])
 %>
     <tr>
         <td>${fcat.fc_name.title()}</td>

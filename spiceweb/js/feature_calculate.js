@@ -22,14 +22,14 @@ $(document).ready(function() {
         // fetch parameter values
         $(this).parent().find('select.param').find(':selected').map(
             function() {
-                params.push($(this).text());
+                params.push($(this).attr('value'));
             }
         );
 
         // build url and send
         var u = $(location).attr('href');
         var u_without_get = u.substring(0, u.indexOf('&'));
-        var url = u_without_get + '?featcat_id=' + catid + '_' + params.join('_');
+        var url = u_without_get + '?featcat_id=' + catid + '_' + params.join('-');
         window.location.href=url;
     });
 });

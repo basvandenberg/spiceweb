@@ -14,7 +14,6 @@
 % endif
 
 <div class="well">
-
 <form id="aac" class="form-inline" enctype="multipart/form-data" method="post">
 
     <legend>Amino acid composition</legend>
@@ -25,9 +24,9 @@
         </a>
     </label>
     <select class="param input-mini">
-      <option selected="selected">1</option>
+        <option value="1" selected="selected">1</option>
 % for i in xrange(2, 11):
-      <option>${i}</option>
+        <option value="${i}">${i}</option>
 % endfor
     </select>
 
@@ -35,4 +34,38 @@
 
 </form>
 </div>
+
+<div class="well">
+<form id="paac" class="form-inline" enctype="multipart/form-data" method="post">
+
+    <legend>Prime-side amino acid count</legend>
+
+    <label class="select">Prime side
+        <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="" title="" data-original-title="">
+            <i class="icon-info-sign"></i>
+        </a>
+    </label>
+    <select class="param input-mini">
+        <option value="5" selected="selected">5'</option>
+        <option value="3">3'</option>
+    </select>
+
+    <label class="select">Length
+        <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="" title="" data-original-title="">
+            <i class="icon-info-sign"></i>
+        </a>
+    </label>
+    <select class="param input-mini">
+        <option value="20" selected="selected">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+        <option value="60">60</option>
+    </select>
+    
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
 </%block>
