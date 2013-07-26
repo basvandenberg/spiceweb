@@ -74,7 +74,7 @@ class Feature:
         template_f = self.get_template_f(smi)
 
         return spiceweb.get_template(template_f, **kw_args)
-    
+
     @cherrypy.expose
     def calculate(self, featcat_id=None):
 
@@ -84,8 +84,8 @@ class Feature:
 
         if(self.project_id is None):
             return self.no_project_selected()
-        
-        pm = self.project_manager
+
+        #pm = self.project_manager
         kw_args = self.get_template_args(smi)
 
         if not(featcat_id is None):
@@ -212,20 +212,22 @@ class Feature:
 
         # obtain feature id to name and feature vector name mapping
         fe = self.project_manager.get_feature_extraction()
-        featname_dict = fe.protein_feat_id_to_name_dict()
 
         # create html table
         str_data = ''
         for index, (tval, pval) in enumerate(ttest_data):
 
             fid = fm.feature_ids[index]
-            fvec, fname = featname_dict[fid]
+            fcat_id, params, feat_id = fid.split('_')
+
+            featcat = fe.PROTEIN_FEATURE_CATEGORIES[fcat_id]
 
             str_data += '<tr id=%s>\n' % (fid)
-            str_data += '<td>%s</td>' % (fvec.capitalize())
-            str_data += '  <td>%s</td>\n' % (fname)
-            str_data += '  <td class="n">%.2f</td>\n' % (tval)
-            str_data += '  <td class="n">%.15f</td>\n' % (pval)
+            str_data += '    <td>%s</td>' % (featcat.fc_name)
+            str_data += '    <td>%s</td>\n' % (featcat.param_str(params))
+            str_data += '    <td>%s</td>\n' % (feat_id)
+            str_data += '    <td class="n">%.2f</td>\n' % (tval)
+            str_data += '    <td class="n">%.15f</td>\n' % (pval)
             str_data += '</tr>\n'
 
         return simplejson.dumps(dict(ttest_table=str_data))
@@ -238,7 +240,6 @@ class Feature:
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
-        featname_dict = fe.protein_feat_id_to_name_dict()
         fvec, _ = fe.protein_feat_id_to_name_dict()[feat_ids]
 
         if(figtype == 'svg'):
@@ -264,7 +265,6 @@ class Feature:
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
-        featname_dict = fe.protein_feat_id_to_name_dict()
         fvec0, _ = fe.protein_feat_id_to_name_dict()[feat_ids[0]]
         fvec1, _ = fe.protein_feat_id_to_name_dict()[feat_ids[1]]
 
@@ -288,7 +288,7 @@ class Feature:
 
     @cherrypy.expose
     def acheck_heatmap_size(self, **data):
-        
+
         max_proteins = 3000
 
         labeling_name = data['labeling_name']
@@ -298,7 +298,7 @@ class Feature:
 
         pm = self.project_manager
         objs = pm.get_feature_matrix().object_indices(labeling_name, class_ids)
-        
+
         if(len(objs) > max_proteins):
             msg = 'Heatmaps are only possible for %i proteins or less.'\
                   % (max_proteins)
@@ -313,7 +313,7 @@ class Feature:
 
         feat_ids = [f.strip() for f in feat_ids.split(',')]
         class_ids = [l.strip() for l in class_ids.split(',')]
-        
+
         pm = self.project_manager
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
