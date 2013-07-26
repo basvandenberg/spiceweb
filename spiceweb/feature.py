@@ -251,7 +251,6 @@ class Feature:
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
-        #fvec, _ = fe.protein_feat_id_to_name_dict()[feat_ids]
 
         fc, param, fid = feat_ids.split('_')
         featcat = fe.PROTEIN_FEATURE_CATEGORIES[fc]
@@ -281,23 +280,30 @@ class Feature:
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
-        fvec0, _ = fe.protein_feat_id_to_name_dict()[feat_ids[0]]
-        fvec1, _ = fe.protein_feat_id_to_name_dict()[feat_ids[1]]
+        
+        fc0, param0, fid0 = feat_ids[0].split('_')
+        fc1, param1, fid1 = feat_ids[1].split('_')
+        featcat0 = fe.PROTEIN_FEATURE_CATEGORIES[fc0]
+        featcat1 = fe.PROTEIN_FEATURE_CATEGORIES[fc1]
+        param_s0 = featcat0.param_str(param0)
+        param_s1 = featcat1.param_str(param1)
+        lab0 = '%s (%s)' % (featcat0.fc_name, param_s0)
+        lab1 = '%s (%s)' % (featcat1.fc_name, param_s1)
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
             filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
                                        labeling_name=labeling_name,
                                        class_ids=class_ids, img_format='svg',
-                                       root_dir=fm_root_dir, feat0_pre=fvec0,
-                                       feat1_pre=fvec1)
+                                       root_dir=fm_root_dir, feat0_pre=lab0,
+                                       feat1_pre=lab1)
         else:
             filetype = 'image/png'
             filepath = fm.save_scatter(feat_ids[0], feat_ids[1],
                                        labeling_name=labeling_name,
                                        class_ids=class_ids, img_format='png',
-                                       root_dir=fm_root_dir, feat0_pre=fvec0,
-                                       feat1_pre=fvec1)
+                                       root_dir=fm_root_dir, feat0_pre=lab0,
+                                       feat1_pre=lab1)
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
