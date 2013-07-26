@@ -82,22 +82,14 @@ param_col = ', '.join(['%s: %s' % (n, v)
 <table id="running" class="tablesorter">
 <thead>
     <tr>
-        <th>feature categorie</th>
-        <th>parameters</th>
+        <th>featext command line option</th>
         <th>initiation time</th>
     </tr>
 </thead>
 <tbody>
 % for (featcat, init_time) in feat_status[status]:
-<%
-fcat_id, param_str = featcat.split('_')
-fcat = featcats[fcat_id]
-param_col = ', '.join(['%s: %s' % (n, v)
-                      for n, v in zip(fcat.param_names, param_str.split(':'))])
-%>
     <tr>
-        <td>${fcat.fc_name.title()}</td>
-        <td>${param_col}</td>
+        <td>--protein_features ${featcat}</td>
         <td>${init_time}</td>
     </tr>
 % endfor
