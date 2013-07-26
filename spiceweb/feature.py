@@ -251,18 +251,23 @@ class Feature:
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
-        fvec, _ = fe.protein_feat_id_to_name_dict()[feat_ids]
+        #fvec, _ = fe.protein_feat_id_to_name_dict()[feat_ids]
+
+        fc, param, fid = feat_ids.split('_')
+        featcat = fe.PROTEIN_FEATURE_CATEGORIES[fc]
+        param_s = featcat.param_str(param)
+        title = '%s (%s)' % (featcat.fc_name, param_s)
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
             filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
                                          class_ids=class_ids, img_format='svg',
-                                         root_dir=fm_root_dir, title=fvec)
+                                         root_dir=fm_root_dir, title=title)
         else:
             filetype = 'image/png'
             filepath = fm.save_histogram(feat_ids, labeling_name=labeling_name,
                                          class_ids=class_ids,
-                                         root_dir=fm_root_dir, title=fvec)
+                                         root_dir=fm_root_dir, title=title)
 
         # serve the file
         return serve_file(filepath, filetype, 'attachment')
