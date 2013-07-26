@@ -249,7 +249,7 @@ featcat = all_featcats[featcat_id]
 p_types = featcat.param_types
 p_names = featcat.param_names
 p_values = [t(p) for (t, p) in zip(p_types, param_setting.split("-"))]
-param_strings = ["- %s: %s" % (n, str(v)) for (n, v) in zip(p_names, p_values)]
+param_string = ' | '.join(["%s: %s" % (n, str(v)) for (n, v) in zip(p_names, p_values)])
 fid = "%s_%s" % (featcat_id, param_setting)
 %>
     <div class="featcat_wrapper" id="${fid}">    
@@ -259,11 +259,9 @@ fid = "%s_%s" % (featcat_id, param_setting)
             <span class="numselected"> (0)</span>
         </div>
     </div>
-% for param_str in param_strings:
     <div class="filter_subheader">
-        <div class="filter_subtitle_param">${param_str}</div>
+        <div class="filter_subtitle_param">${param_string}</div>
     </div>
-% endfor
     <div class="filter_showcat">show / hide</div>
     <div class="filter_select_bar">
         <div class="filter_select_all sel inline">Select all</div>

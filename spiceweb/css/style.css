@@ -429,6 +429,19 @@ hr.spacer_both {
     font-size: 12pt;
 }
 
+/* additional form style feature calculation *********************************/
+form.feat-calc legend {
+    font-size: 15px;
+    font-weight: bold;
+}
+div.well.feat-calc {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+form.feat-calc label:not(.first) {
+    padding-left: 10px;
+}
+
 /* forms *********************************************************************/
 .form-wrapper{
     border: 1px solid #babdb6;
