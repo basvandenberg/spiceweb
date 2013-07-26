@@ -5,7 +5,10 @@ $(document).ready(function() {
 
     // calculate buttons
     $('button[type="submit"]').click(function(event) {
-        
+
+        // remove alerts if they are still displayed
+        hide_alerts();
+
         // prevent default click behavior
         event.preventDefault();
  
@@ -33,13 +36,13 @@ $(document).ready(function() {
 
 // hide alerts
 function hide_alerts() {
-    $("form > div.alert-error").remove()
+    $("div.alert-error").remove()
 }
 
 // show alert msg above the submit button of the form with form_id
-function form_alert(form_id, msg) {
-    hide_alerts();
-    $("form#" + form_id + "> :submit").before(
-    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p></div>'
-    );
-}
+//function form_alert(form_id, msg) {
+//    hide_alerts();
+//    $("form#" + form_id + "> :submit").before(
+//    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p></div>'
+//    );
+//}

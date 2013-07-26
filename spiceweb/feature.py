@@ -85,13 +85,24 @@ class Feature:
         if(self.project_id is None):
             return self.no_project_selected()
 
-        #pm = self.project_manager
         kw_args = self.get_template_args(smi)
 
         if not(featcat_id is None):
-            # check if feature is allready available
-            #kw_args['error_msg'] = 'These features are allready available'
-            self.project_manager.run_feature_extraction([featcat_id])
+
+            pm = self.project_manager
+            fe = pm.get_feature_extraction()
+
+            allready_present = False
+
+            if(featcat_id in fe.available_protein_featcat_ids()):
+                kw_args['msg'] = 'This feature category has ' +\
+                                       'already been calculated'
+            else:
+                # put job in queue
+                pm.run_feature_extraction([featcat_id])
+
+                # redirect to feature list page
+                raise cherrypy.HTTPRedirect(self.get_url(0))
 
         template_f = self.get_template_f(smi)
         return spiceweb.get_template(template_f, **kw_args)

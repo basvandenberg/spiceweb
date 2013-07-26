@@ -9,6 +9,10 @@
 
 <%include file="features_bar.html" />
 
+% if msg:
+    <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
+% endif
+
 <div class="well">
 
 <form id="aac" class="form-inline" enctype="multipart/form-data" method="post">
