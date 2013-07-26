@@ -25,8 +25,8 @@ $(document).ready(function() {
 
         // build url and send
         var u = $(location).attr('href');
-        var url = u + '?featcat_id=' + catid + '_' + params.join('_');
-        alert(url);
+        var u_without_get = u.substring(0, u.indexOf('&'));
+        var url = u_without_get + '?featcat_id=' + catid + '_' + params.join('_');
         window.location.href=url;
     });
 });
