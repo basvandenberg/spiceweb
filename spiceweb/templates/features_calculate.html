@@ -253,4 +253,31 @@
 </form>
 </div>
 
+<!-- Property CTD -->
+
+<div class="well feat-calc">
+<form id="ctd" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Property Composition / Transition / Distribution</legend>
+
+    <label class="select first">Property
+        <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="" title="" data-original-title="">
+            <i class="icon-info-sign"></i>
+        </a>
+    </label>
+    <select class="param input-medium">
+        <option value="hyd" selected="selected">hydrophobicity</option>
+        <option value="vdw">normalized VDW</option>
+        <option value="plr">polarity</option>
+        <option value="plz">polarizability</option>
+        <option value="chr">charge</option>
+        <option value="ss">secondary structure</option>
+        <option value="sa">solvent accessibilty</option>
+    </select>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
 </%block>
