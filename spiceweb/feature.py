@@ -232,11 +232,12 @@ class Feature:
             fcat_id, params, feat_id = fid.split('_')
 
             featcat = fe.PROTEIN_FEATURE_CATEGORIES[fcat_id]
+            id_to_name = featcat.feat_id_name_dict(params)
 
             str_data += '<tr id=%s>\n' % (fid)
             str_data += '    <td>%s</td>' % (featcat.fc_name)
             str_data += '    <td>%s</td>\n' % (featcat.param_str(params))
-            str_data += '    <td>%s</td>\n' % (feat_id)
+            str_data += '    <td>%s</td>\n' % (id_to_name[feat_id])
             str_data += '    <td class="n">%.2f</td>\n' % (tval)
             str_data += '    <td class="n">%.15f</td>\n' % (pval)
             str_data += '</tr>\n'

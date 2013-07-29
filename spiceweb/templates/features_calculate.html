@@ -199,12 +199,23 @@
 </form>
 </div>
 
-<!-- Autocorrelation Moreau-Broto -->
+<!-- Autocorrelation -->
 
 <div class="well feat-calc">
-<form id="acmb" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+<form id="ac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Autocorrelation Morreau-Broto</legend>
+    <legend>Autocorrelation</legend>
+
+    <label class="select first">Type
+        <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="" title="" data-original-title="">
+            <i class="icon-info-sign"></i>
+        </a>
+    </label>
+    <select class="param input-medium">
+        <option value="mb" selected="selected">Moreau-Broto</option>
+        <option value="moran">Moran</option>
+        <option value="geary">Geary</option>
+    </select>
 
     <label class="select first">Scale(s)
         <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="" title="" data-original-title="">
@@ -228,7 +239,11 @@
         </a>
     </label>
     <select class="param input-mini">
-% for i in xrange(2, 31):
+% for i in xrange(1, 20):
+        <option value="${i}">${i}</option>
+% endfor
+        <option value="20" selected="selected">20</option>
+% for i in xrange(21, 31):
         <option value="${i}">${i}</option>
 % endfor
     </select>

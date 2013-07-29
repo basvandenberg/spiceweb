@@ -685,6 +685,10 @@ li.hist {
 .filter_select {
     margin-bottom: 14px;
 }
+.filter_select_bar {
+    border-bottom: 1px solid #888a85;
+    margin-bottom: 10px;
+}
 .filter_select_bar .sel {
     cursor: pointer;
     color: #3465a4;
