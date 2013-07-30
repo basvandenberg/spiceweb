@@ -13,7 +13,87 @@
 <%include file="classification_bar.html" />
 
 ## Classfier details
-<h2>Details classifier ${cl_id}</h2>
+<h2>Classifier ${cl_id}</h2>
+
+###############################################################################
+## Run classifier form
+###############################################################################
+
+% if classifier_f and len(projects) > 0:
+
+<div class="well">
+
+<form id="run-classifier" class="form-inline" enctype="multipart/form-data" method="post">
+
+    <legend>Run classifier on one of your data sets (projects)</legend>
+
+    <label class="select">Data set: </label>
+    <select name="project" id="project" class="param input-large">
+% for project in projects:
+        <option value="${project}" selected="selected">${project}</option>
+% endfor
+    </select>
+    
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Classify</button>
+
+</form>
+<!-- well -->
+</div> 
+
+% endif
+
+###############################################################################
+## Classifier predictions table
+###############################################################################
+
+% if classifier_f:
+
+<h3>Classifier predictions for other data sets</h3>
+
+% for status in ['done']:
+% if len(projects_status[status]) > 0:
+<table class="tablesorter" id="class_done">
+<thead>
+<tr>
+    <th>Project</th>
+    <th>Binary predictions</th>
+    <th>Probabilities</th> 
+</tr>
+</thead>
+<tbody>
+% for pr in projects_status[status]:
+<tr class="${cl_id}">
+    <td>${pr}</td>
+    <td><a href="" id="${pr}_pred" class="download">${pr}_pred.txt</a></td>
+    <td><a href="" id="${pr}_proba" class="download">${pr}_proba.txt</a></td>
+</tr>
+% endfor
+</tbody>
+</table>
+% endif
+% endfor
+
+% for status in ['running', 'waiting', 'error']:
+% if len(projects_status[status]) > 0:
+<h4>${status.title()}</h4>
+<table class="tablesorter">
+<thead>
+<tr>
+    <th>Project</th>
+</tr>
+</thead>
+<tbody>
+% for pr in projects_status[status]:
+<tr>
+    <td>${pr}</td>
+</tr>
+% endfor
+</tbody>
+</table>
+% endif
+% endfor
+
+% endif
 
 ###############################################################################
 ## Classifier settings
@@ -39,6 +119,10 @@
     <tr>
         <td># Features:</td>
         <td>${len(cl_settings['feature_names'])}</td>
+    </tr>
+    <tr>
+        <td>Feature ids:</td>
+        <td>${', '.join(sorted(cl_settings['feature_names']))}</td>
     </tr>
 </table>
 

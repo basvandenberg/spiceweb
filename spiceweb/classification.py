@@ -133,7 +133,7 @@ class Classification:
             return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def details(self, cl_id):
+    def details(self, cl_id, project=None):
 
         smi = 2
         self.fetch_session_data()
@@ -150,10 +150,33 @@ class Classification:
         kw_args['cl_id'] = cl_id
 
         if(self.project_manager.get_classifier_finished(cl_id)):
+        
+            # run classifier on this project's protein sequences
+            if not(project is None):
+                pm.run_classify(cl_id, project)
+                # redirect to classifier list page
+                raise cherrypy.HTTPRedirect(self.get_url(2) + '/' + cl_id)
+            
+            all_projects = [p[0] for p in pm.get_projects()]
+            # TODO fetch list of running project classifications...
+
+            # ERROR fix this, only select jobs for current classifier!!!
+            projects_status = pm.parse_classify_job_files()
+            
+            projects_busy = []
+            for key in projects_status.keys():
+                projects_busy.extend(projects_status[key])
+
+            projects_unavailable = sorted(set(all_projects) - 
+                                          set(projects_busy))
+
             cv_results, avg_results = pm.get_classifier_result(cl_id)
             kw_args['cv_results'] = cv_results
             kw_args['avg_results'] = avg_results
             kw_args['cl_settings'] = pm.get_classifier_settings(cl_id)
+            kw_args['classifier_f'] = pm.get_classifier_f(cl_id)
+            kw_args['projects'] = projects_unavailable
+            kw_args['projects_status'] = projects_status
             kw_args['cl_names'] = self.CL_NAMES
             roc_f = pm.get_roc_f(cl_id)
             if(roc_f and os.path.exists(roc_f)):
@@ -169,6 +192,47 @@ class Classification:
     ###########################################################################
     # ajax calls
     ###########################################################################
+
+    @cherrypy.expose
+    def download(self, cl_id, project_name=None):
+
+        print
+        print cl_id
+        print project_name
+        print
+
+        self.fetch_session_data()
+        pm = self.project_manager
+
+        # download classification output dir
+        if(project_name is None):
+
+            filetype = 'application/zip'
+            filepath = os.path.join(pm.get_cl_dir(cl_id), '%s.zip' % (cl_id))
+
+            with zipfile.ZipFile(filepath, 'w') as fout:
+                first = True
+                for root, dirs, files in os.walk(pm.project_dir):
+                    if first:
+                        rootroot = os.path.dirname(root)
+                        first = False
+                    arcroot = os.path.relpath(root, rootroot)
+                    for file in files:
+                        fout.write(os.path.join(root, file),
+                                arcname=os.path.join(arcroot, file))
+
+        # predictions for the given project
+        else:
+            filetype = 'text/plain'
+            filepath = os.path.join(pm.get_cl_dir(cl_id), 'class_output',
+                                    '%s.txt' % (project_name))
+
+        print 
+        print filepath
+        print filetype
+        print
+
+        return serve_file(filepath, filetype, 'attachment')
 
     # TODO this is a copy of the function in feature.py! 
     # Maybe create a parent class, some other methods can be inherited as well
