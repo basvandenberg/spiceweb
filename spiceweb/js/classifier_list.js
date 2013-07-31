@@ -5,6 +5,25 @@ $(document).ready(function() {
 
     setInterval('update_status();update_results(false);', 60000);
 
+    $("div#classifier_list").on("click", "button.delete-classifier", function() {
+        var cl_id = $(this).attr("id");
+        var postdata = {cl_id: cl_id};
+        $.post('delete', postdata, function() {
+            location.reload();
+        });
+    });
+    
+    //$("div.delete-classifier").on('shown', function() {
+    //
+    //    $(this).find("button.delete-classifier").click(function() {
+    //        var cl_id = $(this).attr("id");
+    //        var postdata = {cl_id: cl_id};
+    //        $.post('delete', postdata, function() {
+    //            location.reload();
+    //        });
+    //    });
+
+    //});
 
 }); 
 
@@ -18,12 +37,14 @@ function select_score() {
 
 function update_results(select_also) {
     var postdata = {};
+
     $.post('result_tables', postdata, 
         function(data) {
             $("div#classifier_results").html(data['result_tables']);
             $("table#classResults").tablesorter();
         });
         return false;
+
 }
 
 function update_status() {

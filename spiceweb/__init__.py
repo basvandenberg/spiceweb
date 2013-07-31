@@ -71,7 +71,7 @@ sub_menus = [
     ['list', 'new', 'details'],
     ['list', 'calculate', 'upload', 'ttest', 'histogram', 'scatter',
      'heatmap'],
-    ['list', 'new', 'details']
+    ['list', 'new', 'details', 'run']
 ]
 
 # static menu items

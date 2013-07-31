@@ -779,12 +779,10 @@ ul.label_list.select li.class_label a {
 textarea {
   border-radius: 4px;
   margin: 4px 0px 4px 0px;
-  width: 640px;
-  max-width: 640px;
+  width: 830px;
+  max-width: 830px;
   border: 1px solid #d3d7cf;
-}
-textarea.job_progress {
-  font-size: 9pt;
+  font-size: 10pt;
   font-family: 'Ubuntu Mono', sans-serif; 
 }
 

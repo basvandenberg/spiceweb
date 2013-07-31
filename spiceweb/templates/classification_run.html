@@ -1,0 +1,98 @@
+## classifier_details.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/classifier_run.js' % (root_url)}"></script>
+</%block>
+
+<%block name="main_title">
+</%block>
+
+<%block name="main_content">
+
+<%include file="classification_bar.html" />
+
+## Classifier run
+<h2>Classifier ${cl_id}</h2>
+
+###############################################################################
+## Run classifier form
+###############################################################################
+
+% if classifier_f and len(data_sets) > 0:
+
+<!--div class="well"-->
+
+<form id="run-classifier" class="form-inline" enctype="multipart/form-data" method="post">
+
+    <legend>Run classifier on one of your data sets</legend>
+
+    <label for="data_set">Data set </label>
+    <select name="data_set" id="data_set" class="param input-large">
+% for data_set in data_sets:
+        <option value="${data_set}" selected="selected">${data_set}</option>
+% endfor
+    </select>
+    
+    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run classification</button>
+
+</form>
+<!-- well -->
+<!--/div--> 
+
+% endif
+
+###############################################################################
+## Classifier predictions table
+###############################################################################
+
+% if classifier_f:
+
+<!--h3>Classifier predictions for other data sets</h3-->
+
+% for status in ['done']:
+% if len(classification_status[status]) > 0:
+<table class="tablesorter" id="class_done">
+<thead>
+<tr>
+    <th>Project</th>
+    <th>Binary predictions</th>
+    <th>Probabilities</th> 
+</tr>
+</thead>
+<tbody>
+% for data_set in classification_status[status]:
+<tr class="${cl_id}">
+    <td>${data_set}</td>
+    <td><a href="" id="${data_set}_pred" class="download pred-file">${data_set}_pred.txt</a></td>
+    <td><a href="" id="${data_set}_proba" class="download pred-file">${data_set}_proba.txt</a></td>
+</tr>
+% endfor
+</tbody>
+</table>
+% endif
+% endfor
+
+% for status in ['running', 'waiting', 'error']:
+% if len(classification_status[status]) > 0:
+<h4>${status.title()}</h4>
+<table class="tablesorter">
+<thead>
+<tr>
+    <th>Data set</th>
+</tr>
+</thead>
+<tbody>
+% for data_set in classification_status[status]:
+<tr>
+    <td>${data_set}</td>
+</tr>
+% endfor
+</tbody>
+</table>
+% endif
+% endfor
+
+% endif
+
+</%block>

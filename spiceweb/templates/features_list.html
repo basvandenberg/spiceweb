@@ -24,6 +24,7 @@ categorized_featids = fe.categorized_protein_feature_ids()
     <tr>
         <th>feature categorie</th>
         <th>parameters</th>
+        <th></th>
     </tr>
 </thead>
 <tbody>
@@ -58,6 +59,32 @@ param_col = ', '.join(['%s: %s' % (n, v)
     <tr>
         <td>${fcat.fc_name.title()}</td>
         <td>${param_col}</td>
+        <td>
+            <a href="#delete-${'%s_%s' % (featcat_id, param_setting)}-modal" 
+               class="btn btn-link my-btn-link delete-project" 
+               data-toggle="modal"
+               id="${'%s_%s' % (featcat_id, param_setting)}">delete
+            </a>
+            <!-- Modal -->
+            <div id="delete-${'%s_%s' % (featcat_id, param_setting)}-modal"
+                 class="modal hide fade delete-features" 
+                 tabindex="-1" 
+                 role="dialog"
+                 aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 id="myModalLabel">Delete feature category ${'%s_%s' % (featcat_id, param_setting)}?</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Feature category ${'%s_%s' % (featcat_id, param_setting)} will be deleted. Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button id="${'%s_%s' % (featcat_id, param_setting)}" class="btn btn-danger delete-features">Delete</button>
+                </div>
+            </div>
+        </td>
     </tr>
 % endfor
 

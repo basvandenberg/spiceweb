@@ -1,15 +1,16 @@
 $(document).ready(function() {
+    
+    $("div.delete-features").on('shown', function() {
 
-    //$("table#feature").tablesorter();
-
-    // bind feature calculation ajax calls to links
-    $('a.calc').bind('click', function(event) {
-        $.post('calcfeat', {featvec: $(this).attr('id')}, function() {
-            location.reload();
+        $(this).find("button.delete-features").click(function() {
+            var featcat_id = $(this).attr("id");
+            var postdata = {featcat_id: featcat_id};
+            $.post('delete', postdata, function() {
+                location.reload();
+            });
         });
-        return false;
+
     });
 
-    setTimeout("location.reload();", 60000);
 });
 

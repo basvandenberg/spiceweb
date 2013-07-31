@@ -1,6 +1,8 @@
 import os
+import zipfile
 import simplejson
 import numpy
+import shutil
 
 import cherrypy
 from cherrypy.lib.static import serve_file
@@ -15,6 +17,7 @@ class Classification:
         'average_precision': 'Avg. precision', 'precision': 'Precision',
         'accuracy': 'Accuracy'
     }
+
     CL_NAMES = {
         'lda': 'Linear Distcriminant Analysis classifier',
         'qda': 'Quadratic Discriminant Analysis classifier',
@@ -60,7 +63,7 @@ class Classification:
         return '%s_%s.html' % (self.mm_name, self.sub_menu[smi])
 
     def get_template_args(self, smi):
-        return spiceweb.get_template_args(main_menu_index=self.mmi, 
+        return spiceweb.get_template_args(main_menu_index=self.mmi,
                 sub_menu_index=smi)
 
     # Duplicate method in feature.py
@@ -87,7 +90,12 @@ class Classification:
         if(self.project_id is None):
             return self.no_project_selected()
 
+        pm = self.project_manager
+        cl_ids = pm.get_classifier_ids()
+
         kw_args = self.get_template_args(smi)
+        kw_args['cl_ids'] = cl_ids
+
         template_f = self.get_template_f(smi)
 
         return spiceweb.get_template(template_f, **kw_args)
@@ -127,13 +135,14 @@ class Classification:
             kw_args['fe'] = self.project_manager.get_feature_extraction()
             kw_args['show_filter'] = True
             kw_args['error_msg'] = error_msg
+            kw_args['cl_ids'] = self.project_manager.get_classifier_ids()
 
             template_f = self.get_template_f(smi)
 
             return spiceweb.get_template(template_f, **kw_args)
 
     @cherrypy.expose
-    def details(self, cl_id, project=None):
+    def details(self, cl_id):
 
         smi = 2
         self.fetch_session_data()
@@ -147,36 +156,15 @@ class Classification:
             return self.no_such_classifier()
 
         kw_args = self.get_template_args(smi)
+        kw_args['cl_ids'] = self.project_manager.get_classifier_ids()
         kw_args['cl_id'] = cl_id
 
         if(self.project_manager.get_classifier_finished(cl_id)):
-        
-            # run classifier on this project's protein sequences
-            if not(project is None):
-                pm.run_classify(cl_id, project)
-                # redirect to classifier list page
-                raise cherrypy.HTTPRedirect(self.get_url(2) + '/' + cl_id)
-            
-            all_projects = [p[0] for p in pm.get_projects()]
-            # TODO fetch list of running project classifications...
-
-            # ERROR fix this, only select jobs for current classifier!!!
-            projects_status = pm.parse_classify_job_files()
-            
-            projects_busy = []
-            for key in projects_status.keys():
-                projects_busy.extend(projects_status[key])
-
-            projects_unavailable = sorted(set(all_projects) - 
-                                          set(projects_busy))
 
             cv_results, avg_results = pm.get_classifier_result(cl_id)
             kw_args['cv_results'] = cv_results
             kw_args['avg_results'] = avg_results
             kw_args['cl_settings'] = pm.get_classifier_settings(cl_id)
-            kw_args['classifier_f'] = pm.get_classifier_f(cl_id)
-            kw_args['projects'] = projects_unavailable
-            kw_args['projects_status'] = projects_status
             kw_args['cl_names'] = self.CL_NAMES
             roc_f = pm.get_roc_f(cl_id)
             if(roc_f and os.path.exists(roc_f)):
@@ -189,30 +177,79 @@ class Classification:
 
         return spiceweb.get_template(template_f, **kw_args)
 
+    @cherrypy.expose
+    def run(self, cl_id, data_set=None):
+
+        smi = 3
+        self.fetch_session_data()
+
+        pm = self.project_manager
+
+        if(self.project_id is None):
+            return self.no_project_selected()
+
+        if not(cl_id in pm.get_classifier_ids()):
+            return self.no_such_classifier()
+
+        kw_args = self.get_template_args(smi)
+        kw_args['cl_ids'] = self.project_manager.get_classifier_ids()
+        kw_args['cl_id'] = cl_id
+
+        if(self.project_manager.get_classifier_finished(cl_id)):
+
+            if not(data_set is None):
+
+                # run classifier on data set
+                pm.run_classify(cl_id, data_set)
+
+                # redirect to classifier run page
+                raise cherrypy.HTTPRedirect(self.get_url(3) + '/' + cl_id)
+
+            # fetch all classification data for this classifier
+            all_data_sets = [p[0] for p in pm.get_projects()]
+            classification_status = pm.parse_classify_job_files(cl_id)
+            classification_busy = []
+            for key in classification_status.keys():
+                classification_busy.extend(classification_status[key])
+            classification_unavailable = sorted(set(all_data_sets) -
+                                          set(classification_busy))
+
+            # forward this data to the template
+            kw_args['classifier_f'] = pm.get_classifier_f(cl_id)
+            kw_args['data_sets'] = classification_unavailable
+            kw_args['classification_status'] = classification_status
+
+        else:
+            kw_args['msg'] = 'Classifier construction still in progress.'
+
+        template_f = self.get_template_f(smi)
+        return spiceweb.get_template(template_f, **kw_args)
+
+
     ###########################################################################
     # ajax calls
     ###########################################################################
 
     @cherrypy.expose
-    def download(self, cl_id, project_name=None):
-
-        print
-        print cl_id
-        print project_name
-        print
+    def download(self, cl_id, data_set=None):
 
         self.fetch_session_data()
         pm = self.project_manager
 
         # download classification output dir
-        if(project_name is None):
+        if(data_set is None):
 
             filetype = 'application/zip'
-            filepath = os.path.join(pm.get_cl_dir(cl_id), '%s.zip' % (cl_id))
+            filepath = os.path.join(pm.cl_dir, '%s.zip' % (cl_id))
+
+            print
+            print filepath
+            print
 
             with zipfile.ZipFile(filepath, 'w') as fout:
                 first = True
-                for root, dirs, files in os.walk(pm.project_dir):
+                d = os.path.join(pm.cl_dir, cl_id)
+                for root, dirs, files in os.walk(d):
                     if first:
                         rootroot = os.path.dirname(root)
                         first = False
@@ -221,23 +258,43 @@ class Classification:
                         fout.write(os.path.join(root, file),
                                 arcname=os.path.join(arcroot, file))
 
-        # predictions for the given project
+        # predictions file for the given project name
         else:
             filetype = 'text/plain'
             filepath = os.path.join(pm.get_cl_dir(cl_id), 'class_output',
-                                    '%s.txt' % (project_name))
-
-        print 
-        print filepath
-        print filetype
-        print
+                                    '%s.txt' % (data_set))
 
         return serve_file(filepath, filetype, 'attachment')
 
-    # TODO this is a copy of the function in feature.py! 
+    @cherrypy.expose
+    def delete(self, cl_id):
+        '''
+        This function handles an ajax call to delete feature category.
+        '''
+        self.fetch_session_data()
+
+        pm = self.project_manager
+
+        # get all classifier ids
+        cl_ids = pm.get_classifier_ids()
+
+        # check if provided classifier id exists
+        if(cl_id in cl_ids):
+
+            # obtain path to classifier dir and job file
+            cl_path = os.path.join(pm.cl_dir, cl_id)
+            job_path = os.path.join(pm.job_done_dir, cl_id)
+
+            # remove dir and file
+            shutil.rmtree(cl_path)
+            os.remove(job_path)
+
+
+    # TODO this is a copy of the function in feature.py!
     # Maybe create a parent class, some other methods can be inherited as well
     @cherrypy.expose
     def class_names(self, labeling_name):
+        # TODO use a template for this...
 
         self.fetch_session_data()
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -263,6 +320,7 @@ class Classification:
 
     @cherrypy.expose
     def result_tables(self):
+        # TODO use a template for this...
 
         self.fetch_session_data()
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -276,8 +334,9 @@ class Classification:
         # create result table if there are any results
         if(len(cl_all_results) > 0):
 
-            score_names = sorted(cl_all_results.values()[0]
-                .values()[0]['cv_results'].keys())
+            #score_names = sorted(cl_all_results.values()[0]
+            #    .values()[0]['cv_results'].keys())
+            score_names = ['accuracy', 'precision', 'recall', 'roc_auc', 'f1']
 
             sel_str = '<div id="score_select">\n'
             sel_str = '<label for="score">Score measure:</label>\n'
@@ -308,6 +367,7 @@ class Classification:
                 for sname in score_names:
                     str_data += '<th class="score" id="%s">%s</th>\n'\
                             % (sname, self.SCORE_NAMES[sname])
+                str_data += '<th></th>'
                 str_data += '</tr>\n'
                 str_data += '</thead>\n'
                 str_data += '<tbody>\n'
@@ -332,6 +392,24 @@ class Classification:
                             score_str = '%.2f' % (numpy.mean(cv_score))
                         str_data += '<td class="score n" id="%s">%s</td>\n' %\
                                 (score_names[index], score_str)
+                    str_data += '''
+    <td><a href="#delete-%s-modal" class="btn btn-link my-btn-link delete-classifier" data-toggle="modal" id="%s">delete</a>
+        <!-- Modal -->
+        <div id="delete-%s-modal" class="modal hide fade delete-classifier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="myModalLabel">Delete classifier %s?</h3>
+          </div>
+          <div class="modal-body">
+            <p>Classifier %s will be deleted. Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button id="%s" class="btn btn-danger delete-classifier">Delete</button>
+          </div>
+        </div>
+    </td>
+''' % (cl_id, cl_id, cl_id, cl_id, cl_id, cl_id)
                     str_data += '</tr>\n'
                 str_data += '</tbody>\n'
                 str_data += '</table>\n\n'
@@ -348,6 +426,7 @@ class Classification:
 
     @cherrypy.expose
     def status_table(self):
+        # TODO use a template for this...
 
         self.fetch_session_data()
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -404,8 +483,8 @@ class Classification:
             dict(progress=progress_txt, error=error_txt, finished=finished))
 
     @cherrypy.expose
-    def roc(self, cl_id):    
-        
+    def roc(self, cl_id):
+
         self.fetch_session_data()
         pm = self.project_manager
 

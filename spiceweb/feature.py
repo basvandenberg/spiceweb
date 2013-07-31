@@ -182,6 +182,24 @@ class Feature:
     #
     # ajax functions
     #
+
+    @cherrypy.expose
+    def delete(self, featcat_id):
+        '''
+        This function handles an ajax call to delete feature category.
+        '''
+        self.fetch_session_data()
+        
+        fm = self.project_manager.get_feature_matrix()
+
+        remove_feat_ids = []
+        for feat_id in fm.feature_ids:
+            if('_'.join(feat_id.split('_')[:2]) == featcat_id):
+                remove_feat_ids.append(feat_id)
+
+        fm.remove_features(remove_feat_ids)
+        fm.save_to_dir(self.project_manager.fm_dir)
+
     @cherrypy.expose
     def class_names(self, labeling_name):
 

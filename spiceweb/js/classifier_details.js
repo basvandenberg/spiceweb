@@ -5,13 +5,11 @@ $(document).ready(function() {
     update_progress();
     refreshIntervalId = setInterval('update_progress()', 3000);
 
-    // bind ajax download call to links
-    $('a.download').bind('click', function(event) {
-        var project_name = $(this).attr('id');
-        var url = get_url_root() + '/download?cl_id=' + clid_from_url() + 
-                '&project_name=' + project_name;
+    // bind ajax download call to Download button
+    $('a.btn.download').bind('click', function(event) {
+        var url = get_url_root() + '/download?cl_id=' + clid_from_url();
         event.preventDefault();
-        window.location.href=url;
+        window.location.href = url;
     });
 
 });
