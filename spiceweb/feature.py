@@ -3,6 +3,7 @@ import simplejson
 import cherrypy
 from cherrypy.lib.static import serve_file
 
+from spice import featmat
 import spiceweb
 from project import Project
 
@@ -192,9 +193,11 @@ class Feature:
         
         fm = self.project_manager.get_feature_matrix()
 
+        num_fc_items = len(featcat_id.split('_'))
+
         remove_feat_ids = []
         for feat_id in fm.feature_ids:
-            if('_'.join(feat_id.split('_')[:2]) == featcat_id):
+            if('_'.join(feat_id.split('_')[:num_fc_items]) == featcat_id):
                 remove_feat_ids.append(feat_id)
 
         fm.remove_features(remove_feat_ids)
@@ -247,15 +250,31 @@ class Feature:
         for index, (tval, pval) in enumerate(ttest_data):
 
             fid = fm.feature_ids[index]
-            fcat_id, params, feat_id = fid.split('_')
 
-            featcat = fe.PROTEIN_FEATURE_CATEGORIES[fcat_id]
-            id_to_name = featcat.feat_id_name_dict(params)
+            tokens = fid.split('_')
+            if(len(tokens) == 2):
+                fcat_id, feat_id = tokens
+                params = ''
+            else:
+                fcat_id, params, feat_id = tokens
+
+            cusfeat = featmat.FeatureMatrix.CUSTOM_FEAT_PRE
+            if fcat_id[:len(cusfeat)] == cusfeat:
+                featcat_name = 'custom feature'
+                feat_param = ''
+                feat_name = fid
+            else:
+                featcat = fe.PROTEIN_FEATURE_CATEGORIES[fcat_id]
+                id_to_name = featcat.feat_id_name_dict(params)
+
+                featcat_name = featcat.fc_name
+                feat_param = featcat.param_str(params)
+                feat_name = id_to_name[feat_id]
 
             str_data += '<tr id=%s>\n' % (fid)
-            str_data += '    <td>%s</td>' % (featcat.fc_name)
-            str_data += '    <td>%s</td>\n' % (featcat.param_str(params))
-            str_data += '    <td>%s</td>\n' % (id_to_name[feat_id])
+            str_data += '    <td>%s</td>' % (featcat_name)
+            str_data += '    <td>%s</td>\n' % (feat_param)
+            str_data += '    <td>%s</td>\n' % (feat_name)
             str_data += '    <td class="n">%.2f</td>\n' % (tval)
             str_data += '    <td class="n">%.15f</td>\n' % (pval)
             str_data += '</tr>\n'
@@ -271,10 +290,16 @@ class Feature:
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
 
-        fc, param, fid = feat_ids.split('_')
-        featcat = fe.PROTEIN_FEATURE_CATEGORIES[fc]
-        param_s = featcat.param_str(param)
-        title = '%s (%s)' % (featcat.fc_name, param_s)
+        tokens = feat_ids.split('_')
+
+        if(len(tokens) == 3):
+            fc, param, fid = tokens
+            featcat = fe.PROTEIN_FEATURE_CATEGORIES[fc]
+            param_s = featcat.param_str(param)
+            title = '%s (%s)' % (featcat.fc_name, param_s)
+        else:
+            fc, fid = tokens
+            title = 'Custom feature category %s' % (fc)
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
@@ -300,14 +325,24 @@ class Feature:
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
         
-        fc0, param0, fid0 = feat_ids[0].split('_')
-        fc1, param1, fid1 = feat_ids[1].split('_')
-        featcat0 = fe.PROTEIN_FEATURE_CATEGORIES[fc0]
-        featcat1 = fe.PROTEIN_FEATURE_CATEGORIES[fc1]
-        param_s0 = featcat0.param_str(param0)
-        param_s1 = featcat1.param_str(param1)
-        lab0 = '%s (%s)' % (featcat0.fc_name, param_s0)
-        lab1 = '%s (%s)' % (featcat1.fc_name, param_s1)
+        tokens0 = feat_ids[0].split('_')
+        tokens1 = feat_ids[1].split('_')
+
+        if(len(tokens0) == 3):
+            fc0, param0, fid0 = tokens0
+            featcat0 = fe.PROTEIN_FEATURE_CATEGORIES[fc0]
+            param_s0 = featcat0.param_str(param0)
+            lab0 = '%s (%s)' % (featcat0.fc_name, param_s0)
+        else:
+            lab0, _ = tokens0
+
+        if(len(tokens1) == 3):
+            fc1, param1, fid1 = tokens1
+            featcat1 = fe.PROTEIN_FEATURE_CATEGORIES[fc1]
+            param_s1 = featcat1.param_str(param1)
+            lab1 = '%s (%s)' % (featcat1.fc_name, param_s1)
+        else:
+            lab1, _ = tokens1
 
         if(figtype == 'svg'):
             filetype = 'image/svg+xml'
