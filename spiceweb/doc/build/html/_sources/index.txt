@@ -17,7 +17,7 @@ Contents:
    tutorial1
 
    user_accounts
-   input_file_format
+   file_formats
    feature_categories
 
 .. Indices and tables
