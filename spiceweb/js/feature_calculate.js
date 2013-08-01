@@ -29,7 +29,10 @@ $(document).ready(function() {
         // build url and send
         var u = $(location).attr('href');
         var u_without_get = u.substring(0, u.indexOf('&'));
-        var url = u_without_get + '?featcat_id=' + catid + '_' + params.join('-');
+        var url = u_without_get + '?featcat_id=' + catid;
+        if(params.length > 0) {
+            url = url + '_' + params.join('-');
+        }
         window.location.href=url;
     });
 });
