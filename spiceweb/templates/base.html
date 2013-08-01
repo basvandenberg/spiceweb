@@ -53,7 +53,9 @@
 
 <body>
 
+###############################################################################
 ## the top-right header menu items
+###############################################################################
 <div id="header_menu">
 % for index, (name, url) in enumerate(header_menu):
 % if header_menu_index == index:
@@ -66,7 +68,9 @@
 % endfor
 </div>
 
+###############################################################################
 ## header text
+###############################################################################
 <div id="header" class=${main_menu[main_menu_index][0]}>
 <div id="title">SPiCE</div>
 <div id="subtitle">Sequence-based Protein Classification and Exploration</div>
@@ -74,14 +78,20 @@
 <div id="beta">beta</div>
 </div>
 
-## show menu bar with current menu active
+###############################################################################
+## menu bar (with current menu active)
+###############################################################################
+
 <div id="main_menu">
 % for index, (name, url) in enumerate(main_menu):
     <a class="menu_item ${name}${' menu_active' if main_menu_index == index else ''}" href="${root_url}${url}">${name}</a>
 % endfor
 </div>
 
+###############################################################################
 ## show current user id and project id when provided in project bar
+###############################################################################
+
 ## TODO use the cherry_auth include auth_bar.html and add project id...
 <div id="project_bar">
 
@@ -102,13 +112,13 @@
 % endif
 
 % if user_id and not '@' in user_id:
-    <div class="project_item">user: <b>test user</b> <a href="#"
+    <div class="project_item">user: <b>unregistered user</b> <a href="#"
 class="info-button" data-toggel="popover" data-trigger="click"
 data-placement="bottom" data-content="
 <p>
-You are not logged in, but can still use the website as a test user. 
+You are not logged in, but can still use the website as a unregistered user. 
 However: <br /><br />
-1) <u><strong>data will not be stored</strong></u> for more than a day<br />
+1) We do not guarantee data to be stored for more than a week<br />
 2) data will only be accessible on the computer you are currently using (if
 cookies are enabled)<br />
 </p>
@@ -124,7 +134,7 @@ title="" data-original-title=""> <i class="icon-info-sign"></i> </a>
 % if project_id and not project_id == 'None':
     <div class="project_item" id="project_name">
         project:
-        <a href="${root_url}${main_menu[1][1]}/details/${project_id}">${project_id}</a>
+        <a href="${root_url}${main_menu[1][1]}details/${project_id}">${project_id}</a>
     </div>
 % endif
 
@@ -136,7 +146,7 @@ title="" data-original-title=""> <i class="icon-info-sign"></i> </a>
             </a>
             <ul class="dropdown-menu">
 % for pid, _ in all_project_ids:
-                <li><a href="${root_url}${main_menu[1][1]}/details/${pid}">${pid}</a></li>
+                <li><a href="${root_url}${main_menu[1][1]}details/${pid}">${pid}</a></li>
 % endfor
             </ul>
         </div>
@@ -146,13 +156,17 @@ title="" data-original-title=""> <i class="icon-info-sign"></i> </a>
 
 </div>
 
+###############################################################################
 ## block for the main content
+###############################################################################
 <div id="wrapper">
 <%block name="main_content">
 </%block>
 </div>
 
+###############################################################################
 ## display the footer
+###############################################################################
 <div id="footer">
 Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
 </div>
@@ -170,7 +184,7 @@ Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft
 <div id="filterscreen">
 <form id="filter">
 
-##
+###############################################################################
 ## Class filter
 ##
 
@@ -221,7 +235,7 @@ num_select = 0
 
 </div>
 
-##
+###############################################################################
 ## Feature filter
 ##
 
@@ -291,24 +305,33 @@ features = zip(feat_ids, feat_names)
 % endif
 % endfor
 
+###############################################################################
 ## custom features
 
-% for custom_featvec_id in custom_feats.keys():
+% for fid in custom_feats.keys():
+
+    <div class="featcat_wrapper" id="${fid}">
+
     <div class="filter_subheader">
-        <div class="filter_subtitle">${custom_featvec_id}<span class="numselected ${custom_featvec_id}">(0)</span></div>
-    </div>
-    <div class="filter_showcat" id="${custom_featvec_id}">show / hide</div>
-        <div class="filter_select_bar">
-            <div id="${custom_featvec_id}" class="filter_select_all sel inline">Select all</div>
-            <div class="inline"> | </div>
-            <div id="${custom_featvec_id}" class="filter_deselect_all sel inline">Deselect all</div>
+        <div class="filter_subtitle">${fid}
+            <span class="numselected">(0)</span>
         </div>
-    <div class="filter_select" id="${custom_featvec_id}">
-        <ol class="feats selectable" id="${custom_featvec_id}">
-% for feat_id in custom_feats[custom_featvec_id]:
+    </div>
+    <div class="filter_showcat">show / hide</div>
+        <div class="filter_select_bar">
+            <div class="filter_select_all sel inline">Select all</div>
+            <div class="inline"> | </div>
+            <div class="filter_deselect_all sel inline">Deselect all</div>
+        </div>
+    <div class="${fid} filter_select">
+        <ol class="feats selectable">
+% for feat_id in custom_feats[fid]:
             <li class="feat ui-widget-content" id="${feat_id}">${feat_id}</li>
 % endfor
         </ol>
+    </div>
+
+    <!-- featcat_wrapper -->
     </div>
 % endfor
 
