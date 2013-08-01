@@ -34,7 +34,7 @@ class JobRunner(Daemon):
                 wait_f = os.path.join(project_d, 'jobs', 'waiting', '*')
                 for f in glob.glob(wait_f):
                     job_f = os.path.basename(f)
-                    timestamp = int(''.join(job_f.split('_')[:1]))
+                    timestamp = int(''.join(job_f.split('_')[:2]))
                     with open(f, 'r') as fin:
                         cmd = '%s' % (fin.readline())
                         stdout_f = fin.readline().strip()
