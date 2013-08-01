@@ -54,7 +54,10 @@ $(document).ready(function() {
 
         var project_id = $("input#project_id").val();
         if(!isValidprojectid(project_id)) {
-            form_alert("create-new-project", "Incorrect project id");
+            form_alert("create-new-project", "<p>Incorrect project id</p>" +
+                "<p>A project id should be at least 4 characters long. " +
+                "Only alphanumeric characters, dashes, and underscores are " +
+                "allowed.</p>");
             isFormValid = false;
         }
 
@@ -101,14 +104,16 @@ function hide_alerts() {
 function form_alert(form_id, msg) {
     hide_alerts();
     $("form#" + form_id + "> :submit").before(
-    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p></div>'
+    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p>' +
+    '</div>'
     );
 }
 
 function form_info(form_id, msg) {
     hide_alerts();
     $("form#" + form_id + "> :submit").before(
-    '<div class="alert alert-block alert-info fade in"><p>' + msg + '</p></div>'
+    '<div class="alert alert-block alert-info fade in"><p>' + msg + '</p>' +
+    '</div>'
     );
 }
 
