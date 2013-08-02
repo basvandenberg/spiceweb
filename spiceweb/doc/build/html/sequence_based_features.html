@@ -1,0 +1,351 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sequence-based features &mdash; SPiCE 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="prev" title="File Formats" href="file_formats.html" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+     
+
+  </head>
+  <body>
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="file_formats.html" title="File Formats"
+             accesskey="P">previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sequence-based features</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#feature-matrix">Feature matrix</a></li>
+<li><a class="reference internal" href="#feature-ids">Feature  ids</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#spice-feature-categeries">SPiCE feature categeries</a><ul>
+<li><a class="reference internal" href="#amino-acid-composition">Amino acid composition</a></li>
+<li><a class="reference internal" href="#prime-side-amino-acid-count">Prime-side amino acid count</a></li>
+<li><a class="reference internal" href="#signal-average">Signal average</a></li>
+<li><a class="reference internal" href="#signal-peaks-area">Signal peaks area</a></li>
+<li><a class="reference internal" href="#autocorrelation">Autocorrelation</a></li>
+<li><a class="reference internal" href="#property-composition-transition-distribution-ctd">Property Composition / Transition / Distribution (CTD)</a></li>
+<li><a class="reference internal" href="#protein-length">Protein length</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="file_formats.html"
+                        title="previous chapter">File Formats</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/sequence_based_features.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sequence-based-features">
+<h1>Sequence-based features<a class="headerlink" href="#sequence-based-features" title="Permalink to this headline">¶</a></h1>
+<p>Once you have initiated a new project with a set of protein sequences, you can
+use the <em>Calculate</em> button under the  <em>Features</em> tab to calculate a range of
+sequence-based features.</p>
+<a class="reference internal image-reference" href="_images/featcalc0.png"><img alt="_images/featcalc0.png" class="align-center" src="_images/featcalc0.png" style="width: 550px;" /></a>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="features">
+<h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
+<p>A sequence-based feature is basically a mapping from a sequence to a number.
+For example, if we have a sequence:</p>
+<div class="highlight-python"><pre>&gt;test0
+AAAAABBBBBBBBBBCCCCC</pre>
+</div>
+<p>Then we could calcalate what the fraction of <tt class="docutils literal"><span class="pre">A</span></tt>&#8216;s in this sequence is by
+taking the number of <tt class="docutils literal"><span class="pre">A</span></tt>&#8216;s and divide that number by the total length of the
+sequence:</p>
+<div class="highlight-python"><pre>fraction A:  5 / 20 = 0.25</pre>
+</div>
+<p>This number can be used as a feature of the sequence <tt class="docutils literal"><span class="pre">test0</span></tt>. Similarly, the
+fraction of the other letters can be calculated:</p>
+<div class="highlight-python"><pre>fraction B: 10 / 20 = 0.5
+
+fraction C:  5 / 20 = 0.25</pre>
+</div>
+<p>This way, we obtained two more sequence-based features for sequence <tt class="docutils literal"><span class="pre">test0</span></tt>.</p>
+<p>It would make sense to combine these three features into a <em>feature category</em>
+which we could call the sequence&#8217;s <em>letter composition</em>. In this way we can map
+a sequence to a list of three values that captures some property /
+charecteristic of the sequence.</p>
+</div>
+<div class="section" id="feature-matrix">
+<h3>Feature matrix<a class="headerlink" href="#feature-matrix" title="Permalink to this headline">¶</a></h3>
+<p>When calculating features, a so called feature matrix is build. As an example,
+let&#8217;s consider the following set of sequences:</p>
+<div class="highlight-python"><pre>&gt;test0
+AAAAABBBBBBBBBBCCCCC
+
+&gt;test1
+BCBCBCBCBC
+
+&gt;test2
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB</pre>
+</div>
+<p>Calculating the <em>letter composition</em> for each of these sequences will result in
+the following feature matrix:</p>
+<div class="highlight-python"><pre>.       fraction A      fraction B      fraction C
+
+test0      0.25            0.50            0.25
+
+test1      0.00            0.50            0.50
+
+test2      0.97            0.03            0.00</pre>
+</div>
+<p>In this matrix, each row gives the feature values of one sequences (also called
+the protein&#8217;s feature vector), and each column gives the feature values of one
+feature.</p>
+</div>
+<div class="section" id="feature-ids">
+<h3>Feature  ids<a class="headerlink" href="#feature-ids" title="Permalink to this headline">¶</a></h3>
+<p>Within the SPiCE system, each feature obtains an id that is build out of three
+components: the feature category id, parameter settings, and feature id. These
+three components are separated by an underscore character (_). For feature
+categories for which no parameters can be set, the parameter settings component
+is left out.</p>
+<p>As an example, let&#8217;s consider the feature id:</p>
+<div class="highlight-python"><pre>ac_moran-gg-20_gg4</pre>
+</div>
+<p>The first component <tt class="docutils literal"><span class="pre">ac</span></tt> is the id of the <em>autocorrelation</em> feature
+category.</p>
+<p>The second component <tt class="docutils literal"><span class="pre">moran-gg-20</span></tt> is a <tt class="docutils literal"><span class="pre">-</span></tt> separated list of feature
+category parameters. In this case <tt class="docutils literal"><span class="pre">moran</span></tt> is the used type of autocorrelation
+function, <tt class="docutils literal"><span class="pre">gg</span></tt> is the used set of amino acid scales (Georgiev
+<a class="reference internal" href="#georgiev2009" id="id1">[1]</a>), and <tt class="docutils literal"><span class="pre">20</span></tt> is the used lag parameter.</p>
+<p>The third component <tt class="docutils literal"><span class="pre">gg4</span></tt> indicates that this is the feature value for the
+4th amino acid scale in the set of Georgiev scales.</p>
+</div>
+</div>
+<div class="section" id="spice-feature-categeries">
+<h2>SPiCE feature categeries<a class="headerlink" href="#spice-feature-categeries" title="Permalink to this headline">¶</a></h2>
+<p>The following sections will bescribe the different feature categories that are
+offered by the SPiCE website. Some of these features were used in our previous
+research <a class="reference internal" href="#vandenberg2010" id="id2">[4]</a>, <a class="reference internal" href="#vandenberg2012" id="id3">[5]</a>. The rest of the
+features are based on those offered by the PROFEAT website <a class="reference internal" href="#li2006" id="id4">[2]</a>,
+<a class="reference internal" href="#rao2011" id="id5">[3]</a>, who extracted their features from different sequence-based
+studies.</p>
+<div class="section" id="amino-acid-composition">
+<h3>Amino acid composition<a class="headerlink" href="#amino-acid-composition" title="Permalink to this headline">¶</a></h3>
+<p>The same as in the example given in the introduction, the amino acids
+composition calculates the fraction of each amino acid in a protein sequence.</p>
+<a class="reference internal image-reference" href="_images/featcalc1.png"><img alt="_images/featcalc1.png" class="align-center" src="_images/featcalc1.png" style="width: 550px;" /></a>
+<p>Having 20 amino acids, this will result in 20 features. If a sequence contains
+any other than the 20 unambiguous amino acid letters will be ignored.</p>
+<p>To illustrate this, consider the following (unrealistic) protein sequence,
+which contains two occurences of each amino acid in which each amino acid
+obtains the value 0.05:</p>
+<div class="highlight-python"><pre>&gt;&gt;aac_test
+MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV</pre>
+</div>
+<p>will result in a amino acid feature vector:</p>
+<div class="highlight-python"><pre>aac_1_A1    aac_1_R1    ...     aac_1_V1
+0.05        0.05        ...     0.05</pre>
+</div>
+<p>As a parameter, users can specify in how many (equal sized) segments a protein
+should be divided, before calculating the amino acid composition of each
+segmente separately. The number of features will therefore be the number of
+segments times 20.</p>
+<p>With 2 as number of segments parameter, the sequence will be split in two:</p>
+<div class="highlight-python"><pre>segment 1              segment2
+MMAARRNNDDCCEEQQGGHH | IILLKKFFPPSSTTWWYYVV</pre>
+</div>
+<p>The amino acid composition of both segments is calculated which together
+results in a feature vector with 40 features:</p>
+<div class="highlight-python"><pre>aac_2_A1   ...     aac_2_V1    ...     aac_2_A2    aac_2_V2
+0.10       ...     0.00                0.0         0.10</pre>
+</div>
+</div>
+<div class="section" id="prime-side-amino-acid-count">
+<h3>Prime-side amino acid count<a class="headerlink" href="#prime-side-amino-acid-count" title="Permalink to this headline">¶</a></h3>
+<p>This feature category returns the amino acid counts (so not fractions) of a
+fixed length sequence end, either the 5` or the 3` side.</p>
+<ul>
+<li><p class="first">feature category id: psaac</p>
+</li>
+<li><dl class="first docutils">
+<dt>parametens:</dt>
+<dd><ul class="first last simple">
+<li>prime side: 3 or 5</li>
+<li>length: 10, 20, ..., 60</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">example feature id: psaac_3_30_C</p>
+</li>
+</ul>
+<a class="reference internal image-reference" href="_images/featcalc2.png"><img alt="_images/featcalc2.png" class="align-center" src="_images/featcalc2.png" style="width: 550px;" /></a>
+<p>For the following example sequence:</p>
+<div class="highlight-python"><pre>&gt;&gt;aac_test
+MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV</pre>
+</div>
+<p>The 5&#8217; amino acid count for length 10 will result in this feature vector:</p>
+<div class="highlight-python"><pre>psaac_5_10_A    psaac_5_10_C    ...     psaac_5_10_V
+2               0                       0</pre>
+</div>
+</div>
+<div class="section" id="signal-average">
+<h3>Signal average<a class="headerlink" href="#signal-average" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/featcalc3.png"><img alt="_images/featcalc3.png" class="align-center" src="_images/featcalc3.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="signal-peaks-area">
+<h3>Signal peaks area<a class="headerlink" href="#signal-peaks-area" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="autocorrelation">
+<h3>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/featcalc4.png"><img alt="_images/featcalc4.png" class="align-center" src="_images/featcalc4.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="property-composition-transition-distribution-ctd">
+<h3>Property Composition / Transition / Distribution (CTD)<a class="headerlink" href="#property-composition-transition-distribution-ctd" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/featcalc4.png"><img alt="_images/featcalc4.png" class="align-center" src="_images/featcalc4.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="protein-length">
+<h3>Protein length<a class="headerlink" href="#protein-length" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/featcalc4.png"><img alt="_images/featcalc4.png" class="align-center" src="_images/featcalc4.png" style="width: 550px;" /></a>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-sequence_based_features-0"><table class="docutils citation" frame="void" id="georgiev2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><span class="first last"><span><span><span><span><span><span>Alexander</span><span>&nbsp;</span><span>G</span></span><span> </span></span><span>Georgiev</span></span><span>.</span></span><span> </span><span><span>Interpretable numerical descriptors of amino acid space</span><span>.</span></span></span><span> </span><span><span><em><span>Journal of Computational Biology</span></em><span>, </span><span><span><span>16</span><span><span>(</span><span>5</span><span>)</span></span><span>:</span></span><span><span>703</span><span>–</span><span>723</span></span></span></span><span>, </span><span>2009</span><span>.</span></span></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="li2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td><span class="first last"><span><span><span><span><span><span><span>Ze-Rong</span><span> </span></span><span>Li</span></span><span>, </span><span><span><span><span>Hong</span><span>&nbsp;</span><span>Huang</span></span><span> </span></span><span>Lin</span></span><span>, </span><span><span><span>LY</span><span>&nbsp;</span></span><span>Han</span></span><span>, </span><span><span><span>L</span><span>&nbsp;</span></span><span>Jiang</span></span><span>, </span><span><span><span>X</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>, and </span><span><span><span><span>Yu</span><span>&nbsp;</span><span>Zong</span></span><span> </span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>34</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W32–W37</span></span></span><span>, </span><span>2006</span><span>.</span></span></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="rao2011" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td><span class="first last"><span><span><span><span><span><span><span>HB</span><span>&nbsp;</span></span><span>Rao</span></span><span>, </span><span><span><span>F</span><span>&nbsp;</span></span><span>Zhu</span></span><span>, </span><span><span><span>GB</span><span>&nbsp;</span></span><span>Yang</span></span><span>, </span><span><span><span>ZR</span><span>&nbsp;</span></span><span>Li</span></span></span><span>, and </span><span><span><span>YZ</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>39</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W385–W390</span></span></span><span>, </span><span>2011</span><span>.</span></span></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="vandenberg2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[4]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span><span>B.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>F.</span></span><span> </span></span><span>Nijkamp</span></span><span>, </span><span><span><span><span>M.</span><span>&nbsp;</span><span>J.</span><span>&nbsp;</span><span>T.</span></span><span> </span></span><span>Reinders</span></span><span>, </span><span><span><span>L.</span><span>&nbsp;</span></span><span>Wu</span></span><span>, </span><span><span><span><span>H.</span><span>&nbsp;</span><span>J.</span></span><span> </span></span><span>Pel</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span>Roubos</span></span></span><span>, and </span><span><span><span>D.</span><span>&nbsp;</span></span><span><span>De</span><span>&nbsp;</span><span>Ridder</span></span></span></span><span>.</span></span><span> </span><span><span>Sequence-based prediction of protein secretion success in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><span>In</span><span> </span><span><em><span>Proceedings of Pattern Recegnition in Bioinformatics 2010</span></em><span>, </span><span><span>3</span><span>–</span><span>14</span></span><span>.</span></span></span><span> </span><span><span>Springer</span><span>, </span><span>2010</span><span>.</span></span></span></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="vandenberg2012" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[5]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span>Bastiaan</span><span>&nbsp;</span><span>A</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span> and </span><span>others</span></span><span>.</span></span><span> </span><span><span>Exploring sequence characteristics related to high-level production of secreted proteins in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><em><span>PLoS ONE</span></em><span>, </span><span><span><span>7</span><span><span>(</span><span>10</span><span>)</span></span><span>:</span></span><span>e45869</span></span></span><span>, </span><span>2012</span><span>.</span></span></span></td></tr>
+</tbody>
+</table>
+</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="file_formats.html" title="File Formats"
+             >previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    
+    <div class="footer">
+        &copy; Copyright 2013, Bastiaan van den Berg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+
+  </body>
+</html>

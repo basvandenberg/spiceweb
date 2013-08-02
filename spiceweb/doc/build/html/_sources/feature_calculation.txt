@@ -1,0 +1,74 @@
+===================
+Feature calculation
+===================
+
+Once you have initiated a new project with a set of protein sequences, you can
+use the *Calculate* button under the  *Features* tab to calculate a range of
+sequence-based features.
+
+.. image:: img/featcalc0.png
+   :width: 550px
+   :align: center
+
+This section will shortly explain about the different features that are offered
+by the SPiCE website. 
+
+----------------------
+Amino acid composition
+----------------------
+
+.. image:: img/featcalc1.png
+   :width: 550px
+   :align: center
+
+---------------------------
+Prime-side amino acid count
+---------------------------
+
+.. image:: img/featcalc2.png
+   :width: 550px
+   :align: center
+
+--------------
+Signal average
+--------------
+
+.. image:: img/featcalc3.png
+   :width: 550px
+   :align: center
+
+-----------------
+Signal peaks area
+-----------------
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   :align: center
+
+---------------
+Autocorrelation
+---------------
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   :align: center
+
+--------------------------------------------------
+Property Composition/Transition/Distribution (CTD)
+--------------------------------------------------
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   :align: center
+
+--------------
+Protein length
+--------------
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   :align: center
+
+^^^^^^^^^^^^^^^^^^^^^^^
+Create example projects
+^^^^^^^^^^^^^^^^^^^^^^^

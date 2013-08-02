@@ -3,11 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the SPiCe documentation!
-===================================
-
-Welcome to the documentation of the SPiCE website. Currently there is only one
-tutorial available, more documentation will be added later.
+==================================
+Welcome to the SPiCe documentation
+==================================
 
 Contents:
 
@@ -15,10 +13,8 @@ Contents:
    :maxdepth: 2
 
    tutorial1
-
-   user_accounts
+   features
    file_formats
-   feature_categories
 
 .. Indices and tables
    ==================

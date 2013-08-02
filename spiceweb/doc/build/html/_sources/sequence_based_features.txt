@@ -1,0 +1,231 @@
+=======================
+Sequence-based features
+=======================
+
+Once you have initiated a new project with a set of protein sequences, you can
+use the *Calculate* button under the  *Features* tab to calculate a range of
+sequence-based features.
+
+.. image:: img/featcalc0.png
+   :width: 550px
+   :align: center
+
+------------
+Introduction
+------------
+
+^^^^^^^^
+Features
+^^^^^^^^
+
+A sequence-based feature is basically a mapping from a sequence to a number.
+For example, if we have a sequence::
+
+    >test0
+    AAAAABBBBBBBBBBCCCCC
+
+Then we could calcalate what the fraction of ``A``'s in this sequence is by
+taking the number of ``A``'s and divide that number by the total length of the
+sequence::
+
+    fraction A:  5 / 20 = 0.25
+
+This number can be used as a feature of the sequence ``test0``. Similarly, the
+fraction of the other letters can be calculated::
+
+    fraction B: 10 / 20 = 0.5
+
+    fraction C:  5 / 20 = 0.25
+
+This way, we obtained two more sequence-based features for sequence ``test0``.
+
+It would make sense to combine these three features into a *feature category*
+which we could call the sequence's *letter composition*. In this way we can map
+a sequence to a list of three values that captures some property /
+charecteristic of the sequence.
+
+^^^^^^^^^^^^^^
+Feature matrix
+^^^^^^^^^^^^^^
+
+When calculating features, a so called feature matrix is build. As an example,
+let's consider the following set of sequences::
+
+    >test0
+    AAAAABBBBBBBBBBCCCCC
+
+    >test1
+    BCBCBCBCBC
+
+    >test2
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+
+Calculating the *letter composition* for each of these sequences will result in
+the following feature matrix::
+
+    .       fraction A      fraction B      fraction C
+
+    test0      0.25            0.50            0.25
+
+    test1      0.00            0.50            0.50
+
+    test2      0.97            0.03            0.00
+
+In this matrix, each row gives the feature values of one sequences (also called
+the protein's feature vector), and each column gives the feature values of one
+feature.
+
+^^^^^^^^^^^^
+Feature  ids
+^^^^^^^^^^^^
+
+Within the SPiCE system, each feature obtains an id that is build out of three
+components: the feature category id, parameter settings, and feature id. These
+three components are separated by an underscore character (_). For feature
+categories for which no parameters can be set, the parameter settings component
+is left out.
+
+As an example, let's consider the feature id::
+
+    ac_moran-gg-20_gg4
+
+The first component ``ac`` is the id of the *autocorrelation* feature
+category.
+
+The second component ``moran-gg-20`` is a ``-`` separated list of feature
+category parameters. In this case ``moran`` is the used type of autocorrelation
+function, ``gg`` is the used set of amino acid scales (Georgiev
+:cite:`georgiev2009`), and ``20`` is the used lag parameter.
+
+The third component ``gg4`` indicates that this is the feature value for the
+4th amino acid scale in the set of Georgiev scales.
+
+
+
+------------------------
+SPiCE feature categeries
+------------------------
+
+The following sections will bescribe the different feature categories that are
+offered by the SPiCE website. Some of these features were used in our previous
+research :cite:`vandenberg2010`, :cite:`vandenberg2012`. The rest of the
+features are based on those offered by the PROFEAT website :cite:`li2006`,
+:cite:`rao2011`, who extracted their features from different sequence-based
+studies.
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^
+Amino acid composition
+^^^^^^^^^^^^^^^^^^^^^^
+
+The same as in the example given in the introduction, the amino acids
+composition calculates the fraction of each amino acid in a protein sequence.
+
+.. image:: img/featcalc1.png
+   :width: 550px
+   :align: center
+
+Having 20 amino acids, this will result in 20 features. If a sequence contains
+any other than the 20 unambiguous amino acid letters will be ignored.
+
+To illustrate this, consider the following (unrealistic) protein sequence,
+which contains two occurences of each amino acid in which each amino acid
+obtains the value 0.05::
+
+    >>aac_test
+    MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV
+
+will result in a amino acid feature vector::
+
+    aac_1_A1    aac_1_R1    ...     aac_1_V1
+    0.05        0.05        ...     0.05
+
+As a parameter, users can specify in how many (equal sized) segments a protein
+should be divided, before calculating the amino acid composition of each
+segmente separately. The number of features will therefore be the number of
+segments times 20.
+
+With 2 as number of segments parameter, the sequence will be split in two::
+
+    segment 1              segment2
+    MMAARRNNDDCCEEQQGGHH | IILLKKFFPPSSTTWWYYVV
+
+The amino acid composition of both segments is calculated which together
+results in a feature vector with 40 features::
+
+    aac_2_A1   ...     aac_2_V1    ...     aac_2_A2    aac_2_V2
+    0.10       ...     0.00                0.0         0.10
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Prime-side amino acid count
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This feature category returns the amino acid counts (so not fractions) of a
+fixed length sequence end, either the 5` or the 3` side.
+
+- feature category id: psaac
+- parametens:
+    - prime side: 3 or 5
+    - length: 10, 20, ..., 60
+- example feature id: psaac_3_30_C
+
+.. image:: img/featcalc2.png
+   :width: 550px
+   :align: center
+
+For the following example sequence::
+
+    >>aac_test
+    MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV
+
+The 5' amino acid count for length 10 will result in this feature vector::
+
+    psaac_5_10_A    psaac_5_10_C    ...     psaac_5_10_V
+    2               0                       0
+
+^^^^^^^^^^^^^^
+Signal average
+^^^^^^^^^^^^^^
+
+.. image:: img/featcalc3.png
+   :width: 550px
+   :align: center
+
+^^^^^^^^^^^^^^^^^
+Signal peaks area
+^^^^^^^^^^^^^^^^^
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   align: center
+
+^^^^^^^^^^^^^^^
+Autocorrelation
+^^^^^^^^^^^^^^^
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   :align: center
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Property Composition / Transition / Distribution (CTD)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   :align: center
+
+^^^^^^^^^^^^^^
+Protein length
+^^^^^^^^^^^^^^
+
+.. image:: img/featcalc4.png
+   :width: 550px
+   :align: center
+
+----------
+References
+----------
+
+.. bibliography:: refs.bib

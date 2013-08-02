@@ -198,7 +198,7 @@ contain one id per line::
     YLR035C
     YLR057W
 
-Feature values must be provided for all the proteins in your project. This
-means that the all the ids that were in your FASTA file must also be in the
-file with feature ids. Of course the number of rows in the feature matrix must
-also correspond to the number of object ids.
+Feature values must be provided for all the proteins in your project, which
+means that all ids in your FASTA file must also be in the protein ids file. The
+number of rows in the feature matrix should also correspond to the number of
+proteins in your data set.
