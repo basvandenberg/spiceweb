@@ -1,3 +1,5 @@
+.. _features:
+
 ========
 Features
 ========
@@ -273,7 +275,7 @@ under the profile curve under some given threshold (Fig.1C).
 
 .. image:: img/featcalc4.png
    :width: 550px
-   align: center
+   :align: center
 
 ^^^^^^^^^^^^^^^
 Autocorrelation

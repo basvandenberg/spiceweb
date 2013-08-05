@@ -32,6 +32,11 @@ h3 {
 h1, h2, h3 {
     font-family: 'Ubuntu';
 }
+.figure>p.caption {
+    font-size: 9pt;
+    margin-top: -12px;
+    margin-bottom: 40px;
+}
 
 /* -- spice header---------------------------------------------------------- */
 
@@ -268,20 +273,22 @@ div.body a {
 
 h1 {
     margin: 0;
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
     padding: 0.7em 0 0.3em 0;
-    font-size: 1.5em;
+    font-size: 1.7em;
     color: #2e3436;
 }
 
 h2 {
-    margin: 1.3em 0 0.2em 0;
-    font-size: 1.35em;
+    margin: 2.5em 0 0.2em 0;
+    font-size: 1.5em;
     padding: 0;
 }
 
 h3 {
-    margin: 1em 0 -0.3em 0;
-    font-size: 1.2em;
+    margin: 1.9em 0 -0.3em 0;
+    font-size: 1.3em;
 }
 
 div.body h1 a, div.body h2 a, div.body h3 a, div.body h4 a, div.body h5 a, div.body h6 a {

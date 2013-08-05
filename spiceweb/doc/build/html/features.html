@@ -124,7 +124,7 @@ Exploration</div>
           <div class="body">
             
   <div class="section" id="features">
-<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
 <p>Once you have initiated a new project with a set of protein sequences, you can
 use the <em>Calculate</em> button under the  <em>Features</em> tab to calculate a range of
 sequence-based features.</p>
@@ -191,7 +191,7 @@ a feature vector), and each column gives the feature values of one feature.</p>
 <h3>Amino acid scales<a class="headerlink" href="#amino-acid-scales" title="Permalink to this headline">¶</a></h3>
 <p>Amino acid scales are mappings from amino acids to property values and are used
 for the calculation of some feature categories. An often used example is the
-Kyte &amp; Doolittle <a class="reference internal" href="#kyte1982" id="id1">[2]</a> hydropathicity scale in which the values
+Kyte &amp; Doolittle <a class="reference internal" href="#kyte1982" id="id2">[2]</a> hydropathicity scale in which the values
 indicates how hydrophobic/hydrophilic amino acids are:</p>
 <div class="highlight-python"><pre>Ala:  1.800
 Arg: -4.500
@@ -232,7 +232,7 @@ scales.</p>
 <p>Since many of these amino acid scales are highly correlated, multiple
 efforts have been done (using PCA or similar techniques) to capture the data of
 all the scales into a limited set of uncorrelated scales.</p>
-<p>A. Georgiev <a class="reference internal" href="#georgiev2009" id="id2">[1]</a> used Varimax to identify 19 uncorrelated
+<p>A. Georgiev <a class="reference internal" href="#georgiev2009" id="id3">[1]</a> used Varimax to identify 19 uncorrelated
 scales that show good correlation with published scales, this in order to
 retain interpretability. This set of 19 scales, and all the separate scales in
 the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base are available for feature calculation on the SPiCE
@@ -262,9 +262,9 @@ function, <tt class="docutils literal"><span class="pre">gg</span></tt> indicate
 <h2>SPiCE feature categeries<a class="headerlink" href="#spice-feature-categeries" title="Permalink to this headline">¶</a></h2>
 <p>The following sections will bescribe the different feature categories that are
 offered by the SPiCE website. Some of these features were used in our previous
-research <a class="reference internal" href="#vandenberg2010" id="id3">[5]</a>, <a class="reference internal" href="#vandenberg2012" id="id4">[6]</a>. The rest of the
-features are based on those offered by the PROFEAT website <a class="reference internal" href="#li2006" id="id5">[3]</a>,
-<a class="reference internal" href="#rao2011" id="id6">[4]</a>, who extracted their features from different sequence-based
+research <a class="reference internal" href="#vandenberg2010" id="id4">[5]</a>, <a class="reference internal" href="#vandenberg2012" id="id5">[6]</a>. The rest of the
+features are based on those offered by the PROFEAT website <a class="reference internal" href="#li2006" id="id6">[3]</a>,
+<a class="reference internal" href="#rao2011" id="id7">[4]</a>, who extracted their features from different sequence-based
 studies.</p>
 <div class="section" id="amino-acid-composition">
 <h3>Amino acid composition<a class="headerlink" href="#amino-acid-composition" title="Permalink to this headline">¶</a></h3>
@@ -326,15 +326,16 @@ indication of the global hydropathicity of the protein.</p>
 transform an amino acid sequence into a (smoothed) property profile / signal.
 Instead of taking the average profile value, this feature calculates the area
 under the profile curve under some given threshold (Fig.1C).</p>
+<a class="reference internal image-reference" href="_images/featcalc4.png"><img alt="_images/featcalc4.png" class="align-center" src="_images/featcalc4.png" style="width: 550px;" /></a>
 </div>
 <div class="section" id="autocorrelation">
 <h3>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Permalink to this headline">¶</a></h3>
-<p>The autocorrelation feature is derived from <a class="reference internal" href="#li2006" id="id7">[3]</a>.</p>
+<p>The autocorrelation feature is derived from <a class="reference internal" href="#li2006" id="id8">[3]</a>.</p>
 </div>
 <div class="section" id="property-composition-transition-distribution-ctd">
 <h3>Property Composition / Transition / Distribution (CTD)<a class="headerlink" href="#property-composition-transition-distribution-ctd" title="Permalink to this headline">¶</a></h3>
 <p>The Composition, Transition, Distribution feature is derived from
-<a class="reference internal" href="#li2006" id="id8">[3]</a>.</p>
+<a class="reference internal" href="#li2006" id="id9">[3]</a>.</p>
 <p>For these features, the protein sequence is first translated
 from the 20 letter amino acid alphabet to a 3 letter alphabet, in which the 20
 amino acids are devided over the three letters based on some property. The
@@ -399,37 +400,37 @@ CTD feature category provides 3 + 3 + 5 x 3 = 21 features for a given property.<
 <p id="bibtex-bibliography-features-0"><table class="docutils citation" frame="void" id="georgiev2009" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><span class="first last"><span><span><span><span><span><span>Alexander</span><span>&nbsp;</span><span>G</span></span><span> </span></span><span>Georgiev</span></span><span>.</span></span><span> </span><span><span>Interpretable numerical descriptors of amino acid space</span><span>.</span></span></span><span> </span><span><span><em><span>Journal of Computational Biology</span></em><span>, </span><span><span><span>16</span><span><span>(</span><span>5</span><span>)</span></span><span>:</span></span><span><span>703</span><span>–</span><span>723</span></span></span></span><span>, </span><span>2009</span><span>.</span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td><span class="first last"><span><span><span><span><span><span>Alexander</span><span>&nbsp;</span><span>G</span></span><span> </span></span><span>Georgiev</span></span><span>.</span></span><span> </span><span><span>Interpretable numerical descriptors of amino acid space</span><span>.</span></span></span><span> </span><span><span><em><span>Journal of Computational Biology</span></em><span>, </span><span><span><span>16</span><span><span>(</span><span>5</span><span>)</span></span><span>:</span></span><span><span>703</span><span>–</span><span>723</span></span></span></span><span>, </span><span>2009</span><span>.</span></span></span></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="kyte1982" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td><span class="first last"><span><span><span><span><span><span>Jack</span><span> </span></span><span>Kyte</span></span><span> and </span><span><span><span><span>Russell</span><span>&nbsp;</span><span>F</span></span><span> </span></span><span>Doolittle</span></span></span><span>.</span></span><span> </span><span><span>A simple method for displaying the hydropathic character of a protein</span><span>.</span></span></span><span> </span><span><span><em><span>Journal of molecular biology</span></em><span>, </span><span><span><span>157</span><span><span>(</span><span>1</span><span>)</span></span><span>:</span></span><span><span>105</span><span>–</span><span>132</span></span></span></span><span>, </span><span>1982</span><span>.</span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><span class="first last"><span><span><span><span><span><span>Jack</span><span> </span></span><span>Kyte</span></span><span> and </span><span><span><span><span>Russell</span><span>&nbsp;</span><span>F</span></span><span> </span></span><span>Doolittle</span></span></span><span>.</span></span><span> </span><span><span>A simple method for displaying the hydropathic character of a protein</span><span>.</span></span></span><span> </span><span><span><em><span>Journal of molecular biology</span></em><span>, </span><span><span><span>157</span><span><span>(</span><span>1</span><span>)</span></span><span>:</span></span><span><span>105</span><span>–</span><span>132</span></span></span></span><span>, </span><span>1982</span><span>.</span></span></span></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="li2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id7">2</a>, <a class="fn-backref" href="#id8">3</a>)</em> <span class="last"><span><span><span><span><span><span><span>Ze-Rong</span><span> </span></span><span>Li</span></span><span>, </span><span><span><span><span>Hong</span><span>&nbsp;</span><span>Huang</span></span><span> </span></span><span>Lin</span></span><span>, </span><span><span><span>LY</span><span>&nbsp;</span></span><span>Han</span></span><span>, </span><span><span><span>L</span><span>&nbsp;</span></span><span>Jiang</span></span><span>, </span><span><span><span>X</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>, and </span><span><span><span><span>Yu</span><span>&nbsp;</span><span>Zong</span></span><span> </span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>34</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W32–W37</span></span></span><span>, </span><span>2006</span><span>.</span></span></span></td></tr>
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id6">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>)</em> <span class="last"><span><span><span><span><span><span><span>Ze-Rong</span><span> </span></span><span>Li</span></span><span>, </span><span><span><span><span>Hong</span><span>&nbsp;</span><span>Huang</span></span><span> </span></span><span>Lin</span></span><span>, </span><span><span><span>LY</span><span>&nbsp;</span></span><span>Han</span></span><span>, </span><span><span><span>L</span><span>&nbsp;</span></span><span>Jiang</span></span><span>, </span><span><span><span>X</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>, and </span><span><span><span><span>Yu</span><span>&nbsp;</span><span>Zong</span></span><span> </span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>34</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W32–W37</span></span></span><span>, </span><span>2006</span><span>.</span></span></span></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="rao2011" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td><span class="first last"><span><span><span><span><span><span><span>HB</span><span>&nbsp;</span></span><span>Rao</span></span><span>, </span><span><span><span>F</span><span>&nbsp;</span></span><span>Zhu</span></span><span>, </span><span><span><span>GB</span><span>&nbsp;</span></span><span>Yang</span></span><span>, </span><span><span><span>ZR</span><span>&nbsp;</span></span><span>Li</span></span></span><span>, and </span><span><span><span>YZ</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>39</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W385–W390</span></span></span><span>, </span><span>2011</span><span>.</span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id7">[4]</a></td><td><span class="first last"><span><span><span><span><span><span><span>HB</span><span>&nbsp;</span></span><span>Rao</span></span><span>, </span><span><span><span>F</span><span>&nbsp;</span></span><span>Zhu</span></span><span>, </span><span><span><span>GB</span><span>&nbsp;</span></span><span>Yang</span></span><span>, </span><span><span><span>ZR</span><span>&nbsp;</span></span><span>Li</span></span></span><span>, and </span><span><span><span>YZ</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>39</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W385–W390</span></span></span><span>, </span><span>2011</span><span>.</span></span></span></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="vandenberg2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[5]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span><span>B.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>F.</span></span><span> </span></span><span>Nijkamp</span></span><span>, </span><span><span><span><span>M.</span><span>&nbsp;</span><span>J.</span><span>&nbsp;</span><span>T.</span></span><span> </span></span><span>Reinders</span></span><span>, </span><span><span><span>L.</span><span>&nbsp;</span></span><span>Wu</span></span><span>, </span><span><span><span><span>H.</span><span>&nbsp;</span><span>J.</span></span><span> </span></span><span>Pel</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span>Roubos</span></span></span><span>, and </span><span><span><span>D.</span><span>&nbsp;</span></span><span><span>De</span><span>&nbsp;</span><span>Ridder</span></span></span></span><span>.</span></span><span> </span><span><span>Sequence-based prediction of protein secretion success in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><span>In</span><span> </span><span><em><span>Proceedings of Pattern Recegnition in Bioinformatics 2010</span></em><span>, </span><span><span>3</span><span>–</span><span>14</span></span><span>.</span></span></span><span> </span><span><span>Springer</span><span>, </span><span>2010</span><span>.</span></span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[5]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span><span>B.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>F.</span></span><span> </span></span><span>Nijkamp</span></span><span>, </span><span><span><span><span>M.</span><span>&nbsp;</span><span>J.</span><span>&nbsp;</span><span>T.</span></span><span> </span></span><span>Reinders</span></span><span>, </span><span><span><span>L.</span><span>&nbsp;</span></span><span>Wu</span></span><span>, </span><span><span><span><span>H.</span><span>&nbsp;</span><span>J.</span></span><span> </span></span><span>Pel</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span>Roubos</span></span></span><span>, and </span><span><span><span>D.</span><span>&nbsp;</span></span><span><span>De</span><span>&nbsp;</span><span>Ridder</span></span></span></span><span>.</span></span><span> </span><span><span>Sequence-based prediction of protein secretion success in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><span>In</span><span> </span><span><em><span>Proceedings of Pattern Recegnition in Bioinformatics 2010</span></em><span>, </span><span><span>3</span><span>–</span><span>14</span></span><span>.</span></span></span><span> </span><span><span>Springer</span><span>, </span><span>2010</span><span>.</span></span></span></span></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="vandenberg2012" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[6]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span>Bastiaan</span><span>&nbsp;</span><span>A</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span> and </span><span>others</span></span><span>.</span></span><span> </span><span><span>Exploring sequence characteristics related to high-level production of secreted proteins in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><em><span>PLoS ONE</span></em><span>, </span><span><span><span>7</span><span><span>(</span><span>10</span><span>)</span></span><span>:</span></span><span>e45869</span></span></span><span>, </span><span>2012</span><span>.</span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[6]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span>Bastiaan</span><span>&nbsp;</span><span>A</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span> and </span><span>others</span></span><span>.</span></span><span> </span><span><span>Exploring sequence characteristics related to high-level production of secreted proteins in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><em><span>PLoS ONE</span></em><span>, </span><span><span><span>7</span><span><span>(</span><span>10</span><span>)</span></span><span>:</span></span><span>e45869</span></span></span><span>, </span><span>2012</span><span>.</span></span></span></td></tr>
 </tbody>
 </table>
 </p>

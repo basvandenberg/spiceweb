@@ -149,71 +149,85 @@ second column, the number of classes in the third column, and a *download* link
 in the third column.
 
 The form at the bottom of the page can be used to upload additional labeling
-files.
+files. 
 
 .. image:: img/t1_0_create_10.png
    :width: 550px
    :align: center
 
+Consult the :ref:`file_formats` documention for more information on the
+labeling file format. To see an example, you can download the labeling file of
+the *yeast-expression* project.
+
 --------
 Features
 --------
 
-Click on the *Features* tab to go to this page. The *features* area provides
-feature calculation and visualization of the feature data. 
+Click on the *Features* tab to go the features area, which provides
+feature calculation and visualization. 
 
-.. image:: img/t1_0_create_11.png
+.. image:: img/tut1_0.png
    :width: 550px
    :align: center
 
-A list with sequence-based feature categories is shown in the table. The first
-column gives the name of the feature category. The second shows what sequence
-data is required to calculate the features of this category. If the features
-are not calculated yet, the third column provides a *calculate* link that will
-start feature calculation. In the second column, the sequence data that is not
-available is grayed out.  The feature *calculate* link is disabled if not all
-sequence data is available.
+Since you have not calculated any features yet, this page will show an empty
+list.
 
 ^^^^^^^^^^^^^^^^^^^
 Feature calculation
 ^^^^^^^^^^^^^^^^^^^
 
-Clicking the *calculate* link will put a feature calculate job in the job queue
-on the compute server. 
+Click on the **Calculate** button to go to the feature calculation page.
 
-.. image:: img/t1_0_create_12.png
+.. image:: img/tut1_1.png
    :width: 550px
    :align: center
 
-The color of the first color indicates the current status of the job: yellow
-for waiting in the queue, blue for running, red if an error occurred, and green
-if the features are successfully calculated.
+Here, a list with sequence-based feature categories is shown. For each feature
+category one or more dropdown boxes enables setting some parameters and the
+**Calculate** button will put the feature calculation job in the job queue on
+the compute servers. Although feature calculation usually does not take long,
+if the compute server is busy, your job might have to wait in queue for a
+while.
 
-Click the *calculate* of the *Amino acid composition* and the *Codon
-composition* to have these feature categories calculated for the
-*yeast-expression* project. Feature calculation does not take a long time, but
-if the server is busy, the job might have to wait in queue for a while.
+More information on the available sequence-based features is described in the
+:ref:`features` documentation.
 
-If the feature calculation is done, click on the **Statistics** button to start
-exploring the calculated features.
+Once you have calculated some features, a table with calculated feature
+categories will occur under the **Features** button, in which the first column
+describes the name of the feature category, the second column lists the used
+parameters, the third column shows how many features are in this category, and
+the last column provides a link to delete the feature category.
+
+.. image:: img/tut1_2.png
+   :width: 550px
+   :align: center
+
+Now with the *yeast-expression* project still active, calculate the amino acid
+composition with the number of segments parameter set to 1, and signal average
+with parameter settings - scales(s): Georgiev, window: 21, and edge: 100. 
+
+If the feature calculation is finished, click on the **Statistics** button to
+start exploring them.
 
 ^^^^^^^^^^^^^^
 Filter sidebar
 ^^^^^^^^^^^^^^
 
-A filter sidebar is used throughout the website which enables you to select
-features (feature matrix columns) and protein classes (feature matrix rows of
-the proteins that share the same class label). By default the side bar is
-hidden on the right side, click on the dark gray tab with the arrow to open the
-side bar.
+Before explaining about the feature statistics and visualization possibilities,
+the *filter sidebar* will be discussed first. The filter sidebar is used
+throughout the website enabling users to select features (feature matrix
+columns) and protein classes (feature matrix rows of the proteins that share
+the same class label). By default the side bar is hidden on the right side,
+click on the dark gray tab with the arrow to open the side bar.
 
-.. image:: img/t1_0_create_13.png
+.. image:: img/tut1_10.png
    :width: 550px
    :align: center
 
 The *Label filter* at the top can be used to select protein classes.
 
-.. image:: img/t1_0_create_14.png
+.. image:: img/tut1_11.png
    :width: 550px
    :align: center
 
@@ -225,7 +239,7 @@ containing 1000 proteins.
 
 Use the drop-down box to select the *expression* labeling.
 
-.. image:: img/t1_0_create_15.png
+.. image:: img/tut1_12.png
    :width: 550px
    :align: center
 
@@ -247,7 +261,7 @@ the corresponding feature category. By default, all feature are hidden.
 Click on the *show/hide* link of the *Amino Acid Composition* category to show
 its features.
 
-.. image:: img/t1_0_create_16.png
+.. image:: img/tut1_13.png
    :width: 550px
    :align: center
 
@@ -255,14 +269,14 @@ You can click on the features to select them. To select multiple features, hold
 down the **Ctrl** button while clicking the features, or hold down the left
 mouse button while drawing a rectangle over the features you want to select.
 
-.. image:: img/t1_0_create_17.png
+.. image:: img/tut1_14.png
    :width: 550px
    :align: center
 
 The *Select all* and *Deselect all* links at the top can be used to select all
 and deselect all features of the corresponding feature category.
 
-.. image:: img/t1_0_create_18.png
+.. image:: img/tut1_15.png
    :width: 550px
    :align: center
 
@@ -275,7 +289,7 @@ Feature statistics
 
 Select all features to show their *t*-values in the table.
 
-.. image:: img/t1_0_create_19.png
+.. image:: img/tut1_16.png
    :width: 550px
    :align: center
 
@@ -301,7 +315,7 @@ The website should have remembered what labels and features were selected (this
 requires that cookies are enabled), in which case the histogram of the *GGT
 (G)* feature shown for the labels *low* and *high*. 
 
-.. image:: img/t1_0_create_20.png
+.. image:: img/tut1_17.png
    :width: 550px
    :align: center
 
@@ -323,7 +337,7 @@ Scatter plots
 With the *GGT (G)* and *CGA (R)* still selected, choose the *scatter* option
 from the **Visualizations** drop-down button.
 
-.. image:: img/t1_0_create_21.png
+.. image:: img/tut1_18.png
    :width: 550px
    :align: center
 
@@ -345,7 +359,7 @@ composition* category and select all features in the *Amino acid composition*
 category. Afterwards select the *heatmap* option from the **Visualizations**
 drop-down button.
 
-.. image:: img/t1_0_create_22.png
+.. image:: img/tut1_19.png
    :width: 550px
    :align: center
 
@@ -377,7 +391,7 @@ New classifier
 
 Click the *Classification* tab and click the **New classifier** button.
 
-.. image:: img/t1_0_create_23.png
+.. image:: img/tut1_20.png
    :width: 550px
    :align: center
 
@@ -385,7 +399,7 @@ Use the *Feature filter* to select 8 amino acid composition features, select 10
 cross-validation loops, and the *k*-nearest neighbor classifier. Click the
 **Run** button to start the experiment. 
 
-.. image:: img/t1_0_create_24.png
+.. image:: img/tut1_21.png
    :width: 550px
    :align: center
 
@@ -404,7 +418,7 @@ Classification results
 Classification results will be shown in the *Results* table as soon as a job is
 finished.
 
-.. image:: img/t1_0_create_25.png
+.. image:: img/tut1_22.png
    :width: 550px
    :align: center
 
@@ -420,13 +434,13 @@ Click on the job with the 64 *Codon composition* features to see more detailed
 results.  At the top, some classification setting and a table with the
 cross-validation results are shown.
 
-.. image:: img/t1_0_create_26.png
+.. image:: img/tut1_23.png
    :width: 550px
    :align: center
 
 In case of a 2-class classification problem, an ROC-curve is shown underneath.
 
-.. image:: img/t1_0_create_27.png
+.. image:: img/tut1_24.png
    :width: 550px
    :align: center
 
@@ -434,7 +448,79 @@ The gray ROC-curves show the cross-validation results and the blue curve shows
 the average ROC-curve. The area under the ROC-curve (and the standard deviation
 for the different CV-loops) are given in the legend.
 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Download and Run trained classifier
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The classifier details page also allows you to run a trained classifier on
+another data set. To do so, you first need to create a new project with a
+FASTA file that contains the sequences for which you would like to have
+predicted classes. 
+
+Go to the details page of one of the classifiers, click the **Run** button and
+use the dropdown box to select the *aniger-secretion* data set. 
+
+.. image:: img/tut1_26.png
+   :width: 550px
+   :align: center
+
+Since the required features are not yet calculated for this project, this will
+be done automatically behind the scenes. As soon as the features are
+calculated, the classifier will be run on the data set. Both the feature
+calculation job and the classification job are put in queue, so it might take
+a while for them to be finished depending on how busy the compute server is.
+
+Links to a file with binary predictions and predicted class probabilities (if
+available for the classifier) will be offered in a table when classification is
+finished.
+
+.. image:: img/tut1_27.png
+   :width: 550px
+   :align: center
+
+Finally, all classifier details can be downloaded as zip-file using the
+**Download** button.
+
+.. image:: img/tut1_28.png
+   :width: 550px
+   :align: center
+
 This finalizes the first tutorial, which covered most of the SPiCE website
 functionalities. If you have any suggestions for improvements, or if you find
 any bugs, please let me know (spice.webapp@gmail.com).
 
+TODO: move this to other topic...
+
+Besides result scores and settings, the zip-file will contain a trained
+Scikit-learn classifier ``classifier.joblib.pkl`` which is pickled using the
+``joblib`` module which is offered as part of the ``scikit-learn`` package.
+
+Loading and running this classifier could be done with a python script like the
+following:
+
+.. code-block:: python
+
+    from sklearn.externals import joblib
+    clf = joblib.load('path/to/classifier.joblib.pkl')
+
+    '''
+    data = load your data here, should be a numpy matrix with the features that
+           where used to train the classifier as columns. 
+    '''
+
+    # prediction class labels on data set
+    pred = clf.predict(data)
+
+    # obtain class probabilities (if possible)
+    if(hasattr(clf, 'predict_proba')):
+        proba = clf.predict_proba(data)
+        # only works for 2-class classification!
+        proba = proba[:, 1]
+
+    # obtain decision function output
+    if(hasattr(clf, 'decision_function')):
+        decision = clf.decision_function(data)
+
+Our ``featext`` and ``featmat`` module that are part of the ``spice`` package
+could be used to calculate the features and obtain the feature matrix ``data``
+that is required to run the classification.

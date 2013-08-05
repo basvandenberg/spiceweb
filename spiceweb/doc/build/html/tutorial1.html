@@ -90,6 +90,7 @@ Exploration</div>
 <li><a class="reference internal" href="#new-classifier">New classifier</a></li>
 <li><a class="reference internal" href="#classification-results">Classification results</a></li>
 <li><a class="reference internal" href="#classifier-details">Classifier details</a></li>
+<li><a class="reference internal" href="#download-and-run-trained-classifier">Download and Run trained classifier</a></li>
 </ul>
 </li>
 </ul>
@@ -215,52 +216,60 @@ in the third column.</p>
 <p>The form at the bottom of the page can be used to upload additional labeling
 files.</p>
 <a class="reference internal image-reference" href="_images/t1_0_create_10.png"><img alt="_images/t1_0_create_10.png" class="align-center" src="_images/t1_0_create_10.png" style="width: 550px;" /></a>
+<p>Consult the <a class="reference internal" href="file_formats.html#file-formats"><em>File Formats</em></a> documention for more information on the
+labeling file format. To see an example, you can download the labeling file of
+the <em>yeast-expression</em> project.</p>
 </div>
 </div>
 <div class="section" id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<p>Click on the <em>Features</em> tab to go to this page. The <em>features</em> area provides
-feature calculation and visualization of the feature data.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_11.png"><img alt="_images/t1_0_create_11.png" class="align-center" src="_images/t1_0_create_11.png" style="width: 550px;" /></a>
-<p>A list with sequence-based feature categories is shown in the table. The first
-column gives the name of the feature category. The second shows what sequence
-data is required to calculate the features of this category. If the features
-are not calculated yet, the third column provides a <em>calculate</em> link that will
-start feature calculation. In the second column, the sequence data that is not
-available is grayed out.  The feature <em>calculate</em> link is disabled if not all
-sequence data is available.</p>
+<p>Click on the <em>Features</em> tab to go the features area, which provides
+feature calculation and visualization.</p>
+<a class="reference internal image-reference" href="_images/tut1_0.png"><img alt="_images/tut1_0.png" class="align-center" src="_images/tut1_0.png" style="width: 550px;" /></a>
+<p>Since you have not calculated any features yet, this page will show an empty
+list.</p>
 <div class="section" id="feature-calculation">
 <h3>Feature calculation<a class="headerlink" href="#feature-calculation" title="Permalink to this headline">¶</a></h3>
-<p>Clicking the <em>calculate</em> link will put a feature calculate job in the job queue
-on the compute server.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_12.png"><img alt="_images/t1_0_create_12.png" class="align-center" src="_images/t1_0_create_12.png" style="width: 550px;" /></a>
-<p>The color of the first color indicates the current status of the job: yellow
-for waiting in the queue, blue for running, red if an error occurred, and green
-if the features are successfully calculated.</p>
-<p>Click the <em>calculate</em> of the <em>Amino acid composition</em> and the <em>Codon
-composition</em> to have these feature categories calculated for the
-<em>yeast-expression</em> project. Feature calculation does not take a long time, but
-if the server is busy, the job might have to wait in queue for a while.</p>
-<p>If the feature calculation is done, click on the <strong>Statistics</strong> button to start
-exploring the calculated features.</p>
+<p>Click on the <strong>Calculate</strong> button to go to the feature calculation page.</p>
+<a class="reference internal image-reference" href="_images/tut1_1.png"><img alt="_images/tut1_1.png" class="align-center" src="_images/tut1_1.png" style="width: 550px;" /></a>
+<p>Here, a list with sequence-based feature categories is shown. For each feature
+category one or more dropdown boxes enables setting some parameters and the
+<strong>Calculate</strong> button will put the feature calculation job in the job queue on
+the compute servers. Although feature calculation usually does not take long,
+if the compute server is busy, your job might have to wait in queue for a
+while.</p>
+<p>More information on the available sequence-based features is described in the
+<a class="reference internal" href="features.html#features"><em>Features</em></a> documentation.</p>
+<p>Once you have calculated some features, a table with calculated feature
+categories will occur under the <strong>Features</strong> button, in which the first column
+describes the name of the feature category, the second column lists the used
+parameters, the third column shows how many features are in this category, and
+the last column provides a link to delete the feature category.</p>
+<a class="reference internal image-reference" href="_images/tut1_2.png"><img alt="_images/tut1_2.png" class="align-center" src="_images/tut1_2.png" style="width: 550px;" /></a>
+<p>Now with the <em>yeast-expression</em> project still active, calculate the amino acid
+composition with the number of segments parameter set to 1, and signal average
+with parameter settings - scales(s): Georgiev, window: 21, and edge: 100.</p>
+<p>If the feature calculation is finished, click on the <strong>Statistics</strong> button to
+start exploring them.</p>
 </div>
 <div class="section" id="filter-sidebar">
 <h3>Filter sidebar<a class="headerlink" href="#filter-sidebar" title="Permalink to this headline">¶</a></h3>
-<p>A filter sidebar is used throughout the website which enables you to select
-features (feature matrix columns) and protein classes (feature matrix rows of
-the proteins that share the same class label). By default the side bar is
-hidden on the right side, click on the dark gray tab with the arrow to open the
-side bar.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_13.png"><img alt="_images/t1_0_create_13.png" class="align-center" src="_images/t1_0_create_13.png" style="width: 550px;" /></a>
+<p>Before explaining about the feature statistics and visualization possibilities,
+the <em>filter sidebar</em> will be discussed first. The filter sidebar is used
+throughout the website enabling users to select features (feature matrix
+columns) and protein classes (feature matrix rows of the proteins that share
+the same class label). By default the side bar is hidden on the right side,
+click on the dark gray tab with the arrow to open the side bar.</p>
+<a class="reference internal image-reference" href="_images/tut1_10.png"><img alt="_images/tut1_10.png" class="align-center" src="_images/tut1_10.png" style="width: 550px;" /></a>
 <p>The <em>Label filter</em> at the top can be used to select protein classes.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_14.png"><img alt="_images/t1_0_create_14.png" class="align-center" src="_images/t1_0_create_14.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_11.png"><img alt="_images/tut1_11.png" class="align-center" src="_images/tut1_11.png" style="width: 550px;" /></a>
 <p>The drop-down box can be used to select one of the available labelings. The
 <em>yeast-expression</em> project has the default <em>one-class</em> labeling, in which each
 protein obtains the same label, and an <em>expression</em> labeling, in which the
 proteins are separated into a <em>low</em> and <em>high</em> expression class, each
 containing 1000 proteins.</p>
 <p>Use the drop-down box to select the <em>expression</em> labeling.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_15.png"><img alt="_images/t1_0_create_15.png" class="align-center" src="_images/t1_0_create_15.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_12.png"><img alt="_images/tut1_12.png" class="align-center" src="_images/tut1_12.png" style="width: 550px;" /></a>
 <p>All the labels of the currently selected labeling are shown underneath the
 drop-down box, which should now show the <em>low</em> and <em>high</em> label. The labels on
 the left (in yellow) are selected and the labels on the right (in gray) are not
@@ -275,21 +284,21 @@ The <em>show/hide</em> link can be used to show or hide the features that are pa
 the corresponding feature category. By default, all feature are hidden.</p>
 <p>Click on the <em>show/hide</em> link of the <em>Amino Acid Composition</em> category to show
 its features.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_16.png"><img alt="_images/t1_0_create_16.png" class="align-center" src="_images/t1_0_create_16.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_13.png"><img alt="_images/tut1_13.png" class="align-center" src="_images/tut1_13.png" style="width: 550px;" /></a>
 <p>You can click on the features to select them. To select multiple features, hold
 down the <strong>Ctrl</strong> button while clicking the features, or hold down the left
 mouse button while drawing a rectangle over the features you want to select.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_17.png"><img alt="_images/t1_0_create_17.png" class="align-center" src="_images/t1_0_create_17.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_14.png"><img alt="_images/tut1_14.png" class="align-center" src="_images/tut1_14.png" style="width: 550px;" /></a>
 <p>The <em>Select all</em> and <em>Deselect all</em> links at the top can be used to select all
 and deselect all features of the corresponding feature category.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_18.png"><img alt="_images/t1_0_create_18.png" class="align-center" src="_images/t1_0_create_18.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_15.png"><img alt="_images/tut1_15.png" class="align-center" src="_images/tut1_15.png" style="width: 550px;" /></a>
 <p>The number between brackets behind the feature category name indicates how many
 of the features of that category are selected.</p>
 </div>
 <div class="section" id="feature-statistics">
 <h3>Feature statistics<a class="headerlink" href="#feature-statistics" title="Permalink to this headline">¶</a></h3>
 <p>Select all features to show their <em>t</em>-values in the table.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_19.png"><img alt="_images/t1_0_create_19.png" class="align-center" src="_images/t1_0_create_19.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_16.png"><img alt="_images/tut1_16.png" class="align-center" src="_images/tut1_16.png" style="width: 550px;" /></a>
 <p>One row appears for each feature, giving the feature category name, feature
 name, <em>t</em>-value, and corresponding <em>p</em>-value in the four columns.</p>
 <p>Click the <em>t</em>-value header to sort the table by that column. The codon fraction
@@ -306,7 +315,7 @@ different protein classes. Use the <strong>Visualizations</strong> drop-down but
 <p>The website should have remembered what labels and features were selected (this
 requires that cookies are enabled), in which case the histogram of the <em>GGT
 (G)</em> feature shown for the labels <em>low</em> and <em>high</em>.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_20.png"><img alt="_images/t1_0_create_20.png" class="align-center" src="_images/t1_0_create_20.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_17.png"><img alt="_images/tut1_17.png" class="align-center" src="_images/tut1_17.png" style="width: 550px;" /></a>
 <p>The distributions clearly show a difference between the <em>low</em> and <em>high</em> class.</p>
 <p>Use the <em>Feature filter</em> in the side bar to select the codon composition <em>CGA
 (R)</em> feature as second feature (hold down the <strong>Ctrl</strong> button while clicking
@@ -320,7 +329,7 @@ button, drag the histogram down and drop it underneath the other histogram.</p>
 <h3>Scatter plots<a class="headerlink" href="#scatter-plots" title="Permalink to this headline">¶</a></h3>
 <p>With the <em>GGT (G)</em> and <em>CGA (R)</em> still selected, choose the <em>scatter</em> option
 from the <strong>Visualizations</strong> drop-down button.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_21.png"><img alt="_images/t1_0_create_21.png" class="align-center" src="_images/t1_0_create_21.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_18.png"><img alt="_images/tut1_18.png" class="align-center" src="_images/tut1_18.png" style="width: 550px;" /></a>
 <p>A scatter plot is shown with the GGT(G) feature values on the <em>y</em>-axis and the
 <em>CGA (R)</em> feature values on the <em>x</em>-axis. The <em>high</em> proteins are shown in blue
 and the <em>low</em> proteins in yellow. The <em>low</em> proteins are now on top of the
@@ -335,7 +344,7 @@ selected.</p>
 composition</em> category and select all features in the <em>Amino acid composition</em>
 category. Afterwards select the <em>heatmap</em> option from the <strong>Visualizations</strong>
 drop-down button.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_22.png"><img alt="_images/t1_0_create_22.png" class="align-center" src="_images/t1_0_create_22.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_19.png"><img alt="_images/tut1_19.png" class="align-center" src="_images/tut1_19.png" style="width: 550px;" /></a>
 <p>A heat map with hierarchically clustered rows (proteins) and columns (features))
 is shown. Depending on the size of the feature matrix, it can take a minute or
 two for the heat map to appear.</p>
@@ -356,11 +365,11 @@ to determine how well this can be predicted using the selected features.</p>
 <div class="section" id="new-classifier">
 <h3>New classifier<a class="headerlink" href="#new-classifier" title="Permalink to this headline">¶</a></h3>
 <p>Click the <em>Classification</em> tab and click the <strong>New classifier</strong> button.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_23.png"><img alt="_images/t1_0_create_23.png" class="align-center" src="_images/t1_0_create_23.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_20.png"><img alt="_images/tut1_20.png" class="align-center" src="_images/tut1_20.png" style="width: 550px;" /></a>
 <p>Use the <em>Feature filter</em> to select 8 amino acid composition features, select 10
 cross-validation loops, and the <em>k</em>-nearest neighbor classifier. Click the
 <strong>Run</strong> button to start the experiment.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_24.png"><img alt="_images/t1_0_create_24.png" class="align-center" src="_images/t1_0_create_24.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_21.png"><img alt="_images/tut1_21.png" class="align-center" src="_images/tut1_21.png" style="width: 550px;" /></a>
 <p>You will be redirected to the <em>Results</em> page, where the current status of your
 job is shown in the table at the bottom. Depending on how busy the server is,
 the job might have to wait in queue for a while.</p>
@@ -372,7 +381,7 @@ and all <em>Codon composition</em> features for the second.</p>
 <h3>Classification results<a class="headerlink" href="#classification-results" title="Permalink to this headline">¶</a></h3>
 <p>Classification results will be shown in the <em>Results</em> table as soon as a job is
 finished.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_25.png"><img alt="_images/t1_0_create_25.png" class="align-center" src="_images/t1_0_create_25.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_22.png"><img alt="_images/tut1_22.png" class="align-center" src="_images/tut1_22.png" style="width: 550px;" /></a>
 <p>The table shows different performance measures for each classifier. With an
 area under the ROC-curve (AUROC) of 0.85, the 64 <em>Codon composition</em> features
 performed best in this example.</p>
@@ -382,15 +391,68 @@ performed best in this example.</p>
 <p>Click on the job with the 64 <em>Codon composition</em> features to see more detailed
 results.  At the top, some classification setting and a table with the
 cross-validation results are shown.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_26.png"><img alt="_images/t1_0_create_26.png" class="align-center" src="_images/t1_0_create_26.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_23.png"><img alt="_images/tut1_23.png" class="align-center" src="_images/tut1_23.png" style="width: 550px;" /></a>
 <p>In case of a 2-class classification problem, an ROC-curve is shown underneath.</p>
-<a class="reference internal image-reference" href="_images/t1_0_create_27.png"><img alt="_images/t1_0_create_27.png" class="align-center" src="_images/t1_0_create_27.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/tut1_24.png"><img alt="_images/tut1_24.png" class="align-center" src="_images/tut1_24.png" style="width: 550px;" /></a>
 <p>The gray ROC-curves show the cross-validation results and the blue curve shows
 the average ROC-curve. The area under the ROC-curve (and the standard deviation
 for the different CV-loops) are given in the legend.</p>
+</div>
+<div class="section" id="download-and-run-trained-classifier">
+<h3>Download and Run trained classifier<a class="headerlink" href="#download-and-run-trained-classifier" title="Permalink to this headline">¶</a></h3>
+<p>The classifier details page also allows you to run a trained classifier on
+another data set. To do so, you first need to create a new project with a
+FASTA file that contains the sequences for which you would like to have
+predicted classes.</p>
+<p>Go to the details page of one of the classifiers, click the <strong>Run</strong> button and
+use the dropdown box to select the <em>aniger-secretion</em> data set.</p>
+<a class="reference internal image-reference" href="_images/tut1_26.png"><img alt="_images/tut1_26.png" class="align-center" src="_images/tut1_26.png" style="width: 550px;" /></a>
+<p>Since the required features are not yet calculated for this project, this will
+be done automatically behind the scenes. As soon as the features are
+calculated, the classifier will be run on the data set. Both the feature
+calculation job and the classification job are put in queue, so it might take
+a while for them to be finished depending on how busy the compute server is.</p>
+<p>Links to a file with binary predictions and predicted class probabilities (if
+available for the classifier) will be offered in a table when classification is
+finished.</p>
+<a class="reference internal image-reference" href="_images/tut1_27.png"><img alt="_images/tut1_27.png" class="align-center" src="_images/tut1_27.png" style="width: 550px;" /></a>
+<p>Finally, all classifier details can be downloaded as zip-file using the
+<strong>Download</strong> button.</p>
+<a class="reference internal image-reference" href="_images/tut1_28.png"><img alt="_images/tut1_28.png" class="align-center" src="_images/tut1_28.png" style="width: 550px;" /></a>
 <p>This finalizes the first tutorial, which covered most of the SPiCE website
 functionalities. If you have any suggestions for improvements, or if you find
 any bugs, please let me know (<a class="reference external" href="mailto:spice&#46;webapp&#37;&#52;&#48;gmail&#46;com">spice<span>&#46;</span>webapp<span>&#64;</span>gmail<span>&#46;</span>com</a>).</p>
+<p>TODO: move this to other topic...</p>
+<p>Besides result scores and settings, the zip-file will contain a trained
+Scikit-learn classifier <tt class="docutils literal"><span class="pre">classifier.joblib.pkl</span></tt> which is pickled using the
+<tt class="docutils literal"><span class="pre">joblib</span></tt> module which is offered as part of the <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> package.</p>
+<p>Loading and running this classifier could be done with a python script like the
+following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;path/to/classifier.joblib.pkl&#39;</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">data = load your data here, should be a numpy matrix with the features that</span>
+<span class="sd">       where used to train the classifier as columns.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c"># prediction class labels on data set</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c"># obtain class probabilities (if possible)</span>
+<span class="k">if</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s">&#39;predict_proba&#39;</span><span class="p">)):</span>
+    <span class="n">proba</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="c"># only works for 2-class classification!</span>
+    <span class="n">proba</span> <span class="o">=</span> <span class="n">proba</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c"># obtain decision function output</span>
+<span class="k">if</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s">&#39;decision_function&#39;</span><span class="p">)):</span>
+    <span class="n">decision</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Our <tt class="docutils literal"><span class="pre">featext</span></tt> and <tt class="docutils literal"><span class="pre">featmat</span></tt> module that are part of the <tt class="docutils literal"><span class="pre">spice</span></tt> package
+could be used to calculate the features and obtain the feature matrix <tt class="docutils literal"><span class="pre">data</span></tt>
+that is required to run the classification.</p>
 </div>
 </div>
 </div>
