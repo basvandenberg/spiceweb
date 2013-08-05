@@ -373,7 +373,8 @@ class Feature:
             class_ids = [class_ids]
 
         pm = self.project_manager
-        objs = pm.get_feature_matrix().object_indices(labeling_name, class_ids)
+        objs = pm.get_feature_matrix().filtered_object_indices(labeling_name,
+                                                               class_ids)
 
         if(len(objs) > max_proteins):
             msg = 'Heatmaps are only possible for %i proteins or less.'\
