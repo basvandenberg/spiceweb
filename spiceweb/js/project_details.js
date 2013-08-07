@@ -10,9 +10,6 @@ function get_url_root() {
 
 $(document).ready(function() {
 
-    // enable popover info box
-    $('.info-button').popover({trigger: "hover", html: "true"});
-
     // register button, to enable loading state
     $("form#create-new-project>button").button();
    
