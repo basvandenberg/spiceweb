@@ -33,6 +33,26 @@
 </form>
 </div>
 
+<!-- Dipeptide composition -->
+
+<div class="well feat-calc">
+<form id="dc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Dipeptide composition</legend>
+
+    <label class="select first">Number of sections</label>
+    <select class="param input-mini">
+        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 11):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
 <!-- Prime amino acid counts -->
 
 <div class="well feat-calc">
@@ -225,6 +245,33 @@
 </form>
 </div>
 
+<!-- Quasi sequence order descriptors -->
+
+<div class="well feat-calc">
+<form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>TODO</legend>
+
+    <label class="select first">Property</label>
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<!-- Pseudo amino acid composition -->
+
+<div class="well feat-calc">
+<form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Pseudo amino acid compositions</legend>
+
+    <label class="select first">TODO</label>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
 <!-- Protein length -->
 
 <div class="well feat-calc">
@@ -237,4 +284,106 @@
 
 </form>
 </div>
+
+<!-- Secondary structure composition -->
+
+<div class="well feat-calc">
+<form id="ssc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Secondary structure composition</legend>
+
+    <label class="select first">Number of sections</label>
+    <select class="param input-mini">
+        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 11):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<!-- Per secondary structure amino acid composition -->
+
+<div class="well feat-calc">
+<form id="ssaac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Per secondary structure amino acid composition</legend>
+
+    <label class="select first">amino acid composition of the helix, strand, and random coil regions</label>
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<!-- Solvent accessibility composition -->
+
+<div class="well feat-calc">
+<form id="sac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Solvent accessibility composition</legend>
+
+    <label class="select first">Number of sections</label>
+    <select class="param input-mini">
+        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 11):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<!-- Per solvent accessibility class amino acid composition -->
+
+<div class="well feat-calc">
+<form id="saaac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Per solvent accessibility class amino acid composition</legend>
+
+    <label class="select first">amino acid composition of the buried and exposed regions</label>
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<!-- Codon composition -->
+
+<div class="well feat-calc">
+<form id="cc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Codon composition</legend>
+
+    <label class="select first">Number of sections</label>
+    <select class="param input-mini">
+        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 11):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<!-- Codon usage -->
+
+<div class="well feat-calc">
+<form id="cu" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>Codon usage</legend>
+
+    <label class="select first">Relative usage of the codons per amino acid</label>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+
 </%block>
