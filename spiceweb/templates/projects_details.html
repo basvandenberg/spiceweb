@@ -43,10 +43,10 @@
 % if ds.available():
     <td class="data_source"><a href="#" class="download" id="${ds.uid}">download</a></td>
 % else:
-    <td class="data_source"><a href="#myModal" class="btn btn-link my-btn-link" data-toggle="modal" id="${ds.uid}">upload</a>
+    <td class="data_source"><a href="#modal_${ds.uid}" class="btn btn-link my-btn-link" data-toggle="modal" id="${ds.uid}">upload</a>
 
         <!-- Modal -->
-        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="modal_${ds.uid}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h3 id="myModalLabel">Upload ${ds.name.lower()} file</h3>
@@ -154,7 +154,9 @@ lname = 'labeling%i' % (index + 1)
     <!-- labeling name input text field -->
     <div class="control-group">
         <label class="control-label" for="data_name">Labeling name
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a unique labeling name. Only alphanumeric characters, underscores, and dashes can be used." title="" data-original-title="">
+            <a class="info-button" data-toggle="popover"
+data-placement="top" data-content="<p>Provide a unique labeling name. Only
+alphanumeric characters, underscores, and dashes can be used.</p>" title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
         </label>
@@ -166,7 +168,10 @@ lname = 'labeling%i' % (index + 1)
     <!-- labeling file input file chooser -->
     <div class="control-group">
         <label class="control-label" for="data_file">Labeling file 
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a labeling file. The first line should contain a tab-separated list of class names. The rest of the lines should contain a tab-separated protein id and corresponding class index per line. Consult the documentation for more information on this subject." title="" data-original-title="">
+            <a href=# class="info-button" data-toggle="popover"
+data-placement="top" data-content="<p>Select a labeling file. Explanation about
+the file format can be found in the documentation (<i>File Formats</i>
+section).</p>" title="" data-original-title="">
                 <i class="icon-info-sign"></i>
             </a>
         </label>
