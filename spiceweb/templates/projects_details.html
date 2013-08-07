@@ -83,7 +83,27 @@
                     <input id="data_type" type="hidden" name="data_type" value="data_source" />
                     <!-- submit -->
                     <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+
                 </form>
+
+                <div class="alert">
+                    <p><strong>Warning!</strong></p>
+                    <p>SPiCE checks:</p>
+                    <ul>
+                        <li>if the sequence ids in the FASTA file correspond to those in this project,</li>
+                        <li>if the FASTA file contains a sequence for each protein in this project,</li>
+                        <li>if the sequence letters are uppercase and from the correct alphabet.</li>
+                    </ul>
+
+                    <p>SPiCE <u><strong>does not</strong></u> check if the
+uploaded sequences are consistent with the allready available sequence data.
+For example, it will not be detected if you upload secondary structure
+sequences for with the sequence lengths are different compared to the protein
+sequences. Or if you first uploaded protein sequence and afterwards upload ORF
+sequences, it is not checked if these correctly translate to the protein
+sequences! Please make sure that you have checked this yourself.</p>
+
+                </div>
 
             </div>
         </div>
