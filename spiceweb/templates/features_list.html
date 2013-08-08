@@ -60,7 +60,7 @@ else:
 <%
 fcat = featcats[featcat_id]
 args = [t(p) for (t, p) in zip(fcat.param_types, param_setting.split('-'))]
-featids, featnames = fcat.feature_func(fcat.model_object(''), *args, feature_ids=True)
+featids, featnames = fcat.feature_func(fcat.model_object, *args, feature_ids=True)
 numfeat = len(featids)
 param_col = ', '.join(['%s: %s' % (n, v)
                       for n, v in zip(fcat.param_names, param_setting.split('-'))])
