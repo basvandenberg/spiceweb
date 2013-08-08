@@ -94,7 +94,7 @@
             <option value="gg" selected="selected">Georgiev (19 scales)</option>
         </optgroup>
         <optgroup label="AAIndex scales">
-% for i in xrange(1, 544):
+% for i in xrange(544):
             <option value="${i}">AA index ${i}</option>
 % endfor
         </optgroup>
@@ -139,7 +139,7 @@
             <option value="gg" selected="selected">Georgiev (19 scales)</option>
         </optgroup>
         <optgroup label="AAIndex scales">
-% for i in xrange(1, 544):
+% for i in xrange(544):
             <option value="${i}">AA index ${i}</option>
 % endfor
         </optgroup>
@@ -200,7 +200,7 @@
             <option value="gg" selected="selected">Georgiev (19 scales)</option>
         </optgroup>
         <optgroup label="AAIndex scales">
-% for i in xrange(1, 544):
+% for i in xrange(544):
             <option value="${i}">AA index ${i}</option>
 % endfor
         </optgroup>
@@ -250,9 +250,21 @@
 <div class="well feat-calc">
 <form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>TODO</legend>
+    <legend>Quasi-sequence-order descriptors</legend>
 
-    <label class="select first">Property</label>
+    <label class="select first">Maximal coupling-rank </label>
+    <select class="param input-mini">
+% for i in xrange(21, 30):
+        <option value="${i}">${i}</option>
+% endfor
+        <option value="30" selected="selected">30</option>
+% for i in xrange(31, 51):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+    <label>Weight: 0.1</label>
+
+
     <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
 
 </form>
@@ -263,9 +275,19 @@
 <div class="well feat-calc">
 <form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Pseudo amino acid compositions</legend>
+    <legend>Pseudo amino acid composition</legend>
 
-    <label class="select first">TODO</label>
+    <label class="select first">Lambda </label>
+    <select class="param input-mini">
+% for i in xrange(21, 30):
+        <option value="${i}">${i}</option>
+% endfor
+        <option value="30" selected="selected">30</option>
+% for i in xrange(31, 51):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+    <label>Weight: 0.05</label>
 
     <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
 
