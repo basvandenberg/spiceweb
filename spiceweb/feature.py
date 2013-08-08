@@ -93,11 +93,28 @@ class Feature:
             pm = self.project_manager
             fe = pm.get_feature_extraction()
 
-            allready_present = False
+            proteins = fe.protein_data_set.proteins
+            featcat = fe.PROTEIN_FEATURE_CATEGORIES[featcat_id.split('_')[0]]
+            missing_data = []
 
-            if(featcat_id in fe.available_protein_featcat_ids()):
+            # check if data required for feature calculation is available
+            for get_data_func, all_objects in featcat.required_data:
+                name = ' '.join(get_data_func.__name__.split('_')[1:])
+                if(all_objects):
+                    if not(all([get_data_func(p) for p in proteins])):
+                        missing_data.append(name)
+                else:
+                    if not(any([get_data_func(p) for p in proteins])):
+                        missing_data.append(name)
+            if(len(missing_data) > 0):
+                kw_args['msg'] = '<p>Required data is missing: %s</p>' %\
+                    (', '.join(missing_data))
+
+            # check if this feature category is already in the feature matrix
+            elif(featcat_id in fe.available_protein_featcat_ids()):
                 kw_args['msg'] = 'This feature category has ' +\
-                                       'already been calculated'
+                    'already been calculated'
+
             else:
                 # put job in queue
                 pm.run_feature_extraction([featcat_id])
