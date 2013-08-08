@@ -273,9 +273,11 @@ fid = "%s_%s" % (featcat_id, param_setting)
             <span class="numselected"> (0)</span>
         </div>
     </div>
+% if not param_string == '':
     <div class="filter_subheader">
         <div class="filter_subtitle_param">${param_string}</div>
     </div>
+% endif
     <div class="filter_showcat">show / hide</div>
     <div class="filter_select_bar">
         <div class="filter_select_all sel inline">Select all</div>
