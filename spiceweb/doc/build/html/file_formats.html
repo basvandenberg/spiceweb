@@ -25,7 +25,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
-    <link rel="prev" title="Features" href="features.html" />
+    <link rel="next" title="User accounts" href="user_accounts.html" />
+    <link rel="prev" title="SPiCE features" href="spice_features.html" />
     <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
      
 
@@ -53,7 +54,10 @@ Exploration</div>
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="features.html" title="Features"
+          <a href="user_accounts.html" title="User accounts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="spice_features.html" title="SPiCE features"
              accesskey="P">previous</a> |</li>
     
         <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
@@ -65,7 +69,13 @@ Exploration</div>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">File Formats</a><ul>
-<li><a class="reference internal" href="#protein-sequences-fasta-file">Protein sequences (FASTA file)</a></li>
+<li><a class="reference internal" href="#fasta-file">FASTA file</a><ul>
+<li><a class="reference internal" href="#amino-acid-sequences">Amino acid sequences</a></li>
+<li><a class="reference internal" href="#nucleotide-sequences">Nucleotide sequences</a></li>
+<li><a class="reference internal" href="#secondary-structure-sequences">Secondary structure sequences</a></li>
+<li><a class="reference internal" href="#solvent-accessibility-sequences">Solvent accessibility sequences</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#labeling-file">Labeling file</a></li>
 <li><a class="reference internal" href="#feature-matrix-file">Feature matrix file</a></li>
 </ul>
@@ -73,8 +83,11 @@ Exploration</div>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="features.html"
-                        title="previous chapter">Features</a></p>
+  <p class="topless"><a href="spice_features.html"
+                        title="previous chapter">SPiCE features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="user_accounts.html"
+                        title="next chapter">User accounts</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/file_formats.txt"
@@ -105,12 +118,13 @@ Exploration</div>
 <span id="id1"></span><h1>File Formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">¶</a></h1>
 <p>This section explains about the different file formats used on the SPiCE
 website.</p>
-<div class="section" id="protein-sequences-fasta-file">
-<h2>Protein sequences (FASTA file)<a class="headerlink" href="#protein-sequences-fasta-file" title="Permalink to this headline">¶</a></h2>
-<p>When creating a new project, a set of protein sequences should be uploaded as a
-FASTA file. In this file format, each sequence should start with a <tt class="docutils literal"><span class="pre">&gt;</span></tt>
-character followed by the sequence id (<em>without a space in between</em>). The
-sequence itself should be on the following lines:</p>
+<div class="section" id="fasta-file">
+<h2>FASTA file<a class="headerlink" href="#fasta-file" title="Permalink to this headline">¶</a></h2>
+<p>FASTA files are used to store sequence data, such as a set of protein amino
+acid sequences.</p>
+<p>In the FASTA file format that is used by SPiCE, each sequence should start with
+a <tt class="docutils literal"><span class="pre">&gt;</span></tt> character followed by the sequence id (<em>without a space in between</em>).
+The sequence itself should be on the following lines:</p>
 <div class="highlight-python"><pre>&gt;YOR106W Syntaxin VAM3
 MSFFDIEAQSSKGNSQQEPQFSTNQKTKELSNLIETFAEQSRVLEKECTKIGSKRDSKELRYKIETELIP
 NCTSVRDKIESNILIHQNGKLSADFKNLKTKYQSLQQSYNQRKSLFPLKTPISPGTSKERKDIHPRTEAV
@@ -144,14 +158,19 @@ IGIICGLAICIEGTALLAKIQESLSKAEFTHDESGLHLIQSYTNYGLDTDKFSRLRRFLWFRTWGLYKSK
 EDLDREAKINEEMIRKLKAAK</pre>
 </div>
 <p>The FASTA file should meet the following requirements:</p>
+<ul class="simple">
+<li>Duplicate sequence ids are not allowed. Each sequence corresponds to an
+object in the feature matrix and each object must have a unique id.</li>
+<li>Empty sequences are not allowed.</li>
+<li>Sequences must be upper case.</li>
+</ul>
+<p>SPiCE uses FASTA files for three types of sequences: amino acid sequences,
+nucleotide sequences, secondary structure sequences, and solvent accessibility
+sequences. Details per sequence type are discussed in the following
+subsections.</p>
+<div class="section" id="amino-acid-sequences">
+<h3>Amino acid sequences<a class="headerlink" href="#amino-acid-sequences" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">Duplicate sequence ids are not allowed. Each sequence will become an object
-in the feature matrix and each object must have a unique id.</p>
-</li>
-<li><p class="first">Empty sequences are not allowed.</p>
-</li>
-<li><p class="first">Sequences must be upper case.</p>
-</li>
 <li><p class="first">For protein (amino acid) sequences the following letters are allowed:</p>
 <div class="highlight-python"><pre>unambiguous amino acids: ARNDCEQGHILKMFPSTWYV
 ambiguous amino acids: BJZX
@@ -159,6 +178,11 @@ special amino acids: UO
 terminal character: *</pre>
 </div>
 </li>
+</ul>
+</div>
+<div class="section" id="nucleotide-sequences">
+<h3>Nucleotide sequences<a class="headerlink" href="#nucleotide-sequences" title="Permalink to this headline">¶</a></h3>
+<ul>
 <li><p class="first">For ORF (nucleotide) sequences the following letters are allowed:</p>
 <div class="highlight-python"><pre>unambiguous nucleotides: TCAG
 ambiguous nucleotides: MRWSYKVHDBN</pre>
@@ -168,6 +192,13 @@ ambiguous nucleotides: MRWSYKVHDBN</pre>
 <p><strong>Note:</strong> Only the unambiguous amino acids and unambiguous nucleotides are
 considered for most calculated features, the other characters are ignored in
 this case.</p>
+</div>
+<div class="section" id="secondary-structure-sequences">
+<h3>Secondary structure sequences<a class="headerlink" href="#secondary-structure-sequences" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="solvent-accessibility-sequences">
+<h3>Solvent accessibility sequences<a class="headerlink" href="#solvent-accessibility-sequences" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 <div class="section" id="labeling-file">
 <h2>Labeling file<a class="headerlink" href="#labeling-file" title="Permalink to this headline">¶</a></h2>
@@ -281,9 +312,7 @@ contain one id per line:</p>
 </pre></div>
 </div>
 <p>Feature values must be provided for all the proteins in your project, which
-means that all ids in your FASTA file must also be in the protein ids file. The
-number of rows in the feature matrix should also correspond to the number of
-proteins in your data set.</p>
+means that all ids in your FASTA file must also be in the protein ids file.</p>
 </div>
 </div>
 
@@ -300,7 +329,10 @@ proteins in your data set.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="features.html" title="Features"
+          <a href="user_accounts.html" title="User accounts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="spice_features.html" title="SPiCE features"
              >previous</a> |</li>
     
         <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>

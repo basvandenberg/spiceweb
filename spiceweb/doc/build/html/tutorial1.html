@@ -90,7 +90,6 @@ Exploration</div>
 <li><a class="reference internal" href="#new-classifier">New classifier</a></li>
 <li><a class="reference internal" href="#classification-results">Classification results</a></li>
 <li><a class="reference internal" href="#classifier-details">Classifier details</a></li>
-<li><a class="reference internal" href="#download-and-run-trained-classifier">Download and Run trained classifier</a></li>
 </ul>
 </li>
 </ul>
@@ -364,18 +363,18 @@ to either the <em>low</em> or the <em>high</em> class. A <a class="reference ext
 to determine how well this can be predicted using the selected features.</p>
 <div class="section" id="new-classifier">
 <h3>New classifier<a class="headerlink" href="#new-classifier" title="Permalink to this headline">¶</a></h3>
-<p>Click the <em>Classification</em> tab and click the <strong>New classifier</strong> button.</p>
+<p>Click the <em>Classification</em> tab and click the <strong>Create</strong> button.</p>
 <a class="reference internal image-reference" href="_images/tut1_20.png"><img alt="_images/tut1_20.png" class="align-center" src="_images/tut1_20.png" style="width: 550px;" /></a>
-<p>Use the <em>Feature filter</em> to select 8 amino acid composition features, select 10
-cross-validation loops, and the <em>k</em>-nearest neighbor classifier. Click the
-<strong>Run</strong> button to start the experiment.</p>
+<p>Use the <em>Feature filter</em> to select the 20 amino acid composition features,
+select 10 cross-validation loops, and the <em>k</em>-nearest neighbor classifier with
+uniform weights. Click the <strong>Run</strong> button to start the experiment.</p>
 <a class="reference internal image-reference" href="_images/tut1_21.png"><img alt="_images/tut1_21.png" class="align-center" src="_images/tut1_21.png" style="width: 550px;" /></a>
 <p>You will be redirected to the <em>Results</em> page, where the current status of your
 job is shown in the table at the bottom. Depending on how busy the server is,
 the job might have to wait in queue for a while.</p>
 <p>Add two more classification jobs, both for a LDA classifier and 10
-cross-validation loops. Use all <em>Amino acid composition</em> features for the first
-and all <em>Codon composition</em> features for the second.</p>
+cross-validation loops. Use all <em>amino acid composition</em> features for the first
+and all <em>codon composition</em> features for the second.</p>
 </div>
 <div class="section" id="classification-results">
 <h3>Classification results<a class="headerlink" href="#classification-results" title="Permalink to this headline">¶</a></h3>
@@ -383,24 +382,21 @@ and all <em>Codon composition</em> features for the second.</p>
 finished.</p>
 <a class="reference internal image-reference" href="_images/tut1_22.png"><img alt="_images/tut1_22.png" class="align-center" src="_images/tut1_22.png" style="width: 550px;" /></a>
 <p>The table shows different performance measures for each classifier. With an
-area under the ROC-curve (AUROC) of 0.85, the 64 <em>Codon composition</em> features
+area under the ROC-curve (AUROC) of 0.85, the 64 <em>codon composition</em> features
 performed best in this example.</p>
 </div>
 <div class="section" id="classifier-details">
 <h3>Classifier details<a class="headerlink" href="#classifier-details" title="Permalink to this headline">¶</a></h3>
-<p>Click on the job with the 64 <em>Codon composition</em> features to see more detailed
-results.  At the top, some classification setting and a table with the
+<p>Click on the job with the 20 <em>amino acid composition</em> features to see more
+detailed results.  At the top, some classification setting and a table with the
 cross-validation results are shown.</p>
 <a class="reference internal image-reference" href="_images/tut1_23.png"><img alt="_images/tut1_23.png" class="align-center" src="_images/tut1_23.png" style="width: 550px;" /></a>
 <p>In case of a 2-class classification problem, an ROC-curve is shown underneath.</p>
 <a class="reference internal image-reference" href="_images/tut1_24.png"><img alt="_images/tut1_24.png" class="align-center" src="_images/tut1_24.png" style="width: 550px;" /></a>
 <p>The gray ROC-curves show the cross-validation results and the blue curve shows
 the average ROC-curve. The area under the ROC-curve (and the standard deviation
-for the different CV-loops) are given in the legend.</p>
-</div>
-<div class="section" id="download-and-run-trained-classifier">
-<h3>Download and Run trained classifier<a class="headerlink" href="#download-and-run-trained-classifier" title="Permalink to this headline">¶</a></h3>
-<p>The classifier details page also allows you to run a trained classifier on
+for the different CV-loops) are given in the legend.
+The classifier details page also allows you to run a trained classifier on
 another data set. To do so, you first need to create a new project with a
 FASTA file that contains the sequences for which you would like to have
 predicted classes.</p>
@@ -422,37 +418,6 @@ finished.</p>
 <p>This finalizes the first tutorial, which covered most of the SPiCE website
 functionalities. If you have any suggestions for improvements, or if you find
 any bugs, please let me know (<a class="reference external" href="mailto:spice&#46;webapp&#37;&#52;&#48;gmail&#46;com">spice<span>&#46;</span>webapp<span>&#64;</span>gmail<span>&#46;</span>com</a>).</p>
-<p>TODO: move this to other topic...</p>
-<p>Besides result scores and settings, the zip-file will contain a trained
-Scikit-learn classifier <tt class="docutils literal"><span class="pre">classifier.joblib.pkl</span></tt> which is pickled using the
-<tt class="docutils literal"><span class="pre">joblib</span></tt> module which is offered as part of the <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> package.</p>
-<p>Loading and running this classifier could be done with a python script like the
-following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;path/to/classifier.joblib.pkl&#39;</span><span class="p">)</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">data = load your data here, should be a numpy matrix with the features that</span>
-<span class="sd">       where used to train the classifier as columns.</span>
-<span class="sd">&#39;&#39;&#39;</span>
-
-<span class="c"># prediction class labels on data set</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="c"># obtain class probabilities (if possible)</span>
-<span class="k">if</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s">&#39;predict_proba&#39;</span><span class="p">)):</span>
-    <span class="n">proba</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="c"># only works for 2-class classification!</span>
-    <span class="n">proba</span> <span class="o">=</span> <span class="n">proba</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="c"># obtain decision function output</span>
-<span class="k">if</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s">&#39;decision_function&#39;</span><span class="p">)):</span>
-    <span class="n">decision</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Our <tt class="docutils literal"><span class="pre">featext</span></tt> and <tt class="docutils literal"><span class="pre">featmat</span></tt> module that are part of the <tt class="docutils literal"><span class="pre">spice</span></tt> package
-could be used to calculate the features and obtain the feature matrix <tt class="docutils literal"><span class="pre">data</span></tt>
-that is required to run the classification.</p>
 </div>
 </div>
 </div>

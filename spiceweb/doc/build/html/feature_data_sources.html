@@ -1,0 +1,205 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Feature data sources &mdash; SPiCE 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="next" title="SPiCE features" href="spice_features.html" />
+    <link rel="prev" title="Features" href="features.html" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+     
+
+  </head>
+  <body>
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="spice_features.html" title="SPiCE features"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             accesskey="P">previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Feature data sources</a><ul>
+<li><a class="reference internal" href="#amino-acid-scales">Amino acid scales</a></li>
+<li><a class="reference internal" href="#amino-acid-matrices">Amino acid matrices</a></li>
+<li><a class="reference internal" href="#amino-acid-clusters">Amino acid clusters</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="features.html"
+                        title="previous chapter">Features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="spice_features.html"
+                        title="next chapter">SPiCE features</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/feature_data_sources.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="feature-data-sources">
+<span id="id1"></span><h1>Feature data sources<a class="headerlink" href="#feature-data-sources" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="amino-acid-scales">
+<h2>Amino acid scales<a class="headerlink" href="#amino-acid-scales" title="Permalink to this headline">¶</a></h2>
+<p>Amino acid scales are mappings from amino acids to property values and are used
+for the calculation of some feature categories. An often used example is the
+Kyte &amp; Doolittle <a class="reference internal" href="spice_features.html#kyte1982" id="id2">[2]</a> hydropathicity scale in which the values
+indicates how hydrophobic/hydrophilic amino acids are:</p>
+<div class="highlight-python"><pre>Ala:  1.800
+Arg: -4.500
+Asn: -3.500
+Asp: -3.500
+Cys:  2.500
+Gln: -3.500
+Glu: -3.500
+Gly: -0.400
+His: -3.200
+Ile:  4.500
+Leu:  3.800
+Lys: -3.900
+Met:  1.900
+Phe:  2.800
+Pro: -1.600
+Ser: -0.800
+Thr: -0.700
+Trp: -0.900
+Tyr: -1.300
+Val:  4.200</pre>
+</div>
+<p>Mapping a protein sequence to the corresponding hydrophaticity values results
+in a raw hydropathicity profile (Figure 1A). A convolution filter (Figure 1B)
+can be used to smooth the profile (Figure 1C), thereby capturing the
+hydropathicity over a sequence window. Both raw and smoothed profiles are used
+for several feature categories.</p>
+<div class="figure align-left">
+<a class="reference internal image-reference" href="_images/hydro_signals.png"><img alt="test" src="_images/hydro_signals.png" style="width: 650px;" /></a>
+<p class="caption"><strong>Figure 1: A)</strong> Raw hydropathicity profile. <strong>B)</strong> Convolution filter
+used to smooth the raw profile. <strong>C)</strong> Smoothed hydropathicity profile. The
+thresholds can be used to determine areas under the curve above a certain
+threshold, in order to capture the occurence of profile peaks.</p>
+</div>
+<p>There are many amino acid scales described in literature, most of which are
+collected in the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base, with <a class="reference external" href="http://www.genome.jp/aaindex/AAindex/list_of_indices">version9.1</a> containing 544 amino acid
+scales.</p>
+<p>Since many of these amino acid scales are highly correlated, multiple
+efforts have been done (using PCA or similar techniques) to capture the data of
+all the scales into a limited set of uncorrelated scales.</p>
+<p>A. Georgiev <a class="reference internal" href="spice_features.html#georgiev2009" id="id3">[1]</a> used Varimax to identify 19 uncorrelated
+scales that show good correlation with published scales, this in order to
+retain interpretability. This set of 19 scales, and all the separate scales in
+the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base are available for feature calculation on the SPiCE
+website.</p>
+</div>
+<div class="section" id="amino-acid-matrices">
+<h2>Amino acid matrices<a class="headerlink" href="#amino-acid-matrices" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="amino-acid-clusters">
+<h2>Amino acid clusters<a class="headerlink" href="#amino-acid-clusters" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="spice_features.html" title="SPiCE features"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             >previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    
+    <div class="footer">
+        &copy; Copyright 2013, Bastiaan van den Berg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+
+  </body>
+</html>

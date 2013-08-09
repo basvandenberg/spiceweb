@@ -389,15 +389,15 @@ to determine how well this can be predicted using the selected features.
 New classifier
 ^^^^^^^^^^^^^^
 
-Click the *Classification* tab and click the **New classifier** button.
+Click the *Classification* tab and click the **Create** button.
 
 .. image:: img/tut1_20.png
    :width: 550px
    :align: center
 
-Use the *Feature filter* to select 8 amino acid composition features, select 10
-cross-validation loops, and the *k*-nearest neighbor classifier. Click the
-**Run** button to start the experiment. 
+Use the *Feature filter* to select the 20 amino acid composition features,
+select 10 cross-validation loops, and the *k*-nearest neighbor classifier with
+uniform weights. Click the **Run** button to start the experiment. 
 
 .. image:: img/tut1_21.png
    :width: 550px
@@ -408,8 +408,8 @@ job is shown in the table at the bottom. Depending on how busy the server is,
 the job might have to wait in queue for a while.
 
 Add two more classification jobs, both for a LDA classifier and 10
-cross-validation loops. Use all *Amino acid composition* features for the first
-and all *Codon composition* features for the second. 
+cross-validation loops. Use all *amino acid composition* features for the first
+and all *codon composition* features for the second. 
 
 ^^^^^^^^^^^^^^^^^^^^^^
 Classification results
@@ -423,15 +423,15 @@ finished.
    :align: center
 
 The table shows different performance measures for each classifier. With an
-area under the ROC-curve (AUROC) of 0.85, the 64 *Codon composition* features
+area under the ROC-curve (AUROC) of 0.85, the 64 *codon composition* features
 performed best in this example.
 
 ^^^^^^^^^^^^^^^^^^
 Classifier details
 ^^^^^^^^^^^^^^^^^^
 
-Click on the job with the 64 *Codon composition* features to see more detailed
-results.  At the top, some classification setting and a table with the
+Click on the job with the 20 *amino acid composition* features to see more
+detailed results.  At the top, some classification setting and a table with the
 cross-validation results are shown.
 
 .. image:: img/tut1_23.png
@@ -447,11 +447,6 @@ In case of a 2-class classification problem, an ROC-curve is shown underneath.
 The gray ROC-curves show the cross-validation results and the blue curve shows
 the average ROC-curve. The area under the ROC-curve (and the standard deviation
 for the different CV-loops) are given in the legend.
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Download and Run trained classifier
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 The classifier details page also allows you to run a trained classifier on
 another data set. To do so, you first need to create a new project with a
 FASTA file that contains the sequences for which you would like to have
@@ -488,39 +483,3 @@ Finally, all classifier details can be downloaded as zip-file using the
 This finalizes the first tutorial, which covered most of the SPiCE website
 functionalities. If you have any suggestions for improvements, or if you find
 any bugs, please let me know (spice.webapp@gmail.com).
-
-TODO: move this to other topic...
-
-Besides result scores and settings, the zip-file will contain a trained
-Scikit-learn classifier ``classifier.joblib.pkl`` which is pickled using the
-``joblib`` module which is offered as part of the ``scikit-learn`` package.
-
-Loading and running this classifier could be done with a python script like the
-following:
-
-.. code-block:: python
-
-    from sklearn.externals import joblib
-    clf = joblib.load('path/to/classifier.joblib.pkl')
-
-    '''
-    data = load your data here, should be a numpy matrix with the features that
-           where used to train the classifier as columns. 
-    '''
-
-    # prediction class labels on data set
-    pred = clf.predict(data)
-
-    # obtain class probabilities (if possible)
-    if(hasattr(clf, 'predict_proba')):
-        proba = clf.predict_proba(data)
-        # only works for 2-class classification!
-        proba = proba[:, 1]
-
-    # obtain decision function output
-    if(hasattr(clf, 'decision_function')):
-        decision = clf.decision_function(data)
-
-Our ``featext`` and ``featmat`` module that are part of the ``spice`` package
-could be used to calculate the features and obtain the feature matrix ``data``
-that is required to run the classification.

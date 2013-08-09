@@ -7,14 +7,16 @@ File Formats
 This section explains about the different file formats used on the SPiCE
 website.
 
-------------------------------
-Protein sequences (FASTA file)
-------------------------------
+----------
+FASTA file
+----------
 
-When creating a new project, a set of protein sequences should be uploaded as a
-FASTA file. In this file format, each sequence should start with a ``>``
-character followed by the sequence id (*without a space in between*). The
-sequence itself should be on the following lines::
+FASTA files are used to store sequence data, such as a set of protein amino
+acid sequences. 
+
+In the FASTA file format that is used by SPiCE, each sequence should start with
+a ``>`` character followed by the sequence id (*without a space in between*).
+The sequence itself should be on the following lines::
 
     >YOR106W Syntaxin VAM3
     MSFFDIEAQSSKGNSQQEPQFSTNQKTKELSNLIETFAEQSRVLEKECTKIGSKRDSKELRYKIETELIP
@@ -52,16 +54,30 @@ Comments should start with a ``#`` character::
 
 The FASTA file should meet the following requirements:
 
-- Duplicate sequence ids are not allowed. Each sequence will become an object
-  in the feature matrix and each object must have a unique id.
+- Duplicate sequence ids are not allowed. Each sequence corresponds to an
+  object in the feature matrix and each object must have a unique id.
 - Empty sequences are not allowed.
 - Sequences must be upper case.
+
+SPiCE uses FASTA files for three types of sequences: amino acid sequences,
+nucleotide sequences, secondary structure sequences, and solvent accessibility
+sequences. Details per sequence type are discussed in the following
+subsections.
+
+^^^^^^^^^^^^^^^^^^^^
+Amino acid sequences
+^^^^^^^^^^^^^^^^^^^^
+
 - For protein (amino acid) sequences the following letters are allowed::
 
     unambiguous amino acids: ARNDCEQGHILKMFPSTWYV
     ambiguous amino acids: BJZX
     special amino acids: UO
     terminal character: *
+
+^^^^^^^^^^^^^^^^^^^^
+Nucleotide sequences
+^^^^^^^^^^^^^^^^^^^^
 
 - For ORF (nucleotide) sequences the following letters are allowed::
 
@@ -71,6 +87,16 @@ The FASTA file should meet the following requirements:
 **Note:** Only the unambiguous amino acids and unambiguous nucleotides are
 considered for most calculated features, the other characters are ignored in
 this case.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Secondary structure sequences
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Solvent accessibility sequences
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 
 -------------
 Labeling file
@@ -201,6 +227,4 @@ contain one id per line::
     YLR057W
 
 Feature values must be provided for all the proteins in your project, which
-means that all ids in your FASTA file must also be in the protein ids file. The
-number of rows in the feature matrix should also correspond to the number of
-proteins in your data set.
+means that all ids in your FASTA file must also be in the protein ids file.
