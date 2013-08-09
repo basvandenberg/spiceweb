@@ -17,6 +17,9 @@ h2 {
 h3 {
     font-size: 14pt;
 }
+h3>a.pull-right {
+    font-size: 10pt;
+}
 p {
     font-family: 'Raleway', sans-serif;
 }
@@ -433,6 +436,14 @@ hr.spacer_both {
 form.feat-calc legend {
     font-size: 15px;
     font-weight: bold;
+}
+form.feat-calc legend a {
+    font-size: 14px;
+    font-weight: normal;
+}
+legend>a {
+    font-size: 14px;
+    font-weight: normal;
 }
 div.well.feat-calc {
     padding-top: 0px;

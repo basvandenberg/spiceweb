@@ -64,19 +64,23 @@ featids, featnames = fcat.feature_func(fcat.model_object, *args, feature_ids=Tru
 numfeat = len(featids)
 param_col = ', '.join(['%s: %s' % (n, v)
                       for n, v in zip(fcat.param_names, param_setting.split('-'))])
+if(param_setting == ''):
+    fcat_id = featcat_id
+else:
+    fcat_id = '%s_%s' % (featcat_id, param_setting)
 %>
     <tr>
         <td>${fcat.fc_name.title()}</td>
         <td>${param_col}</td>
         <td>${numfeat}</td>
         <td>
-            <a href="#delete-${'%s_%s' % (featcat_id, param_setting)}-modal" 
+            <a href="#delete-${fcat_id}-modal" 
                class="btn btn-link my-btn-link delete-features" 
                data-toggle="modal"
-               id="${'%s_%s' % (featcat_id, param_setting)}">delete
+               id="${fcat_id}">delete
             </a>
             <!-- Modal -->
-            <div id="delete-${'%s_%s' % (featcat_id, param_setting)}-modal"
+            <div id="delete-${fcat_id}-modal"
                  class="modal hide fade delete-features" 
                  tabindex="-1" 
                  role="dialog"
@@ -84,14 +88,14 @@ param_col = ', '.join(['%s: %s' % (n, v)
                  aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 id="myModalLabel">Delete feature category ${'%s_%s' % (featcat_id, param_setting)}?</h3>
+                    <h3 id="myModalLabel">Delete feature category ${featcat_id}?</h3>
                 </div>
                 <div class="modal-body">
-                    <p>Feature category ${'%s_%s' % (featcat_id, param_setting)} will be deleted. Are you sure?</p>
+                    <p>Feature category ${featcat_id} will be deleted. Are you sure?</p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button id="${'%s_%s' % (featcat_id, param_setting)}" class="btn btn-danger delete-features">Delete</button>
+                    <button id="${fcat_id}" class="btn btn-danger delete-features">Delete</button>
                 </div>
             </div>
         </td>

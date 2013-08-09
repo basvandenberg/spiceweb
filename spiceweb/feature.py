@@ -4,6 +4,7 @@ import cherrypy
 from cherrypy.lib.static import serve_file
 
 from spice import featmat
+from biopy import sequtil
 import spiceweb
 from project import Project
 
@@ -121,6 +122,9 @@ class Feature:
 
                 # redirect to feature list page
                 raise cherrypy.HTTPRedirect(self.get_url(0))
+
+        kw_args['aaindex_scale_ids'] = sequtil.aaindex_scale_ids
+        kw_args['pseaac_scale_ids'] = sequtil.pseaac_scale_ids
 
         template_f = self.get_template_f(smi)
         return spiceweb.get_template(template_f, **kw_args)

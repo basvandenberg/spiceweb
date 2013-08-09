@@ -13,12 +13,17 @@
     <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
 % endif
 
+<h2>Amino acid sequence-based features<h2>
+
 <!-- Amino acid composition -->
 
 <div class="well feat-calc">
 <form id="aac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Amino acid composition</legend>
+    <legend>
+        Amino acid composition
+        <a class="pull-right" href="${root_url}doc/features.html#amino-acid-composition" target="_tab">help</a>
+    </legend>
 
     <label class="select first">Number of segments</label>
     <select class="param input-mini">
@@ -38,7 +43,10 @@
 <div class="well feat-calc">
 <form id="dc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Dipeptide composition</legend>
+    <legend>
+        Dipeptide composition
+        <a class="pull-right" href="${root_url}doc/features.html#dipeptide-composition" target="_tab">help</a>
+    </legend>
 
     <label class="select first">Number of segments</label>
     <select class="param input-mini">
@@ -53,12 +61,15 @@
 </form>
 </div>
 
-<!-- Prime amino acid counts -->
+<!-- Prime-side amino acid counts -->
 
 <div class="well feat-calc">
 <form id="paac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Prime-side amino acid count</legend>
+    <legend>
+        Prime-side amino acid count
+        <a class="pull-right" href="${root_url}doc/features.html#prime-side-amino-acid-count" target="_tab">help</a>
+    </legend>
 
     <label class="select first">Prime side</label>
     <select class="param input-mini">
@@ -81,21 +92,115 @@
 </form>
 </div>
 
-<!-- Signal average -->
+<!-- Sequence length -->
 
 <div class="well feat-calc">
-<form id="sigavg" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+<form id="len" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Signal average</legend>
+    <legend>
+        Sequence length
+        <a class="pull-right" href="${root_url}doc/features.html#sequence-length" target="_tab">help</a>
+    </legend>
 
-    <label class="select first">Scale(s)</label>
+    <label class="select first">The length of the amino acid sequence</label>
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<h3>Clustered amino acid sequence-based features</h3>
+
+<!-- Property CTD -->
+
+<div class="well feat-calc">
+<form id="ctd" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>
+        Property Composition / Transition / Distribution
+        <a class="pull-right" href="${root_url}doc/features.html#property-composition-transition-distribution-ctd" target="_tab">help</a>
+    </legend>
+
+    <label class="select first">Property</label>
+    <select class="param input-medium">
+        <option value="hyd" selected="selected">hydrophobicity</option>
+        <option value="vdw">normalized VDW</option>
+        <option value="plr">polarity</option>
+        <option value="plz">polarizability</option>
+        <option value="chr">charge</option>
+        <option value="ss">secondary structure</option>
+        <option value="sa">solvent accessibilty</option>
+    </select>
+
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<h3>Amino acid sequence profile-based features</h3>
+
+<!-- Autocorrelation -->
+
+<div class="well feat-calc">
+<form id="ac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>
+        Autocorrelation
+        <a class="pull-right" href="${root_url}doc/features.html#autocorrelation" target="_tab">help</a>
+    </legend>
+
+    <label class="select first">Type</label>
+    <select class="param input-medium">
+        <option value="mb" selected="selected">Moreau-Broto</option>
+        <option value="moran">Moran</option>
+        <option value="geary">Geary</option>
+    </select>
+
+    <label class="select">AA Scale</label>
     <select class="param input-medium">
         <optgroup label="AAIndex combined">
             <option value="gg" selected="selected">Georgiev (19 scales)</option>
         </optgroup>
         <optgroup label="AAIndex scales">
-% for i in xrange(544):
-            <option value="${i}">AA index ${i}</option>
+% for index, aai in enumerate(aaindex_scale_ids):
+            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
+% endfor
+        </optgroup>
+    </select>
+
+    <label class="select">Lag</label>
+    <select class="param input-mini">
+% for i in xrange(1, 20):
+        <option value="${i}">${i}</option>
+% endfor
+        <option value="20" selected="selected">20</option>
+% for i in xrange(21, 31):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+    
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
+<!-- Signal average -->
+
+<div class="well feat-calc">
+<form id="sigavg" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>
+        Signal average 
+        <a class="pull-right" href="${root_url}doc/features.html#signal-average" target="_tab">help</a>
+    </legend>
+
+    <label class="select first">AA Scale</label>
+    <select class="param input-medium">
+        <optgroup label="AAIndex combined">
+            <option value="gg" selected="selected">Georgiev (19 scales)</option>
+        </optgroup>
+        <optgroup label="AAIndex scales">
+% for index, aai in enumerate(aaindex_scale_ids):
+            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
 % endfor
         </optgroup>
     </select>
@@ -131,16 +236,19 @@
 <div class="well feat-calc">
 <form id="sigpeak" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Signal peaks area</legend>
+    <legend>
+        Signal peaks area
+        <a class="pull-right" href="${root_url}doc/features.html#signal-peaks-area" target="_tab">help</a>
+    </legend>
 
-    <label class="select first">Scale(s)</label>
+    <label class="select first">AA Scale</label>
     <select class="param input-medium">
         <optgroup label="AAIndex combined">
             <option value="gg" selected="selected">Georgiev (19 scales)</option>
         </optgroup>
         <optgroup label="AAIndex scales">
-% for i in xrange(544):
-            <option value="${i}">AA index ${i}</option>
+% for index, aai in enumerate(aaindex_scale_ids):
+            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
 % endfor
         </optgroup>
     </select>
@@ -180,106 +288,26 @@
 </form>
 </div>
 
-<!-- Autocorrelation -->
-
-<div class="well feat-calc">
-<form id="ac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>Autocorrelation</legend>
-
-    <label class="select first">Type</label>
-    <select class="param input-medium">
-        <option value="mb" selected="selected">Moreau-Broto</option>
-        <option value="moran">Moran</option>
-        <option value="geary">Geary</option>
-    </select>
-
-    <label class="select first">Scale(s)</label>
-    <select class="param input-medium">
-        <optgroup label="AAIndex combined">
-            <option value="gg" selected="selected">Georgiev (19 scales)</option>
-        </optgroup>
-        <optgroup label="AAIndex scales">
-% for i in xrange(544):
-            <option value="${i}">AA index ${i}</option>
-% endfor
-        </optgroup>
-    </select>
-
-    <label class="select">Lag</label>
-    <select class="param input-mini">
-% for i in xrange(1, 20):
-        <option value="${i}">${i}</option>
-% endfor
-        <option value="20" selected="selected">20</option>
-% for i in xrange(21, 31):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-    
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
-
-</form>
-</div>
-
-<!-- Property CTD -->
-
-<div class="well feat-calc">
-<form id="ctd" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>Property Composition / Transition / Distribution</legend>
-
-    <label class="select first">Property</label>
-    <select class="param input-medium">
-        <option value="hyd" selected="selected">hydrophobicity</option>
-        <option value="vdw">normalized VDW</option>
-        <option value="plr">polarity</option>
-        <option value="plz">polarizability</option>
-        <option value="chr">charge</option>
-        <option value="ss">secondary structure</option>
-        <option value="sa">solvent accessibilty</option>
-    </select>
-
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
-
-</form>
-</div>
-
-<!-- Quasi sequence order descriptors -->
-
-<div class="well feat-calc">
-<form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>Quasi-sequence-order descriptors</legend>
-
-    <label class="select first">Maximal coupling-rank </label>
-    <select class="param input-mini">
-% for i in xrange(21, 30):
-        <option value="${i}">${i}</option>
-% endfor
-        <option value="30" selected="selected">30</option>
-% for i in xrange(31, 51):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-    <label>Weight: 0.1</label>
-
-
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
-
-</form>
-</div>
-
 <!-- Pseudo amino acid composition -->
-
+<!-- TODO implement pseudo amino acid composition function is biopy.sequtil
 <div class="well feat-calc">
-<form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+<form id="paac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Pseudo amino acid composition</legend>
+    <legend>
+        Pseudo amino acid composition
+        <a class="pull-right" href="${root_url}doc/features.html#pseudo-amino-acid-composition" target="_tab">help</a>
+    </legend>
 
-    <label class="select first">Lambda </label>
+    <label class="select first">AA Scale</label>
+    <select class="param input-medium">
+% for i, scale_id in enumerate(pseaac_scale_ids):
+        <option value="${'paac%i' % (i)}">${scale_id}</option>
+% endfor
+    </select>
+
+    <label class="select">Lambda </label>
     <select class="param input-mini">
-% for i in xrange(21, 30):
+% for i in xrange(1, 30):
         <option value="${i}">${i}</option>
 % endfor
         <option value="30" selected="selected">30</option>
@@ -293,26 +321,55 @@
 
 </form>
 </div>
+!-->
 
-<!-- Protein length -->
+<h3>Amino acid distance-based features</h3>
+
+<!-- Quasi sequence order descriptors -->
 
 <div class="well feat-calc">
-<form id="len" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+<form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Protein length</legend>
+    <legend>
+        Quasi-sequence-order descriptors
+        <a class="pull-right" href="${root_url}doc/features.html#quasi-sequence-order-descriptors" target="_tab">help</a>
+    </legend>
 
-    <label class="select first">The length of the peptide</label>
+    <label class="select first">AA distance matrix</label>
+    <select class="param input-medium">
+        <option value="sw" selected="selected">Schneider-Wrede</option>
+        <!--option value="aam11">Grantham</option--> <!-- NOT NORMALIZED LIKE IN PROFEAT -->
+    </select>
+
+    <label class="select">Lambda </label>
+    <select class="param input-mini">
+% for i in xrange(1, 30):
+        <option value="${i}">${i}</option>
+% endfor
+        <option value="30" selected="selected">30</option>
+% for i in xrange(31, 51):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+
+    <label>Weight: 0.1</label>
+
     <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
 
 </form>
 </div>
+
+<h2>Secondary structure sequence-based features</h2>
 
 <!-- Secondary structure composition -->
 
 <div class="well feat-calc">
 <form id="ssc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Secondary structure composition</legend>
+    <legend>
+        Secondary structure composition
+        <a class="pull-right" href="${root_url}doc/features.html#secondary-structure-composition" target="_tab">help</a>
+    </legend>
 
     <label class="select first">Number of segments</label>
     <select class="param input-mini">
@@ -332,20 +389,28 @@
 <div class="well feat-calc">
 <form id="ssaac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Per secondary structure amino acid composition</legend>
+    <legend>
+        Per secondary structure amino acid composition
+        <a class="pull-right" href="${root_url}doc/features.html#per-secondary-structure-amino-acid-composition" target="_tab">help</a>
+    </legend>
 
-    <label class="select first">amino acid composition of the helix, strand, and random coil regions</label>
+    <label class="select first">Amino acid composition of the helix, strand, and random coil regions</label>
     <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
 
 </form>
 </div>
+
+<h2>Solvent accessibility sequence-based features</h2>
 
 <!-- Solvent accessibility composition -->
 
 <div class="well feat-calc">
 <form id="sac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Solvent accessibility composition</legend>
+    <legend>
+        Solvent accessibility composition
+        <a class="pull-right" href="${root_url}doc/features.html#solvent-accessibility-composition" target="_tab">help</a>
+    </legend>
 
     <label class="select first">Number of segments</label>
     <select class="param input-mini">
@@ -365,22 +430,30 @@
 <div class="well feat-calc">
 <form id="saaac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Per solvent accessibility class amino acid composition</legend>
+    <legend>
+        Per solvent accessibility class amino acid composition
+        <a class="pull-right" href="${root_url}doc/features.html#per-solvent-accessibility-class-amino-acid-composition" target="_tab">help</a>
+    </legend>
 
-    <label class="select first">amino acid composition of the buried and exposed regions</label>
+    <label class="select first">Amino acid composition of the buried and exposed regions</label>
     <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
 
 </form>
 </div>
+
+<h2>ORF codon sequence-based features</h2>
 
 <!-- Codon composition -->
 
 <div class="well feat-calc">
 <form id="cc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Codon composition</legend>
+    <legend>
+        Codon composition
+        <a class="pull-right" href="${root_url}doc/features.html#codon-composition" target="_tab">help</a>
+    </legend>
 
-    <label class="select first">Codon composition</label>
+    <label class="select first">The ORF codon composition</label>
 
     <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
 
@@ -392,7 +465,10 @@
 <div class="well feat-calc">
 <form id="cu" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
-    <legend>Codon usage</legend>
+    <legend>
+        Codon usage
+        <a class="pull-right" href="${root_url}doc/features.html#codon-usage" target="_tab">help</a>
+    </legend>
 
     <label class="select first">Relative usage of the codons per amino acid</label>
 
