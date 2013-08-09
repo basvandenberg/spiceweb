@@ -389,7 +389,7 @@ class Classification:
                         if(cv_score[0] == -1.0):
                             score_str = 'n/a'
                         else:
-                            score_str = '%.2f' % (numpy.mean(cv_score))
+                            score_str = '%.3f' % (numpy.mean(cv_score))
                         str_data += '<td class="score n" id="%s">%s</td>\n' %\
                                 (score_names[index], score_str)
                     str_data += '''
