@@ -288,20 +288,20 @@
 </form>
 </div>
 
-<!-- Pseudo amino acid composition -->
-<!-- TODO implement pseudo amino acid composition function is biopy.sequtil
+<!-- Type 1 pseudo amino acid composition -->
 <div class="well feat-calc">
-<form id="paac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+<form id="paac1" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
     <legend>
-        Pseudo amino acid composition
+        Pseudo amino acid composition (type 1)
         <a class="pull-right" href="${root_url}doc/spice_features.html#pseudo-amino-acid-composition" target="_tab">help</a>
     </legend>
 
-    <label class="select first">AA Scale</label>
-    <select class="param input-medium">
-% for i, scale_id in enumerate(pseaac_scale_ids):
-        <option value="${'paac%i' % (i)}">${scale_id}</option>
+    <label class="select first">AA Scales </label>
+    <select class="param input-medium" multiple="multiple">
+        <option value="pseaac0" selected="selected">${pseaac_scale_ids[0]}</option>
+% for i, scale_id in enumerate(pseaac_scale_ids[1:]):
+        <option value="${'pseaac%i' % (i + 1)}">${scale_id}</option>
 % endfor
     </select>
 
@@ -321,7 +321,41 @@
 
 </form>
 </div>
-!-->
+
+<!-- Type 2 pseudo amino acid composition -->
+<div class="well feat-calc">
+<form id="paac2" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+
+    <legend>
+        Pseudo amino acid composition (type 2)
+        <a class="pull-right" href="${root_url}doc/spice_features.html#pseudo-amino-acid-composition" target="_tab">help</a>
+    </legend>
+
+    <label class="select first">AA Scales </label>
+    <select class="param input-medium" multiple="multiple">
+        <option value="pseaac0" selected="selected">${pseaac_scale_ids[0]}</option>
+% for i, scale_id in enumerate(pseaac_scale_ids[1:]):
+        <option value="${'pseaac%i' % (i + 1)}">${scale_id}</option>
+% endfor
+    </select>
+
+    <label class="select">Lambda </label>
+    <select class="param input-mini">
+% for i in xrange(1, 30):
+        <option value="${i}">${i}</option>
+% endfor
+        <option value="30" selected="selected">30</option>
+% for i in xrange(31, 51):
+        <option value="${i}">${i}</option>
+% endfor
+    </select>
+    <label>Weight: 0.05</label>
+    
+    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+</form>
+</div>
+
 
 <h3>Amino acid distance-based features</h3>
 
