@@ -299,9 +299,9 @@
 
     <label class="select first">AA Scales </label>
     <select class="param input-medium" multiple="multiple">
-        <option value="pseaac0" selected="selected">${pseaac_scale_ids[0]}</option>
+        <option value="p0" selected="selected">${pseaac_scale_ids[0]}</option>
 % for i, scale_id in enumerate(pseaac_scale_ids[1:]):
-        <option value="${'pseaac%i' % (i + 1)}">${scale_id}</option>
+        <option value="${'p%i' % (i + 1)}">${scale_id}</option>
 % endfor
     </select>
 
@@ -333,9 +333,9 @@
 
     <label class="select first">AA Scales </label>
     <select class="param input-medium" multiple="multiple">
-        <option value="pseaac0" selected="selected">${pseaac_scale_ids[0]}</option>
+        <option value="p0" selected="selected">${pseaac_scale_ids[0]}</option>
 % for i, scale_id in enumerate(pseaac_scale_ids[1:]):
-        <option value="${'pseaac%i' % (i + 1)}">${scale_id}</option>
+        <option value="${'p%i' % (i + 1)}">${scale_id}</option>
 % endfor
     </select>
 

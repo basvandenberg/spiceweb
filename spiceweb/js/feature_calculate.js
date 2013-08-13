@@ -19,12 +19,11 @@ $(document).ready(function() {
 
         var params = [];
 
-        // fetch parameter values
-        $(this).parent().find('select.param').find(':selected').map(
-            function() {
-                params.push($(this).attr('value'));
-            }
-        );
+        $(this).parent().find('select.param').map(function() {
+            params.push($(this).find(':selected').map(function() {
+                return $(this).attr('value');
+            }).get().join(''))
+        });
 
         // build url and send
         var u = $(location).attr('href');
