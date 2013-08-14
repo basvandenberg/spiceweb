@@ -77,7 +77,8 @@ Exploration</div>
 <li><a class="reference internal" href="#autocorrelation">Autocorrelation</a></li>
 <li><a class="reference internal" href="#signal-average">Signal average</a></li>
 <li><a class="reference internal" href="#signal-peaks-area">Signal peaks area</a></li>
-<li><a class="reference internal" href="#pseudo-amino-acid-composition">Pseudo amino acid composition</a></li>
+<li><a class="reference internal" href="#pseudo-amino-acid-composition-type-1">Pseudo amino acid composition type 1</a></li>
+<li><a class="reference internal" href="#pseudo-amino-acid-composition-type-2">Pseudo amino acid composition type 2</a></li>
 <li><a class="reference internal" href="#quasi-sequence-order-descriptors">Quasi sequence-order descriptors</a></li>
 <li><a class="reference internal" href="#secondary-structure-composition">Secondary structure composition</a></li>
 <li><a class="reference internal" href="#per-secondary-structure-amino-acid-composition">Per secondary structure amino acid composition</a></li>
@@ -127,29 +128,30 @@ Exploration</div>
 <p>Once you have initiated a new project with a set of protein sequences, you can
 use the <em>Calculate</em> button under the  <em>Features</em> tab to calculate a range of
 sequence-based features.</p>
-<a class="reference internal image-reference" href="_images/featcalc0.png"><img alt="_images/featcalc0.png" class="align-center" src="_images/featcalc0.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/featcalc0.png"><img alt="_images/featcalc0.png" class="align-center" src="_images/featcalc0.png" style="width: 640px;" /></a>
 <p>The following sections will bescribe the different feature categories that are
 offered by the SPiCE website. Some of these features were used in our previous
-research <a class="reference internal" href="#vandenberg2010" id="id2">[5]</a>, <a class="reference internal" href="#vandenberg2012" id="id3">[6]</a>. The rest of the
-features are based on those offered by the PROFEAT website <a class="reference internal" href="#li2006" id="id4">[3]</a>,
-<a class="reference internal" href="#rao2011" id="id5">[4]</a>, who extracted their features from different sequence-based
+research <a class="reference internal" href="#vandenberg2010" id="id2">[8]</a>, <a class="reference internal" href="#vandenberg2012" id="id3">[9]</a>. The rest of the
+features are based on those offered by the PROFEAT website <a class="reference internal" href="#li2006" id="id4">[5]</a>,
+<a class="reference internal" href="#rao2011" id="id5">[6]</a>, who extracted their features from different sequence-based
 studies.</p>
 <div class="section" id="amino-acid-composition">
 <h2>Amino acid composition<a class="headerlink" href="#amino-acid-composition" title="Permalink to this headline">¶</a></h2>
-<p>The same as in the example given in the introduction, the amino acids
-composition calculates the fraction of each amino acid in a protein sequence.</p>
-<a class="reference internal image-reference" href="_images/featcalc1.png"><img alt="_images/featcalc1.png" class="align-center" src="_images/featcalc1.png" style="width: 550px;" /></a>
-<p>Having 20 amino acids, this will result in 20 features. If a sequence contains
-any other than the 20 unambiguous amino acid letters will be ignored.</p>
+<p>The amino acids composition calculates the frequency of occurance for each
+of the 20 amino acids in a protein sequence.</p>
+<a class="reference internal image-reference" href="_images/featcalc1.png"><img alt="_images/featcalc1.png" class="align-center" src="_images/featcalc1.png" style="width: 640px;" /></a>
+<p>Having 20 amino acids, this will result in 20 features. Any other than the 20
+unambiguous amino acid letters will be ignored.</p>
 <p>To illustrate this, consider the following (unrealistic) protein sequence,
 which contains two occurences of each amino acid in which each amino acid
 obtains the value 0.05:</p>
 <div class="highlight-python"><pre>&gt;&gt;aac_test
 MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV</pre>
 </div>
-<p>will result in a amino acid feature vector:</p>
-<div class="highlight-python"><pre>aac_1_A1    aac_1_R1    ...     aac_1_V1
-0.05        0.05        ...     0.05</pre>
+<p>will result in the following feature vector:</p>
+<div class="highlight-python"><pre>.              A1          R1       ...        V1
+
+aac_test      0.05        0.05      ...       0.05</pre>
 </div>
 <p>As a parameter, users can specify in how many (equal sized) segments a protein
 should be divided, before calculating the amino acid composition of each
@@ -161,35 +163,72 @@ MMAARRNNDDCCEEQQGGHH | IILLKKFFPPSSTTWWYYVV</pre>
 </div>
 <p>The amino acid composition of both segments is calculated which together
 results in a feature vector with 40 features:</p>
-<div class="highlight-python"><pre>aac_2_A1   ...     aac_2_V1    ...     aac_2_A2    aac_2_V2
-0.10       ...     0.00                0.0         0.10</pre>
+<div class="highlight-python"><pre>.              A1   ...   V1   ...   A2   ...   V2
+
+aac_test      0.10  ...  0.00  ...  0.00  ...  0.10</pre>
 </div>
 </div>
 <div class="section" id="dipeptide-composition">
 <h2>Dipeptide composition<a class="headerlink" href="#dipeptide-composition" title="Permalink to this headline">¶</a></h2>
+<p>Similar to the amino acid composition, the dipeptide composition calculates the
+frequency of occurance of each of the 400 possible dipeptides in a protein
+sequence.</p>
+<a class="reference internal image-reference" href="_images/feat_dipep.png"><img alt="_images/feat_dipep.png" class="align-center" src="_images/feat_dipep.png" style="width: 640px;" /></a>
+<p>Having 400 possible amino acid pairs (dipeptides), this will result in 400
+features. Dipeptides containing any other than the 20 unambiguous amino acid
+letters will be ignored.</p>
+<p>As a parameter, users can specify in how many (equal sized) segments a protein
+should be divided, before calculating the dipeptide composition of each
+segmente separately. To limit the number of features and to avoid too sparse
+feature matrices, the maximal number of segments is set to 2.</p>
+<p>For an example sequence that contains 10 dipeptides:</p>
+<div class="highlight-python"><pre>&gt;&gt;dc_test
+MAAARRNNDDC</pre>
+</div>
+<p>The resulting feature vector wil be:</p>
+<div class="highlight-python"><pre>.           AA      AR   ...   AV      RA      RR         VV
+
+dc_test    0.20    0.10  ...  0.00    0.00    0.10  ...  0.00</pre>
+</div>
 </div>
 <div class="section" id="prime-side-amino-acid-count">
 <h2>Prime-side amino acid count<a class="headerlink" href="#prime-side-amino-acid-count" title="Permalink to this headline">¶</a></h2>
 <p>This feature category returns the amino acid counts of a fixed length sequence
 end, either using the 5` or the 3` side.</p>
-<a class="reference internal image-reference" href="_images/featcalc2.png"><img alt="_images/featcalc2.png" class="align-center" src="_images/featcalc2.png" style="width: 550px;" /></a>
-<p>To illustrate this, consider the following (unrealistic) protein sequence,</p>
-<blockquote>
-<div>&gt;&gt;aac_test
-MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV</div></blockquote>
-<p>The 5&#8217; amino acid count for length 10 will result in this feature vector in
-which the counts for M, A, R, N, and D are set to 2, while the remaining 15
+<a class="reference internal image-reference" href="_images/featcalc2.png"><img alt="_images/featcalc2.png" class="align-center" src="_images/featcalc2.png" style="width: 640px;" /></a>
+<p>For example sequence:</p>
+<div class="highlight-python"><pre>&gt;&gt;psaac_test
+MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV</pre>
+</div>
+<p>the 5&#8217; amino acid count for length 10 will result in the following feature
+vector:</p>
+<div class="highlight-python"><pre>.           A   R   N   D   C   E   Q   G   H  ...  M  ...  V
+
+psaac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0</pre>
+</div>
+<p>in which the counts for M, A, R, N, and D are set to 2, while the remaining 15
 features are set to 0.</p>
 </div>
 <div class="section" id="sequence-length">
 <h2>Sequence length<a class="headerlink" href="#sequence-length" title="Permalink to this headline">¶</a></h2>
 <p>This category calculates only one feature, the length of the amino acid
 sequence.</p>
+<a class="reference internal image-reference" href="_images/feat_len.png"><img alt="_images/feat_len.png" class="align-center" src="_images/feat_len.png" style="width: 640px;" /></a>
+<p>The example sequence:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="go">&gt;&gt;&gt;len_test</span>
+<span class="go">MMAARRNNDD</span>
+</pre></div>
+</div>
+<p>Will result in the following feature vector:</p>
+<div class="highlight-python"><pre>.           len
+
+len_test     10</pre>
+</div>
 </div>
 <div class="section" id="property-composition-transition-distribution-ctd">
 <h2>Property Composition / Transition / Distribution (CTD)<a class="headerlink" href="#property-composition-transition-distribution-ctd" title="Permalink to this headline">¶</a></h2>
 <p>The Composition, Transition, Distribution feature is derived from
-<a class="reference internal" href="#li2006" id="id6">[3]</a>.</p>
+<a class="reference internal" href="#li2006" id="id6">[5]</a>.</p>
 <p>For these features, the protein sequence is first translated
 from the 20 letter amino acid alphabet to a 3 letter alphabet, in which the 20
 amino acids are devided over the three letters based on some property. The
@@ -246,14 +285,14 @@ CTD feature category provides 3 + 3 + 5 x 3 = 21 features for a given property.<
 </div>
 <div class="section" id="autocorrelation">
 <h2>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Permalink to this headline">¶</a></h2>
-<p>The autocorrelation feature is derived from <a class="reference internal" href="#li2006" id="id7">[3]</a>.</p>
+<p>The autocorrelation feature is derived from <a class="reference internal" href="#li2006" id="id7">[5]</a>.</p>
 </div>
 <div class="section" id="signal-average">
 <h2>Signal average<a class="headerlink" href="#signal-average" title="Permalink to this headline">¶</a></h2>
 <p>This feature uses an amino acid scale to tranform an amino acid into a
 (smoothed) property profile (Fig.1A &amp; Fig.1C) and uses the average value of the
 resulting profile as feature value.</p>
-<a class="reference internal image-reference" href="_images/featcalc3.png"><img alt="_images/featcalc3.png" class="align-center" src="_images/featcalc3.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/featcalc3.png"><img alt="_images/featcalc3.png" class="align-center" src="_images/featcalc3.png" style="width: 640px;" /></a>
 <p>Amino acid scales relate to different amino acid properties, such as
 hydropathicity. The average value of such a scale therefore provides an
 indication of the global hydropathicity of the protein.</p>
@@ -261,71 +300,129 @@ indication of the global hydropathicity of the protein.</p>
 <div class="section" id="signal-peaks-area">
 <h2>Signal peaks area<a class="headerlink" href="#signal-peaks-area" title="Permalink to this headline">¶</a></h2>
 <p>The same as the previous feature, this feature uses an amino acid scale to
-transform an amino acid sequence into a (smoothed) property profile / signal.
-Instead of taking the average profile value, this feature calculates the area
-under the profile curve under some given threshold (Fig.1C).</p>
-<a class="reference internal image-reference" href="_images/featcalc4.png"><img alt="_images/featcalc4.png" class="align-center" src="_images/featcalc4.png" style="width: 550px;" /></a>
+transform an amino acid sequence into a (smoothed) property profile / signal
+(Fig.1A &amp; Fig.1C). Instead of taking the average profile value, this feature
+calculates the area under the profile curve under some given threshold
+(Fig.1C).</p>
+<a class="reference internal image-reference" href="_images/featcalc4.png"><img alt="_images/featcalc4.png" class="align-center" src="_images/featcalc4.png" style="width: 640px;" /></a>
 </div>
-<div class="section" id="pseudo-amino-acid-composition">
-<h2>Pseudo amino acid composition<a class="headerlink" href="#pseudo-amino-acid-composition" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pseudo-amino-acid-composition-type-1">
+<h2>Pseudo amino acid composition type 1<a class="headerlink" href="#pseudo-amino-acid-composition-type-1" title="Permalink to this headline">¶</a></h2>
+<p>The type 1 pseudo amino acid composition calculates 20 + lambda features as
+introduced in <a class="reference internal" href="#chou2001" id="id8">[1]</a> and provides the same calculation as provided on
+the PseAAC webserver <a class="reference internal" href="#shen2008" id="id9">[7]</a>.</p>
+<a class="reference internal image-reference" href="_images/feat_pseaac1.png"><img alt="_images/feat_pseaac1.png" class="align-center" src="_images/feat_pseaac1.png" style="width: 640px;" /></a>
+</div>
+<div class="section" id="pseudo-amino-acid-composition-type-2">
+<h2>Pseudo amino acid composition type 2<a class="headerlink" href="#pseudo-amino-acid-composition-type-2" title="Permalink to this headline">¶</a></h2>
+<p>The type 2 pseudo amino acid composition calculates 20 + lambda features as
+introduced in <a class="reference internal" href="#chou2005" id="id10">[2]</a> and provides the same calculation as provided on
+the PseAAC webserver <a class="reference internal" href="#shen2008" id="id11">[7]</a>.</p>
+<a class="reference internal image-reference" href="_images/feat_pseaac2.png"><img alt="_images/feat_pseaac2.png" class="align-center" src="_images/feat_pseaac2.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="quasi-sequence-order-descriptors">
 <h2>Quasi sequence-order descriptors<a class="headerlink" href="#quasi-sequence-order-descriptors" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/feat_qso.png"><img alt="_images/feat_qso.png" class="align-center" src="_images/feat_qso.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="secondary-structure-composition">
 <h2>Secondary structure composition<a class="headerlink" href="#secondary-structure-composition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/feat_ssc.png"><img alt="_images/feat_ssc.png" class="align-center" src="_images/feat_ssc.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="per-secondary-structure-amino-acid-composition">
 <h2>Per secondary structure amino acid composition<a class="headerlink" href="#per-secondary-structure-amino-acid-composition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/feat_ssaac.png"><img alt="_images/feat_ssaac.png" class="align-center" src="_images/feat_ssaac.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="solvent-accessibility-composition">
 <h2>Solvent accessibility composition<a class="headerlink" href="#solvent-accessibility-composition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/feat_sac.png"><img alt="_images/feat_sac.png" class="align-center" src="_images/feat_sac.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="per-solvent-accessibility-class-amino-acid-composition">
 <h2>Per solvent accessibility class amino acid composition<a class="headerlink" href="#per-solvent-accessibility-class-amino-acid-composition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/feat_saaac.png"><img alt="_images/feat_saaac.png" class="align-center" src="_images/feat_saaac.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="codon-composition">
 <h2>Codon composition<a class="headerlink" href="#codon-composition" title="Permalink to this headline">¶</a></h2>
+<p>This feature category calculates the frequence of occurancy of each of the 64
+codons in a protein&#8217;s ORF sequence.</p>
+<a class="reference internal image-reference" href="_images/feat_cc.png"><img alt="_images/feat_cc.png" class="align-center" src="_images/feat_cc.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="codon-usage">
 <h2>Codon usage<a class="headerlink" href="#codon-usage" title="Permalink to this headline">¶</a></h2>
+<p>This feature category calculates the relative usage for each codon per amino
+acid in the protein sequence.</p>
+<a class="reference internal image-reference" href="_images/feat_cu.png"><img alt="_images/feat_cu.png" class="align-center" src="_images/feat_cu.png" style="width: 640px;" /></a>
+<p>To illustrate this, consider the following protein amino acid sequence,
+consisting of only alanines, and the
+corresponding ORF sequence:</p>
+<div class="highlight-python"><pre>amino acid:    A   A   A   A   A   A   A   A   A   A
+       ORF:   GCC GCC GCC GCC GCC GCA GCA GCA GCT GCT</pre>
+</div>
+<p>Since four different codons encode for alanine: GCT, GCC, GCA, and GCG, the
+example ORF sequence can only consist of these 4 codons. The codon usage
+feature calculates the relative frequency of occurance of these four codons,
+resulting in the following 4 feature values:</p>
+<div class="highlight-python"><pre>.       GCT    GCC    GCA    GCG
+        0.2    0.5    0.3    0.0</pre>
+</div>
+<p>All other codon values will be set to 0.0 in this example. In a real sequence,
+containing all 20 amino acids, this proredure is done for each amino acid,
+resulting in a total of 64 features, one per codon.</p>
+<p>TODO: special cases methionine and stop codons.</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="bibtex-bibliography-spice_features-0"><table class="docutils citation" frame="void" id="georgiev2009" rules="none">
+<p id="bibtex-bibliography-spice_features-0"><table class="docutils citation" frame="void" id="chou2001" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><span class="first last"><span><span><span><span><span><span>Alexander</span><span>&nbsp;</span><span>G</span></span><span> </span></span><span>Georgiev</span></span><span>.</span></span><span> </span><span><span>Interpretable numerical descriptors of amino acid space</span><span>.</span></span></span><span> </span><span><span><em><span>Journal of Computational Biology</span></em><span>, </span><span><span><span>16</span><span><span>(</span><span>5</span><span>)</span></span><span>:</span></span><span><span>703</span><span>–</span><span>723</span></span></span></span><span>, </span><span>2009</span><span>.</span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id8">[1]</a></td><td>Kuo-Chen Chou. Prediction of protein cellular attributes using pseudo-amino acid composition. <em>Proteins: Structure, Function, and Bioinformatics</em>, 43(3):246–255, 2001.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="chou2005" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[2]</a></td><td>Kuo-Chen Chou. Using amphiphilic pseudo amino acid composition to predict enzyme subfamily classes. <em>Bioinformatics</em>, 21(1):10–19, 2005.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="georgiev2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Alexander&nbsp;G Georgiev. Interpretable numerical descriptors of amino acid space. <em>Journal of Computational Biology</em>, 16(5):703–723, 2009.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="kyte1982" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[2]</td><td><span class="first last"><span><span><span><span><span><span>Jack</span><span> </span></span><span>Kyte</span></span><span> and </span><span><span><span><span>Russell</span><span>&nbsp;</span><span>F</span></span><span> </span></span><span>Doolittle</span></span></span><span>.</span></span><span> </span><span><span>A simple method for displaying the hydropathic character of a protein</span><span>.</span></span></span><span> </span><span><span><em><span>Journal of molecular biology</span></em><span>, </span><span><span><span>157</span><span><span>(</span><span>1</span><span>)</span></span><span>:</span></span><span><span>105</span><span>–</span><span>132</span></span></span></span><span>, </span><span>1982</span><span>.</span></span></span></td></tr>
+<tr><td class="label">[4]</td><td>Jack Kyte and Russell&nbsp;F Doolittle. A simple method for displaying the hydropathic character of a protein. <em>Journal of molecular biology</em>, 157(1):105–132, 1982.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="li2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id7">3</a>)</em> <span class="last"><span><span><span><span><span><span><span>Ze-Rong</span><span> </span></span><span>Li</span></span><span>, </span><span><span><span><span>Hong</span><span>&nbsp;</span><span>Huang</span></span><span> </span></span><span>Lin</span></span><span>, </span><span><span><span>LY</span><span>&nbsp;</span></span><span>Han</span></span><span>, </span><span><span><span>L</span><span>&nbsp;</span></span><span>Jiang</span></span><span>, </span><span><span><span>X</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>, and </span><span><span><span><span>Yu</span><span>&nbsp;</span><span>Zong</span></span><span> </span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>34</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W32–W37</span></span></span><span>, </span><span>2006</span><span>.</span></span></span></td></tr>
+<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id7">3</a>)</em> Ze-Rong Li, Hong&nbsp;Huang Lin, LY&nbsp;Han, L&nbsp;Jiang, X&nbsp;Chen, and Yu&nbsp;Zong Chen. PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. <em>Nucleic Acids Research</em>, 34(suppl 2):W32–W37, 2006.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="rao2011" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td><span class="first last"><span><span><span><span><span><span><span>HB</span><span>&nbsp;</span></span><span>Rao</span></span><span>, </span><span><span><span>F</span><span>&nbsp;</span></span><span>Zhu</span></span><span>, </span><span><span><span>GB</span><span>&nbsp;</span></span><span>Yang</span></span><span>, </span><span><span><span>ZR</span><span>&nbsp;</span></span><span>Li</span></span></span><span>, and </span><span><span><span>YZ</span><span>&nbsp;</span></span><span>Chen</span></span></span><span>.</span></span><span> </span><span><span>Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence</span><span>.</span></span></span><span> </span><span><span><em><span>Nucleic Acids Research</span></em><span>, </span><span><span><span>39</span><span><span>(</span><span>suppl 2</span><span>)</span></span><span>:</span></span><span>W385–W390</span></span></span><span>, </span><span>2011</span><span>.</span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[6]</a></td><td>HB&nbsp;Rao, F&nbsp;Zhu, GB&nbsp;Yang, ZR&nbsp;Li, and YZ&nbsp;Chen. Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. <em>Nucleic Acids Research</em>, 39(suppl 2):W385–W390, 2011.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="shen2008" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[7]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id11">2</a>)</em> Hong-Bin Shen and Kuo-Chen Chou. PseAAC: a flexible web server for generating various kinds of protein pseudo amino acid composition. <em>Analytical Biochemistry</em>, 373(2):386–388, 2008.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="vandenberg2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[5]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span><span>B.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>F.</span></span><span> </span></span><span>Nijkamp</span></span><span>, </span><span><span><span><span>M.</span><span>&nbsp;</span><span>J.</span><span>&nbsp;</span><span>T.</span></span><span> </span></span><span>Reinders</span></span><span>, </span><span><span><span>L.</span><span>&nbsp;</span></span><span>Wu</span></span><span>, </span><span><span><span><span>H.</span><span>&nbsp;</span><span>J.</span></span><span> </span></span><span>Pel</span></span><span>, </span><span><span><span><span>J.</span><span>&nbsp;</span><span>A.</span></span><span> </span></span><span>Roubos</span></span></span><span>, and </span><span><span><span>D.</span><span>&nbsp;</span></span><span><span>De</span><span>&nbsp;</span><span>Ridder</span></span></span></span><span>.</span></span><span> </span><span><span>Sequence-based prediction of protein secretion success in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><span>In</span><span> </span><span><em><span>Proceedings of Pattern Recegnition in Bioinformatics 2010</span></em><span>, </span><span><span>3</span><span>–</span><span>14</span></span><span>.</span></span></span><span> </span><span><span>Springer</span><span>, </span><span>2010</span><span>.</span></span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[8]</a></td><td>B.&nbsp;A. van&nbsp;den Berg, J.&nbsp;F. Nijkamp, M.&nbsp;J.&nbsp;T. Reinders, L.&nbsp;Wu, H.&nbsp;J. Pel, J.&nbsp;A. Roubos, and D.&nbsp;De&nbsp;Ridder. Sequence-based prediction of protein secretion success in \textit Aspergillus niger. In <em>Proceedings of Pattern Recegnition in Bioinformatics 2010</em>, 3–14. Springer, 2010.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="vandenberg2012" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[6]</a></td><td><span class="first last"><span><span><span><span><span><span><span><span>Bastiaan</span><span>&nbsp;</span><span>A</span></span><span> </span></span><span><span><span>van</span><span>&nbsp;</span><span>den</span></span><span> </span></span></span><span>Berg</span></span><span> and </span><span>others</span></span><span>.</span></span><span> </span><span><span>Exploring sequence characteristics related to high-level production of secreted proteins in \textit Aspergillus niger</span><span>.</span></span></span><span> </span><span><span><em><span>PLoS ONE</span></em><span>, </span><span><span><span>7</span><span><span>(</span><span>10</span><span>)</span></span><span>:</span></span><span>e45869</span></span></span><span>, </span><span>2012</span><span>.</span></span></span></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[9]</a></td><td>Bastiaan&nbsp;A van&nbsp;den Berg and others. Exploring sequence characteristics related to high-level production of secreted proteins in \textit Aspergillus niger. <em>PLoS ONE</em>, 7(10):e45869, 2012.</td></tr>
 </tbody>
 </table>
 </p>

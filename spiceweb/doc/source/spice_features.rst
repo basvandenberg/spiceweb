@@ -9,7 +9,7 @@ use the *Calculate* button under the  *Features* tab to calculate a range of
 sequence-based features.
 
 .. image:: img/featcalc0.png
-   :width: 550px
+   :width: 640px
    :align: center
 
 The following sections will bescribe the different feature categories that are
@@ -25,15 +25,15 @@ studies.
 Amino acid composition
 ----------------------
 
-The same as in the example given in the introduction, the amino acids
-composition calculates the fraction of each amino acid in a protein sequence.
+The amino acids composition calculates the frequency of occurance for each
+of the 20 amino acids in a protein sequence.
 
 .. image:: img/featcalc1.png
-   :width: 550px
+   :width: 640px
    :align: center
 
-Having 20 amino acids, this will result in 20 features. If a sequence contains
-any other than the 20 unambiguous amino acid letters will be ignored.
+Having 20 amino acids, this will result in 20 features. Any other than the 20
+unambiguous amino acid letters will be ignored.
 
 To illustrate this, consider the following (unrealistic) protein sequence,
 which contains two occurences of each amino acid in which each amino acid
@@ -42,10 +42,11 @@ obtains the value 0.05::
     >>aac_test
     MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV
 
-will result in a amino acid feature vector::
+will result in the following feature vector::
 
-    aac_1_A1    aac_1_R1    ...     aac_1_V1
-    0.05        0.05        ...     0.05
+    .              A1          R1       ...        V1
+    
+    aac_test      0.05        0.05      ...       0.05
 
 As a parameter, users can specify in how many (equal sized) segments a protein
 should be divided, before calculating the amino acid composition of each
@@ -60,14 +61,43 @@ With 2 as number of segments parameter, the sequence will be split in two::
 The amino acid composition of both segments is calculated which together
 results in a feature vector with 40 features::
 
-    aac_2_A1   ...     aac_2_V1    ...     aac_2_A2    aac_2_V2
-    0.10       ...     0.00                0.0         0.10
+    .              A1   ...   V1   ...   A2   ...   V2
+
+    aac_test      0.10  ...  0.00  ...  0.00  ...  0.10
 
 
 
 ---------------------
 Dipeptide composition
 ---------------------
+
+Similar to the amino acid composition, the dipeptide composition calculates the
+frequency of occurance of each of the 400 possible dipeptides in a protein
+sequence.
+
+.. image:: img/feat_dipep.png
+   :width: 640px
+   :align: center
+
+Having 400 possible amino acid pairs (dipeptides), this will result in 400
+features. Dipeptides containing any other than the 20 unambiguous amino acid
+letters will be ignored.
+
+As a parameter, users can specify in how many (equal sized) segments a protein
+should be divided, before calculating the dipeptide composition of each
+segmente separately. To limit the number of features and to avoid too sparse
+feature matrices, the maximal number of segments is set to 2.
+
+For an example sequence that contains 10 dipeptides::
+
+    >>dc_test
+    MAAARRNNDDC
+
+The resulting feature vector wil be::
+
+    .           AA      AR   ...   AV      RA      RR         VV
+    
+    dc_test    0.20    0.10  ...  0.00    0.00    0.10  ...  0.00
 
 
 
@@ -79,16 +109,22 @@ This feature category returns the amino acid counts of a fixed length sequence
 end, either using the 5` or the 3` side.
 
 .. image:: img/featcalc2.png
-   :width: 550px
+   :width: 640px
    :align: center
 
-To illustrate this, consider the following (unrealistic) protein sequence,
+For example sequence::
 
-    >>aac_test
+    >>psaac_test
     MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV
 
-The 5' amino acid count for length 10 will result in this feature vector in
-which the counts for M, A, R, N, and D are set to 2, while the remaining 15
+the 5' amino acid count for length 10 will result in the following feature
+vector::
+
+    .           A   R   N   D   C   E   Q   G   H  ...  M  ...  V
+
+    psaac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0
+
+in which the counts for M, A, R, N, and D are set to 2, while the remaining 15
 features are set to 0.
 
 
@@ -99,6 +135,21 @@ Sequence length
 
 This category calculates only one feature, the length of the amino acid
 sequence.
+
+.. image:: img/feat_len.png
+   :width: 640px
+   :align: center
+
+The example sequence::
+
+    >>>len_test
+    MMAARRNNDD
+
+Will result in the following feature vector::
+
+    .           len
+
+    len_test     10
 
 
 
@@ -188,7 +239,7 @@ This feature uses an amino acid scale to tranform an amino acid into a
 resulting profile as feature value.
 
 .. image:: img/featcalc3.png
-   :width: 550px
+   :width: 640px
    :align: center
 
 Amino acid scales relate to different amino acid properties, such as
@@ -202,19 +253,42 @@ Signal peaks area
 -----------------
 
 The same as the previous feature, this feature uses an amino acid scale to
-transform an amino acid sequence into a (smoothed) property profile / signal.
-Instead of taking the average profile value, this feature calculates the area
-under the profile curve under some given threshold (Fig.1C).
+transform an amino acid sequence into a (smoothed) property profile / signal
+(Fig.1A & Fig.1C). Instead of taking the average profile value, this feature
+calculates the area under the profile curve under some given threshold
+(Fig.1C).
 
 .. image:: img/featcalc4.png
-   :width: 550px
+   :width: 640px
    :align: center
 
 
 
------------------------------
-Pseudo amino acid composition
------------------------------
+------------------------------------
+Pseudo amino acid composition type 1
+------------------------------------
+
+The type 1 pseudo amino acid composition calculates 20 + lambda features as
+introduced in :cite:`chou2001` and provides the same calculation as provided on
+the PseAAC webserver :cite:`shen2008`. 
+
+.. image:: img/feat_pseaac1.png
+   :width: 640px
+   :align: center
+
+
+
+------------------------------------
+Pseudo amino acid composition type 2
+------------------------------------
+
+The type 2 pseudo amino acid composition calculates 20 + lambda features as
+introduced in :cite:`chou2005` and provides the same calculation as provided on
+the PseAAC webserver :cite:`shen2008`. 
+
+.. image:: img/feat_pseaac2.png
+   :width: 640px
+   :align: center
 
 
 
@@ -222,35 +296,57 @@ Pseudo amino acid composition
 Quasi sequence-order descriptors
 --------------------------------
 
+.. image:: img/feat_qso.png
+   :width: 640px
+   :align: center
 
 
 -------------------------------
 Secondary structure composition
 -------------------------------
 
+.. image:: img/feat_ssc.png
+   :width: 640px
+   :align: center
 
 
 ----------------------------------------------
 Per secondary structure amino acid composition
 ----------------------------------------------
 
+.. image:: img/feat_ssaac.png
+   :width: 640px
+   :align: center
 
 
 ---------------------------------
 Solvent accessibility composition
 ---------------------------------
 
+.. image:: img/feat_sac.png
+   :width: 640px
+   :align: center
 
 
 ------------------------------------------------------
 Per solvent accessibility class amino acid composition
 ------------------------------------------------------
 
+.. image:: img/feat_saaac.png
+   :width: 640px
+   :align: center
 
 
 -----------------
 Codon composition
 -----------------
+
+This feature category calculates the frequence of occurancy of each of the 64
+codons in a protein's ORF sequence.
+
+.. image:: img/feat_cc.png
+   :width: 640px
+   :align: center
 
 
 
@@ -258,7 +354,33 @@ Codon composition
 Codon usage
 -----------
 
+This feature category calculates the relative usage for each codon per amino
+acid in the protein sequence.
 
+.. image:: img/feat_cu.png
+   :width: 640px
+   :align: center
+
+To illustrate this, consider the following protein amino acid sequence,
+consisting of only alanines, and the
+corresponding ORF sequence::
+
+    amino acid:    A   A   A   A   A   A   A   A   A   A
+           ORF:   GCC GCC GCC GCC GCC GCA GCA GCA GCT GCT
+
+Since four different codons encode for alanine: GCT, GCC, GCA, and GCG, the
+example ORF sequence can only consist of these 4 codons. The codon usage
+feature calculates the relative frequency of occurance of these four codons,
+resulting in the following 4 feature values::
+
+    .       GCT    GCC    GCA    GCG
+            0.2    0.5    0.3    0.0
+
+All other codon values will be set to 0.0 in this example. In a real sequence,
+containing all 20 amino acids, this proredure is done for each amino acid,
+resulting in a total of 64 features, one per codon. 
+
+TODO: special cases methionine and stop codons.
 
 ----------
 References
