@@ -289,15 +289,3 @@ class App:
     def index(self):
         url = '%sapp/projects/list' % (self.root_url)
         raise cherrypy.HTTPRedirect(url)
-
-    # TODO check if needed... some helper functions
-    def redirect_to_first_sub(self):
-        new_uri = '%s%s/%s/%s' % (self.root_url, main_menu[self.menu_index],
-                self.project_id, sub_menus[self.menu_index][0])
-        raise cherrypy.HTTPRedirect(new_uri)
-
-    def project_not_exist(self):
-        kw_args = self.get_template_args()
-        template_name = 'project_not_exist'
-        return get_template('%s.html' % (template_name), **kw_args)
-
