@@ -173,7 +173,6 @@ class Root:
 
         # authentication links (because I want them in root, not /auth/login)
         self.login = self.a.login
-        #self.alogin = self.a.alogin
         self.register = self.a.register
         self.aregister = self.a.aregister
         self.forgot_password = self.a.forgot_password
@@ -181,12 +180,14 @@ class Root:
         self.change_password_once = self.a.change_password_once
         self.achange_password_once = self.a.achange_password_once
         self.activate_account = self.a.activate_account
-        self.logout = self.a.logout
         # the following are only accessible by authenticated users
+        self.logout = self.a.logout
         self.account = self.a.account
+        self.delete_account = self.a.delete_account
+        self.change_password = self.a.change_password
+        self.achange_password = self.a.achange_password
 
         self.app = App(self.a, ROOT_URL, self.project_dir, self.ref_data_dir)
-        #self.news = news.News()
 
     # wrapper around logout to remove active project from session data
     @cherrypy.expose
@@ -194,52 +195,17 @@ class Root:
         cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
         return self.a.alogin(username, password)
 
-    # wrappers to disallow access for guest account
-    @cherrypy.expose
-    def delete_account(self):
-        if(self.is_guest_user()):
-            return self.no_guest_access()
-        else:
-            return self.a.delete_account()
-
+    # wrapper arount delete account, to delete its project data as well
     @cherrypy.expose
     def adelete_account(self, username, password):
-        if(self.is_guest_user()):
-            return None
-        else:
-            # delete project dir
-            if(self.a.udb.verify_password(username, password)):
-                pm = project_management.ProjectManager(self.project_dir)
-                pm.set_user(username)
-                shutil.rmtree(pm.user_dir)
-                cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
-            # delete account
-            return self.a.adelete_account(username, password)
-
-    @cherrypy.expose                                                            
-    def change_password(self):            
-        if(self.is_guest_user()):
-            return self.no_guest_access()
-        else:
-            return self.a.change_password()
-                                                                               
-    @cherrypy.expose                                                            
-    def achange_password(self, password_old, password_new):  
-        if(self.is_guest_user()):
-            return None
-        else:
-            return self.a.achange_password(password_old, password_new)
-
-    def no_guest_access(self):
-        kw_args = get_template_args()
-        template_name = 'no_guest_access'
-        return get_template('%s.html' % (template_name), **kw_args)
-
-    def is_guest_user(self):
-        guest_users = []
-        guest_users.extend(['guest%i' % (i) for i in xrange(10)])
-        user = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
-        return not user == None and user in guest_users
+        # delete project dir (after password verification)
+        if(self.a.udb.verify_password(username, password)):
+            pm = project_management.ProjectManager(self.project_dir)
+            pm.set_user(username)
+            shutil.rmtree(pm.user_dir)
+            cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
+        # delete account
+        return self.a.adelete_account(username, password)
 
     # info pages
     @cherrypy.expose
