@@ -173,7 +173,7 @@ class Root:
 
         # authentication links (because I want them in root, not /auth/login)
         self.login = self.a.login
-        self.alogin = self.a.alogin
+        #self.alogin = self.a.alogin
         self.register = self.a.register
         self.aregister = self.a.aregister
         self.forgot_password = self.a.forgot_password
@@ -187,6 +187,12 @@ class Root:
 
         self.app = App(self.a, ROOT_URL, self.project_dir, self.ref_data_dir)
         #self.news = news.News()
+
+    # wrapper around logout to remove active project from session data
+    @cherrypy.expose
+    def alogin(self, username, password):
+        cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
+        return self.a.alogin(username, password)
 
     # wrappers to disallow access for guest account
     @cherrypy.expose

@@ -48,13 +48,35 @@ class Classification:
         return cherrypy.session.get(Project.SESSION_PROJECT_KEY, None)
 
     def fetch_session_data(self):
+
+        # retrieve logged in user
         self.user_id = self.auth.get_user()
+
+        # if no logged in user, request unregistered user id from cookie
         if(self.user_id is None):
-            #self.user_id = cherrypy.session.id
             self.user_id = cherrypy.request.cookie['spice.session'].value
+
+        # fetch current project id from session data
         self.project_id = self.get_project_id()
+
+        if not(self.project_id is None):
+
+            # fetch project ids for current user
+            existing_projects = [p[0] for p in
+                                 self.project_manager.get_projects()]
+
+            # if user does not have project with project id
+            if not(self.project_id in existing_projects):
+
+                # reset session project id to None
+                cherrypy.session[Project.SESSION_PROJECT_KEY] = None
+
+                # set project id to None
+                self.project_id = None
+
         self.project_manager.set_user(self.user_id)
         self.project_manager.set_project(self.project_id)
+    
 
     def get_url(self, smi):
         return '%s%s%s' % (self.root_url, self.mm_url, self.sub_menu[smi])

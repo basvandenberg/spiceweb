@@ -45,11 +45,32 @@ class Project:
         return cherrypy.session.get(self.SESSION_PROJECT_KEY, None)
 
     def fetch_session_data(self):
+
+        # retrieve logged in user
         self.user_id = self.auth.get_user()
+
+        # if no logged in user, request unregistered user id from cookie
         if(self.user_id is None):
-            #self.user_id = cherrypy.session.id
             self.user_id = cherrypy.request.cookie['spice.session'].value
+
+        # fetch current project id from session data
         self.project_id = self.get_project_id()
+
+        if not(self.project_id is None):
+
+            # fetch project ids for current user
+            existing_projects = [p[0] for p in
+                                 self.project_manager.get_projects()]
+
+            # if user does not have project with project id
+            if not(self.project_id in existing_projects):
+
+                # reset session project id to None
+                cherrypy.session[self.SESSION_PROJECT_KEY] = None
+
+                # set project id to None
+                self.project_id = None
+
         self.project_manager.set_user(self.user_id)
         self.project_manager.set_project(self.project_id)
     
@@ -149,14 +170,17 @@ class Project:
         
         # first check if the provided project_id excists
         existing_projects = [p[0] for p in self.project_manager.get_projects()]
+
         if not(project_id in existing_projects):
+
+            # return message that this project does not exist
             kw_args = self.get_template_args(smi)
             template_f = 'no_such_project.html'
             return spiceweb.get_template(template_f, **kw_args)
 
         # store project id in session
         cherrypy.session[self.SESSION_PROJECT_KEY] = project_id
-
+        
         # reset the session data, using the new project id
         self.fetch_session_data()
 
