@@ -1,23 +1,21 @@
-.. _spice_features:
+.. _features_spice:
 
 ==============
 SPiCE features
 ==============
 
-Once you have initiated a new project with a set of protein sequences, you can
-use the *Calculate* button under the  *Features* tab to calculate a range of
-sequence-based features.
+After project initiation, you can use the *Calculate* button under the
+*Features* tab to calculate a range of sequence-based protein features.
 
 .. image:: img/featcalc0.png
    :width: 640px
    :align: center
 
-The following sections will bescribe the different feature categories that are
-offered by the SPiCE website. Some of these features were used in our previous
-research :cite:`vandenberg2010`, :cite:`vandenberg2012`. The rest of the
-features are based on those offered by the PROFEAT website :cite:`li2006`,
-:cite:`rao2011`, who extracted their features from different sequence-based
-studies.
+The following sections bescribe the different feature categories that can be
+calculated on the SPiCE website. Some of these features were used in our
+previous research :cite:`vandenberg2010` :cite:`vandenberg2012`, and the rest
+was extracted from other feature calculation methods :cite:`li2006`
+:cite:`rao2011`, :cite:`shen2008`, :cite:`cao2013`.
 
 
 
@@ -157,7 +155,8 @@ Will result in the following feature vector::
 Property Composition / Transition / Distribution (CTD)
 ------------------------------------------------------
 
-The Composition, Transition, Distribution feature is derived from
+The Composition, Transition, Distribution feature is introduced in
+:cite:`dubchak1995`, the implementation is based on the description in
 :cite:`li2006`. 
 
 For these features, the protein sequence is first translated
@@ -189,22 +188,27 @@ mapped to a three letter charge alphabet as follows::
     BBBCBBBBBBBBBBCACBCBBBCBBBBBBBBBBBBBBBBBCBBBBBBBBCBBABCBBBBBBABBBBBABB
 
 For the mapped sequence, three types of features are calculated. First the
-letter composition::
+property letter composition::
 
     composition A:  4 / 70 = 0.057
+
     composition B: 58 / 70 = 0.114
+
     composition C:  8 / 70 = 0.829
 
-Secondly the letter relative transition occurances, which is the number of
-transitions from A to B and from B to A divided by the sequence length - 1::
+Secondly the relative frequency of occurance of letter transitions. For letters
+A and B this is the number of transitions from A to B and from B to A divided
+by the sequence length - 1::
 
     transition A-B B-A:  6 / 69 = 0.087
+
     transition A-C C-A:  2 / 69 = 0.029
+
     transition B-C C-B: 14 / 69 = 0.203
 
-Finally the distributation of the letters over the sequence is captured by 5
-features per letter. If we consider letter C, the first feature is the
-(procentual) sequence position where the first occurance of the C is::
+Finally the property letter distributation is captured by 5 features per
+property letter. If we consider letter C, the first feature is the (procentual)
+sequence position of the first occurance of the C::
 
     distribution C first:  4 / 70 = 0.057
 
@@ -213,8 +217,11 @@ respectively 25%, 50%, 75%, and 100% of the letters C is on and before this
 position::
 
     distribution C  25%: 15/70 = 0.214
+
     distribution C  50%: 19/70 = 0.271
+
     distribution C  75%: 41/70 = 0.586
+
     distribution C 100%: 55/70 = 0.786
 
 The same five features are calculated for letters A and B as well. In total the
@@ -226,7 +233,20 @@ CTD feature category provides 3 + 3 + 5 x 3 = 21 features for a given property.
 Autocorrelation
 ---------------
 
-The autocorrelation feature is derived from :cite:`li2006`. 
+The autocorrelation captures correlations between residue properties at a given
+distance over the whole sequence.
+
+Based on the user-defined amino acid scale (see :ref:`feature_data_sources`),
+a protein sequence is first translated to a property profile. Than, for a given
+distance between two residues (the *lag* parameter), the method traverses over
+the protein sequence, calculating a correlation measure for all residue pairs
+at distance *lag*. Three different autocorrelation calculation types are
+offered (the *type* parameter), all using a different correlation measure:
+normalized Moreau-Broto :cite:`moreau1980`, Moran :cite:`moran1950`, and Geary
+:cite:`geary1954`.
+
+The implementation is based on the description is :cite:`li2006`, more
+information about the implementation details can be found there.
 
 
 
@@ -234,9 +254,14 @@ The autocorrelation feature is derived from :cite:`li2006`.
 Signal average
 --------------
 
-This feature uses an amino acid scale to tranform an amino acid into a
-(smoothed) property profile (Fig.1A & Fig.1C) and uses the average value of the
-resulting profile as feature value.
+This feature translates a protein sequence into a property profile using
+a user-defined amino acid scale (see :ref:`feature_data_sources`), and
+calculates the average profile (signal) value as feature.
+
+The *window* and *edge* parameter determine how much the profile is smoothed
+before calculating the feature. A larger window results in more a more smooted
+profile. The edge detirmene how much influence the residues at the edge of the
+window have on the smoothing (see also Fig.1B in :ref:`feature_data_sources`).
 
 .. image:: img/featcalc3.png
    :width: 640px
@@ -252,11 +277,9 @@ indication of the global hydropathicity of the protein.
 Signal peaks area
 -----------------
 
-The same as the previous feature, this feature uses an amino acid scale to
-transform an amino acid sequence into a (smoothed) property profile / signal
-(Fig.1A & Fig.1C). Instead of taking the average profile value, this feature
-calculates the area under the profile curve under some given threshold
-(Fig.1C).
+The same as the previous feature, but instead of taking the average profile
+value, this feature calculates the area under the profile curve under and above
+some given threshold (see also Fig.1C in :ref:`feature_data_sources`).
 
 .. image:: img/featcalc4.png
    :width: 640px
@@ -270,7 +293,9 @@ Pseudo amino acid composition type 1
 
 The type 1 pseudo amino acid composition calculates 20 + lambda features as
 introduced in :cite:`chou2001` and provides the same calculation as provided on
-the PseAAC webserver :cite:`shen2008`. 
+the PseAAC webserver :cite:`shen2008`. The same amino acid scales as on the
+PseAAC webserver are also provided, of which one or more can be selected.
+
 
 .. image:: img/feat_pseaac1.png
    :width: 640px
@@ -284,7 +309,8 @@ Pseudo amino acid composition type 2
 
 The type 2 pseudo amino acid composition calculates 20 + lambda features as
 introduced in :cite:`chou2005` and provides the same calculation as provided on
-the PseAAC webserver :cite:`shen2008`. 
+the PseAAC webserver :cite:`shen2008`. The same amino acid scales as on the
+PseAAC webserver are also provided, of which one or more can be selected.
 
 .. image:: img/feat_pseaac2.png
    :width: 640px
@@ -296,6 +322,8 @@ the PseAAC webserver :cite:`shen2008`.
 Quasi sequence-order descriptors
 --------------------------------
 
+The quasi-sequence-order descriptors are introduced in :cite:`chou2000`.
+
 .. image:: img/feat_qso.png
    :width: 640px
    :align: center
@@ -304,6 +332,10 @@ Quasi sequence-order descriptors
 -------------------------------
 Secondary structure composition
 -------------------------------
+
+Secondary structure sequences may contain three letters, the same that are used
+by secondanry structure prediction method PSIPRED: C (random coil), H (helix),
+E (strand). This feature calculates the composition of these three letters.
 
 .. image:: img/feat_ssc.png
    :width: 640px
@@ -314,14 +346,48 @@ Secondary structure composition
 Per secondary structure amino acid composition
 ----------------------------------------------
 
+This feature category calculates the amino acid composition per secondary
+structure element.
+
 .. image:: img/feat_ssaac.png
    :width: 640px
    :align: center
+
+For example, for the following amino acid and corresponding secondary structure
+sequence::
+
+    protein:     A A A A A A F F F F F F D D D D D D
+                 | | . . . . . . * * * * . . | | | | 
+    sec. struct: C C H H H H H H E E E E H H C C C C
+
+The sequences will be split per secondary structure type, gathering all
+residues that are annotated with the same secondary structure letter::
+
+    C (random coil): A A D D D D
+
+    H (helix):       A A A A F F D D
+
+    E (strand):      F F F F
+
+The composition of these three subsequence is than calculated and returned as
+features::
+
+    .    |        coil        |       helix        |       strand       |
+            CA     CD     CF     HA     HD     HF     EA     ED     EF
+    
+           0.33   0.66   0.00   0.50   0.25   0.25   0.00   0.00   1.00
+
+This example only shows the composition of three amino acids (A,F,D), resulting
+in 3 x 3 = 9 features. When using all amino acids, 3 x 20 = 60 features are
+returned.  
 
 
 ---------------------------------
 Solvent accessibility composition
 ---------------------------------
+
+Solvent accessibility sequences may contain three letters: B (burried),
+E (exposed). This feature calculates the composition of these two letters.
 
 .. image:: img/feat_sac.png
    :width: 640px
@@ -332,10 +398,38 @@ Solvent accessibility composition
 Per solvent accessibility class amino acid composition
 ------------------------------------------------------
 
+This feature category calculates the amino acid composition per solvent
+accessibility class (buried/exposed).
+
 .. image:: img/feat_saaac.png
    :width: 640px
    :align: center
 
+For example, for the following amino acid and corresponding solvent
+accessibility sequence::
+
+    protein:     A A A A A A F F F F F F D D D D D D
+                 . . . . | | | | . . | | | | . . . .
+    solvaccess:  E E E E B B B B E E B B B B E E E E
+
+The sequences will be split in a list with buried and a list with exposed amino
+acids::
+
+    E: A A A A F F D D D D
+
+    B: A A F F F F D D
+
+The composition of these two subsequence is than calculated and returned as
+features::
+
+    .    |      exposed       |       buried       |       
+            EA     ED     EF     BA     BD     BF   
+    
+           0.40   0.40   0.20   0.25   0.25   0.50
+
+This example only shows the composition of three amino acids (A,F,D), resulting
+in 2 x 3 = 6 features. When using all amino acids, 2 x 20 = 40 features are
+returned.  
 
 -----------------
 Codon composition
@@ -380,7 +474,7 @@ All other codon values will be set to 0.0 in this example. In a real sequence,
 containing all 20 amino acids, this proredure is done for each amino acid,
 resulting in a total of 64 features, one per codon. 
 
-TODO: special cases methionine and stop codons.
+.. TODO: special cases methionine and stop codons.
 
 ----------
 References

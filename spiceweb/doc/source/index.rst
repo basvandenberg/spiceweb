@@ -15,7 +15,7 @@ Contents:
    tutorial1
    features
    feature_data_sources
-   spice_features
+   features_spice
    file_formats
    user_accounts
    command_line_tools

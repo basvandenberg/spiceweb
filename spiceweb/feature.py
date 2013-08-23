@@ -314,7 +314,8 @@ class Feature:
                 feat_name = id_to_name[feat_id]
 
             str_data += '<tr id=%s>\n' % (fid)
-            str_data += '    <td>%s</td>' % (featcat_name)
+            str_data += '    <td>%s</td>\n' % (fid)
+            str_data += '    <td>%s</td>\n' % (featcat_name)
             str_data += '    <td>%s</td>\n' % (feat_param)
             str_data += '    <td>%s</td>\n' % (feat_name)
             str_data += '    <td class="n">%.2f</td>\n' % (tval)

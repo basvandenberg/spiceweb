@@ -68,35 +68,55 @@ subsections.
 Amino acid sequences
 ^^^^^^^^^^^^^^^^^^^^
 
-- For protein (amino acid) sequences the following letters are allowed::
+For protein (amino acid) sequences the following letters are allowed::
 
-    unambiguous amino acids: ARNDCEQGHILKMFPSTWYV
-    ambiguous amino acids: BJZX
-    special amino acids: UO
-    terminal character: *
+    unambiguous amino acids: A R N D C E Q G H I L K M F P S T W Y V
+    ambiguous amino acids:   B J Z X
+    special amino acids:     U O
+    terminal character:      *
+
+**Note:** Only the unambiguous amino acids are considered for most calculated
+features, the other characters are ignored in this case.
 
 ^^^^^^^^^^^^^^^^^^^^
 Nucleotide sequences
 ^^^^^^^^^^^^^^^^^^^^
 
-- For ORF (nucleotide) sequences the following letters are allowed::
+For ORF (nucleotide) sequences the following letters are allowed::
 
-    unambiguous nucleotides: TCAG
-    ambiguous nucleotides: MRWSYKVHDBN
+    unambiguous nucleotides: T C A G
+    ambiguous nucleotides:   M R W S Y K V H D B N
 
-**Note:** Only the unambiguous amino acids and unambiguous nucleotides are
-considered for most calculated features, the other characters are ignored in
-this case.
+**Note:** Only the unambiguous nucleotides are considered for most calculated
+features, the other characters are ignored in this case.
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Secondary structure sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+For secondary structure sequences the following letters are allowed, which are
+the same as used by secondary structure prediction method PSIPRED::
+
+    helix:       H
+    strand:      E
+    random coil: R
+
+**Note** A protein's secondary structure sequence should have the same length
+as its amino acid seqeunce. However, SPiCE does not check for this when
+uploading a FASTA file with secondary structures!
+
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Solvent accessibility sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+For secondary structure sequences the following letters are allowed::
 
+    exposed: E
+    buried:  B
+
+**Note** A protein's solvent accessibility sequence should have the same length
+as its amino acid seqeunce. However, SPiCE does not check for this when
+uploading a FASTA file with solvent accessibility sequences!
 
 -------------
 Labeling file
