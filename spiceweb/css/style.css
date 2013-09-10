@@ -265,7 +265,7 @@ div.news_item div.date {
 
 /* Static menu at the top header *********************************************/
 
-div#header_menu {
+nav#header_menu {
     width: 900px;
     height: 20px;
     margin: 0px auto;
@@ -277,20 +277,18 @@ div#header_menu {
     font-size: 11pt;
     padding: 2px 40px;
 }
-
-div#header_menu a {
+nav#header_menu a {
     color: #babdb6;
     padding-right: 10px;
 }
-
-div#header_menu a.active {
+nav#header_menu a.active {
     color: #ffffff;
     font-weight: bold;
 }
 
 /* Colored main menu *********************************************************/
 
-div#main_menu { 
+nav#main_menu { 
     width: 932px;
     height: 32px;
     margin: 5px auto;

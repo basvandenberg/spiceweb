@@ -46,7 +46,7 @@
   <%block name="scripts">
   </%block>
 
-  <meta charset="utf-8">
+  <!--meta charset="utf-8"-->
   <title>SPiCE - Sequence-based Protein Classification and Exploration</title>
 
 </head>
@@ -56,17 +56,17 @@
 ###############################################################################
 ## the top-right header menu items
 ###############################################################################
-<div id="header_menu">
+<nav id="header_menu">
 % for index, (name, url) in enumerate(header_menu):
 % if header_menu_index == index:
   <a href=${root_url}${url} class="active">${name}</a>
 % elif name == 'documentation':
-  <a href=${root_url}${url} target="_tab">${name}</a>
+  <a href=${root_url}${url} target="_blank">${name}</a>
 % else:
   <a href=${root_url}${url}>${name}</a>
 % endif
 % endfor
-</div>
+</nav>
 
 ###############################################################################
 ## header text
@@ -82,11 +82,11 @@
 ## menu bar (with current menu active)
 ###############################################################################
 
-<div id="main_menu">
+<nav id="main_menu">
 % for index, (name, url) in enumerate(main_menu):
     <a class="menu_item ${name}${' menu_active' if main_menu_index == index else ''}" href="${root_url}${url}">${name}</a>
 % endfor
-</div>
+</nav>
 
 ###############################################################################
 ## show current user id and project id when provided in project bar
@@ -112,7 +112,7 @@
 % endif
 
 % if user_id and not '@' in user_id:
-    <div class="project_item">user: <b>unregistered user</b> <a href="#"
+    <div class="project_item">user: <b>unregistered user</b> <a
 class="info-button" data-toggel="popover" data-trigger="click"
 data-placement="bottom" data-content="
 <p>
