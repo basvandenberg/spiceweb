@@ -17,6 +17,7 @@ Contents:
    feature_data_sources
    features_spice
    file_formats
+   example_projects
    user_accounts
    command_line_tools
 

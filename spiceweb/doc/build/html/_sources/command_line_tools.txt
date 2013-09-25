@@ -4,7 +4,12 @@
 Command line tools
 ==================
 
-SPiCE can also be used locally using the command line. 
+SPiCE can also be used locally using the command line using Python package
+``_spice``. This package contains a feature extraction (``featext``) module that
+can be used for features calculation, a ``classification`` module to train
+classifiers and a ``classify`` module to test a trained classifier.
+
+.. _spice: https://github.com/basvandenberg/spice
 
 ----------
 featext.py
@@ -18,10 +23,10 @@ classification.py
 classify.py
 -----------
 
-
-Besides result scores and settings, the zip-file will contain a trained
-Scikit-learn classifier ``classifier.joblib.pkl`` which is pickled using the
-``joblib`` module which is offered as part of the ``scikit-learn`` package.
+Downloaded classification results contain, desides performance scores and used
+settings, a Scikit-learn classifier that was trained on the entire data set:
+``classifier.joblib.pkl``. This file is pickled using the ``joblib`` module
+which is offered as part of the ``scikit-learn`` package.
 
 Loading and running this classifier could be done with a python script like the
 following:
@@ -32,8 +37,8 @@ following:
     clf = joblib.load('path/to/classifier.joblib.pkl')
 
     '''
-    data = load your data here, should be a numpy matrix with the features that
-           where used to train the classifier as columns. 
+    data = use featext to calculate features for your proteins, this should
+           be the same features as those used for training the classifier.
     '''
 
     # prediction class labels on data set
@@ -49,6 +54,3 @@ following:
     if(hasattr(clf, 'decision_function')):
         decision = clf.decision_function(data)
 
-Our ``featext`` and ``featmat`` module that are part of the ``spice`` package
-could be used to calculate the features and obtain the feature matrix ``data``
-that is required to run the classification.

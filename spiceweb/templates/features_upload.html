@@ -17,13 +17,13 @@
 
 <form id="upload-custom-features" class="form-horizontal" enctype="multipart/form-data" method="post">
 
-    <legend>Upload your own feature matrix</legend>
+    <legend>
+        Upload your own feature matrix
+        <a class="pull-right" href="${root_url}doc/file_formats.html#feature-matrix-file" target="_tab">help</a>
+    </legend>
 
     <div class="control-group">
         <label class="control-label" for="feature_matrix_f">Feature matrix file 
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a text file that contains the feature matrix data. The feature matrix should be in numpy format. The rows are the objects, so the number of rows should match the number of proteins in this project, the columns are the features." title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
         </label>
         <div class="controls" id="feature_matrix">
             <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -44,9 +44,6 @@
 
     <div class="control-group">
         <label class="control-label" for="object_ids_f">Protein ids file 
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a text file with protein ids in the same order as the feature matrix rows. Each line should contain only one protein id and the number the ids should match the protein ids in this project." title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
         </label>
         <div class="controls" id="object_ids">
             <div class="fileupload fileupload-new" data-provides="fileupload">

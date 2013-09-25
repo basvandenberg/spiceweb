@@ -452,8 +452,13 @@ another data set. To do so, you first need to create a new project with a
 FASTA file that contains the sequences for which you would like to have
 predicted classes. 
 
-Go to the details page of one of the classifiers, click the **Run** button and
-use the dropdown box to select the *aniger-secretion* data set. 
+^^^^^^^^^^^^^^^^^^^^
+Test your classifier
+^^^^^^^^^^^^^^^^^^^^
+
+To test a trained classifier on another data set, go to the details page of one
+of the classifiers. Click the **Run** button and use the dropdown box to select
+the *aniger-secretion* data set. 
 
 .. image:: img/tut1_26.png
    :width: 550px
@@ -461,7 +466,7 @@ use the dropdown box to select the *aniger-secretion* data set.
 
 Since the required features are not yet calculated for this project, this will
 be done automatically behind the scenes. As soon as the features are
-calculated, the classifier will be run on the data set. Both the feature
+calculated, the classifier will be run on this data set. Both the feature
 calculation job and the classification job are put in queue, so it might take
 a while for them to be finished depending on how busy the compute server is.
 
@@ -472,6 +477,10 @@ finished.
 .. image:: img/tut1_27.png
    :width: 550px
    :align: center
+
+^^^^^^^^^^^^^^^^^^^^
+Download raw results
+^^^^^^^^^^^^^^^^^^^^
 
 Finally, all classifier details can be downloaded as zip-file using the
 **Download** button.

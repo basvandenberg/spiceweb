@@ -90,6 +90,8 @@ Exploration</div>
 <li><a class="reference internal" href="#new-classifier">New classifier</a></li>
 <li><a class="reference internal" href="#classification-results">Classification results</a></li>
 <li><a class="reference internal" href="#classifier-details">Classifier details</a></li>
+<li><a class="reference internal" href="#test-your-classifier">Test your classifier</a></li>
+<li><a class="reference internal" href="#download-raw-results">Download raw results</a></li>
 </ul>
 </li>
 </ul>
@@ -400,18 +402,25 @@ The classifier details page also allows you to run a trained classifier on
 another data set. To do so, you first need to create a new project with a
 FASTA file that contains the sequences for which you would like to have
 predicted classes.</p>
-<p>Go to the details page of one of the classifiers, click the <strong>Run</strong> button and
-use the dropdown box to select the <em>aniger-secretion</em> data set.</p>
+</div>
+<div class="section" id="test-your-classifier">
+<h3>Test your classifier<a class="headerlink" href="#test-your-classifier" title="Permalink to this headline">¶</a></h3>
+<p>To test a trained classifier on another data set, go to the details page of one
+of the classifiers. Click the <strong>Run</strong> button and use the dropdown box to select
+the <em>aniger-secretion</em> data set.</p>
 <a class="reference internal image-reference" href="_images/tut1_26.png"><img alt="_images/tut1_26.png" class="align-center" src="_images/tut1_26.png" style="width: 550px;" /></a>
 <p>Since the required features are not yet calculated for this project, this will
 be done automatically behind the scenes. As soon as the features are
-calculated, the classifier will be run on the data set. Both the feature
+calculated, the classifier will be run on this data set. Both the feature
 calculation job and the classification job are put in queue, so it might take
 a while for them to be finished depending on how busy the compute server is.</p>
 <p>Links to a file with binary predictions and predicted class probabilities (if
 available for the classifier) will be offered in a table when classification is
 finished.</p>
 <a class="reference internal image-reference" href="_images/tut1_27.png"><img alt="_images/tut1_27.png" class="align-center" src="_images/tut1_27.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="download-raw-results">
+<h3>Download raw results<a class="headerlink" href="#download-raw-results" title="Permalink to this headline">¶</a></h3>
 <p>Finally, all classifier details can be downloaded as zip-file using the
 <strong>Download</strong> button.</p>
 <a class="reference internal image-reference" href="_images/tut1_28.png"><img alt="_images/tut1_28.png" class="align-center" src="_images/tut1_28.png" style="width: 550px;" /></a>
