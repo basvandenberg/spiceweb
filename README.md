@@ -2,8 +2,8 @@
 spiceweb
 ========
 
-This is the source code behind the [SPiCE](http://example.com/ "SPiCE") web
-application.
+This is the source code behind the [SPiCE](http://helix.ewi.tudelft.nl/spice
+"SPiCE") web application.
 
 
 Dependencies
