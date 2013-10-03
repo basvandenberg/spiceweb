@@ -1,0 +1,363 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>File Formats &mdash; SPiCE 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="next" title="Example projects" href="example_projects.html" />
+    <link rel="prev" title="SPiCE features" href="features_spice.html" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+     
+
+  </head>
+  <body>
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="example_projects.html" title="Example projects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="features_spice.html" title="SPiCE features"
+             accesskey="P">previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">File Formats</a><ul>
+<li><a class="reference internal" href="#fasta-file">FASTA file</a><ul>
+<li><a class="reference internal" href="#amino-acid-sequences">Amino acid sequences</a></li>
+<li><a class="reference internal" href="#nucleotide-sequences">Nucleotide sequences</a></li>
+<li><a class="reference internal" href="#secondary-structure-sequences">Secondary structure sequences</a></li>
+<li><a class="reference internal" href="#solvent-accessibility-sequences">Solvent accessibility sequences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#labeling-file">Labeling file</a></li>
+<li><a class="reference internal" href="#feature-matrix-file">Feature matrix file</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="features_spice.html"
+                        title="previous chapter">SPiCE features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="example_projects.html"
+                        title="next chapter">Example projects</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/file_formats.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="file-formats">
+<span id="id1"></span><h1>File Formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">¶</a></h1>
+<p>This section explains about the different file formats used on the SPiCE
+website.</p>
+<div class="section" id="fasta-file">
+<h2>FASTA file<a class="headerlink" href="#fasta-file" title="Permalink to this headline">¶</a></h2>
+<p>FASTA files are used to store sequence data, such as a set of protein amino
+acid sequences.</p>
+<p>In the FASTA file format that is used by SPiCE, each sequence should start with
+a <tt class="docutils literal"><span class="pre">&gt;</span></tt> character followed by the sequence id (<em>without a space in between</em>).
+The sequence itself should be on the following lines:</p>
+<div class="highlight-python"><pre>&gt;YOR106W Syntaxin VAM3
+MSFFDIEAQSSKGNSQQEPQFSTNQKTKELSNLIETFAEQSRVLEKECTKIGSKRDSKELRYKIETELIP
+NCTSVRDKIESNILIHQNGKLSADFKNLKTKYQSLQQSYNQRKSLFPLKTPISPGTSKERKDIHPRTEAV
+RQDPESSYISIKVNEQSPLLHNEGQHQLQLQEEQEQQQQGLSQEELDFQTIIHQERSQQIGRIHTAVQEV
+NAIFHQLGSLVKEQGEQVTTIDENISHLHDNMQNANKQLTRADQHQRDRNKCGKVTLIIIIVVCMVVLLA
+VLS</pre>
+</div>
+<p>In the example above <tt class="docutils literal"><span class="pre">YOR106W</span></tt> is the sequence id. The rest of this line
+(<tt class="docutils literal"><span class="pre">Syntaxin</span> <span class="pre">VAM3</span></tt>) will be ignored. After encountering a sequence id, the
+system will start reading the sequence on the following lines, until it
+encounters an empty line, a new sequence id, or a line with a comment on it.</p>
+<p>Comments are allowed in the FASTA files, but only in between the sequences.
+Comments should start with a <tt class="docutils literal"><span class="pre">#</span></tt> character:</p>
+<div class="highlight-python"><pre># Some comments about the first sequence
+# Each comment line should start with a # character
+
+&gt;YOR106W
+MSFFDIEAQSSKGNSQQEPQFSTNQKTKELSNLIETFAEQSRVLEKECTKIGSKRDSKELRYKIETELIP
+NCTSVRDKIESNILIHQNGKLSADFKNLKTKYQSLQQSYNQRKSLFPLKTPISPGTSKERKDIHPRTEAV
+RQDPESSYISIKVNEQSPLLHNEGQHQLQLQEEQEQQQQGLSQEELDFQTIIHQERSQQIGRIHTAVQEV
+NAIFHQLGSLVKEQGEQVTTIDENISHLHDNMQNANKQLTRADQHQRDRNKCGKVTLIIIIVVCMVVLLA
+VLS
+
+# Some comment about the next sequence
+
+&gt;YPR061C
+MLHHKFVYPFLFKWHLSCVEKCPPQITFIAKYATANDKNGNRKLTIRDEQWPELADPTPYDIFGIPKAGS
+GNPKLDKKSLKKKYHRYVKLYHPDHSDNIQIFSSEKVTNSDSKSPLLLTSSEKLHRFKVISQAYDILCDP
+KKKIVYDTTRQGWTTSYSPRSNVNTENYQYAGSYGYHSNAQYEYWNAGTWEDANSMKNERIQENINPWTV
+IGIICGLAICIEGTALLAKIQESLSKAEFTHDESGLHLIQSYTNYGLDTDKFSRLRRFLWFRTWGLYKSK
+EDLDREAKINEEMIRKLKAAK</pre>
+</div>
+<p>The FASTA file should meet the following requirements:</p>
+<ul class="simple">
+<li>Duplicate sequence ids are not allowed. Each sequence corresponds to an
+object in the feature matrix and each object must have a unique id.</li>
+<li>Empty sequences are not allowed.</li>
+<li>Sequences must be upper case.</li>
+</ul>
+<p>SPiCE uses FASTA files for three types of sequences: amino acid sequences,
+nucleotide sequences, secondary structure sequences, and solvent accessibility
+sequences. Details per sequence type are discussed in the following
+subsections.</p>
+<div class="section" id="amino-acid-sequences">
+<h3>Amino acid sequences<a class="headerlink" href="#amino-acid-sequences" title="Permalink to this headline">¶</a></h3>
+<p>For protein (amino acid) sequences the following letters are allowed:</p>
+<div class="highlight-python"><pre>unambiguous amino acids: A R N D C E Q G H I L K M F P S T W Y V
+ambiguous amino acids:   B J Z X
+special amino acids:     U O
+terminal character:      *</pre>
+</div>
+<p><strong>Note:</strong> Only the unambiguous amino acids are considered for most calculated
+features, the other characters are ignored in this case.</p>
+</div>
+<div class="section" id="nucleotide-sequences">
+<h3>Nucleotide sequences<a class="headerlink" href="#nucleotide-sequences" title="Permalink to this headline">¶</a></h3>
+<p>For ORF (nucleotide) sequences the following letters are allowed:</p>
+<div class="highlight-python"><pre>unambiguous nucleotides: T C A G
+ambiguous nucleotides:   M R W S Y K V H D B N</pre>
+</div>
+<p><strong>Note:</strong> Only the unambiguous nucleotides are considered for most calculated
+features, the other characters are ignored in this case.</p>
+</div>
+<div class="section" id="secondary-structure-sequences">
+<h3>Secondary structure sequences<a class="headerlink" href="#secondary-structure-sequences" title="Permalink to this headline">¶</a></h3>
+<p>For secondary structure sequences the following letters are allowed, which are
+the same as used by secondary structure prediction method PSIPRED:</p>
+<div class="highlight-python"><pre>helix:       H
+strand:      E
+random coil: R</pre>
+</div>
+<p><strong>Note</strong> A protein&#8217;s secondary structure sequence should have the same length
+as its amino acid seqeunce. However, SPiCE does not check for this when
+uploading a FASTA file with secondary structures!</p>
+</div>
+<div class="section" id="solvent-accessibility-sequences">
+<h3>Solvent accessibility sequences<a class="headerlink" href="#solvent-accessibility-sequences" title="Permalink to this headline">¶</a></h3>
+<p>For secondary structure sequences the following letters are allowed:</p>
+<div class="highlight-python"><pre>exposed: E
+buried:  B</pre>
+</div>
+<p><strong>Note</strong> A protein&#8217;s solvent accessibility sequence should have the same length
+as its amino acid seqeunce. However, SPiCE does not check for this when
+uploading a FASTA file with solvent accessibility sequences!</p>
+</div>
+</div>
+<div class="section" id="labeling-file">
+<h2>Labeling file<a class="headerlink" href="#labeling-file" title="Permalink to this headline">¶</a></h2>
+<p>After initiating a project with a set of protein sequences, one or more
+labeling files can be uploaded to subdivide the proteins into different
+classes.</p>
+<p>The first line of a labeling file contains the <em>class names</em> and the following
+lines contain the <em>labeled proteins</em>:</p>
+<div class="highlight-python"><pre>low high
+YOR093C 0
+YJL084C 0
+YKR031C 0
+YGR277C 1
+YGR281W 1
+YNR007C 1</pre>
+</div>
+<p>In the example above there are two classes: <tt class="docutils literal"><span class="pre">low</span></tt> and <tt class="docutils literal"><span class="pre">high</span></tt>. The class
+names should be separated by a tab or a space.</p>
+<p>Each of the following lines contains a protein id (which should be the same as
+the ones used in the FASTA file) and its label, which is the class name index.
+In this example, label <tt class="docutils literal"><span class="pre">0</span></tt> refers to <tt class="docutils literal"><span class="pre">low</span></tt>, and label <tt class="docutils literal"><span class="pre">1</span></tt> refers to
+<tt class="docutils literal"><span class="pre">high</span></tt>. The sequence id and label should be separated by a tab or a space.</p>
+<p>The labeling file should meet the following requirements:</p>
+<ul>
+<li><p class="first">There must be at least one label for each class name. The following is for
+example not allowed, because none of the proteins has label 2 (middle)</p>
+<div class="highlight-python"><pre>low high middle
+YOR093C 0
+YJL084C 0
+YKR031C 0
+YGR277C 1
+YGR281W 1
+YNR007C 1</pre>
+</div>
+</li>
+<li><p class="first">There must be exactly one label for each protein in your data set. So there
+must be a label for each sequence in the FASTA file that was used to initiate
+the project.</p>
+</li>
+<li><p class="first">It is allowed to have labels for proteins that are not in your data set. If,
+for example, your data set contains three proteins: <tt class="docutils literal"><span class="pre">YOR093C</span></tt>, <tt class="docutils literal"><span class="pre">YJL084C</span></tt>,
+and <tt class="docutils literal"><span class="pre">YNR007C</span></tt>, then the following labeling file would be allowed, because
+it contains, amongst others, a label for all three proteins:</p>
+<div class="highlight-python"><pre>low high
+YOR093C 0
+YJL084C 0
+YKR031C 0
+YGR277C 1
+YGR281W 1
+YNR007C 1</pre>
+</div>
+</li>
+</ul>
+<p>As a final example, the following labeling file shows a labeling in which the
+proteins are subdivided into 4 classes:</p>
+<div class="highlight-python"><pre>peroxisome  cytoplasm   golgi_apparatus microsome
+Q86WA8  0
+Q9UJ83  0
+O75381  0
+Q96M11  1
+O14713  1
+P01040  1
+Q9H8Y8  2
+Q8N3G9  2
+Q6ZMB0  2
+P08686  3
+Q16678  3
+P56279  3</pre>
+</div>
+<p><strong>NOTE:</strong> SPiCE does not support assigning proteins to multiple classes
+within the same labeling.</p>
+</div>
+<div class="section" id="feature-matrix-file">
+<h2>Feature matrix file<a class="headerlink" href="#feature-matrix-file" title="Permalink to this headline">¶</a></h2>
+<p>Besides calculating the features that are offered by SPiCE, you can also upload
+your own features in the form of a feature matrix. The feature matrix should be
+in text format with the features as columns and the objects (proteins) as rows.</p>
+<p>The python module <a class="reference external" href="http://www.numpy.org/">numpy</a> reads the matrix using the <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html">loadtxt</a> function with
+default parameters.  If you use python to generate your feature matrix, you can
+use the numpy <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.savetxt.html">savetxt</a> function to save your feature matrix in text format.</p>
+<p>A feature matrix with 4 features and 10 objects (proteins) is given below:</p>
+<div class="highlight-python"><pre>3.7621e-02 3.9442e-02 7.1602e-02 4.7937e-02
+4.3977e-02 4.5889e-02 8.9866e-02 5.6405e-02
+4.2781e-02 6.3577e-02 7.4866e-02 6.3577e-02
+4.0064e-02 4.3803e-02 7.6923e-02 6.0363e-02
+3.6904e-02 3.6904e-02 1.0531e-01 5.4005e-02
+4.4481e-02 4.7776e-02 5.6013e-02 4.6129e-02
+3.4279e-02 4.3735e-02 7.8014e-02 4.2553e-02
+5.9087e-02 1.4324e-02 5.9087e-02 4.9239e-02
+4.1727e-02 4.7482e-02 6.4748e-02 5.8993e-02
+2.8269e-02 4.2403e-02 6.3604e-02 7.1849e-02</pre>
+</div>
+<p>Each row gives the feature values of one protein, each column gives all the
+values of one feature.</p>
+<p><strong>NOTE:</strong> In this case, the string format <tt class="docutils literal"><span class="pre">%.4e</span></tt> was used to store the
+feature values. The default format used by the <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.savetxt.html">savetxt</a> function is
+<tt class="docutils literal"><span class="pre">%.18e</span></tt>.</p>
+<p>An additional file with protein ids should be uploaded to indicate the order of
+the proteins (rows) in the feature matrix. The file with protein ids should
+contain one id per line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">YOR093C</span>
+<span class="n">YJL084C</span>
+<span class="n">YKR031C</span>
+<span class="n">YLR024C</span>
+<span class="n">YBL063W</span>
+<span class="n">YJL100W</span>
+<span class="n">YNL126W</span>
+<span class="n">YNR067C</span>
+<span class="n">YLR035C</span>
+<span class="n">YLR057W</span>
+</pre></div>
+</div>
+<p>Feature values must be provided for all the proteins in your project, which
+means that all ids in your FASTA file must also be in the protein ids file.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="example_projects.html" title="Example projects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="features_spice.html" title="SPiCE features"
+             >previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    
+    <div class="footer">
+        &copy; Copyright 2013, Bastiaan van den Berg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,318 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Features &mdash; SPiCE 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="next" title="Feature data sources" href="feature_data_sources.html" />
+    <link rel="prev" title="Tutorial 1: Getting started" href="tutorial1.html" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+     
+
+  </head>
+  <body>
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="feature_data_sources.html" title="Feature data sources"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial1.html" title="Tutorial 1: Getting started"
+             accesskey="P">previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Features</a><ul>
+<li><a class="reference internal" href="#sequence-based-protein-features">Sequence-based protein features</a></li>
+<li><a class="reference internal" href="#feature-matrix">Feature matrix</a></li>
+<li><a class="reference internal" href="#feature-ids">Feature ids</a><ul>
+<li><a class="reference internal" href="#feature-category-ids">Feature category ids</a></li>
+<li><a class="reference internal" href="#pamater-settings-per-feature-category">Pamater settings per feature category</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial1.html"
+                        title="previous chapter">Tutorial 1: Getting started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="feature_data_sources.html"
+                        title="next chapter">Feature data sources</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/features.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="features">
+<span id="id1"></span><h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<p>Before explaining about the features offered by SPiCE, this chapter will
+shortly introduce what sequence-based protein features are in the first section
+and how they can be used to form a feature matrix in the second section. The
+third section explains how SPiCE uses feature ids to identify the different
+calculated features.</p>
+<p>The following chapter will shortly introduce some data sources and basic
+concepts that are used for feature calculation.</p>
+<div class="section" id="sequence-based-protein-features">
+<h2>Sequence-based protein features<a class="headerlink" href="#sequence-based-protein-features" title="Permalink to this headline">¶</a></h2>
+<p>A sequence-based feature is basically a mapping from a sequence to a number.
+For example, if we have a sequence:</p>
+<div class="highlight-python"><pre>&gt;test0
+AAAAABBBBBBBBBBCCCCC</pre>
+</div>
+<p>Then we could calcalate what the relative fraction of occurance of <tt class="docutils literal"><span class="pre">A</span></tt>&#8216;s in
+this sequence is by taking the number of <tt class="docutils literal"><span class="pre">A</span></tt>&#8216;s and dividing that number by
+the total length of the sequence:</p>
+<div class="highlight-python"><pre>fraction A:  5 / 20 = 0.25</pre>
+</div>
+<p>This number can be used as a feature of the sequence <tt class="docutils literal"><span class="pre">test0</span></tt>. Similarly, the
+fraction of occurance of the other letters can be calculated:</p>
+<div class="highlight-python"><pre>fraction B: 10 / 20 = 0.5
+
+fraction C:  5 / 20 = 0.25</pre>
+</div>
+<p>This way, we obtained two more sequence-based features for sequence <tt class="docutils literal"><span class="pre">test0</span></tt>.</p>
+<p>It would make sense to combine these three features into a <em>feature category</em>
+which we could call the <em>letter composition</em>. This way, we can map a sequence
+to a list of three values that captures some sequence property/characteristic.</p>
+<p>Similarly, one could calculate these features for a protein&#8217;s primary
+structure, the amino acid sequence, by calculating the relative fraction of
+occurance of each amino acid in the protein sequence. As a feature category
+this would be called the <em>amino acid composition</em>. Those are the type of
+sequence-based protein features that can be calculated with SPiCE.</p>
+</div>
+<div class="section" id="feature-matrix">
+<h2>Feature matrix<a class="headerlink" href="#feature-matrix" title="Permalink to this headline">¶</a></h2>
+<p>When calculating features, a so called feature matrix is build. As an example,
+let&#8217;s consider the following set of sequences:</p>
+<div class="highlight-python"><pre>&gt;test0
+AAAAABBBBBBBBBBCCCCC
+
+&gt;test1
+BCBCBCBCBC
+
+&gt;test2
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB</pre>
+</div>
+<p>Calculating the <em>letter composition</em> for each of these sequences will result in
+the following feature matrix:</p>
+<div class="highlight-python"><pre>.       fraction A      fraction B      fraction C
+
+test0      0.25            0.50            0.25
+
+test1      0.00            0.50            0.50
+
+test2      0.97            0.03            0.00</pre>
+</div>
+<p>In this matrix, each row gives the feature values of one sequence (also called
+a feature vector), and each column gives the feature values of one feature.</p>
+</div>
+<div class="section" id="feature-ids">
+<h2>Feature ids<a class="headerlink" href="#feature-ids" title="Permalink to this headline">¶</a></h2>
+<p>SPiCE assigns an id to each feature it calculates. This id is composed of three
+parts: the <em>feature category id</em>, <em>parameter settings</em>, and <em>feature id</em>. These
+three components are separated by an underscore character (_). For feature
+categories that do not requir parameters to be set, the parameter settings
+component is left out.</p>
+<p>Lets use the <em>amino acid composition</em> feature category as example. A feature of
+this category could have the following id:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">aac_1_F1</span>
+</pre></div>
+</div>
+<p>The first part,  <tt class="docutils literal"><span class="pre">aac</span></tt>, is the id of the amino acid composition category.</p>
+<p>The second part, <tt class="docutils literal"><span class="pre">1</span></tt>, specifies a parameter that sets number of segments in
+which the sequence should be split before returning the amino acid composition
+of each of the segments. Since this value is one, the sequence will not be
+split and the amino acid composition of the full sequence will be returned.
+This value must be an integer largen than 0.</p>
+<p>Finally, the third part, <tt class="docutils literal"><span class="pre">F1</span></tt> identifies the feature within the feature
+category. In this case it indicates that this feature is the relative frequency
+of occurence of phenylalanine (F) in the first (and this case only) segment.</p>
+<p>Multiple parameters can be specified as a dash (<tt class="docutils literal"><span class="pre">-</span></tt>) separated list as in the
+following example:</p>
+<div class="highlight-python"><pre>ac_moran-gg-20_gg4</pre>
+</div>
+<p>For this example, the first part, <tt class="docutils literal"><span class="pre">ac</span></tt>, is the id of the <em>autocorrelation</em>
+feature category.</p>
+<p>The second part <tt class="docutils literal"><span class="pre">moran-gg-20</span></tt> specifies the three parameters that can be
+set for the calculation of the feature category. In this case <tt class="docutils literal"><span class="pre">moran</span></tt> is type
+of autocorrelation function, <tt class="docutils literal"><span class="pre">gg</span></tt> indicates that the Georgiev amino acid
+scales are used, and <tt class="docutils literal"><span class="pre">20</span></tt> is the lag parameter.</p>
+<p>The third part <tt class="docutils literal"><span class="pre">gg4</span></tt> indicates that this is the feature value for the
+4th amino acid scale in the set of Georgiev scales.</p>
+<div class="section" id="feature-category-ids">
+<h3>Feature category ids<a class="headerlink" href="#feature-category-ids" title="Permalink to this headline">¶</a></h3>
+<p>The following table lists the feature category ids as used in SPiCE.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">id</th>
+<th class="head">Feature category</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>aac</td>
+<td>Amino acid composition</td>
+</tr>
+<tr class="row-odd"><td>dc</td>
+<td>Dipeptide composition</td>
+</tr>
+<tr class="row-even"><td>psaac</td>
+<td>Prime-side amino acid counts</td>
+</tr>
+<tr class="row-odd"><td>ssc</td>
+<td>Secondary structure composition</td>
+</tr>
+<tr class="row-even"><td>ssaac</td>
+<td>Per secondary struct. class amino acid composition</td>
+</tr>
+<tr class="row-odd"><td>sac</td>
+<td>Solvent accessibility composition</td>
+</tr>
+<tr class="row-even"><td>saaac</td>
+<td>Per solvent accessibility class amino acid composition</td>
+</tr>
+<tr class="row-odd"><td>cc</td>
+<td>Codon composition</td>
+</tr>
+<tr class="row-even"><td>cu</td>
+<td>Codon usage</td>
+</tr>
+<tr class="row-odd"><td>len</td>
+<td>Protein length</td>
+</tr>
+<tr class="row-even"><td>ctd</td>
+<td>Property composition/transition/distribution</td>
+</tr>
+<tr class="row-odd"><td>sigavg</td>
+<td>Property signal average</td>
+</tr>
+<tr class="row-even"><td>sigpeak</td>
+<td>Property signal peak areas</td>
+</tr>
+<tr class="row-odd"><td>ac</td>
+<td>Autocorrelation</td>
+</tr>
+<tr class="row-even"><td>paac1</td>
+<td>Pseudo amino acid composition type I</td>
+</tr>
+<tr class="row-odd"><td>paac2</td>
+<td>Pseudo amino acid composition type II</td>
+</tr>
+<tr class="row-even"><td>qso</td>
+<td>Quasi sequence order descriptors</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pamater-settings-per-feature-category">
+<h3>Pamater settings per feature category<a class="headerlink" href="#pamater-settings-per-feature-category" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="feature_data_sources.html" title="Feature data sources"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorial1.html" title="Tutorial 1: Getting started"
+             >previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    
+    <div class="footer">
+        &copy; Copyright 2013, Bastiaan van den Berg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+
+  </body>
+</html>

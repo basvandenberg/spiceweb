@@ -1,0 +1,34 @@
+{% extends "!layout.html" %}
+
+{% block rootrellink %}
+    {{ super() }}
+{% endblock %}
+
+{% block extrahead %}
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+    {{ super() }}
+{% endblock %}
+
+{% block header %}
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    {{ super() }}
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+{% endblock %}

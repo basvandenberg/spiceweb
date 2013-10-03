@@ -1,0 +1,31 @@
+## feature_ttest.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/feature_ttest.js' % (root_url)}"></script>
+</%block>
+
+<%block name="main_content">
+
+<%include file="features_bar.html" />
+
+<a class="pull-right" href="${root_url}doc/tutorial1.html#feature-statistics" target="_blank">help</a> 
+<a href="${root_url}doc/features.html#feature-ids" target="_blank">help feature ids</a>
+
+<table id="ttest" class="tablesorter ttest">
+<thead>
+<tr>
+  <th>id</th>
+  <th>feature category</th>
+  <th>parameter settings</th>
+  <th>feature</th>
+  <th>t-value</th>
+  <th>p-value</th>
+</tr>
+</thead>
+<tbody id="ttest_table">
+
+</tbody>
+</table>
+
+</%block>

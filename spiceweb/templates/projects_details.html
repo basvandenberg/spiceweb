@@ -1,0 +1,230 @@
+## project_details.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/project_details.js' % (root_url)}"></script>
+</%block>
+
+<%block name="main_content">
+
+<%include file="projects_bar.html" />
+
+## Project details
+<h2>Project Details: ${project_id}</h2>
+
+###############################################################################
+## Available protein data files
+###############################################################################
+
+<hr class="spacer" />
+
+<h3>Protein sequence data</h3>
+
+% if msg_seq:
+    <div class="alert alert-block alert-error fade in"><p>${msg_seq}</p></div>
+% endif
+
+## data table
+
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th id="status"></th>
+  <th>data</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+
+% for ds in [d for d in fe.protein_data_set.data_sources if d.uid in data_sources]:
+<tr>
+    <td id="status" class="${'done' if ds.available() else 'notdone'}"></td>
+    <td>${ds.name}</td>
+% if ds.available():
+    <td class="data_source"><a href="#" class="download" id="${ds.uid}">download</a></td>
+% else:
+    <td class="data_source"><a href="#modal_${ds.uid}" class="btn btn-link my-btn-link" data-toggle="modal" id="${ds.uid}">upload</a>
+
+        <!-- Modal -->
+        <div id="modal_${ds.uid}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel">Upload ${ds.name.lower()} file</h3>
+            </div>
+            <div class="modal-body">
+
+                <form id="upload-${ds.uid}" class="form-horizontal upload-seqs" enctype="multipart/form-data" method="post">
+
+                    <!-- labeling file input file chooser -->
+                    <div class="control-group">
+                        <label class="control-label" for="data_file">FASTA file
+                            <a href="#" class="info-button" data-toggle="popover" data-placement="bottom" data-content="Select a FASTA file with ${ds.name.lower()}s." title="">
+                                <i class="icon-info-sign"></i>
+                            </a>
+                        </label>
+                        <div class="controls">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="input-append">
+                                    <div class="uneditable-input span3">
+                                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                                    </div>
+                                    <span class="btn btn-file">
+                                        <span class="fileupload-new">Select file</span>
+                                        <span class="fileupload-exists">Change</span>
+                                        <input type="file" name="data_file" id="data_file" />
+                                    </span>
+                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- hidden data type input -->
+                    <input id="data_name" type="hidden" name="data_name" value="${ds.uid}">
+                    <input id="data_type" type="hidden" name="data_type" value="data_source" />
+                    <!-- submit -->
+                    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+
+                </form>
+
+                <div class="alert">
+                    <p><strong>Warning!</strong></p>
+                    <p>SPiCE checks:</p>
+                    <ul>
+                        <li>if the sequence ids in the FASTA file correspond to those in this project,</li>
+                        <li>if the FASTA file contains a sequence for each protein in this project,</li>
+                        <li>if the sequence letters are uppercase and from the correct alphabet.</li>
+                    </ul>
+
+                    <p>SPiCE <u><strong>does not</strong></u> check if the
+uploaded sequences are consistent with the allready available sequence data.
+For example, it will not be detected if you upload secondary structure
+sequences for with the sequence lengths are different compared to the protein
+sequences. Or if you first uploaded protein sequence and afterwards upload ORF
+sequences, it is not checked if these correctly translate to the protein
+sequences! Please make sure that you have checked this yourself.</p>
+
+                </div>
+
+            </div>
+        </div>
+    </td>
+
+% endif
+</tr>
+% endfor
+
+</tbody>
+</table>
+
+<div class="legend">
+  <div class="status done"></div><div class="text">available</div>
+  <div class="status notdone"></div><div class="text">unavailable</div>
+</div>
+
+###############################################################################
+## Available protein labeling files
+###############################################################################
+
+<hr class="spacer" />
+
+<h3>Labelings</h3>
+
+<%
+lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
+%>
+
+## labelings table
+
+<table id="sortTable" class="tablesorter">
+<thead>
+<tr>
+  <th id="status"></th>
+  <th>name</th>
+  <th>class names</th>
+  <th># classes</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+% for index, (lname, l) in enumerate(sorted(fe.fm_protein.labeling_dict.iteritems())):
+
+<tr>
+  <td id="status" class="done"></td>
+  <td>${lname}</td>
+  <td>${', '.join(['%s (%i)' % (cn, len(l.object_indices_per_class[cn])) for cn in l.class_names])}</td>
+  <td>${len(l.class_names)}</td>
+  <td class="labeling"><a href=# id="${lname}" class="download">download</a></td>
+</tr>
+
+% endfor
+
+</tbody>
+</table>
+
+<%
+lname = 'labeling%i' % (index + 1)
+%>
+
+<hr class="separator">
+
+<form id="upload-labeling" class="form-horizontal" enctype="multipart/form-data" method="post">
+
+    <legend>
+        Upload labeling
+        <a class="pull-right" href=${root_url}doc/file_formats.html#labeling-file target="_tab">help</a>
+    </legend>
+
+    <!-- labeling name input text field -->
+    <div class="control-group">
+        <label class="control-label" for="data_name">Labeling name
+            <a class="info-button" data-toggle="popover"
+data-placement="top" data-content="<p>Provide a unique labeling name. Only
+alphanumeric characters, underscores, and dashes can be used.</p>" title="" data-original-title="">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <input class="input-xlarge" type="text" name="data_name" id="data_name" required="required" />
+        </div>            
+    </div>
+
+    <!-- labeling file input file chooser -->
+    <div class="control-group">
+        <label class="control-label" for="data_file">Labeling file 
+            <a href=# class="info-button" data-toggle="popover"
+data-placement="top" data-content="<p>Select a labeling file. Explanation about
+the file format can be found in the documentation (<i>File Formats</i>
+section).</p>" title="" data-original-title="">
+                <i class="icon-info-sign"></i>
+            </a>
+        </label>
+        <div class="controls">
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-append">
+                    <div class="uneditable-input span3">
+                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Change</span>
+                        <input type="file" name="data_file" id="data_file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- hidden data type input -->
+    <input type="hidden" name="data_type" value="labeling" />
+
+
+% if msg_lab:
+    <div class="alert alert-block alert-error fade in"><p>${msg_lab}</p></div>
+% endif
+
+    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+
+</form>
+
+</%block>

@@ -1,0 +1,467 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial 1: Getting started &mdash; SPiCE 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="next" title="Features" href="features.html" />
+    <link rel="prev" title="Welcome to the SPiCe documentation" href="index.html" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+     
+
+  </head>
+  <body>
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to the SPiCe documentation"
+             accesskey="P">previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial 1: Getting started</a><ul>
+<li><a class="reference internal" href="#projects">Projects</a><ul>
+<li><a class="reference internal" href="#create-example-projects">Create example projects</a></li>
+<li><a class="reference internal" href="#activating-projects">Activating projects</a></li>
+<li><a class="reference internal" href="#project-details">Project details</a></li>
+<li><a class="reference internal" href="#protein-sequece-data">Protein sequece data</a></li>
+<li><a class="reference internal" href="#protein-labelings">Protein labelings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#features">Features</a><ul>
+<li><a class="reference internal" href="#feature-calculation">Feature calculation</a></li>
+<li><a class="reference internal" href="#filter-sidebar">Filter sidebar</a></li>
+<li><a class="reference internal" href="#feature-statistics">Feature statistics</a></li>
+<li><a class="reference internal" href="#histograms">Histograms</a></li>
+<li><a class="reference internal" href="#scatter-plots">Scatter plots</a></li>
+<li><a class="reference internal" href="#clustered-heat-map">Clustered heat map</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#classification">Classification</a><ul>
+<li><a class="reference internal" href="#new-classifier">New classifier</a></li>
+<li><a class="reference internal" href="#classification-results">Classification results</a></li>
+<li><a class="reference internal" href="#classifier-details">Classifier details</a></li>
+<li><a class="reference internal" href="#test-your-classifier">Test your classifier</a></li>
+<li><a class="reference internal" href="#download-raw-results">Download raw results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to the SPiCe documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="features.html"
+                        title="next chapter">Features</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tutorial1.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial-1-getting-started">
+<h1>Tutorial 1: Getting started<a class="headerlink" href="#tutorial-1-getting-started" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial shows you the basic functionalities of the web site using one of
+the example projects. The tutorial is split into three sections, each
+describing one of the main tabs: <em>Projects</em>, <em>Features</em>, and <em>Classification</em>.</p>
+<div class="section" id="projects">
+<h2>Projects<a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
+<p>You can manage your projects under the <em>Projects</em> tab. Here you can create,
+activate, and delete projects. It also allows you to inspect project details
+and upload additional sequence data or labeling files for your projects.</p>
+<div class="section" id="create-example-projects">
+<h3>Create example projects<a class="headerlink" href="#create-example-projects" title="Permalink to this headline">¶</a></h3>
+<p>To get started, let&#8217;s first create a project. To load an example project, go to
+the <em>Project</em> tab and click on the <strong>Create</strong> button.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_0.png"><img alt="_images/t1_0_create_0.png" class="align-center" src="_images/t1_0_create_0.png" style="width: 550px;" /></a>
+<p>A list of example projects can be found at the bottom of the page. Select
+<em>yeast-expression</em> project and click on the <strong>Load project</strong> button to initiate
+the example project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_1.png"><img alt="_images/t1_0_create_1.png" class="align-center" src="_images/t1_0_create_1.png" style="width: 550px;" /></a>
+<p>You will be redirected to your list op projects, which should contain the
+<em>yeast-expression</em> project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_1_1.png"><img alt="_images/t1_0_create_1_1.png" class="align-center" src="_images/t1_0_create_1_1.png" style="width: 550px;" /></a>
+<p>Load a second example project by clicking the <strong>Create</strong> button again. Select
+the <em>A. niger high-level secretion</em> and load the project. Again, you will be
+redirected to your list of projects, which should now contain two projects.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_2.png"><img alt="_images/t1_0_create_2.png" class="align-center" src="_images/t1_0_create_2.png" style="width: 550px;" /></a>
+<p>The list of projects provides a link to the project&#8217;s details page in the first
+column, the project initiation time in the second column, and a <em>delete</em> link
+in the third column. The <em>delete</em> link will delete all files related to the
+project, so be careful with that.</p>
+</div>
+<div class="section" id="activating-projects">
+<h3>Activating projects<a class="headerlink" href="#activating-projects" title="Permalink to this headline">¶</a></h3>
+<p>Notice that the <em>user bar</em>, situated underneath the main tabs, indicates which
+project is currently active.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_3.png"><img alt="_images/t1_0_create_3.png" class="align-center" src="_images/t1_0_create_3.png" style="width: 550px;" /></a>
+<p>If you have multiple projects, an additional <em>select project</em> link will appear,
+which allows you to activate another project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_4.png"><img alt="_images/t1_0_create_4.png" class="align-center" src="_images/t1_0_create_4.png" style="width: 550px;" /></a>
+<p>It is important to note that the <em>features</em> and <em>classification</em> tabs will show
+the data of the active project. Remember that the <em>user bar</em> always shows you
+which project is active and allows you to activate another project.</p>
+<p>Use the <em>user bar</em> to select the <em>yeast-expression</em> project, which will
+redirect you to the details page of that project.</p>
+</div>
+<div class="section" id="project-details">
+<h3>Project details<a class="headerlink" href="#project-details" title="Permalink to this headline">¶</a></h3>
+<p>Activating a new project will always redirect you to that project&#8217;s details
+page. On this page, the active button (the blue one) shows the name of the
+project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_5.png"><img alt="_images/t1_0_create_5.png" class="align-center" src="_images/t1_0_create_5.png" style="width: 550px;" /></a>
+<p>If you have multiple projects, this button turns into a drop-down button where
+you can select one of the projects (the same as in the <em>user bar</em>).</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_6.png"><img alt="_images/t1_0_create_6.png" class="align-center" src="_images/t1_0_create_6.png" style="width: 550px;" /></a>
+<p>If you click the <strong>Download</strong> button on the right, all data of the currently
+active project will be zipped into a zip-file and downloaded to your computer.
+The zip-file contains all project data: the sequence data, calculated features
+data, and trained classifiers data.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_7.png"><img alt="_images/t1_0_create_7.png" class="align-center" src="_images/t1_0_create_7.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="protein-sequece-data">
+<h3>Protein sequece data<a class="headerlink" href="#protein-sequece-data" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Protein sequence data</em> shows the available sequence data for this project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_8.png"><img alt="_images/t1_0_create_8.png" class="align-center" src="_images/t1_0_create_8.png" style="width: 550px;" /></a>
+<p>In case of the <em>yeast-expression</em> project, both ORF (nucleotide) and protein
+(amino acid) sequences are available. With the <em>download</em> link you can download
+the corresponding FASTA files to your computer. If you have FASTA files with
+(predicted) secondary structure or solvent accessibility sequences, you can use
+the <em>upload</em> links to upload them.</p>
+</div>
+<div class="section" id="protein-labelings">
+<h3>Protein labelings<a class="headerlink" href="#protein-labelings" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Labeling</em> table shows the available labelings for this project.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_9.png"><img alt="_images/t1_0_create_9.png" class="align-center" src="_images/t1_0_create_9.png" style="width: 550px;" /></a>
+<p>A labeling is a mapping from each protein to a label, thereby separating the
+set of proteins into different classes. The <em>expression</em> labeling of the
+<em>yeast-expression</em> splits the 2000 proteins into two classes: 1000 proteins
+with the label <em>low</em>, and 1000 proteins with the label <em>high</em>.  All projects
+obtain a default labeling upon project creation. This is the <em>one_class</em>
+labeling, in which all proteins obtain the same label (<em>all</em>).</p>
+<p>For every labeling, the table shows: the name of the labeling in the first
+column; the different classes and the number of proteins per class in the
+second column, the number of classes in the third column, and a <em>download</em> link
+in the third column.</p>
+<p>The form at the bottom of the page can be used to upload additional labeling
+files.</p>
+<a class="reference internal image-reference" href="_images/t1_0_create_10.png"><img alt="_images/t1_0_create_10.png" class="align-center" src="_images/t1_0_create_10.png" style="width: 550px;" /></a>
+<p>Consult the <a class="reference internal" href="file_formats.html#file-formats"><em>File Formats</em></a> documention for more information on the
+labeling file format. To see an example, you can download the labeling file of
+the <em>yeast-expression</em> project.</p>
+</div>
+</div>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<p>Click on the <em>Features</em> tab to go the features area, which provides
+feature calculation and visualization.</p>
+<a class="reference internal image-reference" href="_images/tut1_0.png"><img alt="_images/tut1_0.png" class="align-center" src="_images/tut1_0.png" style="width: 550px;" /></a>
+<p>Since you have not calculated any features yet, this page will show an empty
+list.</p>
+<div class="section" id="feature-calculation">
+<h3>Feature calculation<a class="headerlink" href="#feature-calculation" title="Permalink to this headline">¶</a></h3>
+<p>Click on the <strong>Calculate</strong> button to go to the feature calculation page.</p>
+<a class="reference internal image-reference" href="_images/tut1_1.png"><img alt="_images/tut1_1.png" class="align-center" src="_images/tut1_1.png" style="width: 550px;" /></a>
+<p>Here, a list with sequence-based feature categories is shown. For each feature
+category one or more dropdown boxes enables setting some parameters and the
+<strong>Calculate</strong> button will put the feature calculation job in the job queue on
+the compute servers. Although feature calculation usually does not take long,
+if the compute server is busy, your job might have to wait in queue for a
+while.</p>
+<p>More information on the available sequence-based features is described in the
+<a class="reference internal" href="features.html#features"><em>Features</em></a> documentation.</p>
+<p>Once you have calculated some features, a table with calculated feature
+categories will occur under the <strong>Features</strong> button, in which the first column
+describes the name of the feature category, the second column lists the used
+parameters, the third column shows how many features are in this category, and
+the last column provides a link to delete the feature category.</p>
+<a class="reference internal image-reference" href="_images/tut1_2.png"><img alt="_images/tut1_2.png" class="align-center" src="_images/tut1_2.png" style="width: 550px;" /></a>
+<p>Now with the <em>yeast-expression</em> project still active, calculate the amino acid
+composition with the number of segments parameter set to 1, and signal average
+with parameter settings - scales(s): Georgiev, window: 21, and edge: 100.</p>
+<p>If the feature calculation is finished, click on the <strong>Statistics</strong> button to
+start exploring them.</p>
+</div>
+<div class="section" id="filter-sidebar">
+<h3>Filter sidebar<a class="headerlink" href="#filter-sidebar" title="Permalink to this headline">¶</a></h3>
+<p>Before explaining about the feature statistics and visualization possibilities,
+the <em>filter sidebar</em> will be discussed first. The filter sidebar is used
+throughout the website enabling users to select features (feature matrix
+columns) and protein classes (feature matrix rows of the proteins that share
+the same class label). By default the side bar is hidden on the right side,
+click on the dark gray tab with the arrow to open the side bar.</p>
+<a class="reference internal image-reference" href="_images/tut1_10.png"><img alt="_images/tut1_10.png" class="align-center" src="_images/tut1_10.png" style="width: 550px;" /></a>
+<p>The <em>Label filter</em> at the top can be used to select protein classes.</p>
+<a class="reference internal image-reference" href="_images/tut1_11.png"><img alt="_images/tut1_11.png" class="align-center" src="_images/tut1_11.png" style="width: 550px;" /></a>
+<p>The drop-down box can be used to select one of the available labelings. The
+<em>yeast-expression</em> project has the default <em>one-class</em> labeling, in which each
+protein obtains the same label, and an <em>expression</em> labeling, in which the
+proteins are separated into a <em>low</em> and <em>high</em> expression class, each
+containing 1000 proteins.</p>
+<p>Use the drop-down box to select the <em>expression</em> labeling.</p>
+<a class="reference internal image-reference" href="_images/tut1_12.png"><img alt="_images/tut1_12.png" class="align-center" src="_images/tut1_12.png" style="width: 550px;" /></a>
+<p>All the labels of the currently selected labeling are shown underneath the
+drop-down box, which should now show the <em>low</em> and <em>high</em> label. The labels on
+the left (in yellow) are selected and the labels on the right (in gray) are not
+selected. You can click on the arrow of a label button to select or deselect
+it, i.e. to move it from left to right or the other way around.</p>
+<p>In order to show <em>t</em>-statistics, exactly two labels (protein classes) need to
+be selected. Select both the <em>low</em> and the <em>high</em> label. The <em>t</em>-statistics
+table remains empty, because we first need to select for what features we want
+to see the <em>t</em>-value, which can be done with the <em>Feature filter</em>.</p>
+<p>The <em>Feature filter</em> shows all feature categories that have been calculated.
+The <em>show/hide</em> link can be used to show or hide the features that are part of
+the corresponding feature category. By default, all feature are hidden.</p>
+<p>Click on the <em>show/hide</em> link of the <em>Amino Acid Composition</em> category to show
+its features.</p>
+<a class="reference internal image-reference" href="_images/tut1_13.png"><img alt="_images/tut1_13.png" class="align-center" src="_images/tut1_13.png" style="width: 550px;" /></a>
+<p>You can click on the features to select them. To select multiple features, hold
+down the <strong>Ctrl</strong> button while clicking the features, or hold down the left
+mouse button while drawing a rectangle over the features you want to select.</p>
+<a class="reference internal image-reference" href="_images/tut1_14.png"><img alt="_images/tut1_14.png" class="align-center" src="_images/tut1_14.png" style="width: 550px;" /></a>
+<p>The <em>Select all</em> and <em>Deselect all</em> links at the top can be used to select all
+and deselect all features of the corresponding feature category.</p>
+<a class="reference internal image-reference" href="_images/tut1_15.png"><img alt="_images/tut1_15.png" class="align-center" src="_images/tut1_15.png" style="width: 550px;" /></a>
+<p>The number between brackets behind the feature category name indicates how many
+of the features of that category are selected.</p>
+</div>
+<div class="section" id="feature-statistics">
+<h3>Feature statistics<a class="headerlink" href="#feature-statistics" title="Permalink to this headline">¶</a></h3>
+<p>Select all features to show their <em>t</em>-values in the table.</p>
+<a class="reference internal image-reference" href="_images/tut1_16.png"><img alt="_images/tut1_16.png" class="align-center" src="_images/tut1_16.png" style="width: 550px;" /></a>
+<p>One row appears for each feature, giving the feature category name, feature
+name, <em>t</em>-value, and corresponding <em>p</em>-value in the four columns.</p>
+<p>Click the <em>t</em>-value header to sort the table by that column. The codon fraction
+<em>GGT (G)</em> has the highest <em>t</em>-value, indicating class separation for this
+feature.</p>
+<p>Use the feature filter to select only this feature, the table should now
+contain only a single row, showing the <em>GGT (G)</em> feature.</p>
+</div>
+<div class="section" id="histograms">
+<h3>Histograms<a class="headerlink" href="#histograms" title="Permalink to this headline">¶</a></h3>
+<p>Histograms can be used to visualize feature value distributions for the
+different protein classes. Use the <strong>Visualizations</strong> drop-down button to select
+<em>histogram</em>.</p>
+<p>The website should have remembered what labels and features were selected (this
+requires that cookies are enabled), in which case the histogram of the <em>GGT
+(G)</em> feature shown for the labels <em>low</em> and <em>high</em>.</p>
+<a class="reference internal image-reference" href="_images/tut1_17.png"><img alt="_images/tut1_17.png" class="align-center" src="_images/tut1_17.png" style="width: 550px;" /></a>
+<p>The distributions clearly show a difference between the <em>low</em> and <em>high</em> class.</p>
+<p>Use the <em>Feature filter</em> in the side bar to select the codon composition <em>CGA
+(R)</em> feature as second feature (hold down the <strong>Ctrl</strong> button while clicking
+this feature so that the first feature remains selected as well). The histogram
+for this feature should appear underneath the first histogram.</p>
+<p>Notice that you can drag and drop the histograms to enable reordering the
+histograms on screen. Click on the top histogram and hold down the mouse
+button, drag the histogram down and drop it underneath the other histogram.</p>
+</div>
+<div class="section" id="scatter-plots">
+<h3>Scatter plots<a class="headerlink" href="#scatter-plots" title="Permalink to this headline">¶</a></h3>
+<p>With the <em>GGT (G)</em> and <em>CGA (R)</em> still selected, choose the <em>scatter</em> option
+from the <strong>Visualizations</strong> drop-down button.</p>
+<a class="reference internal image-reference" href="_images/tut1_18.png"><img alt="_images/tut1_18.png" class="align-center" src="_images/tut1_18.png" style="width: 550px;" /></a>
+<p>A scatter plot is shown with the GGT(G) feature values on the <em>y</em>-axis and the
+<em>CGA (R)</em> feature values on the <em>x</em>-axis. The <em>high</em> proteins are shown in blue
+and the <em>low</em> proteins in yellow. The <em>low</em> proteins are now on top of the
+<em>high</em> proteins. This depends of the order in which the label in the <em>Label
+filter</em> are selected.</p>
+<p>Notice that a scatter plot will only be shown if exactly two features are
+selected.</p>
+</div>
+<div class="section" id="clustered-heat-map">
+<h3>Clustered heat map<a class="headerlink" href="#clustered-heat-map" title="Permalink to this headline">¶</a></h3>
+<p>Use the <em>Feature filter</em> to select deselect all features in the <em>Codon
+composition</em> category and select all features in the <em>Amino acid composition</em>
+category. Afterwards select the <em>heatmap</em> option from the <strong>Visualizations</strong>
+drop-down button.</p>
+<a class="reference internal image-reference" href="_images/tut1_19.png"><img alt="_images/tut1_19.png" class="align-center" src="_images/tut1_19.png" style="width: 550px;" /></a>
+<p>A heat map with hierarchically clustered rows (proteins) and columns (features))
+is shown. Depending on the size of the feature matrix, it can take a minute or
+two for the heat map to appear.</p>
+<p>The heat map visualizes the standardized (mean 0.0, std 1.0) values of the
+feature matrix. The columns are the selected features and the rows are the
+proteins in the selected classes (labels). The column on the right shows the
+protein labels, white for <em>high</em> labeled proteins and gray for <em>low</em> labeled
+proteins.</p>
+</div>
+</div>
+<div class="section" id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<p>The <em>t</em>-statistics and visualizations showed that some feature-value
+distributions are different between the <em>high</em> and <em>low</em> class. Now let&#8217;s try
+to train a classifier that uses these features to predict if a proteins belongs
+to either the <em>low</em> or the <em>high</em> class. A <a class="reference external" href="http://en.wikipedia.org/wiki/Cross-validation_(statistics)">cross-validation</a> protocol is used
+to determine how well this can be predicted using the selected features.</p>
+<div class="section" id="new-classifier">
+<h3>New classifier<a class="headerlink" href="#new-classifier" title="Permalink to this headline">¶</a></h3>
+<p>Click the <em>Classification</em> tab and click the <strong>Create</strong> button.</p>
+<a class="reference internal image-reference" href="_images/tut1_20.png"><img alt="_images/tut1_20.png" class="align-center" src="_images/tut1_20.png" style="width: 550px;" /></a>
+<p>Use the <em>Feature filter</em> to select the 20 amino acid composition features,
+select 10 cross-validation loops, and the <em>k</em>-nearest neighbor classifier with
+uniform weights. Click the <strong>Run</strong> button to start the experiment.</p>
+<a class="reference internal image-reference" href="_images/tut1_21.png"><img alt="_images/tut1_21.png" class="align-center" src="_images/tut1_21.png" style="width: 550px;" /></a>
+<p>You will be redirected to the <em>Results</em> page, where the current status of your
+job is shown in the table at the bottom. Depending on how busy the server is,
+the job might have to wait in queue for a while.</p>
+<p>Add two more classification jobs, both for a LDA classifier and 10
+cross-validation loops. Use all <em>amino acid composition</em> features for the first
+and all <em>codon composition</em> features for the second.</p>
+</div>
+<div class="section" id="classification-results">
+<h3>Classification results<a class="headerlink" href="#classification-results" title="Permalink to this headline">¶</a></h3>
+<p>Classification results will be shown in the <em>Results</em> table as soon as a job is
+finished.</p>
+<a class="reference internal image-reference" href="_images/tut1_22.png"><img alt="_images/tut1_22.png" class="align-center" src="_images/tut1_22.png" style="width: 550px;" /></a>
+<p>The table shows different performance measures for each classifier. With an
+area under the ROC-curve (AUROC) of 0.85, the 64 <em>codon composition</em> features
+performed best in this example.</p>
+</div>
+<div class="section" id="classifier-details">
+<h3>Classifier details<a class="headerlink" href="#classifier-details" title="Permalink to this headline">¶</a></h3>
+<p>Click on the job with the 20 <em>amino acid composition</em> features to see more
+detailed results.  At the top, some classification setting and a table with the
+cross-validation results are shown.</p>
+<a class="reference internal image-reference" href="_images/tut1_23.png"><img alt="_images/tut1_23.png" class="align-center" src="_images/tut1_23.png" style="width: 550px;" /></a>
+<p>In case of a 2-class classification problem, an ROC-curve is shown underneath.</p>
+<a class="reference internal image-reference" href="_images/tut1_24.png"><img alt="_images/tut1_24.png" class="align-center" src="_images/tut1_24.png" style="width: 550px;" /></a>
+<p>The gray ROC-curves show the cross-validation results and the blue curve shows
+the average ROC-curve. The area under the ROC-curve (and the standard deviation
+for the different CV-loops) are given in the legend.
+The classifier details page also allows you to run a trained classifier on
+another data set. To do so, you first need to create a new project with a
+FASTA file that contains the sequences for which you would like to have
+predicted classes.</p>
+</div>
+<div class="section" id="test-your-classifier">
+<h3>Test your classifier<a class="headerlink" href="#test-your-classifier" title="Permalink to this headline">¶</a></h3>
+<p>To test a trained classifier on another data set, go to the details page of one
+of the classifiers. Click the <strong>Run</strong> button and use the dropdown box to select
+the <em>aniger-secretion</em> data set.</p>
+<a class="reference internal image-reference" href="_images/tut1_26.png"><img alt="_images/tut1_26.png" class="align-center" src="_images/tut1_26.png" style="width: 550px;" /></a>
+<p>Since the required features are not yet calculated for this project, this will
+be done automatically behind the scenes. As soon as the features are
+calculated, the classifier will be run on this data set. Both the feature
+calculation job and the classification job are put in queue, so it might take
+a while for them to be finished depending on how busy the compute server is.</p>
+<p>Links to a file with binary predictions and predicted class probabilities (if
+available for the classifier) will be offered in a table when classification is
+finished.</p>
+<a class="reference internal image-reference" href="_images/tut1_27.png"><img alt="_images/tut1_27.png" class="align-center" src="_images/tut1_27.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="download-raw-results">
+<h3>Download raw results<a class="headerlink" href="#download-raw-results" title="Permalink to this headline">¶</a></h3>
+<p>Finally, all classifier details can be downloaded as zip-file using the
+<strong>Download</strong> button.</p>
+<a class="reference internal image-reference" href="_images/tut1_28.png"><img alt="_images/tut1_28.png" class="align-center" src="_images/tut1_28.png" style="width: 550px;" /></a>
+<p>This finalizes the first tutorial, which covered most of the SPiCE website
+functionalities. If you have any suggestions for improvements, or if you find
+any bugs, please let me know (<a class="reference external" href="mailto:spice&#46;webapp&#37;&#52;&#48;gmail&#46;com">spice<span>&#46;</span>webapp<span>&#64;</span>gmail<span>&#46;</span>com</a>).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to the SPiCe documentation"
+             >previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    
+    <div class="footer">
+        &copy; Copyright 2013, Bastiaan van den Berg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+
+  </body>
+</html>

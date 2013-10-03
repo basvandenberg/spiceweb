@@ -1,0 +1,327 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Feature data sources &mdash; SPiCE 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="next" title="SPiCE features" href="features_spice.html" />
+    <link rel="prev" title="Features" href="features.html" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+     
+
+  </head>
+  <body>
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="features_spice.html" title="SPiCE features"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             accesskey="P">previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Feature data sources</a><ul>
+<li><a class="reference internal" href="#id2">Amino acid scales</a></li>
+<li><a class="reference internal" href="#amino-acid-matrices">Amino acid matrices</a></li>
+<li><a class="reference internal" href="#amino-acid-clusters">Amino acid clusters</a><ul>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="features.html"
+                        title="previous chapter">Features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="features_spice.html"
+                        title="next chapter">SPiCE features</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/feature_data_sources.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="feature-data-sources">
+<span id="id1"></span><h1>Feature data sources<a class="headerlink" href="#feature-data-sources" title="Permalink to this headline">¶</a></h1>
+<p>This chapter introduces some data sources and basic concepts that are used for
+the calculation of several features.</p>
+<div class="section" id="id2">
+<h2>Amino acid scales<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Amino acid scales are mappings from amino acids to property values and are used
+for the calculation of some feature categories. An often used example is the
+Kyte &amp; Doolittle <a class="reference internal" href="features_spice.html#kyte1982" id="id3">[3]</a> hydropathicity scale in which the values
+indicates how hydrophobic/hydrophilic amino acids are:</p>
+<div class="highlight-python"><pre>Ala:  1.800
+Arg: -4.500
+Asn: -3.500
+Asp: -3.500
+Cys:  2.500
+Gln: -3.500
+Glu: -3.500
+Gly: -0.400
+His: -3.200
+Ile:  4.500
+Leu:  3.800
+Lys: -3.900
+Met:  1.900
+Phe:  2.800
+Pro: -1.600
+Ser: -0.800
+Thr: -0.700
+Trp: -0.900
+Tyr: -1.300
+Val:  4.200</pre>
+</div>
+<p>Mapping a protein sequence to the corresponding hydrophaticity values results
+in a raw hydropathicity profile (Figure 1A). A convolution filter (Figure 1B)
+can be used to smooth the profile (Figure 1C), thereby capturing the
+hydropathicity over a sequence window. Both raw and smoothed profiles are used
+for several feature categories.</p>
+<div class="figure align-left">
+<a class="reference internal image-reference" href="_images/hydro_signals.png"><img alt="test" src="_images/hydro_signals.png" style="width: 650px;" /></a>
+<p class="caption"><strong>Figure 1: A)</strong> Raw hydropathicity profile. <strong>B)</strong> Convolution filter
+used to smooth the raw profile. <strong>C)</strong> Smoothed hydropathicity profile. The
+thresholds can be used to determine areas under the curve above a certain
+threshold, in order to capture the occurence of profile peaks.</p>
+</div>
+<p>There are many amino acid scales described in literature, most of which are
+collected in the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base <a class="reference internal" href="features_spice.html#kawashima2008" id="id4">[2]</a>, with <a class="reference external" href="http://www.genome.jp/aaindex/AAindex/list_of_indices">version9.1</a>
+containing 544 amino acid scales.</p>
+<p>Since many of these amino acid scales are highly correlated, multiple
+efforts have been done (using PCA or similar techniques) to capture the data of
+all the scales into a limited set of uncorrelated scales.</p>
+<p>A. Georgiev <a class="reference internal" href="features_spice.html#georgiev2009" id="id5">[1]</a> used Varimax to identify 19 uncorrelated
+scales that show good correlation with published scales, this in order to
+retain interpretability. This set of 19 scales, and all the separate scales in
+the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base are available for calculation of the signal mean, signal
+peaks area, and autocorrelation features.</p>
+<p>The scales are always standardized to mean 0.0 and standard deviation 1.0
+before they are used for feature calculation.</p>
+<p>Five amino acid scales, as provided on the PseAAC webserver <a class="reference internal" href="features_spice.html#shen2008" id="id6">[6]</a>,
+are available for the pseudo amino acid composition features.</p>
+</div>
+<div class="section" id="amino-acid-matrices">
+<h2>Amino acid matrices<a class="headerlink" href="#amino-acid-matrices" title="Permalink to this headline">¶</a></h2>
+<p>An amino acid distance matrix is used for to calculate the quasi-sequence-order
+descriptors. This is a 20 x 20 matrix that defines distances between all amino
+acids. The Schneider-Wrede amino acid distance matrix is used for the
+quasi-distance-order calculation <a class="reference internal" href="features_spice.html#schneider1994" id="id7">[5]</a></p>
+</div>
+<div class="section" id="amino-acid-clusters">
+<h2>Amino acid clusters<a class="headerlink" href="#amino-acid-clusters" title="Permalink to this headline">¶</a></h2>
+<p>The property composition/transition/distribution (CTD) feature maps protein
+sequences to a reduced 3-letter property alphabet. The amino acids are therefor
+clustered into three groups for different properties. The used property
+clusters are extracted from the PROFEAT publication and given in the list
+below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="22%" />
+<col width="22%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Clusters A</th>
+<th class="head">Cluster B</th>
+<th class="head">Cluster C</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Hydrophobicity</td>
+<td>R K E D Q N</td>
+<td>G A S T P H Y</td>
+<td>C L V I M F W</td>
+</tr>
+<tr class="row-odd"><td>Normalized van der Waals volume</td>
+<td>G A S C* T P D</td>
+<td>N V E Q I L</td>
+<td>M H K F R Y W</td>
+</tr>
+<tr class="row-even"><td>Polarity</td>
+<td>L I F W C M V Y</td>
+<td>P A T G S</td>
+<td>H Q R K N E D</td>
+</tr>
+<tr class="row-odd"><td>Polarizability</td>
+<td>G A S D T</td>
+<td>C P N V E Q I L</td>
+<td>K M H F R Y W</td>
+</tr>
+<tr class="row-even"><td>Charge</td>
+<td>K R</td>
+<td>ANCQGHILMFPSTWYV</td>
+<td>D E</td>
+</tr>
+<tr class="row-odd"><td>Secondary structure</td>
+<td>E A L M Q K R H</td>
+<td>V I Y C W F T</td>
+<td>G N P S D</td>
+</tr>
+<tr class="row-even"><td>Solvent accessibility</td>
+<td>A L F C G I V W</td>
+<td>R** K Q E N D</td>
+<td>M P S T H Y</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[*]</td><td>Added compared to original table in <a class="reference internal" href="features_spice.html#li2006" id="id9">[4]</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[†]</td><td>Changed from P to R compared to original table in <a class="reference internal" href="features_spice.html#li2006" id="id11">[4]</a></td></tr>
+</tbody>
+</table>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<p id="bibtex-bibliography-feature_data_sources-0"><table class="docutils citation" frame="void" id="georgiev2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[1]</a></td><td>A.G. Georgiev. Interpretable numerical descriptors of amino acid space. <em>Journal of Computational Biology</em>, 16(5):703–723, 2009.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="kawashima2008" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>S.&nbsp;Kawashima, P.&nbsp;Pokarowski, M.&nbsp;Pokarowska, A.&nbsp;Kolinski, T.&nbsp;Katayama, and M.&nbsp;Kanehisa. AAindex: amino acid index database, progress report 2008. <em>Nucleic Acids Research</em>, 36(suppl 1):D202–D205, 2008.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="kyte1982" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>J.&nbsp;Kyte and Russell&nbsp;F Doolittle. A simple method for displaying the hydropathic character of a protein. <em>Journal of Molecular Biology</em>, 157(1):105–132, 1982.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="li2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id11">2</a>)</em> Ze-Rong Li, Hong&nbsp;Huang Lin, LY&nbsp;Han, L&nbsp;Jiang, X&nbsp;Chen, and Yu&nbsp;Zong Chen. PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. <em>Nucleic Acids Research</em>, 34(suppl 2):W32–W37, 2006.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="schneider1994" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[5]</a></td><td>G.&nbsp;Schneider and P.&nbsp;Wrede. The rational design of amino acid sequences by artificial neural networks and simulated molecular evolution: de novo design of an idealized leader peptidase cleavage site. <em>Biophysical Journal</em>, 66(2):335–344, 1994.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="shen2008" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>H.B. Shen and K.C. Chou. PseAAC: a flexible web server for generating various kinds of protein pseudo amino acid composition. <em>Analytical Biochemistry</em>, 373(2):386–388, 2008.</td></tr>
+</tbody>
+</table>
+</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="features_spice.html" title="SPiCE features"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="Features"
+             >previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    
+    <div class="footer">
+        &copy; Copyright 2013, Bastiaan van den Berg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+
+  </body>
+</html>

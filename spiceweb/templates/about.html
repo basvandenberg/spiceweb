@@ -1,0 +1,67 @@
+## about.html
+<%inherit file="base.html"/>
+
+<%block name="main_content">
+
+<div id="home_wrapper">
+
+<h1>About</h1>
+
+<p class="story">
+
+SPiCE provides easy access to visualization and classification methods for
+sets of protein sequences. It can be used to calculate sequence-based protein
+features, visualize feature data, and construct protein classifiers.
+
+</p>
+
+<p class="story">
+
+SPiCE has been developed as part of <a
+href="http://bioinformatics.tudelft.nl/users/bastiaan-van-den-berg">my</a> PhD
+in the <a href="http://bioinformatics.tudelft.nl/">Delft Bioinformatics Lab</a>
+at <a href="http://www.tudelft.nl/en">Delft University of Technology</a>. The
+software was initialy used for the construction of a classifier that predicts
+successful high-level secretion of proteins in <i>Asperigillus niger</i> (<a
+href="#ref1">1</a>). To make feature exploration and classifier construction
+methods generally accessible, we developed the SPiCE website as a user-friendly
+graphical user interface to that software. SPiCE is described in the
+following paper (<a href="#ref2">2</a>).
+
+</p>
+
+<p class="story">
+
+The website can be explored without registration. In that case your data is not
+password protected and data will not be stored for more than a month.
+A registered account can be created providing you with a protected workspace.
+You need to <a href="${root_url}register">register</a> with a valid email
+address and a password. A verification link will be send to you in order to
+activate your account.
+
+</p>
+
+<p class="story">
+
+The website performance best in <a
+href="https://www.google.com/intl/en/chrome/browser/" target="_tab">Google
+Chrome</a>. Both <a href="http://www.mozilla.org/en-US/firefox/new/"
+target="_tab">Firefox</a> and <a href="http://www.opera.com/"
+target="_tab">Opera</a> were tested, however, less extensive. Please avoid
+using Internet Explorer (espessially the older versions), not all
+functionalities work in this browser. Please contact <a href="contact">me</a>
+in case of any other issues.
+
+</p>
+
+<div class="references">
+<a id="ref1" href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0045869" target="_blank"><b>Exploring sequence characteristics related to high-level production of secreted proteins in Aspergillus niger.</b></a> B.A. van den Berg, M.J.T. Reinders, M. Hulsman, L. Wu, H.J. Pel, J.A. Roubos, D. de Ridder (2012) <i>PLoS ONE</i>, Volume 7, Issue 10, e45869.
+<br \>
+<a id="ref2" href="#" target="_blank">(Publication in progress)</a> B.A. van den Berg, M.J.T. Reinders, J.A Roubos, D. de Ridder (2013).
+</div>
+
+</div>
+
+<%include file="sidebar.html" />
+
+</%block>

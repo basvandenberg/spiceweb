@@ -1,0 +1,75 @@
+## feature_upload.html
+<%inherit file="base.html"/>
+
+<%block name="scripts">
+  <script type="application/javascript" src="${'%sjs/feature_upload.js' % (root_url)}"></script>
+</%block>
+
+<%block name="main_content">
+
+<%include file="features_bar.html" />
+
+###############################################################################
+## Upload custom feature form
+###############################################################################
+
+<div class="well">
+
+<form id="upload-custom-features" class="form-horizontal" enctype="multipart/form-data" method="post">
+
+    <legend>
+        Upload your own feature matrix
+        <a class="pull-right" href="${root_url}doc/file_formats.html#feature-matrix-file" target="_tab">help</a>
+    </legend>
+
+    <div class="control-group">
+        <label class="control-label" for="feature_matrix_f">Feature matrix file 
+        </label>
+        <div class="controls" id="feature_matrix">
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-append">
+                    <div class="uneditable-input span3">
+                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Change</span>
+                        <input type="file" name="feature_matrix_f" id="feature_matrix_f" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="object_ids_f">Protein ids file 
+        </label>
+        <div class="controls" id="object_ids">
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-append">
+                    <div class="uneditable-input span3">
+                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Change</span>
+                        <input type="file" name="object_ids_f" id="object_ids_f" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+% if msg:
+    <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
+% endif
+
+    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+
+</form>
+
+</div>
+
+</%block>

@@ -1,0 +1,43 @@
+## home.html
+
+<%inherit file="base.html"/>
+
+<%block name="main_content">
+
+<div id="home_wrapper">
+    
+<h1>Welcome to the SPiCE website</h1>
+
+<div id="introduction" class="news_item">
+<p class="story">
+
+SPiCE provides easy access to visualization and classification methods for
+sets of protein sequences. It can be used to calculate sequence-based protein
+features, visualize feature data, and construct protein classifiers.
+
+</p>
+
+<a href="${root_url + 'about'}">Read more ></a>
+</div>
+
+<img id="home_img" src="img/plaatje2.png" alt="" />
+
+<hr class="spacer">
+
+<h2>News</h2>
+
+ % for (date, title, text, _) in news_items:
+ <div class="news_item">
+ <h3>${title}</h3>
+ <div class="date">${date.strftime('%d %B %Y')}</div>
+ <p class="story">${text}</p>
+ </div>
+ % endfor
+
+<a href="${root_url + 'news'}">More news ></a>
+
+</div>
+
+<%include file="sidebar.html" />
+
+</%block>

@@ -1,0 +1,70 @@
+<%
+uri_root = '%s%s' % (root_url, main_menu[main_menu_index][1])
+uris = ['%s%s' % (uri_root, sub_menu[0]), '%s%s' % (uri_root, sub_menu[1])]
+icons = ['icon-list', 'icon-plus']
+menu_names = ['Classifiers', 'Create']
+%>
+
+<div class="btn-toolbar">
+
+## classifiers list and create classifier buttons
+
+    <div class="btn-group">
+% for index, uri in enumerate(uris):
+% if (index == sub_menu_index):
+        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+% else:
+        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+% endif
+% endfor
+    </div>
+
+## classifiers dropdown select button
+
+% if (len(cl_ids) > 0):
+    <div class="btn-group">
+% if context.get('cl_id', UNDEFINED) is not UNDEFINED:
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" 
+           href="${root_url}${main_menu[3][1]}details/${cl_id}">
+            ${cl_id}
+        </a>
+% else:
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" 
+           href="${root_url}${main_menu[3][1]}details/${cl_ids[0]}">
+            ${cl_ids[0]}
+        </a>
+% endif
+% if (len(cl_ids) > 1):
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+% for cid in cl_ids:
+            <li><a href="${root_url}${main_menu[3][1]}details/${cid}">${cid}</a></li>
+% endfor
+        </ul>
+% endif
+    </div>
+% endif
+
+## additional buttons for details pages
+
+% if sub_menu_index >= 2:
+    <div class="btn-group">
+        <div class="classifier">
+            <a href=${root_url}${main_menu[3][1]}run/${cl_id} 
+               class="btn${' btn-primary' if sub_menu_index == 3 else ''}">
+                <i class="icon-play"></i> Run
+            </a>
+        </div>
+    </div>
+    <div class="btn-group">
+        <div class="classifier">
+            <a href=# class="btn download"><i class="icon-download"></i> Download</a>
+        </div>
+    </div>
+% endif
+
+</div>
+
+<hr class="menu" />

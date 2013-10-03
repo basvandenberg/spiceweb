@@ -1,0 +1,52 @@
+<%
+uri_root = '%s%s' % (root_url, main_menu[main_menu_index][1])
+uris = ['%s%s' % (uri_root, sub_menu[0]), '%s%s' % (uri_root, sub_menu[1])]
+icons = ['icon-list', 'icon-plus']
+menu_names = ['Projects', 'Create']
+%>
+
+<div class="btn-toolbar">
+
+    <div class="btn-group">
+% for index, uri in enumerate(uris):
+% if (index == sub_menu_index):
+        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+% else:
+        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+% endif
+% endfor
+    </div>
+
+% if (all_project_ids and not all_project_ids == 'None'):
+    <div class="btn-group">
+% if (len(all_project_ids) == 1):
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}details/${all_project_ids[0][0]}">${all_project_ids[0][0]}</a>
+% elif (len(all_project_ids) > 1):
+% if project_id is None:
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}details/${all_project_ids[0][0]}">${all_project_ids[0][0]}</a>
+% else:
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}details/${project_id}">${project_id}</a>
+% endif
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+% for pid, _ in all_project_ids:
+            <li><a href="${root_url}${main_menu[1][1]}details/${pid}">${pid}</a></li>
+% endfor
+        </ul>
+% endif
+    </div>
+% endif
+
+% if sub_menu_index == 2:
+    <div class="btn-group">
+        <div class="project">
+        <a href=# class="btn download" id="${project_id}"><i class="icon-download"></i> Download</a>
+        </div>
+    </div>
+% endif
+
+</div>
+
+<hr class="menu" />

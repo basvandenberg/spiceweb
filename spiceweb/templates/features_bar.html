@@ -1,0 +1,71 @@
+<%
+uri_root = '%s%s' % (root_url, main_menu[main_menu_index][1])
+uris = []
+for sm in sub_menu:
+    uris.append('%s%s' % (uri_root, sm))
+icons = ['icon-list', 'icon', 'icon-upload', 'icon', 'icon', 'icon', 'icon']
+menu_names = ['Features', 'Calculate', 'Upload']
+%>
+
+<div class="btn-toolbar">
+
+    <div class="btn-group">
+% for index, uri in enumerate(uris):
+% if (index < 3):
+% if (index == sub_menu_index):
+        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+% else:
+        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+% endif
+% endif
+% endfor
+    </div>
+
+<div class="btn-group">
+
+% for index, uri in enumerate(uris):
+% if (index >= 3 and index < 4):
+% if (index == sub_menu_index):
+        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> Statistics</a>
+% else:
+        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> Statistics</a>
+% endif
+% endif
+% endfor
+
+</div>
+<div class="btn-group">
+
+% if (sub_menu_index >= 4):
+  <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+% else:
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+% endif
+    Visualizations
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+% for index, uri in enumerate(uris):
+% if (index >= 4):
+        <li><a href="${uri}"><i class="${icons[index]}"></i> ${sub_menu[index]}</a></li>
+% endif
+% endfor
+  </ul>
+</div>
+
+    <div class="btn-group">
+% for index, uri in enumerate(uris):
+% if (index >= split_index):
+% if (index == sub_menu_index):
+        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
+% else:
+        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
+% endif
+% endif
+% endfor
+    </div>
+
+
+</div>
+
+<hr class="menu" />
