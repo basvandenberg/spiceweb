@@ -1,3 +1,7 @@
+0.1.2, TODO
+
+- ISSUE #2: Disabled js related to retrieving taxon ids on new project page.
+
 0.1.1, 31 October 2013.
 
 - Just a minor release to test how that works in a production environment.
