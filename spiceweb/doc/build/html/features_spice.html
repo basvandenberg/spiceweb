@@ -71,7 +71,7 @@ Exploration</div>
 <li><a class="reference internal" href="#">SPiCE features</a><ul>
 <li><a class="reference internal" href="#amino-acid-composition">Amino acid composition</a></li>
 <li><a class="reference internal" href="#dipeptide-composition">Dipeptide composition</a></li>
-<li><a class="reference internal" href="#prime-side-amino-acid-count">Prime-side amino acid count</a></li>
+<li><a class="reference internal" href="#terminal-end-amino-acid-count">Terminal end amino acid count</a></li>
 <li><a class="reference internal" href="#sequence-length">Sequence length</a></li>
 <li><a class="reference internal" href="#property-composition-transition-distribution-ctd">Property Composition / Transition / Distribution (CTD)</a></li>
 <li><a class="reference internal" href="#autocorrelation">Autocorrelation</a></li>
@@ -189,20 +189,20 @@ MAAARRNNDDC</pre>
 dc_test    0.20    0.10  ...  0.00    0.00    0.10  ...  0.00</pre>
 </div>
 </div>
-<div class="section" id="prime-side-amino-acid-count">
-<h2>Prime-side amino acid count<a class="headerlink" href="#prime-side-amino-acid-count" title="Permalink to this headline">¶</a></h2>
-<p>This feature category returns the amino acid counts of a fixed length sequence
-end, either using the 5` or the 3` side.</p>
+<div class="section" id="terminal-end-amino-acid-count">
+<h2>Terminal end amino acid count<a class="headerlink" href="#terminal-end-amino-acid-count" title="Permalink to this headline">¶</a></h2>
+<p>This feature category returns the amino acid counts of a fixed length sequence,
+either at the N- or the C-terminal end of the protein sequence.</p>
 <a class="reference internal image-reference" href="_images/featcalc2.png"><img alt="_images/featcalc2.png" class="align-center" src="_images/featcalc2.png" style="width: 640px;" /></a>
 <p>For example sequence:</p>
-<div class="highlight-python"><pre>&gt;&gt;psaac_test
+<div class="highlight-python"><pre>&gt;&gt;teraac_test
 MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV</pre>
 </div>
-<p>the 5&#8217; amino acid count for length 10 will result in the following feature
-vector:</p>
-<div class="highlight-python"><pre>.           A   R   N   D   C   E   Q   G   H  ...  M  ...  V
+<p>the amino acid counts of the length 10 C-terminal end result in the following
+feature vector:</p>
+<div class="highlight-python"><pre>.            A   R   N   D   C   E   Q   G   H  ...  M  ...  V
 
-psaac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0</pre>
+teraac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0</pre>
 </div>
 <p>in which the counts for M, A, R, N, and D are set to 2, while the remaining 15
 features are set to 0.</p>

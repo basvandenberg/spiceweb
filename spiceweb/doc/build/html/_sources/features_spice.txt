@@ -99,12 +99,12 @@ The resulting feature vector wil be::
 
 
 
----------------------------
-Prime-side amino acid count
----------------------------
+-----------------------------
+Terminal end amino acid count
+-----------------------------
 
-This feature category returns the amino acid counts of a fixed length sequence
-end, either using the 5` or the 3` side.
+This feature category returns the amino acid counts of a fixed length sequence,
+either at the N- or the C-terminal end of the protein sequence.
 
 .. image:: img/featcalc2.png
    :width: 640px
@@ -112,15 +112,15 @@ end, either using the 5` or the 3` side.
 
 For example sequence::
 
-    >>psaac_test
+    >>teraac_test
     MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV
 
-the 5' amino acid count for length 10 will result in the following feature
-vector::
+the amino acid counts of the length 10 C-terminal end result in the following
+feature vector::
 
-    .           A   R   N   D   C   E   Q   G   H  ...  M  ...  V
+    .            A   R   N   D   C   E   Q   G   H  ...  M  ...  V
 
-    psaac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0
+    teraac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0
 
 in which the counts for M, A, R, N, and D are set to 2, while the remaining 15
 features are set to 0.

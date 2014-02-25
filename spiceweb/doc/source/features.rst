@@ -134,7 +134,7 @@ The following table lists the feature category ids as used in SPiCE.
 +------------+----------------------------------------------------------------+
 | dc         | Dipeptide composition                                          |
 +------------+----------------------------------------------------------------+
-| psaac      | Prime-side amino acid counts                                   |
+| teraac     | Terminal end amino acid counts                                 |
 +------------+----------------------------------------------------------------+
 | ssc        | Secondary structure composition                                |
 +------------+----------------------------------------------------------------+
