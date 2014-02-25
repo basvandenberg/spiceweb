@@ -10,9 +10,6 @@ and how they can be used to form a feature matrix in the second section. The
 third section explains how SPiCE uses feature ids to identify the different
 calculated features.
 
-The following chapter will shortly introduce some data sources and basic
-concepts that are used for feature calculation.
-
 -------------------------------
 Sequence-based protein features
 -------------------------------
@@ -23,14 +20,14 @@ For example, if we have a sequence::
     >test0
     AAAAABBBBBBBBBBCCCCC
 
-Then we could calcalate what the relative fraction of occurance of ``A``'s in
+Then we could calculate what the relative fraction of occurrence of ``A``'s in
 this sequence is by taking the number of ``A``'s and dividing that number by
 the total length of the sequence::
 
     fraction A:  5 / 20 = 0.25
 
 This number can be used as a feature of the sequence ``test0``. Similarly, the
-fraction of occurance of the other letters can be calculated::
+fraction of occurrence of the other letters can be calculated::
 
     fraction B: 10 / 20 = 0.5
 
@@ -44,7 +41,7 @@ to a list of three values that captures some sequence property/characteristic.
 
 Similarly, one could calculate these features for a protein's primary
 structure, the amino acid sequence, by calculating the relative fraction of
-occurance of each amino acid in the protein sequence. As a feature category
+occurrence of each amino acid in the protein sequence. As a feature category
 this would be called the *amino acid composition*. Those are the type of
 sequence-based protein features that can be calculated with SPiCE.
 
@@ -85,7 +82,7 @@ Feature ids
 SPiCE assigns an id to each feature it calculates. This id is composed of three
 parts: the *feature category id*, *parameter settings*, and *feature id*. These
 three components are separated by an underscore character (_). For feature
-categories that do not requir parameters to be set, the parameter settings
+categories that do not require parameters to be set, the parameter settings
 component is left out.
 
 Lets use the *amino acid composition* feature category as example. A feature of
@@ -99,11 +96,11 @@ The second part, ``1``, specifies a parameter that sets number of segments in
 which the sequence should be split before returning the amino acid composition
 of each of the segments. Since this value is one, the sequence will not be
 split and the amino acid composition of the full sequence will be returned.
-This value must be an integer largen than 0.
+This value must be an integer larger than 0.
 
 Finally, the third part, ``F1`` identifies the feature within the feature
 category. In this case it indicates that this feature is the relative frequency
-of occurence of phenylalanine (F) in the first (and this case only) segment.
+of occurrence of phenylalanine (F) in the first (and this case only) segment.
 
 Multiple parameters can be specified as a dash (``-``) separated list as in the
 following example::
@@ -164,9 +161,4 @@ The following table lists the feature category ids as used in SPiCE.
 +------------+----------------------------------------------------------------+
 | qso        | Quasi sequence order descriptors                               |
 +------------+----------------------------------------------------------------+
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Pamater settings per feature category
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 
