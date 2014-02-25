@@ -13,9 +13,9 @@ from project import Project
 class Classification:
 
     SCORE_NAMES = {
-        'roc_auc': 'AUROC', 'f1': 'F1-score', 'recall': 'Recall',
-        'average_precision': 'Avg. precision', 'precision': 'Precision',
-        'accuracy': 'Accuracy'
+        'roc_auc': 'AUROC', 'mcc': 'MCC-score', 'f1': 'F1-score',
+        'recall': 'Recall', 'average_precision': 'Avg. precision',
+        'precision': 'Precision', 'accuracy': 'Accuracy'
     }
 
     CL_NAMES = {
@@ -408,7 +408,7 @@ class Classification:
                     str_data += '<td class="n">%s</td>\n' %\
                             (cl_settings['n_fold_cv'])
                     for index, cv_score in enumerate(cv_scores):
-                        if(cv_score[0] == -1.0):
+                        if(cv_score[0] == -10.0):
                             score_str = 'n/a'
                         else:
                             score_str = '%.3f' % (numpy.mean(cv_score))
