@@ -174,10 +174,10 @@ cusfeats = fe.fm_protein.get_custom_features()
 % endif
 
 % if len(cusfeats.keys()) > 0 or len(categorized_featids) > 0:
-<div class="btn-group">
-  <a href="${'%s%s' % (uri_root, 'download')}" class="btn"><i class="icon-download"></i> Download feature matrix</a>
+<div class="btn-group pull-right">
+  <a href="${'%s%s' % (uri_root, 'download')}" class="btn btn-warning">Download feature matrix</a>
+  <a href="${root_url}doc/file_formats.html#feature-matrix-file" target="_blank" class="btn"><i class="icon-info-sign"></i></a>
 </div> 
-<a href="${root_url}doc/file_formats.html#feature-matrix-file" target="_blank">help</a>
 % endif
 
 ###############################################################################
