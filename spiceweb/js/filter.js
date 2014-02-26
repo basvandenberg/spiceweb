@@ -116,7 +116,7 @@ function init_labeling_filter(labeling_name, class_ids) {
     update_classes($("select#labeling_select").val(), class_ids);
 
     // respond to selecting another labeling (fetch label names from server)
-    $("select#labeling_select").live("change", function() {
+    $("select#labeling_select").on("change", function() {
         update_classes($(this).val(), null);
         update(true, false);
     });
