@@ -22,7 +22,6 @@
 
     <legend>
         Amino acid composition
-        <a class="pull-right" href="${root_url}doc/features_spice.html#amino-acid-composition" target="_blank">help</a>
     </legend>
 
     <label class="select first">Number of segments</label>
@@ -33,7 +32,10 @@
 % endfor
     </select>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#amino-acid-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -45,7 +47,6 @@
 
     <legend>
         Dipeptide composition
-        <a class="pull-right" href="${root_url}doc/features_spice.html#dipeptide-composition" target="_blank">help</a>
     </legend>
 
     <label class="select first">Number of segments</label>
@@ -56,25 +57,27 @@
 % endfor
     </select>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#dipeptide-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
 
-<!-- Prime-side amino acid counts -->
+<!-- Terminal end amino acid counts -->
 
 <div class="well feat-calc">
-<form id="psaac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
+<form id="teraac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
 
     <legend>
-        Prime-side amino acid count
-        <a class="pull-right" href="${root_url}doc/features_spice.html#prime-side-amino-acid-count" target="_blank">help</a>
+        Terminal end amino acid count
     </legend>
 
-    <label class="select first">Prime side</label>
-    <select class="param input-mini">
-        <option value="5" selected="selected">5'</option>
-        <option value="3">3'</option>
+    <label class="select first">Side</label>
+    <select class="param input-medium">
+        <option value="n" selected="selected">N-terminal end</option>
+        <option value="c">C-terminal end</option>
     </select>
 
     <label class="select">Length</label>
@@ -87,7 +90,10 @@
         <option value="60">60</option>
     </select>
     
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#terminal-end-amino-acid-count" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -99,11 +105,15 @@
 
     <legend>
         Sequence length
-        <a class="pull-right" href="${root_url}doc/features_spice.html#sequence-length" target="_blank">help</a>
     </legend>
 
     <label class="select first">The length of the amino acid sequence</label>
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#sequence-length" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
+
 
 </form>
 </div>
@@ -117,7 +127,6 @@
 
     <legend>
         Property Composition / Transition / Distribution
-        <a class="pull-right" href="${root_url}doc/features_spice.html#property-composition-transition-distribution-ctd" target="_blank">help</a>
     </legend>
 
     <label class="select first">Property</label>
@@ -131,7 +140,10 @@
         <option value="sa">solvent accessibilty</option>
     </select>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#property-composition-transition-distribution-ctd" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -145,7 +157,6 @@
 
     <legend>
         Autocorrelation
-        <a class="pull-right" href="${root_url}doc/features_spice.html#autocorrelation" target="_blank">help</a>
     </legend>
 
     <label class="select first">Type</label>
@@ -178,7 +189,10 @@
 % endfor
     </select>
     
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#autocorrelation" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -190,7 +204,6 @@
 
     <legend>
         Signal average 
-        <a class="pull-right" href="${root_url}doc/features_spice.html#signal-average" target="_blank">help</a>
     </legend>
 
     <label class="select first">AA Scale</label>
@@ -226,7 +239,10 @@
         <option value="100" selected="selected">100</option>
     </select>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#signal-average" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -238,7 +254,6 @@
 
     <legend>
         Signal peaks area
-        <a class="pull-right" href="${root_url}doc/features_spice.html#signal-peaks-area" target="_blank">help</a>
     </legend>
 
     <label class="select first">AA Scale</label>
@@ -283,7 +298,10 @@
         <option value="20">2.0</option>
     </select>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#signal-peaks-area" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -294,7 +312,6 @@
 
     <legend>
         Pseudo amino acid composition (type 1)
-        <a class="pull-right" href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-1" target="_blank">help</a>
     </legend>
 
     <label class="select first">AA Scales </label>
@@ -317,7 +334,10 @@
     </select>
     <label>Weight: 0.05</label>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-1" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -328,7 +348,6 @@
 
     <legend>
         Pseudo amino acid composition (type 2)
-        <a class="pull-right" href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-2" target="_blank">help</a>
     </legend>
 
     <label class="select first">AA Scales </label>
@@ -351,7 +370,10 @@
     </select>
     <label>Weight: 0.05</label>
     
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-2" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -366,7 +388,6 @@
 
     <legend>
         Quasi-sequence-order descriptors
-        <a class="pull-right" href="${root_url}doc/features_spice.html#quasi-sequence-order-descriptors" target="_blank">help</a>
     </legend>
 
     <label class="select first">AA distance matrix</label>
@@ -388,7 +409,10 @@
 
     <label>Weight: 0.1</label>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#quasi-sequence-order-descriptors" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -402,7 +426,6 @@
 
     <legend>
         Secondary structure composition
-        <a class="pull-right" href="${root_url}doc/features_spice.html#secondary-structure-composition" target="_blank">help</a>
     </legend>
 
     <label class="select first">Number of segments</label>
@@ -413,7 +436,10 @@
 % endfor
     </select>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#secondary-structure-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -425,11 +451,14 @@
 
     <legend>
         Per secondary structure amino acid composition
-        <a class="pull-right" href="${root_url}doc/features_spice.html#per-secondary-structure-amino-acid-composition" target="_blank">help</a>
     </legend>
 
     <label class="select first">Amino acid composition of the helix, strand, and random coil regions</label>
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#per-secondary-structure-amino-acid-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -443,7 +472,6 @@
 
     <legend>
         Solvent accessibility composition
-        <a class="pull-right" href="${root_url}doc/features_spice.html#solvent-accessibility-composition" target="_blank">help</a>
     </legend>
 
     <label class="select first">Number of segments</label>
@@ -454,7 +482,10 @@
 % endfor
     </select>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#solvent-accessibility-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -466,11 +497,14 @@
 
     <legend>
         Per solvent accessibility class amino acid composition
-        <a class="pull-right" href="${root_url}doc/features_spice.html#per-solvent-accessibility-class-amino-acid-composition" target="_blank">help</a>
     </legend>
 
     <label class="select first">Amino acid composition of the buried and exposed regions</label>
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#per-solvent-accessibility-class-amino-acid-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -484,12 +518,14 @@
 
     <legend>
         Codon composition
-        <a class="pull-right" href="${root_url}doc/features_spice.html#codon-composition" target="_blank">help</a>
     </legend>
 
     <label class="select first">The ORF codon composition</label>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#codon-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
@@ -501,12 +537,14 @@
 
     <legend>
         Codon usage
-        <a class="pull-right" href="${root_url}doc/features_spice.html#codon-usage" target="_blank">help</a>
     </legend>
 
     <label class="select first">Relative usage of the codons per amino acid</label>
 
-    <button class="btn btn-warning pull-right" type="submit" data-loading-text="Loading...">Calculate</button>
+    <div class="btn-group pull-right">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
+        <a href="${root_url}doc/features_spice.html#codon-usage" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 </div>
