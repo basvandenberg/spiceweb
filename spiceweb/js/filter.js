@@ -27,7 +27,13 @@ $(document).ready(function() {
     // button to show/hide feature category
     $(".filter_showcat").click(function() {
         var currentId = $(this).parent().attr('id');
-        $("div." + currentId + ".filter_select").animate({height:'toggle'});
+
+        if(currentId == undefined) {
+            $("div#labelfilter").animate({height:'toggle'});
+        }
+        else {
+            $("div." + currentId + ".filter_select").animate({height:'toggle'});
+        }
     });
 
     // hide feature categories by default
