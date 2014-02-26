@@ -179,7 +179,6 @@ lname = 'labeling%i' % (index + 1)
 
     <legend>
         Upload labeling
-        <a class="pull-right" href=${root_url}doc/file_formats.html#labeling-file target="_tab">help</a>
     </legend>
 
     <!-- labeling name input text field -->
@@ -198,14 +197,7 @@ alphanumeric characters, underscores, and dashes can be used.</p>" title="" data
 
     <!-- labeling file input file chooser -->
     <div class="control-group">
-        <label class="control-label" for="data_file">Labeling file 
-            <a href=# class="info-button" data-toggle="popover"
-data-placement="top" data-content="<p>Select a labeling file. Explanation about
-the file format can be found in the documentation (<i>File Formats</i>
-section).</p>" title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
+        <label class="control-label" for="data_file">Labeling file </label>
         <div class="controls">
             <div class="fileupload fileupload-new" data-provides="fileupload">
                 <div class="input-append">
@@ -231,7 +223,10 @@ section).</p>" title="" data-original-title="">
     <div class="alert alert-block alert-error fade in"><p>${msg_lab}</p></div>
 % endif
 
-    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+    <div class="btn-group">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+        <a href="${root_url}doc/file_formats.html#labeling-file" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 

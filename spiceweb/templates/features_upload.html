@@ -19,7 +19,6 @@
 
     <legend>
         Upload your own feature matrix
-        <a class="pull-right" href="${root_url}doc/file_formats.html#feature-matrix-file" target="_tab">help</a>
     </legend>
 
     <div class="control-group">
@@ -66,7 +65,10 @@
     <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
 % endif
 
-    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+    <div class="btn-group">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+        <a href="${root_url}doc/file_formats.html#feature-matrix-file" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 
