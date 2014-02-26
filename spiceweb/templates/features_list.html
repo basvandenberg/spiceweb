@@ -17,6 +17,7 @@
 
 <%
 categorized_featids = fe.categorized_protein_feature_ids()
+uri_root = '%s%s' % (root_url, main_menu[main_menu_index][1])
 %>
 
 % if len(categorized_featids) > 0:
@@ -170,6 +171,13 @@ cusfeats = fe.fm_protein.get_custom_features()
 </tbody>
 </table>
 
+% endif
+
+% if len(cusfeats.keys()) > 0 or len(categorized_featids) > 0:
+<div class="btn-group">
+  <a href="${'%s%s' % (uri_root, 'download')}" class="btn"><i class="icon-download"></i> Download feature matrix</a>
+</div> 
+<a href="${root_url}doc/file_formats.html#feature-matrix-file" target="_blank">help</a>
 % endif
 
 ###############################################################################

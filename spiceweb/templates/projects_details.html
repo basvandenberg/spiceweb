@@ -127,6 +127,7 @@ yourself.</p>
 
 <h3>Labelings</h3>
 
+## TODO Where is this used???
 <%
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 %>
@@ -144,6 +145,7 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 </tr>
 </thead>
 <tbody>
+
 % for index, (lname, l) in enumerate(sorted(fe.fm_protein.labeling_dict.iteritems())):
 
 <tr>
@@ -159,6 +161,7 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 </tbody>
 </table>
 
+## TODO Where is this used???
 <%
 lname = 'labeling%i' % (index + 1)
 %>
