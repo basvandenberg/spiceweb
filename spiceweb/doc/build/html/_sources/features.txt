@@ -4,11 +4,10 @@
 Features
 ========
 
-Before explaining about the features offered by SPiCE, this chapter will
-shortly introduce what sequence-based protein features are in the first section
-and how they can be used to form a feature matrix in the second section. The
-third section explains how SPiCE uses feature ids to identify the different
-calculated features.
+Here we shortly introduce what features are. The first section introduces
+sequence-based protein features and the second section explains how calculated
+features form a feature matrix. Finally, the third section explains how SPiCE
+uses ids for identifying features.
 
 -------------------------------
 Sequence-based protein features
@@ -27,7 +26,7 @@ the total length of the sequence::
     fraction A:  5 / 20 = 0.25
 
 This number can be used as a feature of the sequence ``test0``. Similarly, the
-fraction of occurrence of the other letters can be calculated::
+relative fraction of occurrences of the other letters can be calculated::
 
     fraction B: 10 / 20 = 0.5
 
@@ -41,9 +40,8 @@ to a list of three values that captures some sequence property/characteristic.
 
 Similarly, one could calculate these features for a protein's primary
 structure, the amino acid sequence, by calculating the relative fraction of
-occurrence of each amino acid in the protein sequence. As a feature category
-this would be called the *amino acid composition*. Those are the type of
-sequence-based protein features that can be calculated with SPiCE.
+occurrence of each amino acid in the protein sequence. This feature category
+is called the *amino acid composition*. 
 
 --------------
 Feature matrix
@@ -73,7 +71,7 @@ the following feature matrix::
     test2      0.97            0.03            0.00
 
 In this matrix, each row gives the feature values of one sequence (also called
-a feature vector), and each column gives the feature values of one feature.
+a feature vector), and each column is one feature.
 
 -----------
 Feature ids
@@ -85,8 +83,7 @@ three components are separated by an underscore character (_). For feature
 categories that do not require parameters to be set, the parameter settings
 component is left out.
 
-Lets use the *amino acid composition* feature category as example. A feature of
-this category could have the following id::
+A feature of the *amino acid composition* could have the following id::
     
     aac_1_F1
 
@@ -96,14 +93,13 @@ The second part, ``1``, specifies a parameter that sets number of segments in
 which the sequence should be split before returning the amino acid composition
 of each of the segments. Since this value is one, the sequence will not be
 split and the amino acid composition of the full sequence will be returned.
-This value must be an integer larger than 0.
 
 Finally, the third part, ``F1`` identifies the feature within the feature
 category. In this case it indicates that this feature is the relative frequency
 of occurrence of phenylalanine (F) in the first (and this case only) segment.
 
-Multiple parameters can be specified as a dash (``-``) separated list as in the
-following example::
+Multiple parameters can be specified, in which case they are separated using a
+dash (``-``)::
 
     ac_moran-gg-20_gg4
 

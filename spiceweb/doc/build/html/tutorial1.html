@@ -224,8 +224,9 @@ the <em>yeast-expression</em> project.</p>
 </div>
 <div class="section" id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<p>Click on the <em>Features</em> tab to go the features area, which provides
-feature calculation and visualization.</p>
+<p>Click on the <em>Features</em> tab to go the features area, which provides feature
+calculation and visualization.  If you are not familiar with features, more
+information about this topic can be found on the <a class="reference internal" href="features.html#features"><em>Features</em></a> page.</p>
 <a class="reference internal image-reference" href="_images/tut1_0.png"><img alt="_images/tut1_0.png" class="align-center" src="_images/tut1_0.png" style="width: 550px;" /></a>
 <p>Since you have not calculated any features yet, this page will show an empty
 list.</p>
@@ -234,33 +235,33 @@ list.</p>
 <p>Click on the <strong>Calculate</strong> button to go to the feature calculation page.</p>
 <a class="reference internal image-reference" href="_images/tut1_1.png"><img alt="_images/tut1_1.png" class="align-center" src="_images/tut1_1.png" style="width: 550px;" /></a>
 <p>Here, a list with sequence-based feature categories is shown. For each feature
-category one or more dropdown boxes enables setting some parameters and the
+category one or more drop-down boxes enables setting some parameters and the
 <strong>Calculate</strong> button will put the feature calculation job in the job queue on
 the compute servers. Although feature calculation usually does not take long,
 if the compute server is busy, your job might have to wait in queue for a
-while.</p>
-<p>More information on the available sequence-based features is described in the
-<a class="reference internal" href="features.html#features"><em>Features</em></a> documentation.</p>
+while. More information about the available sequence-based features can be
+found on the <a class="reference internal" href="features_spice.html#features-spice"><em>SPiCE features</em></a> page.</p>
 <p>Once you have calculated some features, a table with calculated feature
 categories will occur under the <strong>Features</strong> button, in which the first column
 describes the name of the feature category, the second column lists the used
-parameters, the third column shows how many features are in this category, and
-the last column provides a link to delete the feature category.</p>
+parameters, the third column shows the number of features in this category, and
+the last column provides a link to delete these features.</p>
 <a class="reference internal image-reference" href="_images/tut1_2.png"><img alt="_images/tut1_2.png" class="align-center" src="_images/tut1_2.png" style="width: 550px;" /></a>
-<p>Now with the <em>yeast-expression</em> project still active, calculate the amino acid
-composition with the number of segments parameter set to 1, and signal average
-with parameter settings - scales(s): Georgiev, window: 21, and edge: 100.</p>
+<p>With the <em>yeast-expression</em> project still active, calculate the amino acid
+composition with the number of segments parameter set to 1, and calculate the
+signal average features with parameters AA scale set to Georgiev, window set to
+21, and edge set to 100.</p>
 <p>If the feature calculation is finished, click on the <strong>Statistics</strong> button to
-start exploring them.</p>
+start exploring them.  But before explaining about the feature statistics and
+visualization possibilities, the <em>filter sidebar</em> will be introduced first.</p>
 </div>
 <div class="section" id="filter-sidebar">
 <h3>Filter sidebar<a class="headerlink" href="#filter-sidebar" title="Permalink to this headline">¶</a></h3>
-<p>Before explaining about the feature statistics and visualization possibilities,
-the <em>filter sidebar</em> will be discussed first. The filter sidebar is used
-throughout the website enabling users to select features (feature matrix
-columns) and protein classes (feature matrix rows of the proteins that share
-the same class label). By default the side bar is hidden on the right side,
-click on the dark gray tab with the arrow to open the side bar.</p>
+<p>The <em>filter sidebar</em> is used throughout the website enabling users to select
+features (feature matrix columns) and protein classes (feature matrix rows of
+proteins sharing the same class label). By default the side bar is hidden on
+the right side. You can click on the dark gray tab with the arrow to show and
+hide it.</p>
 <a class="reference internal image-reference" href="_images/tut1_10.png"><img alt="_images/tut1_10.png" class="align-center" src="_images/tut1_10.png" style="width: 550px;" /></a>
 <p>The <em>Label filter</em> at the top can be used to select protein classes.</p>
 <a class="reference internal image-reference" href="_images/tut1_11.png"><img alt="_images/tut1_11.png" class="align-center" src="_images/tut1_11.png" style="width: 550px;" /></a>
@@ -280,89 +281,92 @@ it, i.e. to move it from left to right or the other way around.</p>
 be selected. Select both the <em>low</em> and the <em>high</em> label. The <em>t</em>-statistics
 table remains empty, because we first need to select for what features we want
 to see the <em>t</em>-value, which can be done with the <em>Feature filter</em>.</p>
-<p>The <em>Feature filter</em> shows all feature categories that have been calculated.
-The <em>show/hide</em> link can be used to show or hide the features that are part of
-the corresponding feature category. By default, all feature are hidden.</p>
+<p>The <em>Feature filter</em> shows all feature categories that have been calculated
+thus far.  The <em>show/hide</em> link can be used to show or hide the features of the
+corresponding feature category. By default, all feature are hidden.</p>
 <p>Click on the <em>show/hide</em> link of the <em>Amino Acid Composition</em> category to show
 its features.</p>
 <a class="reference internal image-reference" href="_images/tut1_13.png"><img alt="_images/tut1_13.png" class="align-center" src="_images/tut1_13.png" style="width: 550px;" /></a>
 <p>You can click on the features to select them. To select multiple features, hold
 down the <strong>Ctrl</strong> button while clicking the features, or hold down the left
-mouse button while drawing a rectangle over the features you want to select.</p>
+mouse button while drawing a rectangle over the features you want to select.
+The table with <em>t</em>-statistics updates as soon as you (de)select features.</p>
 <a class="reference internal image-reference" href="_images/tut1_14.png"><img alt="_images/tut1_14.png" class="align-center" src="_images/tut1_14.png" style="width: 550px;" /></a>
 <p>The <em>Select all</em> and <em>Deselect all</em> links at the top can be used to select all
-and deselect all features of the corresponding feature category.</p>
+and deselect all features of the corresponding feature category.  The number
+between brackets behind the feature category name indicates how many of the
+features of that category are selected.</p>
 <a class="reference internal image-reference" href="_images/tut1_15.png"><img alt="_images/tut1_15.png" class="align-center" src="_images/tut1_15.png" style="width: 550px;" /></a>
-<p>The number between brackets behind the feature category name indicates how many
-of the features of that category are selected.</p>
+<p>Use the <em>Select all</em> link to select all features of the amino acid composition
+and use the <em>Deselect all</em> link to deselect all average signal value features.</p>
 </div>
 <div class="section" id="feature-statistics">
 <h3>Feature statistics<a class="headerlink" href="#feature-statistics" title="Permalink to this headline">¶</a></h3>
-<p>Select all features to show their <em>t</em>-values in the table.</p>
 <a class="reference internal image-reference" href="_images/tut1_16.png"><img alt="_images/tut1_16.png" class="align-center" src="_images/tut1_16.png" style="width: 550px;" /></a>
-<p>One row appears for each feature, giving the feature category name, feature
-name, <em>t</em>-value, and corresponding <em>p</em>-value in the four columns.</p>
-<p>Click the <em>t</em>-value header to sort the table by that column. The codon fraction
-<em>GGT (G)</em> has the highest <em>t</em>-value, indicating class separation for this
-feature.</p>
-<p>Use the feature filter to select only this feature, the table should now
-contain only a single row, showing the <em>GGT (G)</em> feature.</p>
+<p>The table with <em>t</em>-statistics shows one row per feature, providing the feature
+id, feature category name, parameter settings, feature name, <em>t</em>-value, and
+corresponding <em>p</em>-value in the six columns.</p>
+<p>Clicking the <em>t</em>-value header sorts the table by that column.  Features <em>S,
+segment 1</em> and <em>A, segment 1</em> have the lowest and highest <em>t</em>-values
+respectively. In combination with a very small  <em>p</em>-value, this indicates
+different class means for these features.</p>
+<p>Use the feature filter to select the <em>S segment 1</em> and the <em>A segment 1</em>
+feature (hold down the <strong>Ctrl</strong> button to select multiple features), the table
+should now contain only two rows, showing both selected features.</p>
 </div>
 <div class="section" id="histograms">
 <h3>Histograms<a class="headerlink" href="#histograms" title="Permalink to this headline">¶</a></h3>
 <p>Histograms can be used to visualize feature value distributions for the
-different protein classes. Use the <strong>Visualizations</strong> drop-down button to select
-<em>histogram</em>.</p>
+different protein classes. Use the <strong>Visualizations</strong> drop-down button to
+select <em>histogram</em>.</p>
 <p>The website should have remembered what labels and features were selected (this
-requires that cookies are enabled), in which case the histogram of the <em>GGT
-(G)</em> feature shown for the labels <em>low</em> and <em>high</em>.</p>
+requires that cookies are enabled), in which case the histogram of the <em>A,
+segment 1</em> and the <em>S, segment 1</em> feature are shown.</p>
 <a class="reference internal image-reference" href="_images/tut1_17.png"><img alt="_images/tut1_17.png" class="align-center" src="_images/tut1_17.png" style="width: 550px;" /></a>
-<p>The distributions clearly show a difference between the <em>low</em> and <em>high</em> class.</p>
-<p>Use the <em>Feature filter</em> in the side bar to select the codon composition <em>CGA
-(R)</em> feature as second feature (hold down the <strong>Ctrl</strong> button while clicking
-this feature so that the first feature remains selected as well). The histogram
-for this feature should appear underneath the first histogram.</p>
-<p>Notice that you can drag and drop the histograms to enable reordering the
-histograms on screen. Click on the top histogram and hold down the mouse
-button, drag the histogram down and drop it underneath the other histogram.</p>
+<p>The distributions clearly show different class means for classes <em>low</em> and
+<em>high</em>.</p>
 </div>
 <div class="section" id="scatter-plots">
 <h3>Scatter plots<a class="headerlink" href="#scatter-plots" title="Permalink to this headline">¶</a></h3>
-<p>With the <em>GGT (G)</em> and <em>CGA (R)</em> still selected, choose the <em>scatter</em> option
-from the <strong>Visualizations</strong> drop-down button.</p>
+<p>With features <em>A, segment 1</em> and <em>S, segment 1</em> still selected, choose the <em>scatter</em>
+option from the <strong>Visualizations</strong> drop-down button.</p>
 <a class="reference internal image-reference" href="_images/tut1_18.png"><img alt="_images/tut1_18.png" class="align-center" src="_images/tut1_18.png" style="width: 550px;" /></a>
-<p>A scatter plot is shown with the GGT(G) feature values on the <em>y</em>-axis and the
-<em>CGA (R)</em> feature values on the <em>x</em>-axis. The <em>high</em> proteins are shown in blue
-and the <em>low</em> proteins in yellow. The <em>low</em> proteins are now on top of the
-<em>high</em> proteins. This depends of the order in which the label in the <em>Label
-filter</em> are selected.</p>
-<p>Notice that a scatter plot will only be shown if exactly two features are
-selected.</p>
+<p>A scatter plot is shown with the <em>S, segment 1</em> feature values on the <em>y</em>-axis
+and the <em>A, segment 1</em> feature values on the <em>x</em>-axis. Proteins in class <em>high</em>
+are shown in yellow and proteins in class <em>low</em> in blue. The proteins with
+label <em>high</em> are now on top of the proteins with label <em>low</em>. This depends on
+the order in which the labels in the <em>Label filter</em> are selected.</p>
+<p>Notice that, since a scatter plot has only two axes, a plot can only be shown
+if exactly two features (one per axis) are selected.</p>
 </div>
 <div class="section" id="clustered-heat-map">
 <h3>Clustered heat map<a class="headerlink" href="#clustered-heat-map" title="Permalink to this headline">¶</a></h3>
-<p>Use the <em>Feature filter</em> to select deselect all features in the <em>Codon
-composition</em> category and select all features in the <em>Amino acid composition</em>
+<p>Use the <em>Feature filter</em> to select all features in the <em>Amino acid composition</em>
 category. Afterwards select the <em>heatmap</em> option from the <strong>Visualizations</strong>
-drop-down button.</p>
+drop-down button. A heat map with hierarchically clustered rows (proteins) and
+columns (features) is shown. Depending on the size of the feature matrix, it
+can take a minute or two for the heat map to appear.</p>
 <a class="reference internal image-reference" href="_images/tut1_19.png"><img alt="_images/tut1_19.png" class="align-center" src="_images/tut1_19.png" style="width: 550px;" /></a>
-<p>A heat map with hierarchically clustered rows (proteins) and columns (features))
-is shown. Depending on the size of the feature matrix, it can take a minute or
-two for the heat map to appear.</p>
-<p>The heat map visualizes the standardized (mean 0.0, std 1.0) values of the
-feature matrix. The columns are the selected features and the rows are the
-proteins in the selected classes (labels). The column on the right shows the
-protein labels, white for <em>high</em> labeled proteins and gray for <em>low</em> labeled
-proteins.</p>
+<p>The heat map visualizes the feature matrix. The columns are the selected
+features and the rows are proteins with the selected class labels. The feature
+values are standardized (mean 0.0, std 1.0) per feature (column). The column
+on the right shows the class labels, white for label <em>high</em> and gray for label
+<em>low</em>.</p>
 </div>
 </div>
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
-<p>The <em>t</em>-statistics and visualizations showed that some feature-value
-distributions are different between the <em>high</em> and <em>low</em> class. Now let&#8217;s try
-to train a classifier that uses these features to predict if a proteins belongs
-to either the <em>low</em> or the <em>high</em> class. A <a class="reference external" href="http://en.wikipedia.org/wiki/Cross-validation_(statistics)">cross-validation</a> protocol is used
-to determine how well this can be predicted using the selected features.</p>
+<p>The <em>t</em>-statistics and visualizations showed that for some features, the
+feature-value distributions of the classes <em>low</em> and <em>high</em> have different
+means. This indicates that these features can be used to predict a protein&#8217;s
+class label. Let&#8217;s try this by training a classifier that uses these features
+to predict if a proteins belongs to either the <em>low</em> or the <em>high</em> class. A
+<a class="reference external" href="http://en.wikipedia.org/wiki/Cross-validation_(statistics)">cross-validation</a> protocol is used to determine how well this can be predicted
+using the selected features.</p>
+<p>First calculate some more features. Go to the <em>features</em> tab and click the
+<strong>Calculate</strong> button. Almost at the bottom of the list, click on the
+<strong>Calculate</strong> button of the <em>Codon composition</em> feature category to have these
+features calculated. Wait until calculation is finished.</p>
 <div class="section" id="new-classifier">
 <h3>New classifier<a class="headerlink" href="#new-classifier" title="Permalink to this headline">¶</a></h3>
 <p>Click the <em>Classification</em> tab and click the <strong>Create</strong> button.</p>
@@ -374,34 +378,35 @@ uniform weights. Click the <strong>Run</strong> button to start the experiment.<
 <p>You will be redirected to the <em>Results</em> page, where the current status of your
 job is shown in the table at the bottom. Depending on how busy the server is,
 the job might have to wait in queue for a while.</p>
-<p>Add two more classification jobs, both for a LDA classifier and 10
-cross-validation loops. Use all <em>amino acid composition</em> features for the first
-and all <em>codon composition</em> features for the second.</p>
+<p>Add two more classification jobs, both for a linear discriminant analysis (LDA)
+classifier and 10 cross-validation loops. For the first one, use all <em>amino
+acid composition</em> features as before. For the second one, use and all <em>codon
+composition</em> features.</p>
 </div>
 <div class="section" id="classification-results">
 <h3>Classification results<a class="headerlink" href="#classification-results" title="Permalink to this headline">¶</a></h3>
-<p>Classification results will be shown in the <em>Results</em> table as soon as a job is
+<p>Classification results are shown in the <em>Results</em> table as soon as a job is
 finished.</p>
 <a class="reference internal image-reference" href="_images/tut1_22.png"><img alt="_images/tut1_22.png" class="align-center" src="_images/tut1_22.png" style="width: 550px;" /></a>
 <p>The table shows different performance measures for each classifier. With an
 area under the ROC-curve (AUROC) of 0.85, the 64 <em>codon composition</em> features
-performed best in this example.</p>
+provided best classification performance.</p>
 </div>
 <div class="section" id="classifier-details">
 <h3>Classifier details<a class="headerlink" href="#classifier-details" title="Permalink to this headline">¶</a></h3>
 <p>Click on the job with the 20 <em>amino acid composition</em> features to see more
-detailed results.  At the top, some classification setting and a table with the
-cross-validation results are shown.</p>
+detailed results.  At the top, some classification settings and a table with
+the cross-validation results are shown.</p>
 <a class="reference internal image-reference" href="_images/tut1_23.png"><img alt="_images/tut1_23.png" class="align-center" src="_images/tut1_23.png" style="width: 550px;" /></a>
 <p>In case of a 2-class classification problem, an ROC-curve is shown underneath.</p>
 <a class="reference internal image-reference" href="_images/tut1_24.png"><img alt="_images/tut1_24.png" class="align-center" src="_images/tut1_24.png" style="width: 550px;" /></a>
 <p>The gray ROC-curves show the cross-validation results and the blue curve shows
 the average ROC-curve. The area under the ROC-curve (and the standard deviation
-for the different CV-loops) are given in the legend.
-The classifier details page also allows you to run a trained classifier on
-another data set. To do so, you first need to create a new project with a
-FASTA file that contains the sequences for which you would like to have
-predicted classes.</p>
+for the different CV-loops) are given in the legend.</p>
+<p>The classifier details page also allows you to run a trained classifier on
+another data set. To do so, you first need to create a new project with a FASTA
+file that contains the sequences for which you would like to have predicted
+classes.</p>
 </div>
 <div class="section" id="test-your-classifier">
 <h3>Test your classifier<a class="headerlink" href="#test-your-classifier" title="Permalink to this headline">¶</a></h3>
