@@ -355,7 +355,7 @@ class Feature:
             str_data += '    <td>%s</td>\n' % (feat_param)
             str_data += '    <td>%s</td>\n' % (feat_name)
             str_data += '    <td class="n">%.2f</td>\n' % (tval)
-            str_data += '    <td class="n">%.15f</td>\n' % (pval)
+            str_data += '    <td class="n">%.05e</td>\n' % (pval)
             str_data += '</tr>\n'
 
         return simplejson.dumps(dict(ttest_table=str_data))
