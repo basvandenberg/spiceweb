@@ -15,7 +15,7 @@
 # Solved issues:
 
 - ISSUE #2: Disabled js related to retrieving taxon ids on new project page.
-- ISSUE # : Fixed show/hide link of the label filter in the filter sidebar.
+- ISSUE #4: Fixed show/hide link of the label filter in the filter sidebar.
 
 # Other
 - Made help links more consistent (attached to buttons).
