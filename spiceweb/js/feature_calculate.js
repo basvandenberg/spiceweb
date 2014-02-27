@@ -13,13 +13,13 @@ $(document).ready(function() {
         event.preventDefault();
  
         // fetch the featcat id from the form id
-        var catid = $(this).parent().attr('id');
+        var catid = $(this).parent().parent().attr('id');
 
         // assuming we only use dropdown to select parameters!!!
 
         var params = [];
 
-        $(this).parent().find('select.param').map(function() {
+        $(this).parent().parent().find('select.param').map(function() {
             params.push($(this).find(':selected').map(function() {
                 return $(this).attr('value');
             }).get().join(''))
