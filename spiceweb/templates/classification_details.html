@@ -85,14 +85,26 @@ snames = sorted(cv_results.keys())
   <tr>
     <td>${index}</td>
 % for sname in snames:
+
+% if cv_results[sname][index] == -10.0:
+    <td>n/a</td>
+% else:
     <td>${'%.3f' % (cv_results[sname][index])}</td>
+% endif
+
 % endfor
   </tr>
 % endfor
   <tr class="double">
     <td>avg/std</td>
 % for sname in snames:
+
+% if avg_results[sname][0] == -10.0:
+    <td>n/a</td>
+% else:
     <td>${'%.2f / %.2f' % (avg_results[sname][0], avg_results[sname][1])}</td>
+% endif
+
 % endfor
   </tr>
 </tbody>
@@ -123,7 +135,7 @@ snames = sorted(cv_results.keys())
 ###############################################################################
 
 <hr class="spacer">
-<h3>Errors</h3>
+<h3>Warnings/Errors</h3>
 <textarea class="error_txt" id="${cl_id}" rows="5"></textarea>
 
 </%block>

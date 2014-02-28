@@ -421,7 +421,8 @@ class Classification:
 
             #score_names = sorted(cl_all_results.values()[0]
             #    .values()[0]['cv_results'].keys())
-            score_names = ['accuracy', 'precision', 'recall', 'roc_auc', 'f1']
+            score_names = ['accuracy', 'precision', 'recall', 'roc_auc', 'mcc', 
+                           'f1']
 
             sel_str = '<div id="score_select">\n'
             sel_str = '<label for="score">Score measure:</label>\n'
