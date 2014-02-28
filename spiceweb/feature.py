@@ -118,12 +118,15 @@ class Feature:
 
         if not(featcat_id is None):
 
-            #pm = self.project_manager
-            #fe = pm.get_feature_extraction()
-
             proteins = fe.protein_data_set.proteins
             featcat = fe.PROTEIN_FEATURE_CATEGORIES[featcat_id.split('_')[0]]
             missing_data = []
+
+            print
+            print featcat_id
+            print 
+            print fe.available_protein_featcat_ids()
+            print
 
             # check if data required for feature calculation is available
             for get_data_func, all_objects in featcat.required_data:

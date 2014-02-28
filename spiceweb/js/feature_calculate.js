@@ -6,9 +6,6 @@ $(document).ready(function() {
     // calculate buttons
     $('button[type="submit"]').click(function(event) {
 
-        // remove alerts if they are still displayed
-        hide_alerts();
-
         // prevent default click behavior
         event.preventDefault();
  
@@ -32,6 +29,10 @@ $(document).ready(function() {
         if(params.length > 0) {
             url = url + '_' + params.join('-');
         }
+
+        // remove alerts if they are still displayed
+        hide_alerts();
+
         window.location.href=url;
     });
 });

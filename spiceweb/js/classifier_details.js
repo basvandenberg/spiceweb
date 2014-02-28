@@ -2,8 +2,8 @@ var refreshIntervalId;
 
 $(document).ready(function() { 
 
-    update_progress();
-    refreshIntervalId = setInterval('update_progress()', 3000);
+    update_progress(false);
+    refreshIntervalId = setInterval('update_progress(true)', 2000);
 
     // bind ajax download call to Download button
     $('a.btn.download').bind('click', function(event) {
@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 });
 
-function update_progress() {
+function update_progress(reload) {
     var ta = $("textarea.job_progress");
     var tb = $("textarea.error_txt");
     var cl_id = ta.attr('id');
@@ -29,6 +29,9 @@ function update_progress() {
             var error = data['error'].length > 0
             if(finished || error) {
                 clearInterval(refreshIntervalId);
+                if(reload) {
+                  location.reload();
+                }
             }
         });
         return false;

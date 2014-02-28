@@ -206,6 +206,7 @@ class Classification:
         self.fetch_session_data()
 
         pm = self.project_manager
+        fe = pm.get_feature_extraction()
 
         if(self.project_id is None):
             return self.no_project_selected()
@@ -214,18 +215,75 @@ class Classification:
             return self.no_such_classifier()
 
         kw_args = self.get_template_args(smi)
-        kw_args['cl_ids'] = self.project_manager.get_classifier_ids()
         kw_args['cl_id'] = cl_id
+        kw_args['cl_ids'] = pm.get_classifier_ids()
+
+        print
+        print cl_id
 
         if(self.project_manager.get_classifier_finished(cl_id)):
 
             if not(data_set is None):
 
-                # run classifier on data set
-                pm.run_classify(cl_id, data_set)
+                # required feature categories for running classifier cl_id
+                settings_dict = pm.get_classifier_settings(cl_id)
+                feat_ids = settings_dict['feature_names']
+                feat_cats = set([f.split('_')[0] for f in feat_ids])
 
-                # redirect to classifier run page
-                raise cherrypy.HTTPRedirect(self.get_url(3) + '/' + cl_id)
+                print
+                print settings_dict
+                print
+                print feat_ids
+                print
+                print feat_cats
+                print
+
+                # required sequence data for calculating the feature categories
+                required_seq_data = set()
+                for fc in feat_cats:
+                     for ds in fe.PROTEIN_FEATURE_CATEGORIES[fc].required_data:
+                        required_seq_data.add(ds)
+
+                print required_seq_data
+                print
+
+                # SWITCH TO OTHER PROJECT FOR CHECKING SEQUENCE AVAILABILITY
+                prev_proj = pm.project_id
+                pm.set_project(data_set)
+                data_set_fe = pm.get_feature_extraction()
+                data_set_proteins = data_set_fe.protein_data_set.proteins
+                # SWITCH BACK TO CURRENT PROJECT
+                pm.set_project(prev_proj)
+
+                # check if required data is available for data set
+                missing_data = set()
+                for get_data_func, all_objects in required_seq_data:
+                    name = ' '.join(get_data_func.__name__.split('_')[1:])
+                    print name
+                    print
+                    if(all_objects):
+                        if not(all([get_data_func(p) for p in data_set_proteins])):
+                            missing_data.add(name)
+                    else:
+                        if not(any([get_data_func(p) for p in data_set_proteins])):
+                            missing_data.add(name)
+
+                print
+                print missing_data
+
+                if(len(missing_data) > 0):
+                    # send error msg to template
+                    kw_args['msg'] = '<p>The features that are required for running this classifier can not be calculated for the %s project, because the following sequence data is not available in this project:</p><ul>' % (data_set)
+                    for item in sorted(missing_data):
+                        kw_args['msg'] += '<li>%ss</li>' % (item)
+                    kw_args['msg'] += '</ul>'
+                else:
+
+                    # run classifier on data set
+                    pm.run_classify(cl_id, data_set)
+
+                    # redirect to classifier run page
+                    raise cherrypy.HTTPRedirect(self.get_url(3) + '/' + cl_id)
 
             # fetch all classification data for this classifier
             all_data_sets = [p[0] for p in pm.get_projects()]
@@ -236,13 +294,18 @@ class Classification:
             classification_unavailable = sorted(set(all_data_sets) -
                                           set(classification_busy))
 
-            # forward this data to the template
+            # forward this data to the template:
+            # to inform the template if classifier construction has finished
             kw_args['classifier_f'] = pm.get_classifier_f(cl_id)
+            # for the drop-down list of data sets without classification
             kw_args['data_sets'] = classification_unavailable
+            # for the results and status tables
             kw_args['classification_status'] = classification_status
 
-        else:
-            kw_args['msg'] = 'Classifier construction still in progress.'
+        print
+        print 'here'
+        print cl_id
+        print
 
         template_f = self.get_template_f(smi)
         return spiceweb.get_template(template_f, **kw_args)

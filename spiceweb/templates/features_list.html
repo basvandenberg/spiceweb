@@ -187,9 +187,10 @@ cusfeats = fe.fm_protein.get_custom_features()
 % for status in ['running', 'waiting', 'error']:
 
 % if (len(feat_status[status]) > 0):
-<h3>${status.title()} jobs</h3>
 
-<table id="running" class="tablesorter">
+<h3 id="${status}">${status.title()} jobs</h3>
+
+<table class="tablesorter">
 <thead>
     <tr>
         <th>featext command line option</th>
@@ -205,6 +206,11 @@ cusfeats = fe.fm_protein.get_custom_features()
 % endfor
 </tbody>
 </table>
+
+% if status in ['running', 'waiting']:
+<div class="alert alert-block alert-info fade in"><p><i class="icon-info-sign"></i> The page automatically reloads every 10 seconds.</p></div>
+% endif
+
 % endif
 
 % endfor

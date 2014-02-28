@@ -12,11 +12,13 @@
 
 <%include file="classification_bar.html" />
 
+% if cv_results and cl_settings:
 <div class="btn-group pull-right">
     <div class="classifier">
         <a href=# class="btn btn-warning download" id="${project_id}">Download classifier data</a>
     </div>
 </div>
+% endif
 
 ## Classfier details
 <h2>Classifier ${cl_id}</h2>

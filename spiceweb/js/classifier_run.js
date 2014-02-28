@@ -17,6 +17,15 @@ $(document).ready(function() {
         window.location.href = url;
     });
 
+    // if classifier training hasn't finished yet, automatically reload page
+    if($('div#progress').length > 0) {
+      setTimeout("location.reload(true);", 10000);
+    }
+   
+    // if run classifier jobs are waiting or running, start automatic reload
+    if($('h4#waiting').length > 0 || ($('h4#running').length > 0)) {
+      setTimeout("location.reload(true);", 10000);
+    }
 });
 
 function clid_from_url() {

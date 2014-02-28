@@ -15,30 +15,53 @@
 ## Classifier run
 <h2>Classifier ${cl_id}</h2>
 
+% if msg:
+    <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
+% endif
+
 ###############################################################################
 ## Run classifier form
 ###############################################################################
 
-% if classifier_f and len(data_sets) > 0:
+% if classifier_f:
+
+% if len(data_sets) > 0:
 
 <!--div class="well"-->
 
 <form id="run-classifier" class="form-inline" enctype="multipart/form-data" method="post">
 
-    <legend>Run classifier on one of your data sets</legend>
+    <legend>Run this classifier on your project data sets</legend>
 
-    <label for="data_set">Data set </label>
+    <label for="data_set">Project data set </label>
     <select name="data_set" id="data_set" class="param input-large">
 % for data_set in data_sets:
         <option value="${data_set}" selected="selected">${data_set}</option>
 % endfor
     </select>
     
-    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run classification</button>
+    <div class="btn-group">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run classification</button>
+        <a href="${root_url}doc/" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 <!-- well -->
 <!--/div--> 
+
+% else:
+
+<div class="alert alert-block alert-info fade in">
+    <p>No more data sets available to run this classifier on. </p>
+</div>
+
+% endif
+
+% else:
+
+<div class="alert alert-block alert-info fade in" id="progress">
+    <p>Please be patient, classifier construction is still in progress (this page will automatically reload every 10 seconds). </p>
+</div>
 
 % endif
 
@@ -75,7 +98,7 @@
 
 % for status in ['running', 'waiting', 'error']:
 % if len(classification_status[status]) > 0:
-<h4>${status.title()}</h4>
+<h4 id=${status}>${status.title()}</h4>
 <table class="tablesorter">
 <thead>
 <tr>
