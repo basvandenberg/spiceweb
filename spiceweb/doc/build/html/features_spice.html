@@ -128,20 +128,20 @@ Exploration</div>
 <p>After project initiation, you can use the <em>Calculate</em> button under the
 <em>Features</em> tab to calculate a range of sequence-based protein features.</p>
 <a class="reference internal image-reference" href="_images/featcalc0.png"><img alt="_images/featcalc0.png" class="align-center" src="_images/featcalc0.png" style="width: 640px;" /></a>
-<p>The following sections bescribe the different feature categories that can be
+<p>The following sections describe the different feature categories that can be
 calculated on the SPiCE website. Some of these features were used in our
 previous research <a class="reference internal" href="#vandenberg2010" id="id1">[16]</a> <a class="reference internal" href="#vandenberg2012" id="id2">[17]</a>, and the rest
 was extracted from other feature calculation methods <a class="reference internal" href="#li2006" id="id3">[4]</a>
 <a class="reference internal" href="#rao2011" id="id4">[13]</a>, <a class="reference internal" href="#shen2008" id="id5">[6]</a>, <a class="reference internal" href="#cao2013" id="id6">[1]</a>.</p>
 <div class="section" id="amino-acid-composition">
 <h2>Amino acid composition<a class="headerlink" href="#amino-acid-composition" title="Permalink to this headline">¶</a></h2>
-<p>The amino acids composition calculates the frequency of occurance for each
-of the 20 amino acids in a protein sequence.</p>
+<p>The amino acids composition calculates the relative frequency of occurrence for
+each of the 20 amino acids in a protein sequence.</p>
 <a class="reference internal image-reference" href="_images/featcalc1.png"><img alt="_images/featcalc1.png" class="align-center" src="_images/featcalc1.png" style="width: 640px;" /></a>
 <p>Having 20 amino acids, this will result in 20 features. Any other than the 20
 unambiguous amino acid letters will be ignored.</p>
 <p>To illustrate this, consider the following (unrealistic) protein sequence,
-which contains two occurences of each amino acid in which each amino acid
+which contains two occurrences of each amino acid in which each amino acid
 obtains the value 0.05:</p>
 <div class="highlight-python"><pre>&gt;&gt;aac_test
 MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV</pre>
@@ -153,7 +153,7 @@ aac_test      0.05        0.05      ...       0.05</pre>
 </div>
 <p>As a parameter, users can specify in how many (equal sized) segments a protein
 should be divided, before calculating the amino acid composition of each
-segmente separately. The number of features will therefore be the number of
+segment separately. The number of features will therefore be the number of
 segments times 20.</p>
 <p>With 2 as number of segments parameter, the sequence will be split in two:</p>
 <div class="highlight-python"><pre>segment 1              segment2
@@ -169,21 +169,21 @@ aac_test      0.10  ...  0.00  ...  0.00  ...  0.10</pre>
 <div class="section" id="dipeptide-composition">
 <h2>Dipeptide composition<a class="headerlink" href="#dipeptide-composition" title="Permalink to this headline">¶</a></h2>
 <p>Similar to the amino acid composition, the dipeptide composition calculates the
-frequency of occurance of each of the 400 possible dipeptides in a protein
-sequence.</p>
+relative frequency of occurrence of each of the 400 possible dipeptides in a
+protein sequence.</p>
 <a class="reference internal image-reference" href="_images/feat_dipep.png"><img alt="_images/feat_dipep.png" class="align-center" src="_images/feat_dipep.png" style="width: 640px;" /></a>
 <p>Having 400 possible amino acid pairs (dipeptides), this will result in 400
 features. Dipeptides containing any other than the 20 unambiguous amino acid
 letters will be ignored.</p>
 <p>As a parameter, users can specify in how many (equal sized) segments a protein
 should be divided, before calculating the dipeptide composition of each
-segmente separately. To limit the number of features and to avoid too sparse
+segment separately. To limit the number of features and to avoid too sparse
 feature matrices, the maximal number of segments is set to 2.</p>
 <p>For an example sequence that contains 10 dipeptides:</p>
 <div class="highlight-python"><pre>&gt;&gt;dc_test
 MAAARRNNDDC</pre>
 </div>
-<p>The resulting feature vector wil be:</p>
+<p>The resulting feature vector will be:</p>
 <div class="highlight-python"><pre>.           AA      AR   ...   AV      RA      RR         VV
 
 dc_test    0.20    0.10  ...  0.00    0.00    0.10  ...  0.00</pre>
@@ -230,7 +230,7 @@ len_test     10</pre>
 <a class="reference internal" href="#li2006" id="id8">[4]</a>.</p>
 <p>For these features, the protein sequence is first translated
 from the 20 letter amino acid alphabet to a 3 letter alphabet, in which the 20
-amino acids are devided over the three letters based on some property. The
+amino acids are divided over the three letters based on some property. The
 properties and corresponding subdivision of the amino acids are:</p>
 <div class="highlight-python"><pre>property                letter A            letter B            letter C
 ---------------------------------------------------------------------------
@@ -262,18 +262,18 @@ composition B: 58 / 70 = 0.114
 
 composition C:  8 / 70 = 0.829</pre>
 </div>
-<p>Secondly the relative frequency of occurance of letter transitions. For letters
-A and B this is the number of transitions from A to B and from B to A divided
-by the sequence length - 1:</p>
+<p>Secondly the relative frequency of occurrence of letter transitions. For
+letters A and B this is the number of transitions from A to B and from B to A
+divided by the sequence length - 1:</p>
 <div class="highlight-python"><pre>transition A-B B-A:  6 / 69 = 0.087
 
 transition A-C C-A:  2 / 69 = 0.029
 
 transition B-C C-B: 14 / 69 = 0.203</pre>
 </div>
-<p>Finally the property letter distributation is captured by 5 features per
+<p>Finally the property letter distribution is captured by 5 features per
 property letter. If we consider letter C, the first feature is the (procentual)
-sequence position of the first occurance of the C:</p>
+sequence position of the first occurrence of the C:</p>
 <div class="highlight-python"><pre>distribution C first:  4 / 70 = 0.057</pre>
 </div>
 <p>The following 4 features are the (procentual) sequence positions where
@@ -311,8 +311,8 @@ information about the implementation details can be found there.</p>
 a user-defined amino acid scale (see <a class="reference internal" href="feature_data_sources.html#feature-data-sources"><em>Feature data sources</em></a>), and
 calculates the average profile (signal) value as feature.</p>
 <p>The <em>window</em> and <em>edge</em> parameter determine how much the profile is smoothed
-before calculating the feature. A larger window results in more a more smooted
-profile. The edge detirmene how much influence the residues at the edge of the
+before calculating the feature. A larger window results in more a more smoothed
+profile. The edge determine how much influence the residues at the edge of the
 window have on the smoothing (see also Fig.1B in <a class="reference internal" href="feature_data_sources.html#feature-data-sources"><em>Feature data sources</em></a>).</p>
 <a class="reference internal image-reference" href="_images/featcalc3.png"><img alt="_images/featcalc3.png" class="align-center" src="_images/featcalc3.png" style="width: 640px;" /></a>
 <p>Amino acid scales relate to different amino acid properties, such as
@@ -350,7 +350,7 @@ PseAAC webserver are also provided, of which one or more can be selected.</p>
 <div class="section" id="secondary-structure-composition">
 <h2>Secondary structure composition<a class="headerlink" href="#secondary-structure-composition" title="Permalink to this headline">¶</a></h2>
 <p>Secondary structure sequences may contain three letters, the same that are used
-by secondanry structure prediction method PSIPRED: C (random coil), H (helix),
+by secondary structure prediction method PSIPRED: C (random coil), H (helix),
 E (strand). This feature calculates the composition of these three letters.</p>
 <a class="reference internal image-reference" href="_images/feat_ssc.png"><img alt="_images/feat_ssc.png" class="align-center" src="_images/feat_ssc.png" style="width: 640px;" /></a>
 </div>
@@ -386,7 +386,7 @@ returned.</p>
 </div>
 <div class="section" id="solvent-accessibility-composition">
 <h2>Solvent accessibility composition<a class="headerlink" href="#solvent-accessibility-composition" title="Permalink to this headline">¶</a></h2>
-<p>Solvent accessibility sequences may contain three letters: B (burried),
+<p>Solvent accessibility sequences may contain two letters: B (buried),
 E (exposed). This feature calculates the composition of these two letters.</p>
 <a class="reference internal image-reference" href="_images/feat_sac.png"><img alt="_images/feat_sac.png" class="align-center" src="_images/feat_sac.png" style="width: 640px;" /></a>
 </div>
@@ -420,8 +420,8 @@ returned.</p>
 </div>
 <div class="section" id="codon-composition">
 <h2>Codon composition<a class="headerlink" href="#codon-composition" title="Permalink to this headline">¶</a></h2>
-<p>This feature category calculates the frequence of occurancy of each of the 64
-codons in a protein&#8217;s ORF sequence.</p>
+<p>This feature category calculates the relative frequency of occurrence of each
+of the 64 codons in a protein&#8217;s ORF sequence.</p>
 <a class="reference internal image-reference" href="_images/feat_cc.png"><img alt="_images/feat_cc.png" class="align-center" src="_images/feat_cc.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="codon-usage">
@@ -437,13 +437,13 @@ corresponding ORF sequence:</p>
 </div>
 <p>Since four different codons encode for alanine: GCT, GCC, GCA, and GCG, the
 example ORF sequence can only consist of these 4 codons. The codon usage
-feature calculates the relative frequency of occurance of these four codons,
+feature calculates the relative frequency of occurrence of these four codons,
 resulting in the following 4 feature values:</p>
 <div class="highlight-python"><pre>.       GCT    GCC    GCA    GCG
         0.2    0.5    0.3    0.0</pre>
 </div>
 <p>All other codon values will be set to 0.0 in this example. In a real sequence,
-containing all 20 amino acids, this proredure is done for each amino acid,
+containing all 20 amino acids, this procedure is done for each amino acid,
 resulting in a total of 64 features, one per codon.</p>
 </div>
 <div class="section" id="references">

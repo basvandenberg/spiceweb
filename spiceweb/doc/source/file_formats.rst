@@ -59,7 +59,7 @@ The FASTA file should meet the following requirements:
 - Empty sequences are not allowed.
 - Sequences must be upper case.
 
-SPiCE uses FASTA files for three types of sequences: amino acid sequences,
+SPiCE uses FASTA files for four types of sequences: amino acid sequences,
 nucleotide sequences, secondary structure sequences, and solvent accessibility
 sequences. Details per sequence type are discussed in the following
 subsections.
@@ -102,7 +102,7 @@ the same as used by secondary structure prediction method PSIPRED::
     random coil: R
 
 **Note** A protein's secondary structure sequence should have the same length
-as its amino acid seqeunce. However, SPiCE does not check for this when
+as its amino acid sequence. However, SPiCE does not check for this when
 uploading a FASTA file with secondary structures!
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -115,7 +115,7 @@ For secondary structure sequences the following letters are allowed::
     buried:  B
 
 **Note** A protein's solvent accessibility sequence should have the same length
-as its amino acid seqeunce. However, SPiCE does not check for this when
+as its amino acid sequence. However, SPiCE does not check for this when
 uploading a FASTA file with solvent accessibility sequences!
 
 -------------

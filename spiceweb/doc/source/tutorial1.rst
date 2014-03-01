@@ -33,7 +33,7 @@ the example project.
    :width: 550px
    :align: center
 
-You will be redirected to your list op projects, which should contain the
+You will be redirected to your list of projects, which should contain the
 *yeast-expression* project.
 
 .. image:: img/t1_0_create_1_1.png
@@ -155,7 +155,7 @@ files.
    :width: 550px
    :align: center
 
-Consult the :ref:`file_formats` documention for more information on the
+Consult the :ref:`file_formats` documentation for more information on the
 labeling file format. To see an example, you can download the labeling file of
 the *yeast-expression* project.
 
@@ -332,8 +332,8 @@ The distributions clearly show different class means for classes *low* and
 Scatter plots
 ^^^^^^^^^^^^^
 
-With features *A, segment 1* and *S, segment 1* still selected, choose the *scatter*
-option from the **Visualizations** drop-down button.
+With features *A, segment 1* and *S, segment 1* still selected, choose the
+*scatter* option from the **Visualizations** drop-down button.
 
 .. image:: img/tut1_18.png
    :width: 550px
@@ -463,8 +463,8 @@ Test your classifier
 ^^^^^^^^^^^^^^^^^^^^
 
 To test a trained classifier on another data set, go to the details page of one
-of the classifiers. Click the **Run** button and use the dropdown box to select
-the *aniger-secretion* data set. 
+of the classifiers. Click the **Run** button and use the drop-down box to
+select the *aniger-secretion* data set. 
 
 .. image:: img/tut1_26.png
    :width: 550px

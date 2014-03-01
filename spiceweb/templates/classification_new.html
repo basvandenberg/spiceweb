@@ -25,7 +25,7 @@
             </a>
         </label>
         <div class="controls">
-            <select id="n_fold_cv" name="n_fold_cv">
+            <select id="n_fold_cv" name="n_fold_cv" class="input-mini">
               <option>3</option>
               <option>5</option>
               <option selected="selected">10</option>
@@ -40,10 +40,10 @@
             </a>
         </label>
         <div class="controls">
-            <select id="cl_type" name=cl_type />
+            <select id="cl_type" name="cl_type" class="input-xlarge"/>
                 <optgroup label="Linear Discriminant Analysis">
-                    <option value="lda">LDA classifier</option>
-                    <option value="qda">QDA classifier</option>
+                    <option value="lda">Linear Discriminant Analysis (LDA) classifier</option>
+                    <option value="qda">Quadratic Discriminant Analysis (QDA) classifier</option>
                 </optgroup>
                 <optgroup label="Nearest Neighbor Classifiers">
                     <option value="kn_uniform">k-Nearest neighbor classifier (uniform weights)</option>

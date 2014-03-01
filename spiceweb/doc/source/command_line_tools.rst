@@ -23,7 +23,7 @@ classification.py
 classify.py
 -----------
 
-Downloaded classification results contain, desides performance scores and used
+Downloaded classification results contain, besides performance scores and used
 settings, a Scikit-learn classifier that was trained on the entire data set:
 ``classifier.joblib.pkl``. This file is pickled using the ``joblib`` module
 which is offered as part of the ``scikit-learn`` package.

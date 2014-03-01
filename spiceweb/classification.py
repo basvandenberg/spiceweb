@@ -19,7 +19,7 @@ class Classification:
     }
 
     CL_NAMES = {
-        'lda': 'Linear Distcriminant Analysis classifier',
+        'lda': 'Linear Discriminant Analysis classifier',
         'qda': 'Quadratic Discriminant Analysis classifier',
         'nc': 'Nearest Centroid classifier',
         'kn_uniform': 'k-Nearest Neighbor classifier (uniform weights)',
@@ -28,7 +28,7 @@ class Classification:
         'svc_rbf': 'RBF-kernel Support Vector Machine (SVM) classifier',
         'gnb': 'Gaussian Naive Bayes classifier',
         'mnb': 'Multinomial Naive Bayes classifier',
-        'bnb': 'Bernoulli naive bayes',
+        'bnb': 'Bernoulli naive Bayes',
         'dtree': 'Decision Tree classifier',
         'rforest': 'Random Forest classifier'
     }
