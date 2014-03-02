@@ -122,12 +122,6 @@ class Feature:
             featcat = fe.PROTEIN_FEATURE_CATEGORIES[featcat_id.split('_')[0]]
             missing_data = []
 
-            print
-            print featcat_id
-            print 
-            print fe.available_protein_featcat_ids()
-            print
-
             # check if data required for feature calculation is available
             for get_data_func, all_objects in featcat.required_data:
                 name = ' '.join(get_data_func.__name__.split('_')[1:])

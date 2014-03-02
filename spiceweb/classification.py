@@ -218,9 +218,6 @@ class Classification:
         kw_args['cl_id'] = cl_id
         kw_args['cl_ids'] = pm.get_classifier_ids()
 
-        print
-        print cl_id
-
         if(self.project_manager.get_classifier_finished(cl_id)):
 
             if not(data_set is None):
@@ -230,22 +227,11 @@ class Classification:
                 feat_ids = settings_dict['feature_names']
                 feat_cats = set([f.split('_')[0] for f in feat_ids])
 
-                print
-                print settings_dict
-                print
-                print feat_ids
-                print
-                print feat_cats
-                print
-
                 # required sequence data for calculating the feature categories
                 required_seq_data = set()
                 for fc in feat_cats:
                      for ds in fe.PROTEIN_FEATURE_CATEGORIES[fc].required_data:
                         required_seq_data.add(ds)
-
-                print required_seq_data
-                print
 
                 # SWITCH TO OTHER PROJECT FOR CHECKING SEQUENCE AVAILABILITY
                 prev_proj = pm.project_id
@@ -268,8 +254,6 @@ class Classification:
                         if not(any([get_data_func(p) for p in data_set_proteins])):
                             missing_data.add(name)
 
-                print
-                print missing_data
 
                 if(len(missing_data) > 0):
                     # send error msg to template
@@ -301,11 +285,6 @@ class Classification:
             kw_args['data_sets'] = classification_unavailable
             # for the results and status tables
             kw_args['classification_status'] = classification_status
-
-        print
-        print 'here'
-        print cl_id
-        print
 
         template_f = self.get_template_f(smi)
         return spiceweb.get_template(template_f, **kw_args)
