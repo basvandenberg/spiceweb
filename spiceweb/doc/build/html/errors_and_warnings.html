@@ -1,0 +1,179 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Errors and Warnings &mdash; SPiCE 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/spicedoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
+    <link rel="next" title="Example projects" href="example_projects.html" />
+    <link rel="prev" title="File Formats" href="file_formats.html" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
+     
+
+  </head>
+  <body>
+    <!--div id="header_menu">
+        <a href=http://helix.ewi.tudelft.nl/spica/news/>news</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/doc/ class="active">documentation</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/software/>software</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/about/>about</a>
+        <a href=http://helix.ewi.tudelft.nl/spica/contact/>contact</a>
+    </div-->
+    <div id="header" class="home">
+        <div id="title"><!--a href="http://helix.ewi.tudelft.nl/spice"-->SPiCe<!--/a--></div>
+        <div id="subtitle">Sequence-based Protein Classification and
+Exploration</div>
+        <div id="version">version 0.1</div>
+    </div>
+    
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="example_projects.html" title="Example projects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="file_formats.html" title="File Formats"
+             accesskey="P">previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Errors and Warnings</a><ul>
+<li><a class="reference internal" href="#variable-are-collinear-warning">Variable are collinear warning</a></li>
+<li><a class="reference internal" href="#sum-of-true-positives-and-false-positives-are-equal-to-zero-for-some-labels">Sum of true positives and false positives are equal to zero for some labels</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="file_formats.html"
+                        title="previous chapter">File Formats</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="example_projects.html"
+                        title="next chapter">Example projects</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/errors_and_warnings.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="errors-and-warnings">
+<span id="id1"></span><h1>Errors and Warnings<a class="headerlink" href="#errors-and-warnings" title="Permalink to this headline">¶</a></h1>
+<p>Running a classification job can result in different errors or warnings. Some
+of them are explained below. Please let us now if you run into an error or
+warning that is not explained here (<a class="reference external" href="mailto:spice&#46;webapp&#37;&#52;&#48;gmail&#46;com">spice<span>&#46;</span>webapp<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<p>The provided errors and warnings are generated by the scikit-learn software,
+that is used for classification. The <a class="reference external" href="http://scikit-learn.org/stable/">scikit-learn</a> website contains a lot of
+useful information and documentation.</p>
+<div class="section" id="variable-are-collinear-warning">
+<h2>Variable are collinear warning<a class="headerlink" href="#variable-are-collinear-warning" title="Permalink to this headline">¶</a></h2>
+<p>Both the linear and quadratic discriminant analysis (LDA and QDA) classifiers
+can result in a warning that there are collinear variables:</p>
+<div class="highlight-python"><pre>/usr/local/lib/python2.7/dist-packages/sklearn/lda.py:162: UserWarning:
+Variables are collinear warnings.warn("Variables are collinear")</pre>
+</div>
+<p>Both LDA and QDA involves computing a matrix inversion, which is inaccurate if
+the determinant is close to 0, i.e. two or more variables are almost a linear
+combination of each other. This <a class="reference external" href="http://www.wikipedia.org/wiki/multicollinearity">multicollinearity</a> might have a negative effect
+on your classification results. However, this is not necessarily a problem,
+since a good classification performance might still be obtain, for example when
+running an LDA classifier on the <em>A. niger</em> example project using the amino
+acid composition as features.</p>
+</div>
+<div class="section" id="sum-of-true-positives-and-false-positives-are-equal-to-zero-for-some-labels">
+<h2>Sum of true positives and false positives are equal to zero for some labels<a class="headerlink" href="#sum-of-true-positives-and-false-positives-are-equal-to-zero-for-some-labels" title="Permalink to this headline">¶</a></h2>
+<p>In case of multi-class problems, it might occur that the
+The precision and recall are equal to zero for some labels.</p>
+<div class="highlight-python"><pre>/usr/local/lib/python2.7/dist-packages/sklearn/metrics/metrics.py:1249:
+UserWarning: The precision and recall are equal to zero for some labels.
+fbeta_score is ill defined for those labels [ 0.].</pre>
+</div>
+<p>These warnings might occur in multiple cross-validation (CV) loops, so multiple
+of such warnings might occur for one classification run.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="example_projects.html" title="Example projects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="file_formats.html" title="File Formats"
+             >previous</a> |</li>
+    
+        <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    
+    <div class="footer">
+        &copy; Copyright 2013, Bastiaan van den Berg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+    <div class="spica_footer">
+    Delft University of Technology, <a href="http://bioinformatics.tudelft.nl">Delft Bioinformatics Lab</a>
+    </div>
+
+  </body>
+</html>

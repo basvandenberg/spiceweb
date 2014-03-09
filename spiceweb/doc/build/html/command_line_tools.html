@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="SPiCE 0.1 documentation" href="index.html" />
-    <link rel="prev" title="User accounts" href="user_accounts.html" />
+    <link rel="prev" title="Example projects" href="example_projects.html" />
     <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway" rel="stylesheet" type="text/css">
      
 
@@ -53,7 +53,7 @@ Exploration</div>
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="user_accounts.html" title="User accounts"
+          <a href="example_projects.html" title="Example projects"
              accesskey="P">previous</a> |</li>
     
         <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>
@@ -73,8 +73,8 @@ Exploration</div>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="user_accounts.html"
-                        title="previous chapter">User accounts</a></p>
+  <p class="topless"><a href="example_projects.html"
+                        title="previous chapter">Example projects</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/command_line_tools.txt"
@@ -104,14 +104,71 @@ Exploration</div>
   <div class="section" id="command-line-tools">
 <span id="id1"></span><h1>Command line tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h1>
 <p>SPiCE can also be used locally using the command line using Python package
-<tt class="docutils literal"><span class="pre">_spice</span></tt>. This package contains a feature extraction (<tt class="docutils literal"><span class="pre">featext</span></tt>) module that
+<a class="reference external" href="https://github.com/basvandenberg/spice">spice</a>. This package contains a feature extraction (<tt class="docutils literal"><span class="pre">featext</span></tt>) module that
 can be used for features calculation, a <tt class="docutils literal"><span class="pre">classification</span></tt> module to train
-classifiers and a <tt class="docutils literal"><span class="pre">classify</span></tt> module to test a trained classifier.</p>
+classifiers and a <tt class="docutils literal"><span class="pre">classify</span></tt> module to run a trained classifier on another
+data set.</p>
 <div class="section" id="featext-py">
 <h2>featext.py<a class="headerlink" href="#featext-py" title="Permalink to this headline">¶</a></h2>
+<p>For feature extraction, a project needs to be initialized first at a give
+location (path). For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span> <span class="n">test_project</span>
+<span class="n">cd</span> <span class="n">test_project</span>
+<span class="n">featext</span> <span class="o">--</span><span class="n">root</span> <span class="o">.</span> <span class="o">--</span><span class="n">init</span>
+</pre></div>
+</div>
+<p>A directory protein_data_set has been created, which will contain all protein
+sequence data. The directory feature_matrix_protein will contain all calculated
+features in the form of a feature matrix.</p>
+<p>Next the protein ids need to be added. These should be stored in a file that
+contains exactly one (unique) protein id per line.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">featext</span> <span class="o">--</span><span class="n">root</span> <span class="o">.</span> <span class="o">--</span><span class="n">uniprot_ids</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">ids_file</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>The option is called uniprot_ids for historic reasons, but you can use any ids
+you like. This naming will be adjusted in a following release.</p>
+<p>A protein_ids.txt file is now stored in the protein_data_set directory. The
+next step is to add protein sequences, using a FASTA-file. This file should at
+least contain a sequence for each id you just added to the project. Only these
+sequences will be read and added to the projects protein data.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">featext</span> <span class="o">--</span><span class="n">root</span> <span class="o">.</span> <span class="o">--</span><span class="n">protein_seqeunce_data</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">fasta_file</span><span class="o">.</span><span class="n">fsa</span>
+</pre></div>
+</div>
+<p>A protein.fsa file is now stored in the protein_data_set directory. This
+sequence data can now be used for calculating features.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">featext</span> <span class="o">--</span><span class="n">root</span> <span class="o">.</span> <span class="o">--</span><span class="n">protein_features</span> <span class="n">aac_1</span> <span class="n">dc_1</span>
+</pre></div>
+</div>
+<p>The protein_features options <tt class="docutils literal"><span class="pre">aac_1</span></tt> and <tt class="docutils literal"><span class="pre">dc_1</span></tt> are feature category ids
+that indicate what features need to be calculated. More information about
+feature ids can be found in the <a class="reference internal" href="features.html#feature-ids"><em>Feature ids</em></a> section.</p>
+<p>Protein labels can be set using a <em class="xref std std-ref">labeling file</em>, which is required for
+running classification jobs.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">featext</span> <span class="o">--</span><span class="n">root</span> <span class="o">.</span> <span class="o">--</span><span class="n">labels</span> <span class="n">protein</span> <span class="n">my_labeling</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">labeling_file</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>There are three parameters that should follow the <tt class="docutils literal"><span class="pre">--labels</span></tt> option. The
+first should always be protein, the second is the name of your labeling (you
+can choose any), and the third is the path to your labeling file.</p>
 </div>
 <div class="section" id="classification-py">
 <h2>classification.py<a class="headerlink" href="#classification-py" title="Permalink to this headline">¶</a></h2>
+<p>Classification jobs can be run using:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">classification</span> <span class="o">-</span><span class="n">f</span> <span class="n">your_project_dir</span><span class="o">/</span><span class="n">feature_matrix_protein</span> \
+    <span class="o">-</span><span class="n">l</span> <span class="n">labeling_name</span> <span class="o">-</span><span class="n">c</span> <span class="n">lda</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">e</span> <span class="n">roc_auc</span> <span class="o">--</span><span class="n">classes</span> <span class="n">low</span> <span class="n">high</span> \
+    <span class="o">--</span><span class="n">features</span> <span class="n">aac_1_A</span> <span class="n">aac_1_C</span> <span class="n">aac_1_D</span> <span class="o">--</span><span class="n">standardize</span> <span class="o">-</span><span class="n">o</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output_dir</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">-f</span></tt> should point to the feature matrix directory within your project
+dir. With the <tt class="docutils literal"><span class="pre">-l</span></tt> and <tt class="docutils literal"><span class="pre">--classes</span></tt> options you can indicate which labaling
+to use, and within this labeling, which labels should be classified. The <tt class="docutils literal"><span class="pre">-c</span></tt>
+option indicates what classifier to use, the <tt class="docutils literal"><span class="pre">-n</span></tt> option holds the number of
+CV-loops to use for performance assessment, the <tt class="docutils literal"><span class="pre">-e</span></tt> option holds the
+evaluation score to use. The features to use for classification can be
+indicating using the <tt class="docutils literal"><span class="pre">--features</span></tt> option. The <tt class="docutils literal"><span class="pre">-standardize</span></tt> option will
+most often be used, this causes the feature matrix to be standardized. Finally,
+the <tt class="docutils literal"><span class="pre">-o</span></tt> option points to the directory to which the results should be
+written.</p>
 </div>
 <div class="section" id="classify-py">
 <h2>classify.py<a class="headerlink" href="#classify-py" title="Permalink to this headline">¶</a></h2>
@@ -159,7 +216,7 @@ following:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="user_accounts.html" title="User accounts"
+          <a href="example_projects.html" title="Example projects"
              >previous</a> |</li>
     
         <li><a href="index.html">SPiCE 0.1 documentation</a> &raquo;</li>

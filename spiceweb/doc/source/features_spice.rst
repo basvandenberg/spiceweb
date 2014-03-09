@@ -287,15 +287,20 @@ some given threshold (see also Fig.1C in :ref:`feature_data_sources`).
 
 
 
+..    include:: <isogrk1.txt>
+
 ------------------------------------
 Pseudo amino acid composition type 1
 ------------------------------------
 
-The type 1 pseudo amino acid composition calculates 20 + lambda features as
-introduced in :cite:`chou2001` and provides the same calculation as provided on
-the PseAAC webserver :cite:`shen2008`. The same amino acid scales as on the
-PseAAC webserver are also provided, of which one or more can be selected.
+The type 1 pseudo amino acid composition, also called the parallel-type,
+calculates 20 + |lgr| features as introduced in :cite:`chou2001` and provides
+the same calculation as provided on the PseAAC webserver :cite:`shen2008`. The
+same amino acid scales as on the PseAAC webserver are also provided, of which
+one or more can be selected. Details about these features and how they are
+calculated are given on the PseAAC-type1_ help site.
 
+.. _PseAAC-type1: http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type1.htm
 
 .. image:: img/feat_pseaac1.png
    :width: 640px
@@ -307,10 +312,15 @@ PseAAC webserver are also provided, of which one or more can be selected.
 Pseudo amino acid composition type 2
 ------------------------------------
 
-The type 2 pseudo amino acid composition calculates 20 + lambda features as
-introduced in :cite:`chou2005` and provides the same calculation as provided on
-the PseAAC webserver :cite:`shen2008`. The same amino acid scales as on the
-PseAAC webserver are also provided, of which one or more can be selected.
+The type 2 pseudo amino acid composition calculates 20 + *i* x |lgr| features,
+in which *i* is the number of selected amino acid scales, as introduced in
+:cite:`chou2005` and provides the same calculation as provided on the PseAAC
+webserver :cite:`shen2008`. The same amino acid scales as on the PseAAC
+webserver are also provided, of which one or more can be selected. Details
+about these features and how they are calculated are given on the PseAAC-type2_
+help site.
+
+.. _PseAAC-type2: http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type2.htm
 
 .. image:: img/feat_pseaac2.png
    :width: 640px

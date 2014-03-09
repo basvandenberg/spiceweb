@@ -73,6 +73,8 @@ the following feature matrix::
 In this matrix, each row gives the feature values of one sequence (also called
 a feature vector), and each column is one feature.
 
+.. _feature_ids:
+
 -----------
 Feature ids
 -----------
