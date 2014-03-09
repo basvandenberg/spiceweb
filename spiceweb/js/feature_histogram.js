@@ -9,7 +9,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
     if(feat_ids.length == 0) {
         $("div#feat_error").remove()
         $("ul.histograms").before(
-            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one ore more features using the feature filter in the right panel.</p></div>'
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Select one ore more features using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">feature filter</a> in the right panel. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
         );
     }
     else {
@@ -19,7 +19,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
     if(class_ids.length < 1) {
         $("div#class_error").remove()
         $("ul.histograms").before(
-            '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one or more labels using the label filter in the right panel</p></div>'
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Select one ore more labels using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">label filter</a> in the right panel. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
         );
     }
     else {

@@ -13,7 +13,7 @@ from project import Project
 class Classification:
 
     SCORE_NAMES = {
-        'roc_auc': 'AUROC', 'mcc': 'MCC-score', 'f1': 'F1-score',
+        'roc_auc': 'AUROC', 'mcc': 'MCC', 'f1': 'F1',
         'recall': 'Recall', 'average_precision': 'Avg. precision',
         'precision': 'Precision', 'accuracy': 'Accuracy'
     }
@@ -428,7 +428,7 @@ class Classification:
                 str_data += '<th>job id</th>\n'
                 str_data += '<th>classifier</th>\n'
                 str_data += '<th># features</th>\n'
-                str_data += '<th># CV-loops</th>\n'
+                str_data += '<th># CV</th>\n'
                 for sname in score_names:
                     str_data += '<th class="score" id="%s">%s</th>\n'\
                             % (sname, self.SCORE_NAMES[sname])
