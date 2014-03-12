@@ -378,25 +378,19 @@ uniform weights. Click the <strong>Run</strong> button to start the experiment.<
 <p>You will be redirected to the <em>Results</em> page, where the current status of your
 job is shown in the table at the bottom. Depending on how busy the server is,
 the job might have to wait in queue for a while.</p>
-<p>Add two more classification jobs, both for a linear discriminant analysis (LDA)
-classifier and 10 cross-validation loops. For the first one, use all <em>amino
-acid composition</em> features as before. For the second one, use and all <em>codon
-composition</em> features.</p>
 </div>
 <div class="section" id="classification-results">
 <h3>Classification results<a class="headerlink" href="#classification-results" title="Permalink to this headline">¶</a></h3>
 <p>Classification results are shown in the <em>Results</em> table as soon as a job is
 finished.</p>
 <a class="reference internal image-reference" href="_images/tut1_22.png"><img alt="_images/tut1_22.png" class="align-center" src="_images/tut1_22.png" style="width: 550px;" /></a>
-<p>The table shows different performance measures for each classifier. With an
-area under the ROC-curve (AUROC) of 0.85, the 64 <em>codon composition</em> features
-provided best classification performance.</p>
+<p>The table shows different performance measures for each classifier.</p>
 </div>
 <div class="section" id="classifier-details">
 <h3>Classifier details<a class="headerlink" href="#classifier-details" title="Permalink to this headline">¶</a></h3>
-<p>Click on the job with the 20 <em>amino acid composition</em> features to see more
-detailed results.  At the top, some classification settings and a table with
-the cross-validation results are shown.</p>
+<p>Click on link in the first column of the table to see more detailed results.
+At the top, some classification settings and a table with the cross-validation
+results are shown.</p>
 <a class="reference internal image-reference" href="_images/tut1_23.png"><img alt="_images/tut1_23.png" class="align-center" src="_images/tut1_23.png" style="width: 550px;" /></a>
 <p>In case of a 2-class classification problem, an ROC-curve is shown underneath.</p>
 <a class="reference internal image-reference" href="_images/tut1_24.png"><img alt="_images/tut1_24.png" class="align-center" src="_images/tut1_24.png" style="width: 550px;" /></a>
@@ -410,9 +404,8 @@ classes.</p>
 </div>
 <div class="section" id="test-your-classifier">
 <h3>Test your classifier<a class="headerlink" href="#test-your-classifier" title="Permalink to this headline">¶</a></h3>
-<p>To test a trained classifier on another data set, go to the details page of one
-of the classifiers. Click the <strong>Run</strong> button and use the drop-down box to
-select the <em>aniger-secretion</em> data set.</p>
+<p>To test a trained classifier on another data set, click the <strong>Run</strong> button and
+use the drop-down box to select the <em>aniger-secretion</em> data set.</p>
 <a class="reference internal image-reference" href="_images/tut1_26.png"><img alt="_images/tut1_26.png" class="align-center" src="_images/tut1_26.png" style="width: 550px;" /></a>
 <p>Since the required features are not yet calculated for this project, this will
 be done automatically behind the scenes. As soon as the features are
@@ -427,7 +420,7 @@ finished.</p>
 <div class="section" id="download-raw-results">
 <h3>Download raw results<a class="headerlink" href="#download-raw-results" title="Permalink to this headline">¶</a></h3>
 <p>Finally, all classifier details can be downloaded as zip-file using the
-<strong>Download</strong> button.</p>
+<strong>Download classifier data</strong> button on the classifier details page.</p>
 <a class="reference internal image-reference" href="_images/tut1_28.png"><img alt="_images/tut1_28.png" class="align-center" src="_images/tut1_28.png" style="width: 550px;" /></a>
 <p>This finalizes the first tutorial, which covered most of the SPiCE website
 functionalities. If you have any suggestions for improvements, or if you find

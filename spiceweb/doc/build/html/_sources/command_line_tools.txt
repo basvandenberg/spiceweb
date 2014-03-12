@@ -83,7 +83,7 @@ Classification jobs can be run using:
         --features aac_1_A aac_1_C aac_1_D --standardize -o path/to/output_dir
 
 The ``-f`` should point to the feature matrix directory within your project
-dir. With the ``-l`` and ``--classes`` options you can indicate which labaling
+dir. With the ``-l`` and ``--classes`` options you can indicate which labeling
 to use, and within this labeling, which labels should be classified. The ``-c``
 option indicates what classifier to use, the ``-n`` option holds the number of
 CV-loops to use for performance assessment, the ``-e`` option holds the

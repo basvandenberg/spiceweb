@@ -411,11 +411,6 @@ You will be redirected to the *Results* page, where the current status of your
 job is shown in the table at the bottom. Depending on how busy the server is,
 the job might have to wait in queue for a while.
 
-Add two more classification jobs, both for a linear discriminant analysis (LDA)
-classifier and 10 cross-validation loops. For the first one, use all *amino
-acid composition* features as before. For the second one, use and all *codon
-composition* features. 
-
 ^^^^^^^^^^^^^^^^^^^^^^
 Classification results
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -427,17 +422,15 @@ finished.
    :width: 550px
    :align: center
 
-The table shows different performance measures for each classifier. With an
-area under the ROC-curve (AUROC) of 0.85, the 64 *codon composition* features
-provided best classification performance.
+The table shows different performance measures for each classifier. 
 
 ^^^^^^^^^^^^^^^^^^
 Classifier details
 ^^^^^^^^^^^^^^^^^^
 
-Click on the job with the 20 *amino acid composition* features to see more
-detailed results.  At the top, some classification settings and a table with
-the cross-validation results are shown.
+Click on link in the first column of the table to see more detailed results.
+At the top, some classification settings and a table with the cross-validation
+results are shown.
 
 .. image:: img/tut1_23.png
    :width: 550px
@@ -462,9 +455,8 @@ classes.
 Test your classifier
 ^^^^^^^^^^^^^^^^^^^^
 
-To test a trained classifier on another data set, go to the details page of one
-of the classifiers. Click the **Run** button and use the drop-down box to
-select the *aniger-secretion* data set. 
+To test a trained classifier on another data set, click the **Run** button and
+use the drop-down box to select the *aniger-secretion* data set. 
 
 .. image:: img/tut1_26.png
    :width: 550px
@@ -489,7 +481,7 @@ Download raw results
 ^^^^^^^^^^^^^^^^^^^^
 
 Finally, all classifier details can be downloaded as zip-file using the
-**Download** button.
+**Download classifier data** button on the classifier details page.
 
 .. image:: img/tut1_28.png
    :width: 550px
