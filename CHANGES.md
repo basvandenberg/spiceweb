@@ -15,6 +15,8 @@
 
 - ISSUE #2: Disabled js related to retrieving taxon ids on new project page.
 - ISSUE #4: Fixed show/hide link of the label filter in the filter sidebar.
+- ISSUE #5: ORF feature classifier can be run on project without ORF sequence
+            data.
 
 #### Other
 - Made help links more consistent (attached to buttons).
