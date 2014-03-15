@@ -21,6 +21,8 @@ menu_names = ['Features', 'Calculate', 'Upload']
 % endfor
     </div>
 
+% if (len(fe.fm_protein.feature_ids) > 0):
+
 <div class="btn-group">
 
 % for index, uri in enumerate(uris):
@@ -36,7 +38,7 @@ menu_names = ['Features', 'Calculate', 'Upload']
 </div>
 <div class="btn-group">
 
-% if (sub_menu_index >= 4):
+% if (sub_menu_index >= 4 and sub_menu_index < 7):
   <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
 % else:
   <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -46,25 +48,15 @@ menu_names = ['Features', 'Calculate', 'Upload']
   </a>
   <ul class="dropdown-menu">
 % for index, uri in enumerate(uris):
-% if (index >= 4):
+% if (index >= 4 and index < 7):
         <li><a href="${uri}"><i class="${icons[index]}"></i> ${sub_menu[index]}</a></li>
 % endif
 % endfor
   </ul>
+
 </div>
 
-    <div class="btn-group">
-% for index, uri in enumerate(uris):
-% if (index >= split_index):
-% if (index == sub_menu_index):
-        <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
-% else:
-        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${sub_menu[index]}</a>
 % endif
-% endif
-% endfor
-    </div>
-
 
 </div>
 

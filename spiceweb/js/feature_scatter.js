@@ -10,7 +10,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $("div#scatter img").replaceWith($('<img>'))
         $("div#feat_error").remove()
         $("div#scatter").before(
-            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select exactly two features using the feature filter in the right panel.</p></div>'
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Select exactly two features using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">feature filter</a> in the right panel. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
         );
     }
     else {
@@ -21,7 +21,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $("div#scatter img").replaceWith($('<img>'))
         $("div#class_error").remove()
         $("div#scatter").before(
-            '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one or more labels using the label filter in the right panel</p></div>'
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Select one ore more labels using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">label filter</a> in the right panel. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
         );
     }
     else {

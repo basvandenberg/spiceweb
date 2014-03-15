@@ -11,7 +11,7 @@ After project initiation, you can use the *Calculate* button under the
    :width: 640px
    :align: center
 
-The following sections bescribe the different feature categories that can be
+The following sections describe the different feature categories that can be
 calculated on the SPiCE website. Some of these features were used in our
 previous research :cite:`vandenberg2010` :cite:`vandenberg2012`, and the rest
 was extracted from other feature calculation methods :cite:`li2006`
@@ -23,8 +23,8 @@ was extracted from other feature calculation methods :cite:`li2006`
 Amino acid composition
 ----------------------
 
-The amino acids composition calculates the frequency of occurance for each
-of the 20 amino acids in a protein sequence.
+The amino acids composition calculates the relative frequency of occurrence for
+each of the 20 amino acids in a protein sequence.
 
 .. image:: img/featcalc1.png
    :width: 640px
@@ -34,7 +34,7 @@ Having 20 amino acids, this will result in 20 features. Any other than the 20
 unambiguous amino acid letters will be ignored.
 
 To illustrate this, consider the following (unrealistic) protein sequence,
-which contains two occurences of each amino acid in which each amino acid
+which contains two occurrences of each amino acid in which each amino acid
 obtains the value 0.05::
 
     >>aac_test
@@ -48,7 +48,7 @@ will result in the following feature vector::
 
 As a parameter, users can specify in how many (equal sized) segments a protein
 should be divided, before calculating the amino acid composition of each
-segmente separately. The number of features will therefore be the number of
+segment separately. The number of features will therefore be the number of
 segments times 20.
 
 With 2 as number of segments parameter, the sequence will be split in two::
@@ -70,8 +70,8 @@ Dipeptide composition
 ---------------------
 
 Similar to the amino acid composition, the dipeptide composition calculates the
-frequency of occurance of each of the 400 possible dipeptides in a protein
-sequence.
+relative frequency of occurrence of each of the 400 possible dipeptides in a
+protein sequence.
 
 .. image:: img/feat_dipep.png
    :width: 640px
@@ -83,7 +83,7 @@ letters will be ignored.
 
 As a parameter, users can specify in how many (equal sized) segments a protein
 should be divided, before calculating the dipeptide composition of each
-segmente separately. To limit the number of features and to avoid too sparse
+segment separately. To limit the number of features and to avoid too sparse
 feature matrices, the maximal number of segments is set to 2.
 
 For an example sequence that contains 10 dipeptides::
@@ -91,7 +91,7 @@ For an example sequence that contains 10 dipeptides::
     >>dc_test
     MAAARRNNDDC
 
-The resulting feature vector wil be::
+The resulting feature vector will be::
 
     .           AA      AR   ...   AV      RA      RR         VV
     
@@ -99,12 +99,12 @@ The resulting feature vector wil be::
 
 
 
----------------------------
-Prime-side amino acid count
----------------------------
+-----------------------------
+Terminal end amino acid count
+-----------------------------
 
-This feature category returns the amino acid counts of a fixed length sequence
-end, either using the 5` or the 3` side.
+This feature category returns the amino acid counts of a fixed length sequence,
+either at the N- or the C-terminal end of the protein sequence.
 
 .. image:: img/featcalc2.png
    :width: 640px
@@ -112,15 +112,15 @@ end, either using the 5` or the 3` side.
 
 For example sequence::
 
-    >>psaac_test
+    >>teraac_test
     MMAARRNNDDCCEEQQGGHHIILLKKFFPPSSTTWWYYVV
 
-the 5' amino acid count for length 10 will result in the following feature
-vector::
+the amino acid counts of the length 10 C-terminal end result in the following
+feature vector::
 
-    .           A   R   N   D   C   E   Q   G   H  ...  M  ...  V
+    .            A   R   N   D   C   E   Q   G   H  ...  M  ...  V
 
-    psaac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0
+    teraac_test  2   2   2   2   0   0   0   0   0  ...  2  ...  0
 
 in which the counts for M, A, R, N, and D are set to 2, while the remaining 15
 features are set to 0.
@@ -161,7 +161,7 @@ The Composition, Transition, Distribution feature is introduced in
 
 For these features, the protein sequence is first translated
 from the 20 letter amino acid alphabet to a 3 letter alphabet, in which the 20
-amino acids are devided over the three letters based on some property. The
+amino acids are divided over the three letters based on some property. The
 properties and corresponding subdivision of the amino acids are::
 
     property                letter A            letter B            letter C
@@ -196,9 +196,9 @@ property letter composition::
 
     composition C:  8 / 70 = 0.829
 
-Secondly the relative frequency of occurance of letter transitions. For letters
-A and B this is the number of transitions from A to B and from B to A divided
-by the sequence length - 1::
+Secondly the relative frequency of occurrence of letter transitions. For
+letters A and B this is the number of transitions from A to B and from B to A
+divided by the sequence length - 1::
 
     transition A-B B-A:  6 / 69 = 0.087
 
@@ -206,9 +206,9 @@ by the sequence length - 1::
 
     transition B-C C-B: 14 / 69 = 0.203
 
-Finally the property letter distributation is captured by 5 features per
+Finally the property letter distribution is captured by 5 features per
 property letter. If we consider letter C, the first feature is the (procentual)
-sequence position of the first occurance of the C::
+sequence position of the first occurrence of the C::
 
     distribution C first:  4 / 70 = 0.057
 
@@ -259,8 +259,8 @@ a user-defined amino acid scale (see :ref:`feature_data_sources`), and
 calculates the average profile (signal) value as feature.
 
 The *window* and *edge* parameter determine how much the profile is smoothed
-before calculating the feature. A larger window results in more a more smooted
-profile. The edge detirmene how much influence the residues at the edge of the
+before calculating the feature. A larger window results in more a more smoothed
+profile. The edge determine how much influence the residues at the edge of the
 window have on the smoothing (see also Fig.1B in :ref:`feature_data_sources`).
 
 .. image:: img/featcalc3.png
@@ -287,15 +287,20 @@ some given threshold (see also Fig.1C in :ref:`feature_data_sources`).
 
 
 
+..    include:: <isogrk1.txt>
+
 ------------------------------------
 Pseudo amino acid composition type 1
 ------------------------------------
 
-The type 1 pseudo amino acid composition calculates 20 + lambda features as
-introduced in :cite:`chou2001` and provides the same calculation as provided on
-the PseAAC webserver :cite:`shen2008`. The same amino acid scales as on the
-PseAAC webserver are also provided, of which one or more can be selected.
+The type 1 pseudo amino acid composition, also called the parallel-type,
+calculates 20 + |lgr| features as introduced in :cite:`chou2001` and provides
+the same calculation as provided on the PseAAC webserver :cite:`shen2008`. The
+same amino acid scales as on the PseAAC webserver are also provided, of which
+one or more can be selected. Details about these features and how they are
+calculated are given on the PseAAC-type1_ help site.
 
+.. _PseAAC-type1: http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type1.htm
 
 .. image:: img/feat_pseaac1.png
    :width: 640px
@@ -307,10 +312,15 @@ PseAAC webserver are also provided, of which one or more can be selected.
 Pseudo amino acid composition type 2
 ------------------------------------
 
-The type 2 pseudo amino acid composition calculates 20 + lambda features as
-introduced in :cite:`chou2005` and provides the same calculation as provided on
-the PseAAC webserver :cite:`shen2008`. The same amino acid scales as on the
-PseAAC webserver are also provided, of which one or more can be selected.
+The type 2 pseudo amino acid composition calculates 20 + *i* x |lgr| features,
+in which *i* is the number of selected amino acid scales, as introduced in
+:cite:`chou2005` and provides the same calculation as provided on the PseAAC
+webserver :cite:`shen2008`. The same amino acid scales as on the PseAAC
+webserver are also provided, of which one or more can be selected. Details
+about these features and how they are calculated are given on the PseAAC-type2_
+help site.
+
+.. _PseAAC-type2: http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type2.htm
 
 .. image:: img/feat_pseaac2.png
    :width: 640px
@@ -334,7 +344,7 @@ Secondary structure composition
 -------------------------------
 
 Secondary structure sequences may contain three letters, the same that are used
-by secondanry structure prediction method PSIPRED: C (random coil), H (helix),
+by secondary structure prediction method PSIPRED: C (random coil), H (helix),
 E (strand). This feature calculates the composition of these three letters.
 
 .. image:: img/feat_ssc.png
@@ -386,7 +396,7 @@ returned.
 Solvent accessibility composition
 ---------------------------------
 
-Solvent accessibility sequences may contain three letters: B (burried),
+Solvent accessibility sequences may contain two letters: B (buried),
 E (exposed). This feature calculates the composition of these two letters.
 
 .. image:: img/feat_sac.png
@@ -435,8 +445,8 @@ returned.
 Codon composition
 -----------------
 
-This feature category calculates the frequence of occurancy of each of the 64
-codons in a protein's ORF sequence.
+This feature category calculates the relative frequency of occurrence of each
+of the 64 codons in a protein's ORF sequence.
 
 .. image:: img/feat_cc.png
    :width: 640px
@@ -464,14 +474,14 @@ corresponding ORF sequence::
 
 Since four different codons encode for alanine: GCT, GCC, GCA, and GCG, the
 example ORF sequence can only consist of these 4 codons. The codon usage
-feature calculates the relative frequency of occurance of these four codons,
+feature calculates the relative frequency of occurrence of these four codons,
 resulting in the following 4 feature values::
 
     .       GCT    GCC    GCA    GCG
             0.2    0.5    0.3    0.0
 
 All other codon values will be set to 0.0 in this example. In a real sequence,
-containing all 20 amino acids, this proredure is done for each amino acid,
+containing all 20 amino acids, this procedure is done for each amino acid,
 resulting in a total of 64 features, one per codon. 
 
 .. TODO: special cases methionine and stop codons.

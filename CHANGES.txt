@@ -1,7 +1,0 @@
-0.1.1, 31 October 2013.
-
-- Just a minor release to test how that works in a production environment.
-- Updated some of the info texts.
-- Removed input form for selecting reference proteome when creating project.
-
-0.1.0, 3 October 2013 -- Initial release.

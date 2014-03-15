@@ -12,6 +12,14 @@
 
 <%include file="classification_bar.html" />
 
+% if cv_results and cl_settings:
+<div class="btn-group pull-right">
+    <div class="classifier">
+        <a href=# class="btn btn-warning download" id="${project_id}">Download classifier data</a>
+    </div>
+</div>
+% endif
+
 ## Classfier details
 <h2>Classifier ${cl_id}</h2>
 
@@ -77,14 +85,26 @@ snames = sorted(cv_results.keys())
   <tr>
     <td>${index}</td>
 % for sname in snames:
+
+% if cv_results[sname][index] == -10.0:
+    <td>n/a</td>
+% else:
     <td>${'%.3f' % (cv_results[sname][index])}</td>
+% endif
+
 % endfor
   </tr>
 % endfor
   <tr class="double">
     <td>avg/std</td>
 % for sname in snames:
+
+% if avg_results[sname][0] == -10.0:
+    <td>n/a</td>
+% else:
     <td>${'%.2f / %.2f' % (avg_results[sname][0], avg_results[sname][1])}</td>
+% endif
+
 % endfor
   </tr>
 </tbody>
@@ -115,7 +135,9 @@ snames = sorted(cv_results.keys())
 ###############################################################################
 
 <hr class="spacer">
-<h3>Errors</h3>
+<h3>Warnings & Errors</h3>
 <textarea class="error_txt" id="${cl_id}" rows="5"></textarea>
+
+<a href="${root_url}doc/errors_and_warnings.html" class="btn pull-right" target="_blank"><i class="icon-info-sign"></i> Warnings & Errors</a>
 
 </%block>

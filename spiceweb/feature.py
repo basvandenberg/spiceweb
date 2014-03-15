@@ -1,4 +1,6 @@
+import os
 import simplejson
+import zipfile
 
 import cherrypy
 from cherrypy.lib.static import serve_file
@@ -108,12 +110,13 @@ class Feature:
         if(self.project_id is None):
             return self.no_project_selected()
 
+        pm = self.project_manager
+        fe = pm.get_feature_extraction()
+
         kw_args = self.get_template_args(smi)
+        kw_args['fe'] = fe
 
         if not(featcat_id is None):
-
-            pm = self.project_manager
-            fe = pm.get_feature_extraction()
 
             proteins = fe.protein_data_set.proteins
             featcat = fe.PROTEIN_FEATURE_CATEGORIES[featcat_id.split('_')[0]]
@@ -161,7 +164,10 @@ class Feature:
             return self.no_project_selected()
 
         pm = self.project_manager
+        fe = pm.get_feature_extraction()
+
         kw_args = self.get_template_args(smi)
+        kw_args['fe'] = fe
 
         # upload custom feature matrix
         error_msg = None
@@ -225,6 +231,33 @@ class Feature:
     #
     # ajax functions
     #
+
+    @cherrypy.expose
+    def download(self):
+        '''
+        This functions returns the current feature matrix (zipped)
+        '''
+
+        self.fetch_session_data()
+        pm = self.project_manager
+
+        filetype = 'application/zip'
+        filepath = os.path.join(pm.user_dir,
+                                '%s_feature_matrix.zip' % (self.project_id))
+
+        with zipfile.ZipFile(filepath, 'w') as fout:
+            first = True
+            for root, dirs, files in os.walk(pm.fm_dir):
+                # only add root dir files, skipping labels and images dir
+                if first:
+                    first = False
+                    rootroot = os.path.dirname(root)
+                    arcroot = os.path.relpath(root, rootroot)
+                    for file in files:
+                        fout.write(os.path.join(root, file),
+                                   arcname=os.path.join(arcroot, file))
+
+        return serve_file(filepath, filetype, 'attachment')
 
     @cherrypy.expose
     def delete(self, featcat_id):
@@ -319,7 +352,7 @@ class Feature:
             str_data += '    <td>%s</td>\n' % (feat_param)
             str_data += '    <td>%s</td>\n' % (feat_name)
             str_data += '    <td class="n">%.2f</td>\n' % (tval)
-            str_data += '    <td class="n">%.15f</td>\n' % (pval)
+            str_data += '    <td class="n">%.05e</td>\n' % (pval)
             str_data += '</tr>\n'
 
         return simplejson.dumps(dict(ttest_table=str_data))

@@ -15,7 +15,7 @@ def uri_details(pid):
 %>
 
 <h2>Projects</h2>
-<a class="pull-right" href="${root_url}doc/tutorial1.html#projects" target="_blank">help</a>
+
 
 % if len(projects) > 0:
 ## List projects
@@ -64,6 +64,8 @@ init_str += ' - %s:%s' % (init_tokens[1][:2], init_tokens[1][2:4])
 % else:
 <p>No projects available.</p>
 % endif
+
+<a href="${root_url}doc/tutorial1.html#projects" class="btn pull-right" target="_blank"><i class="icon-info-sign"></i> Projects</a>
 
 <!-- Button to trigger delete modal -->
 <!--a href="#myModal" role="button" class="btn btn-link" data-toggle="modal">Launch demo modal</a-->

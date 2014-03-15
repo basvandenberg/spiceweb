@@ -17,8 +17,8 @@ Contents:
    feature_data_sources
    features_spice
    file_formats
+   errors_and_warnings
    example_projects
-   user_accounts
    command_line_tools
 
 .. Indices and tables

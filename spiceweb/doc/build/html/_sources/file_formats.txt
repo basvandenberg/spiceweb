@@ -59,7 +59,7 @@ The FASTA file should meet the following requirements:
 - Empty sequences are not allowed.
 - Sequences must be upper case.
 
-SPiCE uses FASTA files for three types of sequences: amino acid sequences,
+SPiCE uses FASTA files for four types of sequences: amino acid sequences,
 nucleotide sequences, secondary structure sequences, and solvent accessibility
 sequences. Details per sequence type are discussed in the following
 subsections.
@@ -102,7 +102,7 @@ the same as used by secondary structure prediction method PSIPRED::
     random coil: R
 
 **Note** A protein's secondary structure sequence should have the same length
-as its amino acid seqeunce. However, SPiCE does not check for this when
+as its amino acid sequence. However, SPiCE does not check for this when
 uploading a FASTA file with secondary structures!
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -115,8 +115,11 @@ For secondary structure sequences the following letters are allowed::
     buried:  B
 
 **Note** A protein's solvent accessibility sequence should have the same length
-as its amino acid seqeunce. However, SPiCE does not check for this when
+as its amino acid sequence. However, SPiCE does not check for this when
 uploading a FASTA file with solvent accessibility sequences!
+
+
+.. _labeling_file:
 
 -------------
 Labeling file
@@ -199,19 +202,12 @@ within the same labeling.
 Feature matrix file
 -------------------
 
-Besides calculating the features that are offered by SPiCE, you can also upload
-your own features in the form of a feature matrix. The feature matrix should be
-in text format with the features as columns and the objects (proteins) as rows.
-
-The python module numpy_ reads the matrix using the loadtxt_ function with
-default parameters.  If you use python to generate your feature matrix, you can
-use the numpy savetxt_ function to save your feature matrix in text format.
-
-.. _numpy: http://www.numpy.org/
-.. _loadtxt: http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
-.. _savetxt: http://docs.scipy.org/doc/numpy/reference/generated/numpy.savetxt.html
-
-A feature matrix with 4 features and 10 objects (proteins) is given below::
+Feature matrices are stored as text file in a format that is used by the python
+module numpy_. This module is used for reading and writing feature matrices
+using the loadtxt_ and savetxt_ functions. An example feature matrix with 4
+features and 10 objects (proteins) is given below, in which each row gives the
+feature values of one protein, each column gives all the values of one
+feature::
 
     3.7621e-02 3.9442e-02 7.1602e-02 4.7937e-02
     4.3977e-02 4.5889e-02 8.9866e-02 5.6405e-02
@@ -224,16 +220,19 @@ A feature matrix with 4 features and 10 objects (proteins) is given below::
     4.1727e-02 4.7482e-02 6.4748e-02 5.8993e-02
     2.8269e-02 4.2403e-02 6.3604e-02 7.1849e-02
 
-Each row gives the feature values of one protein, each column gives all the
-values of one feature.
+
+.. _numpy: http://www.numpy.org/
+.. _loadtxt: http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
+.. _savetxt: http://docs.scipy.org/doc/numpy/reference/generated/numpy.savetxt.html
 
 **NOTE:** In this case, the string format ``%.4e`` was used to store the
 feature values. The default format used by the savetxt_ function is
 ``%.18e``.
 
-An additional file with protein ids should be uploaded to indicate the order of
-the proteins (rows) in the feature matrix. The file with protein ids should
-contain one id per line::
+For annotating features and proteins, SPiCE uses two additional files. The
+first contains protein ids that indicate the order of the proteins (rows) in
+the feature matrix. This file contains one id per line. For the given example
+feature matrix, such a file could be::
 
     YOR093C
     YJL084C
@@ -246,5 +245,23 @@ contain one id per line::
     YLR035C
     YLR057W
 
-Feature values must be provided for all the proteins in your project, which
-means that all ids in your FASTA file must also be in the protein ids file.
+Similarly, the second file stores the ids of the features (columns) in the
+feature matrix, for example::
+
+    aac_1_A1
+    aac_1_R1
+    aac_1_N1
+    aac_1_D1
+
+**NOTE:** See :ref:`feature_ids` for more information about the used feature
+ids.
+
+For uploading your own features (`spice/app/features/upload`), both the feature
+matrix file (in the described numpy format) and the file with protein ids need
+to be provided. Feature values must be provided for all the proteins in your
+project, which means that all ids in your FASTA file must also be in the
+protein ids file.  Feature ids will automatically be assigned by the SPiCE
+system.
+
+The feature matrix with all calculated features can also be downloaded using
+the ``Download feature matrix`` button on the `spice/app/features/list` page.

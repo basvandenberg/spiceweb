@@ -73,7 +73,6 @@ Exploration</div>
 <li><a class="reference internal" href="#feature-matrix">Feature matrix</a></li>
 <li><a class="reference internal" href="#feature-ids">Feature ids</a><ul>
 <li><a class="reference internal" href="#feature-category-ids">Feature category ids</a></li>
-<li><a class="reference internal" href="#pamater-settings-per-feature-category">Pamater settings per feature category</a></li>
 </ul>
 </li>
 </ul>
@@ -114,13 +113,10 @@ Exploration</div>
             
   <div class="section" id="features">
 <span id="id1"></span><h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
-<p>Before explaining about the features offered by SPiCE, this chapter will
-shortly introduce what sequence-based protein features are in the first section
-and how they can be used to form a feature matrix in the second section. The
-third section explains how SPiCE uses feature ids to identify the different
-calculated features.</p>
-<p>The following chapter will shortly introduce some data sources and basic
-concepts that are used for feature calculation.</p>
+<p>Here we shortly introduce what features are. The first section introduces
+sequence-based protein features and the second section explains how calculated
+features form a feature matrix. Finally, the third section explains how SPiCE
+uses ids for identifying features.</p>
 <div class="section" id="sequence-based-protein-features">
 <h2>Sequence-based protein features<a class="headerlink" href="#sequence-based-protein-features" title="Permalink to this headline">¶</a></h2>
 <p>A sequence-based feature is basically a mapping from a sequence to a number.
@@ -128,13 +124,13 @@ For example, if we have a sequence:</p>
 <div class="highlight-python"><pre>&gt;test0
 AAAAABBBBBBBBBBCCCCC</pre>
 </div>
-<p>Then we could calcalate what the relative fraction of occurance of <tt class="docutils literal"><span class="pre">A</span></tt>&#8216;s in
+<p>Then we could calculate what the relative fraction of occurrence of <tt class="docutils literal"><span class="pre">A</span></tt>&#8216;s in
 this sequence is by taking the number of <tt class="docutils literal"><span class="pre">A</span></tt>&#8216;s and dividing that number by
 the total length of the sequence:</p>
 <div class="highlight-python"><pre>fraction A:  5 / 20 = 0.25</pre>
 </div>
 <p>This number can be used as a feature of the sequence <tt class="docutils literal"><span class="pre">test0</span></tt>. Similarly, the
-fraction of occurance of the other letters can be calculated:</p>
+relative fraction of occurrences of the other letters can be calculated:</p>
 <div class="highlight-python"><pre>fraction B: 10 / 20 = 0.5
 
 fraction C:  5 / 20 = 0.25</pre>
@@ -145,9 +141,8 @@ which we could call the <em>letter composition</em>. This way, we can map a sequ
 to a list of three values that captures some sequence property/characteristic.</p>
 <p>Similarly, one could calculate these features for a protein&#8217;s primary
 structure, the amino acid sequence, by calculating the relative fraction of
-occurance of each amino acid in the protein sequence. As a feature category
-this would be called the <em>amino acid composition</em>. Those are the type of
-sequence-based protein features that can be calculated with SPiCE.</p>
+occurrence of each amino acid in the protein sequence. This feature category
+is called the <em>amino acid composition</em>.</p>
 </div>
 <div class="section" id="feature-matrix">
 <h2>Feature matrix<a class="headerlink" href="#feature-matrix" title="Permalink to this headline">¶</a></h2>
@@ -173,17 +168,16 @@ test1      0.00            0.50            0.50
 test2      0.97            0.03            0.00</pre>
 </div>
 <p>In this matrix, each row gives the feature values of one sequence (also called
-a feature vector), and each column gives the feature values of one feature.</p>
+a feature vector), and each column is one feature.</p>
 </div>
 <div class="section" id="feature-ids">
-<h2>Feature ids<a class="headerlink" href="#feature-ids" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Feature ids<a class="headerlink" href="#feature-ids" title="Permalink to this headline">¶</a></h2>
 <p>SPiCE assigns an id to each feature it calculates. This id is composed of three
 parts: the <em>feature category id</em>, <em>parameter settings</em>, and <em>feature id</em>. These
 three components are separated by an underscore character (_). For feature
-categories that do not requir parameters to be set, the parameter settings
+categories that do not require parameters to be set, the parameter settings
 component is left out.</p>
-<p>Lets use the <em>amino acid composition</em> feature category as example. A feature of
-this category could have the following id:</p>
+<p>A feature of the <em>amino acid composition</em> could have the following id:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">aac_1_F1</span>
 </pre></div>
 </div>
@@ -191,13 +185,12 @@ this category could have the following id:</p>
 <p>The second part, <tt class="docutils literal"><span class="pre">1</span></tt>, specifies a parameter that sets number of segments in
 which the sequence should be split before returning the amino acid composition
 of each of the segments. Since this value is one, the sequence will not be
-split and the amino acid composition of the full sequence will be returned.
-This value must be an integer largen than 0.</p>
+split and the amino acid composition of the full sequence will be returned.</p>
 <p>Finally, the third part, <tt class="docutils literal"><span class="pre">F1</span></tt> identifies the feature within the feature
 category. In this case it indicates that this feature is the relative frequency
-of occurence of phenylalanine (F) in the first (and this case only) segment.</p>
-<p>Multiple parameters can be specified as a dash (<tt class="docutils literal"><span class="pre">-</span></tt>) separated list as in the
-following example:</p>
+of occurrence of phenylalanine (F) in the first (and this case only) segment.</p>
+<p>Multiple parameters can be specified, in which case they are separated using a
+dash (<tt class="docutils literal"><span class="pre">-</span></tt>):</p>
 <div class="highlight-python"><pre>ac_moran-gg-20_gg4</pre>
 </div>
 <p>For this example, the first part, <tt class="docutils literal"><span class="pre">ac</span></tt>, is the id of the <em>autocorrelation</em>
@@ -228,8 +221,8 @@ scales are used, and <tt class="docutils literal"><span class="pre">20</span></t
 <tr class="row-odd"><td>dc</td>
 <td>Dipeptide composition</td>
 </tr>
-<tr class="row-even"><td>psaac</td>
-<td>Prime-side amino acid counts</td>
+<tr class="row-even"><td>teraac</td>
+<td>Terminal end amino acid counts</td>
 </tr>
 <tr class="row-odd"><td>ssc</td>
 <td>Secondary structure composition</td>
@@ -275,9 +268,6 @@ scales are used, and <tt class="docutils literal"><span class="pre">20</span></t
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="pamater-settings-per-feature-category">
-<h3>Pamater settings per feature category<a class="headerlink" href="#pamater-settings-per-feature-category" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>

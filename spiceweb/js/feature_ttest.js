@@ -8,7 +8,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
     if(feat_ids.length == 0) {
         $("div#feat_error").remove()
         $("table.ttest").before(
-            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Select one ore more features using the feature filter in the right panel.</p></div>'
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Select one ore more features using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">feature filter</a> in the right panel. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
         );
     }
     else {
@@ -19,7 +19,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         emptyTable();
         $("div#class_error").remove()
         $("table.ttest").before(
-            '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info: </strong>Two class labels should be selected. Use the label filter on the right panel to select two labels</p></div>'
+            '<div id="class_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Two class labels should be selected. Use the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar"> label filter</a> on the right panel to select two labels. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
         );
         
     }

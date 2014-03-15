@@ -27,21 +27,19 @@ $(document).ready(function() {
     // put the project id in the project id input field
     $("input#project_id").val(projectId);
 
+    // DISABLED reference organisms
     // collapsable taxon reference set selection
-    $("#taxon_select.collapse").collapse()
-
+    // $("#taxon_select.collapse").collapse()
     // upon selecing reference set
-    $("input[name=use_reference]").on("change", function() {
-        $("#taxon_select.collapse").collapse('toggle')
-    });
-
+    //$("input[name=use_reference]").on("change", function() {
+    //    $("#taxon_select.collapse").collapse('toggle')
+    //});
     // update taxon list on changed taxon domain select
-    $("select#taxon_domain").on("change", function() {
-        fill_taxon_select();
-    });
-    
+    //$("select#taxon_domain").on("change", function() {
+    //    fill_taxon_select();
+    //});   
     // fil taxon select
-    fill_taxon_select();
+    //fill_taxon_select();
 
     // 
     $("form#create-new-project>button").button();
@@ -67,11 +65,12 @@ $(document).ready(function() {
             isFormValid = false;
         }
         if(isFormValid) {
-            var ref_checked = $("input[name=use_reference ]:checked")
-            if(ref_checked.length) {
-                form_info("create-new-project", "Please be patient, the data set is being loaded, this can take some time..."
-                );   
-            }
+            // DISABLED reference organisms
+            //var ref_checked = $("input[name=use_reference ]:checked")
+            //if(ref_checked.length) {
+            //    form_info("create-new-project", "Please be patient, the data set is being loaded, this can take some time..."
+            //    );   
+            //}
             $("form#create-new-project>button").button('loading');
         }
 
@@ -122,7 +121,9 @@ function isValidprojectid(projectid) {
     return /^([0-9a-zA-Z_-]){4,30}$/.test(projectid);
 }
 
+// DISABLED reference organisms
 // fill taxon select list
+/*
 function fill_taxon_select() {
     // obtain selected taxon domain ancestral number
     var taxon_domain = $('select#taxon_domain').val();
@@ -133,3 +134,4 @@ function fill_taxon_select() {
         $("select#taxon").html(data.taxon_list);
     });   
 }
+*/

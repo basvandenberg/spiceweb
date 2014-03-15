@@ -3,7 +3,7 @@ $(document).ready(function() {
     update_results(true);
     update_status();
 
-    setInterval('update_status();update_results(false);', 60000);
+    setInterval('update_status();update_results(false);', 5000);
 
     $("div#classifier_list").on("click", "button.delete-classifier", function() {
         var cl_id = $(this).attr("id");

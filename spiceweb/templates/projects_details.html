@@ -9,8 +9,15 @@
 
 <%include file="projects_bar.html" />
 
+<div class="btn-group pull-right">
+    <div class="project">
+    <a href=# class="btn btn-warning download" id="${project_id}">Download all project data</a>
+    </div>
+</div>
+
 ## Project details
 <h2>Project Details: ${project_id}</h2>
+
 
 ###############################################################################
 ## Available protein data files
@@ -96,12 +103,10 @@
                     </ul>
 
                     <p>SPiCE <u><strong>does not</strong></u> check if the
-uploaded sequences are consistent with the allready available sequence data.
-For example, it will not be detected if you upload secondary structure
-sequences for with the sequence lengths are different compared to the protein
-sequences. Or if you first uploaded protein sequence and afterwards upload ORF
-sequences, it is not checked if these correctly translate to the protein
-sequences! Please make sure that you have checked this yourself.</p>
+uploaded sequences are consistent with the sequence data in this project. For
+example, SPiCE does not check if uploaded ORF sequences correctly translate to
+the available protein sequences in this project! Please make sure to check this
+yourself.</p>
 
                 </div>
 
@@ -129,6 +134,7 @@ sequences! Please make sure that you have checked this yourself.</p>
 
 <h3>Labelings</h3>
 
+## TODO Where is this used???
 <%
 lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 %>
@@ -146,6 +152,7 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 </tr>
 </thead>
 <tbody>
+
 % for index, (lname, l) in enumerate(sorted(fe.fm_protein.labeling_dict.iteritems())):
 
 <tr>
@@ -161,6 +168,7 @@ lname = 'labeling%i' % (len(fe.fm_protein.labeling_dict.keys()))
 </tbody>
 </table>
 
+## TODO Where is this used???
 <%
 lname = 'labeling%i' % (index + 1)
 %>
@@ -171,7 +179,6 @@ lname = 'labeling%i' % (index + 1)
 
     <legend>
         Upload labeling
-        <a class="pull-right" href=${root_url}doc/file_formats.html#labeling-file target="_tab">help</a>
     </legend>
 
     <!-- labeling name input text field -->
@@ -190,14 +197,7 @@ alphanumeric characters, underscores, and dashes can be used.</p>" title="" data
 
     <!-- labeling file input file chooser -->
     <div class="control-group">
-        <label class="control-label" for="data_file">Labeling file 
-            <a href=# class="info-button" data-toggle="popover"
-data-placement="top" data-content="<p>Select a labeling file. Explanation about
-the file format can be found in the documentation (<i>File Formats</i>
-section).</p>" title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
+        <label class="control-label" for="data_file">Labeling file </label>
         <div class="controls">
             <div class="fileupload fileupload-new" data-provides="fileupload">
                 <div class="input-append">
@@ -223,7 +223,10 @@ section).</p>" title="" data-original-title="">
     <div class="alert alert-block alert-error fade in"><p>${msg_lab}</p></div>
 % endif
 
-    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+    <div class="btn-group">
+        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+        <a href="${root_url}doc/file_formats.html#labeling-file" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    </div>
 
 </form>
 

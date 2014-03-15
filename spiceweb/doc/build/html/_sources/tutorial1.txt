@@ -33,7 +33,7 @@ the example project.
    :width: 550px
    :align: center
 
-You will be redirected to your list op projects, which should contain the
+You will be redirected to your list of projects, which should contain the
 *yeast-expression* project.
 
 .. image:: img/t1_0_create_1_1.png
@@ -155,7 +155,7 @@ files.
    :width: 550px
    :align: center
 
-Consult the :ref:`file_formats` documention for more information on the
+Consult the :ref:`file_formats` documentation for more information on the
 labeling file format. To see an example, you can download the labeling file of
 the *yeast-expression* project.
 
@@ -163,8 +163,9 @@ the *yeast-expression* project.
 Features
 --------
 
-Click on the *Features* tab to go the features area, which provides
-feature calculation and visualization. 
+Click on the *Features* tab to go the features area, which provides feature
+calculation and visualization.  If you are not familiar with features, more
+information about this topic can be found on the :ref:`features` page.
 
 .. image:: img/tut1_0.png
    :width: 550px
@@ -184,42 +185,41 @@ Click on the **Calculate** button to go to the feature calculation page.
    :align: center
 
 Here, a list with sequence-based feature categories is shown. For each feature
-category one or more dropdown boxes enables setting some parameters and the
+category one or more drop-down boxes enables setting some parameters and the
 **Calculate** button will put the feature calculation job in the job queue on
 the compute servers. Although feature calculation usually does not take long,
 if the compute server is busy, your job might have to wait in queue for a
-while.
-
-More information on the available sequence-based features is described in the
-:ref:`features` documentation.
+while. More information about the available sequence-based features can be
+found on the :ref:`features_spice` page.
 
 Once you have calculated some features, a table with calculated feature
 categories will occur under the **Features** button, in which the first column
 describes the name of the feature category, the second column lists the used
-parameters, the third column shows how many features are in this category, and
-the last column provides a link to delete the feature category.
+parameters, the third column shows the number of features in this category, and
+the last column provides a link to delete these features.
 
 .. image:: img/tut1_2.png
    :width: 550px
    :align: center
 
-Now with the *yeast-expression* project still active, calculate the amino acid
-composition with the number of segments parameter set to 1, and signal average
-with parameter settings - scales(s): Georgiev, window: 21, and edge: 100. 
+With the *yeast-expression* project still active, calculate the amino acid
+composition with the number of segments parameter set to 1, and calculate the
+signal average features with parameters AA scale set to Georgiev, window set to
+21, and edge set to 100. 
 
 If the feature calculation is finished, click on the **Statistics** button to
-start exploring them.
+start exploring them.  But before explaining about the feature statistics and
+visualization possibilities, the *filter sidebar* will be introduced first. 
 
 ^^^^^^^^^^^^^^
 Filter sidebar
 ^^^^^^^^^^^^^^
 
-Before explaining about the feature statistics and visualization possibilities,
-the *filter sidebar* will be discussed first. The filter sidebar is used
-throughout the website enabling users to select features (feature matrix
-columns) and protein classes (feature matrix rows of the proteins that share
-the same class label). By default the side bar is hidden on the right side,
-click on the dark gray tab with the arrow to open the side bar.
+The *filter sidebar* is used throughout the website enabling users to select
+features (feature matrix columns) and protein classes (feature matrix rows of
+proteins sharing the same class label). By default the side bar is hidden on
+the right side. You can click on the dark gray tab with the arrow to show and
+hide it.
 
 .. image:: img/tut1_10.png
    :width: 550px
@@ -254,9 +254,9 @@ be selected. Select both the *low* and the *high* label. The *t*-statistics
 table remains empty, because we first need to select for what features we want
 to see the *t*-value, which can be done with the *Feature filter*.
 
-The *Feature filter* shows all feature categories that have been calculated.
-The *show/hide* link can be used to show or hide the features that are part of
-the corresponding feature category. By default, all feature are hidden. 
+The *Feature filter* shows all feature categories that have been calculated
+thus far.  The *show/hide* link can be used to show or hide the features of the
+corresponding feature category. By default, all feature are hidden. 
 
 Click on the *show/hide* link of the *Amino Acid Composition* category to show
 its features.
@@ -268,122 +268,126 @@ its features.
 You can click on the features to select them. To select multiple features, hold
 down the **Ctrl** button while clicking the features, or hold down the left
 mouse button while drawing a rectangle over the features you want to select.
+The table with *t*-statistics updates as soon as you (de)select features.
 
 .. image:: img/tut1_14.png
    :width: 550px
    :align: center
 
 The *Select all* and *Deselect all* links at the top can be used to select all
-and deselect all features of the corresponding feature category.
+and deselect all features of the corresponding feature category.  The number
+between brackets behind the feature category name indicates how many of the
+features of that category are selected.
+
 
 .. image:: img/tut1_15.png
    :width: 550px
    :align: center
 
-The number between brackets behind the feature category name indicates how many
-of the features of that category are selected.
+Use the *Select all* link to select all features of the amino acid composition
+and use the *Deselect all* link to deselect all average signal value features.
 
 ^^^^^^^^^^^^^^^^^^
 Feature statistics
 ^^^^^^^^^^^^^^^^^^
 
-Select all features to show their *t*-values in the table.
 
 .. image:: img/tut1_16.png
    :width: 550px
    :align: center
 
-One row appears for each feature, giving the feature category name, feature
-name, *t*-value, and corresponding *p*-value in the four columns.
+The table with *t*-statistics shows one row per feature, providing the feature
+id, feature category name, parameter settings, feature name, *t*-value, and
+corresponding *p*-value in the six columns.
 
-Click the *t*-value header to sort the table by that column. The codon fraction
-*GGT (G)* has the highest *t*-value, indicating class separation for this
-feature. 
+Clicking the *t*-value header sorts the table by that column.  Features *S,
+segment 1* and *A, segment 1* have the lowest and highest *t*-values
+respectively. In combination with a very small  *p*-value, this indicates
+different class means for these features. 
 
-Use the feature filter to select only this feature, the table should now
-contain only a single row, showing the *GGT (G)* feature.
+Use the feature filter to select the *S segment 1* and the *A segment 1*
+feature (hold down the **Ctrl** button to select multiple features), the table
+should now contain only two rows, showing both selected features.
 
 ^^^^^^^^^^
 Histograms
 ^^^^^^^^^^
 
 Histograms can be used to visualize feature value distributions for the
-different protein classes. Use the **Visualizations** drop-down button to select
-*histogram*.
+different protein classes. Use the **Visualizations** drop-down button to
+select *histogram*.
 
 The website should have remembered what labels and features were selected (this
-requires that cookies are enabled), in which case the histogram of the *GGT
-(G)* feature shown for the labels *low* and *high*. 
+requires that cookies are enabled), in which case the histogram of the *A,
+segment 1* and the *S, segment 1* feature are shown. 
 
 .. image:: img/tut1_17.png
    :width: 550px
    :align: center
 
-The distributions clearly show a difference between the *low* and *high* class.
-
-Use the *Feature filter* in the side bar to select the codon composition *CGA
-(R)* feature as second feature (hold down the **Ctrl** button while clicking
-this feature so that the first feature remains selected as well). The histogram
-for this feature should appear underneath the first histogram.
-
-Notice that you can drag and drop the histograms to enable reordering the
-histograms on screen. Click on the top histogram and hold down the mouse
-button, drag the histogram down and drop it underneath the other histogram. 
+The distributions clearly show different class means for classes *low* and
+*high*.
 
 ^^^^^^^^^^^^^
 Scatter plots
 ^^^^^^^^^^^^^
 
-With the *GGT (G)* and *CGA (R)* still selected, choose the *scatter* option
-from the **Visualizations** drop-down button.
+With features *A, segment 1* and *S, segment 1* still selected, choose the
+*scatter* option from the **Visualizations** drop-down button.
 
 .. image:: img/tut1_18.png
    :width: 550px
    :align: center
 
-A scatter plot is shown with the GGT(G) feature values on the *y*-axis and the
-*CGA (R)* feature values on the *x*-axis. The *high* proteins are shown in blue
-and the *low* proteins in yellow. The *low* proteins are now on top of the
-*high* proteins. This depends of the order in which the label in the *Label
-filter* are selected.
+A scatter plot is shown with the *S, segment 1* feature values on the *y*-axis
+and the *A, segment 1* feature values on the *x*-axis. Proteins in class *high*
+are shown in yellow and proteins in class *low* in blue. The proteins with
+label *high* are now on top of the proteins with label *low*. This depends on
+the order in which the labels in the *Label filter* are selected.
 
-Notice that a scatter plot will only be shown if exactly two features are
-selected. 
+Notice that, since a scatter plot has only two axes, a plot can only be shown
+if exactly two features (one per axis) are selected. 
 
 ^^^^^^^^^^^^^^^^^^
 Clustered heat map
 ^^^^^^^^^^^^^^^^^^
 
-Use the *Feature filter* to select deselect all features in the *Codon
-composition* category and select all features in the *Amino acid composition*
+Use the *Feature filter* to select all features in the *Amino acid composition*
 category. Afterwards select the *heatmap* option from the **Visualizations**
-drop-down button.
+drop-down button. A heat map with hierarchically clustered rows (proteins) and
+columns (features) is shown. Depending on the size of the feature matrix, it
+can take a minute or two for the heat map to appear. 
 
 .. image:: img/tut1_19.png
    :width: 550px
    :align: center
 
-A heat map with hierarchically clustered rows (proteins) and columns (features))
-is shown. Depending on the size of the feature matrix, it can take a minute or
-two for the heat map to appear. 
+The heat map visualizes the feature matrix. The columns are the selected
+features and the rows are proteins with the selected class labels. The feature
+values are standardized (mean 0.0, std 1.0) per feature (column). The column
+on the right shows the class labels, white for label *high* and gray for label
+*low*.
 
-The heat map visualizes the standardized (mean 0.0, std 1.0) values of the
-feature matrix. The columns are the selected features and the rows are the
-proteins in the selected classes (labels). The column on the right shows the
-protein labels, white for *high* labeled proteins and gray for *low* labeled
-proteins.
+
 
 --------------
 Classification
 --------------
 
-The *t*-statistics and visualizations showed that some feature-value
-distributions are different between the *high* and *low* class. Now let's try
-to train a classifier that uses these features to predict if a proteins belongs
-to either the *low* or the *high* class. A cross-validation_ protocol is used
-to determine how well this can be predicted using the selected features.
+The *t*-statistics and visualizations showed that for some features, the
+feature-value distributions of the classes *low* and *high* have different
+means. This indicates that these features can be used to predict a protein's
+class label. Let's try this by training a classifier that uses these features
+to predict if a proteins belongs to either the *low* or the *high* class. A
+cross-validation_ protocol is used to determine how well this can be predicted
+using the selected features.
 
 .. _cross-validation: http://en.wikipedia.org/wiki/Cross-validation_(statistics)
+
+First calculate some more features. Go to the *features* tab and click the
+**Calculate** button. Almost at the bottom of the list, click on the
+**Calculate** button of the *Codon composition* feature category to have these
+features calculated. Wait until calculation is finished.
 
 ^^^^^^^^^^^^^^
 New classifier
@@ -407,32 +411,26 @@ You will be redirected to the *Results* page, where the current status of your
 job is shown in the table at the bottom. Depending on how busy the server is,
 the job might have to wait in queue for a while.
 
-Add two more classification jobs, both for a LDA classifier and 10
-cross-validation loops. Use all *amino acid composition* features for the first
-and all *codon composition* features for the second. 
-
 ^^^^^^^^^^^^^^^^^^^^^^
 Classification results
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Classification results will be shown in the *Results* table as soon as a job is
+Classification results are shown in the *Results* table as soon as a job is
 finished.
 
 .. image:: img/tut1_22.png
    :width: 550px
    :align: center
 
-The table shows different performance measures for each classifier. With an
-area under the ROC-curve (AUROC) of 0.85, the 64 *codon composition* features
-performed best in this example.
+The table shows different performance measures for each classifier. 
 
 ^^^^^^^^^^^^^^^^^^
 Classifier details
 ^^^^^^^^^^^^^^^^^^
 
-Click on the job with the 20 *amino acid composition* features to see more
-detailed results.  At the top, some classification setting and a table with the
-cross-validation results are shown.
+Click on link in the first column of the table to see more detailed results.
+At the top, some classification settings and a table with the cross-validation
+results are shown.
 
 .. image:: img/tut1_23.png
    :width: 550px
@@ -447,18 +445,18 @@ In case of a 2-class classification problem, an ROC-curve is shown underneath.
 The gray ROC-curves show the cross-validation results and the blue curve shows
 the average ROC-curve. The area under the ROC-curve (and the standard deviation
 for the different CV-loops) are given in the legend.
+
 The classifier details page also allows you to run a trained classifier on
-another data set. To do so, you first need to create a new project with a
-FASTA file that contains the sequences for which you would like to have
-predicted classes. 
+another data set. To do so, you first need to create a new project with a FASTA
+file that contains the sequences for which you would like to have predicted
+classes. 
 
 ^^^^^^^^^^^^^^^^^^^^
 Test your classifier
 ^^^^^^^^^^^^^^^^^^^^
 
-To test a trained classifier on another data set, go to the details page of one
-of the classifiers. Click the **Run** button and use the dropdown box to select
-the *aniger-secretion* data set. 
+To test a trained classifier on another data set, click the **Run** button and
+use the drop-down box to select the *aniger-secretion* data set. 
 
 .. image:: img/tut1_26.png
    :width: 550px
@@ -483,7 +481,7 @@ Download raw results
 ^^^^^^^^^^^^^^^^^^^^
 
 Finally, all classifier details can be downloaded as zip-file using the
-**Download** button.
+**Download classifier data** button on the classifier details page.
 
 .. image:: img/tut1_28.png
    :width: 550px
