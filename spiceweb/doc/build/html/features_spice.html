@@ -130,9 +130,8 @@ Exploration</div>
 <a class="reference internal image-reference" href="_images/featcalc0.png"><img alt="_images/featcalc0.png" class="align-center" src="_images/featcalc0.png" style="width: 640px;" /></a>
 <p>The following sections describe the different feature categories that can be
 calculated on the SPiCE website. Some of these features were used in our
-previous research <a class="reference internal" href="#vandenberg2010" id="id1">[16]</a> <a class="reference internal" href="#vandenberg2012" id="id2">[17]</a>, and the rest
-was extracted from other feature calculation methods <a class="reference internal" href="#li2006" id="id3">[4]</a>
-<a class="reference internal" href="#rao2011" id="id4">[13]</a>, <a class="reference internal" href="#shen2008" id="id5">[6]</a>, <a class="reference internal" href="#cao2013" id="id6">[1]</a>.</p>
+previous research [1,2], and the rest was extracted from other feature
+calculation methods [3,4,5,6].</p>
 <div class="section" id="amino-acid-composition">
 <h2>Amino acid composition<a class="headerlink" href="#amino-acid-composition" title="Permalink to this headline">¶</a></h2>
 <p>The amino acids composition calculates the relative frequency of occurrence for
@@ -225,9 +224,8 @@ len_test     10</pre>
 </div>
 <div class="section" id="property-composition-transition-distribution-ctd">
 <h2>Property Composition / Transition / Distribution (CTD)<a class="headerlink" href="#property-composition-transition-distribution-ctd" title="Permalink to this headline">¶</a></h2>
-<p>The Composition, Transition, Distribution feature is introduced in
-<a class="reference internal" href="#dubchak1995" id="id7">[5]</a>, the implementation is based on the description in
-<a class="reference internal" href="#li2006" id="id8">[4]</a>.</p>
+<p>The Composition, Transition, Distribution feature is introduced in [7], the
+implementation is based on the description in [3].</p>
 <p>For these features, the protein sequence is first translated
 from the 20 letter amino acid alphabet to a 3 letter alphabet, in which the 20
 amino acids are divided over the three letters based on some property. The
@@ -300,10 +298,9 @@ distance between two residues (the <em>lag</em> parameter), the method traverses
 the protein sequence, calculating a correlation measure for all residue pairs
 at distance <em>lag</em>. Three different autocorrelation calculation types are
 offered (the <em>type</em> parameter), all using a different correlation measure:
-normalized Moreau-Broto <a class="reference internal" href="#moreau1980" id="id9">[12]</a>, Moran <a class="reference internal" href="#moran1950" id="id10">[11]</a>, and Geary
-<a class="reference internal" href="#geary1954" id="id11">[6]</a>.</p>
-<p>The implementation is based on the description is <a class="reference internal" href="#li2006" id="id12">[4]</a>, more
-information about the implementation details can be found there.</p>
+normalized Moreau-Broto [8], Moran [9], and Geary [10].</p>
+<p>The implementation is based on the description in [3], more information about
+the implementation details can be found there.</p>
 </div>
 <div class="section" id="signal-average">
 <h2>Signal average<a class="headerlink" href="#signal-average" title="Permalink to this headline">¶</a></h2>
@@ -329,27 +326,26 @@ some given threshold (see also Fig.1C in <a class="reference internal" href="fea
 <div class="section" id="pseudo-amino-acid-composition-type-1">
 <h2>Pseudo amino acid composition type 1<a class="headerlink" href="#pseudo-amino-acid-composition-type-1" title="Permalink to this headline">¶</a></h2>
 <p>The type 1 pseudo amino acid composition, also called the parallel-type,
-calculates 20 + λ features as introduced in <a class="reference internal" href="#chou2001" id="id13">[2]</a> and provides
-the same calculation as provided on the PseAAC webserver <a class="reference internal" href="#shen2008" id="id14">[6]</a>. The
-same amino acid scales as on the PseAAC webserver are also provided, of which
-one or more can be selected. Details about these features and how they are
-calculated are given on the <a class="reference external" href="http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type1.htm">PseAAC-type1</a> help site.</p>
+calculates 20 + λ features as introduced in [11] and provides the same
+calculation as provided on the PseAAC webserver [5]. The same amino acid scales
+as on the PseAAC webserver are also provided, of which one or more can be
+selected. Details about these features and how they are calculated are given on
+the <a class="reference external" href="http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type1.htm">PseAAC-type1</a> help site.</p>
 <a class="reference internal image-reference" href="_images/feat_pseaac1.png"><img alt="_images/feat_pseaac1.png" class="align-center" src="_images/feat_pseaac1.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="pseudo-amino-acid-composition-type-2">
 <h2>Pseudo amino acid composition type 2<a class="headerlink" href="#pseudo-amino-acid-composition-type-2" title="Permalink to this headline">¶</a></h2>
 <p>The type 2 pseudo amino acid composition calculates 20 + <em>i</em> x λ features,
-in which <em>i</em> is the number of selected amino acid scales, as introduced in
-<a class="reference internal" href="#chou2005" id="id15">[3]</a> and provides the same calculation as provided on the PseAAC
-webserver <a class="reference internal" href="#shen2008" id="id16">[6]</a>. The same amino acid scales as on the PseAAC
-webserver are also provided, of which one or more can be selected. Details
-about these features and how they are calculated are given on the <a class="reference external" href="http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type2.htm">PseAAC-type2</a>
-help site.</p>
+in which <em>i</em> is the number of selected amino acid scales, as introduced in [12]
+and provides the same calculation as provided on the PseAAC webserver [5]. The
+same amino acid scales as on the PseAAC webserver are also provided, of which
+one or more can be selected. Details about these features and how they are
+calculated are given on the <a class="reference external" href="http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type2.htm">PseAAC-type2</a> help site.</p>
 <a class="reference internal image-reference" href="_images/feat_pseaac2.png"><img alt="_images/feat_pseaac2.png" class="align-center" src="_images/feat_pseaac2.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="quasi-sequence-order-descriptors">
 <h2>Quasi sequence-order descriptors<a class="headerlink" href="#quasi-sequence-order-descriptors" title="Permalink to this headline">¶</a></h2>
-<p>The quasi-sequence-order descriptors are introduced in <a class="reference internal" href="#chou2000" id="id17">[4]</a>.</p>
+<p>The quasi-sequence-order descriptors are introduced in [13].</p>
 <a class="reference internal image-reference" href="_images/feat_qso.png"><img alt="_images/feat_qso.png" class="align-center" src="_images/feat_qso.png" style="width: 640px;" /></a>
 </div>
 <div class="section" id="secondary-structure-composition">
@@ -453,109 +449,19 @@ resulting in a total of 64 features, one per codon.</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="bibtex-bibliography-features_spice-0"><table class="docutils citation" frame="void" id="cao2013" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[1]</a></td><td>D.S. Cao, Q.S. Xu, and Y.Z. Liang. Propy: a tool to generate various modes of chou’s PseAAC. <em>Bioinformatics</em>, 29(7):960–962, 2013.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="chou2001" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id13">[2]</a></td><td>K.C. Chou. Prediction of protein cellular attributes using pseudo-amino acid composition. <em>Proteins: Structure, Function, and Bioinformatics</em>, 43(3):246–255, 2001.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="chou2005" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id15">[3]</a></td><td>K.C. Chou. Using amphiphilic pseudo amino acid composition to predict enzyme subfamily classes. <em>Bioinformatics</em>, 21(1):10–19, 2005.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="chou2000" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id17">[4]</a></td><td>Kuo-Chen Chou. Prediction of protein subcellular locations by incorporating quasi-sequence-order effect. <em>Biochemical and Biophysical Research Communications</em>, 278(2):477–483, 2000.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="dubchak1995" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[5]</a></td><td>I.&nbsp;Dubchak, I.&nbsp;Muchnik, S.R. Holbrook, and S.H. Kim. Prediction of protein folding class using global description of amino acid sequence. <em>Proceedings of the National Academy of Sciences</em>, 92(19):8700–8704, 1995.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="geary1954" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id11">[6]</a></td><td>R.C. Geary. The contiguity ratio and statistical mapping. <em>The Incorporated Statistician</em>, 5(3):115–146, 1954.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="georgiev2009" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[1]</td><td>A.G. Georgiev. Interpretable numerical descriptors of amino acid space. <em>Journal of Computational Biology</em>, 16(5):703–723, 2009.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="kawashima2008" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[2]</td><td>S.&nbsp;Kawashima, P.&nbsp;Pokarowski, M.&nbsp;Pokarowska, A.&nbsp;Kolinski, T.&nbsp;Katayama, and M.&nbsp;Kanehisa. AAindex: amino acid index database, progress report 2008. <em>Nucleic Acids Research</em>, 36(suppl 1):D202–D205, 2008.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="kyte1982" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[3]</td><td>J.&nbsp;Kyte and Russell&nbsp;F Doolittle. A simple method for displaying the hydropathic character of a protein. <em>Journal of Molecular Biology</em>, 157(1):105–132, 1982.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="li2006" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id12">3</a>)</em> Ze-Rong Li, Hong&nbsp;Huang Lin, LY&nbsp;Han, L&nbsp;Jiang, X&nbsp;Chen, and Yu&nbsp;Zong Chen. PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. <em>Nucleic Acids Research</em>, 34(suppl 2):W32–W37, 2006.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="moran1950" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[11]</a></td><td>P.A.P. Moran. Notes on continuous stochastic phenomena. <em>Biometrika</em>, 37(1/2):17–23, 1950.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="moreau1980" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[12]</a></td><td>G.&nbsp;Moreau and P&nbsp;Broto. Autocorrelation of molecular structures, application to SAR studies. <em>Nouveau Journal de Chimie</em>, 4:757–764, 1980.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="rao2011" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[13]</a></td><td>H.B. Rao, F.&nbsp;Zhu, G.B. Yang, Z.R. Li, and Y.Z. Chen. Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. <em>Nucleic Acids Research</em>, 39(suppl 2):W385–W390, 2011.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="schneider1994" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[5]</td><td>G.&nbsp;Schneider and P.&nbsp;Wrede. The rational design of amino acid sequences by artificial neural networks and simulated molecular evolution: de novo design of an idealized leader peptidase cleavage site. <em>Biophysical Journal</em>, 66(2):335–344, 1994.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="shen2008" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id14">2</a>, <a class="fn-backref" href="#id16">3</a>)</em> H.B. Shen and K.C. Chou. PseAAC: a flexible web server for generating various kinds of protein pseudo amino acid composition. <em>Analytical Biochemistry</em>, 373(2):386–388, 2008.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="vandenberg2010" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[16]</a></td><td>B.&nbsp;A. van&nbsp;den Berg, J.&nbsp;F. Nijkamp, M.&nbsp;J.&nbsp;T. Reinders, L.&nbsp;Wu, H.&nbsp;J. Pel, J.&nbsp;A. Roubos, and D.&nbsp;De&nbsp;Ridder. Sequence-based prediction of protein secretion success in \textit Aspergillus niger. In <em>Proceedings of Pattern Recegnition in Bioinformatics 2010</em>, 3–14. Springer, 2010.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="vandenberg2012" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[17]</a></td><td>B.A. van&nbsp;den Berg, M.J.T. Reinders, M.&nbsp;Hulsman, L.&nbsp;Wu, H.J. Pel, J.A. Roubos, and D.&nbsp;de&nbsp;Ridder. Exploring sequence characteristics related to high-level production of secreted proteins in \textit Aspergillus niger. <em>PLoS ONE</em>, 7(10):e45869, 2012.</td></tr>
-</tbody>
-</table>
-</p>
+<p>[1] B. A. van den Berg, J. F. Nijkamp, M. J. T. Reinders, L. Wu, H. J. Pel, J. A. Roubos, and D. De Ridder. Sequence-based prediction of protein secretion success in textit Aspergillus niger. In Proceedings of Pattern Recegnition in Bioinformatics 2010, 3–14. Springer, 2010.</p>
+<p>[2] B.A. van den Berg, M.J.T. Reinders, M. Hulsman, L. Wu, H.J. Pel, J.A. Roubos, and D. de Ridder. Exploring sequence characteristics related to high-level production of secreted proteins in textit Aspergillus niger. PLoS ONE, 7(10):e45869, 2012.</p>
+<p>[3] Ze-Rong Li, Hong Huang Lin, LY Han, L Jiang, X Chen, and Yu Zong Chen. PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. Nucleic Acids Research, 34(suppl 2):W32–W37, 2006.</p>
+<p>[4] H.B. Rao, F. Zhu, G.B. Yang, Z.R. Li, and Y.Z. Chen. Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. Nucleic Acids Research, 39(suppl 2):W385–W390, 2011.</p>
+<p>[5] H.B. Shen and K.C. Chou. PseAAC: a flexible web server for generating various kinds of protein pseudo amino acid composition. Analytical Biochemistry, 373(2):386–388, 2008.</p>
+<p>[6] D.S. Cao, Q.S. Xu, and Y.Z. Liang. Propy: a tool to generate various modes of chou’s PseAAC. Bioinformatics, 29(7):960–962, 2013.</p>
+<p>[7] I. Dubchak, I. Muchnik, S.R. Holbrook, and S.H. Kim. Prediction of protein folding class using global description of amino acid sequence. Proceedings of the National Academy of Sciences, 92(19):8700–8704, 1995.</p>
+<p>[8] G. Moreau and P Broto. Autocorrelation of molecular structures, application to SAR studies. Nouveau Journal de Chimie, 4:757–764, 1980.</p>
+<p>[9] P.A.P. Moran. Notes on continuous stochastic phenomena. Biometrika, 37(1/2):17–23, 1950.</p>
+<p>[10] R.C. Geary. The contiguity ratio and statistical mapping. The Incorporated Statistician, 5(3):115–146, 1954.</p>
+<p>[11] K.C. Chou. Prediction of protein cellular attributes using pseudo-amino acid composition. Proteins: Structure, Function, and Bioinformatics, 43(3):246–255, 2001.</p>
+<p>[12] K.C. Chou. Using amphiphilic pseudo amino acid composition to predict enzyme subfamily classes. Bioinformatics, 21(1):10–19, 2005.</p>
+<p>[13] K.C. Chou. Prediction of protein subcellular locations by incorporating quasi-sequence-order effect. Biochemical and Biophysical Research Communications, 278(2):477–483, 2000.</p>
 </div>
 </div>
 

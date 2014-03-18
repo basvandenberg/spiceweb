@@ -13,10 +13,8 @@ After project initiation, you can use the *Calculate* button under the
 
 The following sections describe the different feature categories that can be
 calculated on the SPiCE website. Some of these features were used in our
-previous research :cite:`vandenberg2010` :cite:`vandenberg2012`, and the rest
-was extracted from other feature calculation methods :cite:`li2006`
-:cite:`rao2011`, :cite:`shen2008`, :cite:`cao2013`.
-
+previous research [1,2], and the rest was extracted from other feature
+calculation methods [3,4,5,6].
 
 
 ----------------------
@@ -155,9 +153,8 @@ Will result in the following feature vector::
 Property Composition / Transition / Distribution (CTD)
 ------------------------------------------------------
 
-The Composition, Transition, Distribution feature is introduced in
-:cite:`dubchak1995`, the implementation is based on the description in
-:cite:`li2006`. 
+The Composition, Transition, Distribution feature is introduced in [7], the
+implementation is based on the description in [3]. 
 
 For these features, the protein sequence is first translated
 from the 20 letter amino acid alphabet to a 3 letter alphabet, in which the 20
@@ -242,11 +239,10 @@ distance between two residues (the *lag* parameter), the method traverses over
 the protein sequence, calculating a correlation measure for all residue pairs
 at distance *lag*. Three different autocorrelation calculation types are
 offered (the *type* parameter), all using a different correlation measure:
-normalized Moreau-Broto :cite:`moreau1980`, Moran :cite:`moran1950`, and Geary
-:cite:`geary1954`.
+normalized Moreau-Broto [8], Moran [9], and Geary [10].
 
-The implementation is based on the description is :cite:`li2006`, more
-information about the implementation details can be found there.
+The implementation is based on the description in [3], more information about
+the implementation details can be found there.
 
 
 
@@ -294,11 +290,11 @@ Pseudo amino acid composition type 1
 ------------------------------------
 
 The type 1 pseudo amino acid composition, also called the parallel-type,
-calculates 20 + |lgr| features as introduced in :cite:`chou2001` and provides
-the same calculation as provided on the PseAAC webserver :cite:`shen2008`. The
-same amino acid scales as on the PseAAC webserver are also provided, of which
-one or more can be selected. Details about these features and how they are
-calculated are given on the PseAAC-type1_ help site.
+calculates 20 + |lgr| features as introduced in [11] and provides the same
+calculation as provided on the PseAAC webserver [5]. The same amino acid scales
+as on the PseAAC webserver are also provided, of which one or more can be
+selected. Details about these features and how they are calculated are given on
+the PseAAC-type1_ help site.
 
 .. _PseAAC-type1: http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type1.htm
 
@@ -313,12 +309,11 @@ Pseudo amino acid composition type 2
 ------------------------------------
 
 The type 2 pseudo amino acid composition calculates 20 + *i* x |lgr| features,
-in which *i* is the number of selected amino acid scales, as introduced in
-:cite:`chou2005` and provides the same calculation as provided on the PseAAC
-webserver :cite:`shen2008`. The same amino acid scales as on the PseAAC
-webserver are also provided, of which one or more can be selected. Details
-about these features and how they are calculated are given on the PseAAC-type2_
-help site.
+in which *i* is the number of selected amino acid scales, as introduced in [12]
+and provides the same calculation as provided on the PseAAC webserver [5]. The
+same amino acid scales as on the PseAAC webserver are also provided, of which
+one or more can be selected. Details about these features and how they are
+calculated are given on the PseAAC-type2_ help site.
 
 .. _PseAAC-type2: http://www.csbio.sjtu.edu.cn/bioinf/PseAAC/type2.htm
 
@@ -332,7 +327,7 @@ help site.
 Quasi sequence-order descriptors
 --------------------------------
 
-The quasi-sequence-order descriptors are introduced in :cite:`chou2000`.
+The quasi-sequence-order descriptors are introduced in [13].
 
 .. image:: img/feat_qso.png
    :width: 640px
@@ -490,4 +485,28 @@ resulting in a total of 64 features, one per codon.
 References
 ----------
 
-.. bibliography:: refs.bib
+[1] B. A. van den Berg, J. F. Nijkamp, M. J. T. Reinders, L. Wu, H. J. Pel, J. A. Roubos, and D. De Ridder. Sequence-based prediction of protein secretion success in \textit Aspergillus niger. In Proceedings of Pattern Recegnition in Bioinformatics 2010, 3–14. Springer, 2010.
+
+[2] B.A. van den Berg, M.J.T. Reinders, M. Hulsman, L. Wu, H.J. Pel, J.A. Roubos, and D. de Ridder. Exploring sequence characteristics related to high-level production of secreted proteins in \textit Aspergillus niger. PLoS ONE, 7(10):e45869, 2012.
+
+[3] Ze-Rong Li, Hong Huang Lin, LY Han, L Jiang, X Chen, and Yu Zong Chen. PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. Nucleic Acids Research, 34(suppl 2):W32–W37, 2006.
+
+[4] H.B. Rao, F. Zhu, G.B. Yang, Z.R. Li, and Y.Z. Chen. Update of PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. Nucleic Acids Research, 39(suppl 2):W385–W390, 2011.
+
+[5] H.B. Shen and K.C. Chou. PseAAC: a flexible web server for generating various kinds of protein pseudo amino acid composition. Analytical Biochemistry, 373(2):386–388, 2008.
+
+[6] D.S. Cao, Q.S. Xu, and Y.Z. Liang. Propy: a tool to generate various modes of chou’s PseAAC. Bioinformatics, 29(7):960–962, 2013.
+
+[7] I. Dubchak, I. Muchnik, S.R. Holbrook, and S.H. Kim. Prediction of protein folding class using global description of amino acid sequence. Proceedings of the National Academy of Sciences, 92(19):8700–8704, 1995.
+
+[8] G. Moreau and P Broto. Autocorrelation of molecular structures, application to SAR studies. Nouveau Journal de Chimie, 4:757–764, 1980.
+
+[9] P.A.P. Moran. Notes on continuous stochastic phenomena. Biometrika, 37(1/2):17–23, 1950.
+
+[10] R.C. Geary. The contiguity ratio and statistical mapping. The Incorporated Statistician, 5(3):115–146, 1954.
+
+[11] K.C. Chou. Prediction of protein cellular attributes using pseudo-amino acid composition. Proteins: Structure, Function, and Bioinformatics, 43(3):246–255, 2001.
+
+[12] K.C. Chou. Using amphiphilic pseudo amino acid composition to predict enzyme subfamily classes. Bioinformatics, 21(1):10–19, 2005.
+
+[13] K.C. Chou. Prediction of protein subcellular locations by incorporating quasi-sequence-order effect. Biochemical and Biophysical Research Communications, 278(2):477–483, 2000.

@@ -21,8 +21,8 @@ Variable are collinear warning
 Both the linear and quadratic discriminant analysis (LDA and QDA) classifiers
 can result in a warning that there are collinear variables::
 
-    /usr/local/lib/python2.7/dist-packages/sklearn/lda.py:162: UserWarning: 
-    Variables are collinear warnings.warn("Variables are collinear")
+    UserWarning: Variables are collinear warnings.warn("Variables are
+    collinear")
 
 Both LDA and QDA involves computing a matrix inversion, which is inaccurate if
 the determinant is close to 0, i.e. two or more variables are almost a linear
@@ -38,14 +38,22 @@ acid composition as features.
 Sum of true positives and false positives are equal to zero for some labels
 ---------------------------------------------------------------------------
 
-In case of multi-class problems, it might occur that the  
-The precision and recall are equal to zero for some labels. ::
+During a cross-validation loop, it might occur that a class label is not
+assigned to any of the proteins in the test set. For example, in case of a
+two-class classification problem with classes *class1* and *class2*, it could
+happen that all proteins are predicted to be in *class1* and none to be in
+*class2*, even though stratified cross-validation is used. This often happens
+in case of class inbalance. If this is the case, then both the number of true
+and false positives are zero (or both the number of true and false negatives),
+which renders several scoring functions ill defined::
 
-
-    /usr/local/lib/python2.7/dist-packages/sklearn/metrics/metrics.py:1249: 
-    UserWarning: The precision and recall are equal to zero for some labels. 
-    fbeta_score is ill defined for those labels [ 0.]. 
-
+    UserWarning: The sum of true positives and false positives are equal to
+    zero for some labels. Precision is ill defined for those labels [ 1.]. The
+    precision and recall are equal to zero for some labels. fbeta_score is ill
+    defined for those labels [ 1.]
 
 These warnings might occur in multiple cross-validation (CV) loops, so multiple
 of such warnings might occur for one classification run.
+
+
+

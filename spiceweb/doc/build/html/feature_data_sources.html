@@ -119,8 +119,8 @@ the calculation of several features.</p>
 <h2>Amino acid scales<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Amino acid scales are mappings from amino acids to property values and are used
 for the calculation of some feature categories. An often used example is the
-Kyte &amp; Doolittle <a class="reference internal" href="features_spice.html#kyte1982" id="id3">[3]</a> hydropathicity scale in which the values
-indicates how hydrophobic/hydrophilic amino acids are:</p>
+Kyte &amp; Doolittle [1] hydropathicity scale in which the values indicates how
+hydrophobic/hydrophilic amino acids are:</p>
 <div class="highlight-python"><pre>Ala:  1.800
 Arg: -4.500
 Asn: -3.500
@@ -155,27 +155,27 @@ thresholds can be used to determine areas under the curve above a certain
 threshold, in order to capture the occurence of profile peaks.</p>
 </div>
 <p>There are many amino acid scales described in literature, most of which are
-collected in the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base <a class="reference internal" href="features_spice.html#kawashima2008" id="id4">[2]</a>, with <a class="reference external" href="http://www.genome.jp/aaindex/AAindex/list_of_indices">version9.1</a>
-containing 544 amino acid scales.</p>
+collected in the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base [2], with <a class="reference external" href="http://www.genome.jp/aaindex/AAindex/list_of_indices">version9.1</a> containing 544 amino
+acid scales.</p>
 <p>Since many of these amino acid scales are highly correlated, multiple
 efforts have been done (using PCA or similar techniques) to capture the data of
 all the scales into a limited set of uncorrelated scales.</p>
-<p>A. Georgiev <a class="reference internal" href="features_spice.html#georgiev2009" id="id5">[1]</a> used Varimax to identify 19 uncorrelated
-scales that show good correlation with published scales, this in order to
-retain interpretability. This set of 19 scales, and all the separate scales in
-the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base are available for calculation of the signal mean, signal
-peaks area, and autocorrelation features.</p>
+<p>A. Georgiev [3] used Varimax to identify 19 uncorrelated scales that show good
+correlation with published scales, this in order to retain interpretability.
+This set of 19 scales, and all the separate scales in the <a class="reference external" href="http://www.genome.jp/aaindex">AAIndex</a> data base
+are available for calculation of the signal mean, signal peaks area, and
+autocorrelation features.</p>
 <p>The scales are always standardized to mean 0.0 and standard deviation 1.0
 before they are used for feature calculation.</p>
-<p>Five amino acid scales, as provided on the PseAAC webserver <a class="reference internal" href="features_spice.html#shen2008" id="id6">[6]</a>,
-are available for the pseudo amino acid composition features.</p>
+<p>Five amino acid scales, as provided on the PseAAC webserver [4], are available
+for the pseudo amino acid composition features.</p>
 </div>
 <div class="section" id="amino-acid-matrices">
 <h2>Amino acid matrices<a class="headerlink" href="#amino-acid-matrices" title="Permalink to this headline">¶</a></h2>
 <p>An amino acid distance matrix is used for to calculate the quasi-sequence-order
 descriptors. This is a 20 x 20 matrix that defines distances between all amino
 acids. The Schneider-Wrede amino acid distance matrix is used for the
-quasi-distance-order calculation <a class="reference internal" href="features_spice.html#schneider1994" id="id7">[5]</a></p>
+quasi-distance-order calculation [5].</p>
 </div>
 <div class="section" id="amino-acid-clusters">
 <h2>Amino acid clusters<a class="headerlink" href="#amino-acid-clusters" title="Permalink to this headline">¶</a></h2>
@@ -236,57 +236,26 @@ below.</p>
 </tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id8" rules="none">
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[*]</td><td>Added compared to original table in <a class="reference internal" href="features_spice.html#li2006" id="id9">[4]</a></td></tr>
+<tr><td class="label">[*]</td><td>Added compared to original table in [6]</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id10" rules="none">
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[†]</td><td>Changed from P to R compared to original table in <a class="reference internal" href="features_spice.html#li2006" id="id11">[4]</a></td></tr>
+<tr><td class="label">[†]</td><td>Changed from P to R compared to original table in [6]</td></tr>
 </tbody>
 </table>
 <div class="section" id="references">
 <h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<p id="bibtex-bibliography-feature_data_sources-0"><table class="docutils citation" frame="void" id="georgiev2009" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[1]</a></td><td>A.G. Georgiev. Interpretable numerical descriptors of amino acid space. <em>Journal of Computational Biology</em>, 16(5):703–723, 2009.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="kawashima2008" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>S.&nbsp;Kawashima, P.&nbsp;Pokarowski, M.&nbsp;Pokarowska, A.&nbsp;Kolinski, T.&nbsp;Katayama, and M.&nbsp;Kanehisa. AAindex: amino acid index database, progress report 2008. <em>Nucleic Acids Research</em>, 36(suppl 1):D202–D205, 2008.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="kyte1982" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>J.&nbsp;Kyte and Russell&nbsp;F Doolittle. A simple method for displaying the hydropathic character of a protein. <em>Journal of Molecular Biology</em>, 157(1):105–132, 1982.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="li2006" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id11">2</a>)</em> Ze-Rong Li, Hong&nbsp;Huang Lin, LY&nbsp;Han, L&nbsp;Jiang, X&nbsp;Chen, and Yu&nbsp;Zong Chen. PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. <em>Nucleic Acids Research</em>, 34(suppl 2):W32–W37, 2006.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="schneider1994" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[5]</a></td><td>G.&nbsp;Schneider and P.&nbsp;Wrede. The rational design of amino acid sequences by artificial neural networks and simulated molecular evolution: de novo design of an idealized leader peptidase cleavage site. <em>Biophysical Journal</em>, 66(2):335–344, 1994.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="shen2008" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>H.B. Shen and K.C. Chou. PseAAC: a flexible web server for generating various kinds of protein pseudo amino acid composition. <em>Analytical Biochemistry</em>, 373(2):386–388, 2008.</td></tr>
-</tbody>
-</table>
-</p>
+<p>[1] J. Kyte and Russell F Doolittle. A simple method for displaying the hydropathic character of a protein. Journal of Molecular Biology, 157(1):105–132, 1982.</p>
+<p>[2] S. Kawashima, P. Pokarowski, M. Pokarowska, A. Kolinski, T. Katayama, and M. Kanehisa. AAindex: amino acid index database, progress report 2008. Nucleic Acids Research, 36(suppl 1):D202–D205, 2008.</p>
+<p>[3] A.G. Georgiev. Interpretable numerical descriptors of amino acid space. Journal of Computational Biology, 16(5):703–723, 2009.</p>
+<p>[4] H.B. Shen and K.C. Chou. PseAAC: a flexible web server for generating various kinds of protein pseudo amino acid composition. Analytical Biochemistry, 373(2):386–388, 2008.</p>
+<p>[5] G. Schneider and P. Wrede. The rational design of amino acid sequences by artificial neural networks and simulated molecular evolution: de novo design of an idealized leader peptidase cleavage site. Biophysical Journal, 66(2):335–344, 1994.</p>
+<p>[6] Ze-Rong Li, Hong Huang Lin, LY Han, L Jiang, X Chen, and Yu Zong Chen. PROFEAT: a web server for computing structural and physicochemical features of proteins and peptides from amino acid sequence. Nucleic Acids Research, 34(suppl 2):W32–W37, 2006.</p>
 </div>
 </div>
 </div>
