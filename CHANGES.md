@@ -1,3 +1,9 @@
+### 1.0.0 - 18 March 2014
+
+- Updated documentation.
+
+
+
 ### 0.1.2 - 15 March 2014
 
 #### Added features:
