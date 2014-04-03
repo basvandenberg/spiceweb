@@ -200,7 +200,8 @@ class Root:
     def adelete_account(self, username, password):
         # delete project dir (after password verification)
         if(self.a.udb.verify_password(username, password)):
-            pm = project_management.ProjectManager(self.project_dir)
+            pm = project_management.ProjectManager(self.project_dir,
+                                                   self.ref_data_dir)
             pm.set_user(username)
             shutil.rmtree(pm.user_dir)
             cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
