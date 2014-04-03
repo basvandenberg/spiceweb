@@ -181,7 +181,6 @@ class Root:
         self.achange_password_once = self.a.achange_password_once
         self.activate_account = self.a.activate_account
         # the following are only accessible by authenticated users
-        self.logout = self.a.logout
         self.account = self.a.account
         self.delete_account = self.a.delete_account
         self.change_password = self.a.change_password
@@ -190,6 +189,14 @@ class Root:
         self.app = App(self.a, ROOT_URL, self.project_dir, self.ref_data_dir)
 
     # wrapper around logout to remove active project from session data
+    @cherrypy.expose
+    def logout(self):
+        cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
+        return self.a.logout()
+
+    # wrapper around login to remove active project from session data, this
+    # should not happen, because these are removed during logout in the
+    # function above
     @cherrypy.expose
     def alogin(self, username, password):
         cherrypy.session[project.Project.SESSION_PROJECT_KEY] = None
