@@ -1,3 +1,11 @@
+### 1.0.1 - 
+
+#### Solved issues:
+
+- ISSUE #9: Active project still shown on logout.
+- ISSUE #8: Delete account does not work.
+
+
 ### 1.0.0 - 18 March 2014
 
 - Updated documentation.
