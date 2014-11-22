@@ -6,9 +6,9 @@
 
   ## common style sheets
   <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway' rel='stylesheet' type='text/css'>
-  <!--link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" /-->
   <link rel="stylesheet" type="text/css" href="${'%scss/jquery-ui.min.css' % (root_url)}" />
   <link rel="stylesheet" type="text/css" href="${'%scss/bootstrap.min.css' % (root_url)}" />
+  <link rel="stylesheet" type="text/css" href="${'%slib/bootstrap/dist/css/bootstrap.min.css' % (root_url)}" />
   <link rel="stylesheet" type="text/css" href="${'%scss/bootstrap-fileupload.min.css' % (root_url)}" />
   <link rel="stylesheet" type="text/css" href="${'%scss/style.css' % (root_url)}" />
   <link rel="stylesheet" type="text/css" href="${'%sauth_css/style.css' % (root_url)}" />
@@ -17,9 +17,8 @@
   </%block>
 
   ## common javascript libraries and scripts
-  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script-->
-  <script type="application/javascript" src="${'%sjs/jquery-2.1.0.min.js' % (root_url)}"></script>
-  <!--script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script-->
+  <script type="application/javascript" src="${'%slib/jquery/dist/jquery.min.js' % (root_url)}"></script>
+  <script type="application/javascript" src="${'%slib/d3/d3.min.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/jquery.ui.core.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/jquery.ui.widget.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/jquery.ui.mouse.js' % (root_url)}"></script>
@@ -27,7 +26,7 @@
   <script type="application/javascript" src="${'%sjs/jquery.ui.droppable.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/jquery.ui.selectable.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/jquery.cookie.js' % (root_url)}"></script>
-  <script type="application/javascript" src="${'%sjs/bootstrap.min.js' % (root_url)}"></script>
+  <script type="application/javascript" src="${'%slib/bootstrap/dist/js/bootstrap.min.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/bootstrap-fileupload.min.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/jquery.tablesorter.min.js' % (root_url)}"></script>
   <script type="application/javascript" src="${'%sjs/spice.js' % (root_url)}"></script>

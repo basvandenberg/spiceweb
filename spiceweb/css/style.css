@@ -54,7 +54,7 @@ div#header {
     position: relative;
     display: block;
     margin-top: 15px;
-    width: 846px;
+    width: 932px;
     margin-left: auto;
     margin-right: auto;
     padding: 10px 43px;
@@ -62,7 +62,7 @@ div#header {
     text-align: center;
     border-radius: 15px 15px 0px 0px;
     border-bottom: 0px;
-    height: 48px;
+    height: 68px;
 }
 div#header div#title {
     position: absolute;
@@ -107,7 +107,7 @@ div#footer {
 /* The main wrapper **********************************************************/
 
 div#wrapper {
-    width: 844px;
+    width: 930px;
     margin-left: auto;
     margin-right: auto;
     background-color: #ffffff;
@@ -266,8 +266,8 @@ div.news_item div.date {
 /* Static menu at the top header *********************************************/
 
 nav#header_menu {
-    width: 900px;
-    height: 20px;
+    width: 980px;
+    height: 24px;
     margin: 0px auto;
     margin-bottom: 19px;
     background-color: #555753;
@@ -308,7 +308,7 @@ nav#main_menu {
     background-color: #ce5c00;
 }
 .menu_item {
-    width: 202px;
+    width: 232px;
     float: left;
     color: #d3d7cf;
     padding: 6px 15px 4px 15px;
@@ -316,8 +316,8 @@ nav#main_menu {
     text-decoration: none;
 }
 .menu_active {
-    width: 206px;
-    height: 16px;
+    width: 236px;
+    height: 37px;
     padding-bottom: 8px;
     padding-top: 8px;
     margin-top: -5px;
