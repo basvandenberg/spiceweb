@@ -593,8 +593,8 @@ div.text.disabled {
     position: relative;
 }
 .hist {
-    margin: 10px;
-    width: 730px;
+    margin: 10px 0px;
+    width: 842px;
     height: 280px;
     border: 1px solid #d3d7cf;
     border-radius: 4px;
@@ -737,7 +737,7 @@ select.feats {
     margin: 2px 3px; 
     padding: 2px 10px; 
     font-size: 11px; 
-    height: 13px; 
+    height: 17px; 
     line-height: 13px;
 }
 select#labeling_select {
@@ -748,7 +748,7 @@ select#labeling_select {
     margin-top: 10px; 
 }
 ul.label_list {
-    width: 125px;
+    width: 117px;
     display: inline-block;
     vertical-align: top;
     margin-top: 3px;
@@ -764,7 +764,7 @@ ul.label_list.select li.class_label {
 }
 ul.label_list li.class_label div {
     float: right;
-    width: 94px;
+    width: 102px;
     font-family: 'Ubuntu';
     font-size: 13px;
     padding: 2px 5px;
