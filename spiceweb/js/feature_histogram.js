@@ -68,6 +68,7 @@ function show_hist(cid, class_ids) {
 
     // remove histograms if no class labels are selected
     if(class_ids.length < 1) {
+
         $("li.hist").hide('fast', function(){$("li.hist").remove();});
         $("li.loadhist").hide('fast', function(){$("li.loadhist").remove();});
     }
@@ -85,24 +86,33 @@ function show_hist(cid, class_ids) {
         var postdata = {labeling_name: labeling, labels: labels_str};
         
         // append load box to sortable list
-        $('<img>').attr(
+        /*$('<img>').attr(
             {'src':'ahistogram?feat_ids=' + cid + 
                                    '&labeling_name=' + labeling + 
                                    '&class_ids=' + labels_str + 
                                    '&figtype=png'}
         ).load(function() {
             
-        }).appendTo($("li.hist#" + cid))
+        }).appendTo($("li.hist#" + cid))*/
 
+        url = 'ahistogram?feat_ids=' + cid
+                      + '&labeling_name=' + labeling
+                      + '&class_ids=' + labels_str;
+
+        $.getJSON(url, function(data) {
+            console.log(data);
+        });
         
         return false;
     }
 }
 
 $(document).ready(function() {
+
     // make histograms dragable
-    $("#sortable").sortable();
-    $("#sortable").disableSelection();
+    //var sortable = $('#sortable');
+    //$(sortable).sortable();
+    //$(sortable).disableSelection();
 });
 
 

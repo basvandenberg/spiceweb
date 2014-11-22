@@ -358,7 +358,29 @@ class Feature:
         return simplejson.dumps(dict(ttest_table=str_data))
 
     @cherrypy.expose
-    def ahistogram(self, feat_ids, labeling_name, class_ids, figtype='png'):
+    def ahistogram(self, feat_ids, labeling_name, class_ids):
+
+        class_ids = [l.strip() for l in class_ids.split(',')]
+        pm = self.project_manager
+        fm = pm.get_feature_matrix()
+        fm_root_dir = pm.fm_dir
+        fe = pm.get_feature_extraction()
+
+        tokens = feat_ids.split('_')
+
+        if(len(tokens) == 3):
+            fc, param, fid = tokens
+            featcat = fe.PROTEIN_FEATURE_CATEGORIES[fc]
+            param_s = featcat.param_str(param)
+            title = '%s (%s)' % (featcat.fc_name, param_s)
+        else:
+            fc, fid = tokens
+            title = 'Custom feature category %s' % (fc)
+
+        return fm.histogram_json(feat_ids, labeling_name, class_ids=class_ids,
+                                 title=title)
+
+    def ahistogram2(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
         class_ids = [l.strip() for l in class_ids.split(',')]
         pm = self.project_manager
