@@ -83,7 +83,7 @@ function show_hist(cid, class_ids) {
         // construct post data
         var labels_str = class_ids.join(",");
         var labeling = $("select#labeling_select").val()
-        var postdata = {labeling_name: labeling, labels: labels_str};
+        //var postdata = {labeling_name: labeling, labels: labels_str};
         
         // append load box to sortable list
         /*$('<img>').attr(
@@ -100,7 +100,88 @@ function show_hist(cid, class_ids) {
                       + '&class_ids=' + labels_str;
 
         $.getJSON(url, function(data) {
+
             console.log(data);
+
+            var feat_id = data['feature-id'];
+            $('#' + feat_id).empty();
+
+            var width = 840;
+            var height = 280;
+
+            var margin = 10;
+
+            var num_hists = data['legend'].length;
+            var num_bins = data[data['legend'][0]].length;
+
+            var total_bin_width = Math.floor((840 - 2 * margin) / num_bins);
+            var margin_between_bins = 3;
+
+            var margin_between_bars = 1;
+            if((total_bin_width - (2 * margin_between_bins)) % 2 == 0) {
+                margin_between_bars = 2;
+            }
+
+            var bar_width = (total_bin_width
+                    - (2 * margin_between_bins)
+                    - ((num_hists - 1) * margin_between_bars)) / 2;
+
+            var max_count = 0;
+            for(var leg_i = 0; leg_i < data['legend'].length; leg_i++) {
+                max_count = Math.max(
+                        Math.max.apply(null, data[data['legend'][leg_i]]),
+                        max_count
+                );
+            }
+            var max_bar_height = height - 2 * margin;
+            var y_step = max_bar_height / max_count;
+
+            var svg = d3.select('#' + feat_id)
+              .append('svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            var colors = ['#204a87', '#fce94f'];
+
+            for(var leg_i = 0; leg_i < data['legend'].length; leg_i++) {
+
+                var legend = data['legend'][leg_i];
+                var hist_data = data[legend];
+
+                var g = svg.append('g');
+                g.selectAll('rect')
+                    .data(hist_data)
+                  .enter()
+                    .append('rect')
+                    .attr('stroke', '#2e3436')
+                    .attr('stroke-width', 1)
+                    .attr('fill', function(d, i) {
+
+                        return colors[leg_i];
+                    })
+                    .attr('x', function(d, i) {
+
+                        return margin
+                                + (i * total_bin_width)
+                                + margin_between_bins
+                                + leg_i * (bar_width + margin_between_bars);
+                    })
+                    .attr('y', function(d) {
+
+                        return (height - margin) - d * y_step;
+                    })
+                    .attr('width', bar_width)
+                    .attr('height', function(d) {
+
+                        return d * y_step;
+                    });
+            }
+
+            svg.append('g')
+                .append('text')
+                .text(data['title'])
+                .attr('x', 10)
+                .attr('y', 10);
         });
         
         return false;
