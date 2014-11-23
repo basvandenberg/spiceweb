@@ -10,21 +10,24 @@ $(document).ready(function() {
         event.preventDefault();
  
         // fetch the featcat id from the form id
-        var catid = $(this).parent().parent().attr('id');
+        var catid = $(this).closest('form').attr('id');
 
         // assuming we only use dropdown to select parameters!!!
 
         var params = [];
 
-        $(this).parent().parent().find('select.param').map(function() {
+        $(this).closest('form').find('select.param').map(function() {
             params.push($(this).find(':selected').map(function() {
                 return $(this).attr('value');
             }).get().join(''))
         });
 
         // build url and send
-        var u = $(location).attr('href');
-        var u_without_get = u.substring(0, u.indexOf('&'));
+        //var u = $(location).attr('href');
+        //var u_without_get = u.substring(0, u.indexOf('&'));
+        var u_without_get = location.protocol + '//'
+                + location.host
+                + location.pathname;
         var url = u_without_get + '?featcat_id=' + catid;
         if(params.length > 0) {
             url = url + '_' + params.join('-');

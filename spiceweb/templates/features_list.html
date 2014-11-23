@@ -75,30 +75,7 @@ else:
         <td>${param_col}</td>
         <td>${numfeat}</td>
         <td>
-            <a href="#delete-${fcat_id}-modal" 
-               class="btn btn-link my-btn-link delete-features" 
-               data-toggle="modal"
-               id="${fcat_id}">delete
-            </a>
-            <!-- Modal -->
-            <div id="delete-${fcat_id}-modal"
-                 class="modal hide fade delete-features" 
-                 tabindex="-1" 
-                 role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="true">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 id="myModalLabel">Delete feature category ${featcat_id}?</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Feature category ${featcat_id} will be deleted. Are you sure?</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button id="${fcat_id}" class="btn btn-danger delete-features">Delete</button>
-                </div>
-            </div>
+            <a type="button" id="${fcat_id}" class="btn btn-link my-btn-link delete-features" data-target="#delete-features-modal">delete</a>
         </td>
     </tr>
 % endfor
@@ -174,10 +151,12 @@ cusfeats = fe.fm_protein.get_custom_features()
 % endif
 
 % if len(cusfeats.keys()) > 0 or len(categorized_featids) > 0:
-<div class="btn-group pull-right">
-  <a href="${'%s%s' % (uri_root, 'download')}" class="btn btn-warning">Download feature matrix</a>
-  <a href="${root_url}doc/file_formats.html#feature-matrix-file" target="_blank" class="btn"><i class="icon-info-sign"></i></a>
-</div> 
+<div class="btn-group pull-right" role="group" aria-label="...">
+    <a href="${'%s%s' % (uri_root, 'download')}" class="btn btn-warning">Download feature matrix</a>
+    <a href="${root_url}doc/file_formats.html#feature-matrix-file" target="_blank" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+    </a>
+</div>
 % endif
 
 ###############################################################################

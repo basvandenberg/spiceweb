@@ -7,7 +7,6 @@
   ## common style sheets
   <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu|Raleway' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="${'%scss/jquery-ui.min.css' % (root_url)}" />
-  <link rel="stylesheet" type="text/css" href="${'%scss/bootstrap.min.css' % (root_url)}" />
   <link rel="stylesheet" type="text/css" href="${'%slib/bootstrap/dist/css/bootstrap.min.css' % (root_url)}" />
   <link rel="stylesheet" type="text/css" href="${'%scss/bootstrap-fileupload.min.css' % (root_url)}" />
   <link rel="stylesheet" type="text/css" href="${'%scss/style.css' % (root_url)}" />
@@ -335,6 +334,45 @@ features = zip(feat_ids, feat_names)
 </%block>
 
 % endif
+
+
+<!-- Modal - delete project -->
+<div class="modal fade" id="delete-project-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete project?</h4>
+      </div>
+      <div class="modal-body">
+        <p>The project will be permanently deleted and cannot be recovered. Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger delete">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - delete features -->
+<div class="modal fade" id="delete-features-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete project?</h4>
+      </div>
+      <div class="modal-body">
+        <p>The feature category will be deleted. Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger delete">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 

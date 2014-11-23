@@ -12,7 +12,7 @@ menu_names = ['Projects', 'Create']
 % if (index == sub_menu_index):
         <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % else:
-        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+        <a href="${uri}" class="btn btn-default"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % endif
 % endfor
     </div>
@@ -20,14 +20,14 @@ menu_names = ['Projects', 'Create']
 % if (all_project_ids and not all_project_ids == 'None'):
     <div class="btn-group">
 % if (len(all_project_ids) == 1):
-        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}details/${all_project_ids[0][0]}">${all_project_ids[0][0]}</a>
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ' btn-default'}" href="${root_url}${main_menu[1][1]}details/${all_project_ids[0][0]}">${all_project_ids[0][0]}</a>
 % elif (len(all_project_ids) > 1):
 % if project_id is None:
-        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}details/${all_project_ids[0][0]}">${all_project_ids[0][0]}</a>
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ' btn-default'}" href="${root_url}${main_menu[1][1]}details/${all_project_ids[0][0]}">${all_project_ids[0][0]}</a>
 % else:
-        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" href="${root_url}${main_menu[1][1]}details/${project_id}">${project_id}</a>
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ' btn-default'}" href="${root_url}${main_menu[1][1]}details/${project_id}">${project_id}</a>
 % endif
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">

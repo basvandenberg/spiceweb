@@ -10,543 +10,748 @@
 <%include file="features_bar.html" />
 
 % if msg:
-    <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
+    <div class="alert alert-danger"><p>${msg}</p></div>
 % endif
 
 <h2>Amino acid sequence-based features<h2>
 
 <!-- Amino acid composition -->
-
-<div class="well feat-calc">
-<form id="aac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Amino acid composition
-    </legend>
-
-    <label class="select first">Number of segments</label>
-    <select class="param input-mini">
-        <option value="1" selected="selected">1</option>
-% for i in xrange(2, 11):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#amino-acid-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Amino acid composition</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="aac" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="aac_num_segments" class="col-sm-3 control-label">Number of segments</label>
+                <div class="col-sm-9">
+                    <select id="aac_num_segments" class="form-control param">
+                        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 11):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#amino-acid-composition" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Dipeptide composition -->
-
-<div class="well feat-calc">
-<form id="dc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Dipeptide composition
-    </legend>
-
-    <label class="select first">Number of segments</label>
-    <select class="param input-mini">
-        <option value="1" selected="selected">1</option>
-% for i in xrange(2, 3):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#dipeptide-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Dipeptide composition</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="dc" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="dc_num_segments" class="col-sm-3 control-label">Number of segments</label>
+                <div class="col-sm-9">
+                    <select id="dc_num_segments" class="form-control param">
+                        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 3):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#dipeptide-composition" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Terminal end amino acid counts -->
-
-<div class="well feat-calc">
-<form id="teraac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Terminal end amino acid count
-    </legend>
-
-    <label class="select first">Side</label>
-    <select class="param input-medium">
-        <option value="N" selected="selected">N-terminal end</option>
-        <option value="C">C-terminal end</option>
-    </select>
-
-    <label class="select">Length</label>
-    <select class="param input-mini">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="40" selected="selected">40</option>
-        <option value="50">50</option>
-        <option value="60">60</option>
-    </select>
-    
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#terminal-end-amino-acid-count" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Terminal end amino acid count</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="teraac" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="teraac_side" class="col-sm-3 control-label">Side</label>
+                <div class="col-sm-9">
+                    <select id="teraac_side" class="form-control param">
+                        <option value="N" selected="selected">N-terminal end</option>
+                        <option value="C">C-terminal end</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="teraac_length" class="col-sm-3 control-label">Length</label>
+                <div class="col-sm-9">
+                    <select id="teraac_length" class="form-control param">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40" selected="selected">40</option>
+                        <option value="50">50</option>
+                        <option value="60">60</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#terminal-end-amino-acid-count" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Sequence length -->
-
-<div class="well feat-calc">
-<form id="len" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Sequence length
-    </legend>
-
-    <label class="select first">The length of the amino acid sequence</label>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#sequence-length" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Sequence length</h3>
     </div>
+    <div class="panel-body">
 
+        <form id="len" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label class="col-sm-8">Length of the amino acid sequence</label>
+                <div class="col-sm-4">
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#sequece-length" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
 
-</form>
+    </div>
 </div>
 
 <h3>Clustered amino acid sequence-based features</h3>
 
 <!-- Property CTD -->
-
-<div class="well feat-calc">
-<form id="ctd" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Property Composition / Transition / Distribution
-    </legend>
-
-    <label class="select first">Property</label>
-    <select class="param input-medium">
-        <option value="hyd" selected="selected">hydrophobicity</option>
-        <option value="vdw">normalized VDW</option>
-        <option value="plr">polarity</option>
-        <option value="plz">polarizability</option>
-        <option value="chr">charge</option>
-        <option value="ss">secondary structure</option>
-        <option value="sa">solvent accessibilty</option>
-    </select>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#property-composition-transition-distribution-ctd" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Property Composition / Transition / Distribution</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="ctd" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="ctd-prop" class="col-sm-3 control-label">Property</label>
+                <div class="col-sm-9">
+                    <select id="ctd-prop" class="form-control param">
+                        <option value="hyd" selected="selected">hydrophobicity</option>
+                        <option value="vdw">normalized VDW</option>
+                        <option value="plr">polarity</option>
+                        <option value="plz">polarizability</option>
+                        <option value="chr">charge</option>
+                        <option value="ss">secondary structure</option>
+                        <option value="sa">solvent accessibilty</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#property-composition-transition-distribution-ctd" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <h3>Amino acid sequence profile-based features</h3>
 
 <!-- Autocorrelation -->
-
-<div class="well feat-calc">
-<form id="ac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Autocorrelation
-    </legend>
-
-    <label class="select first">Type</label>
-    <select class="param input-medium">
-        <option value="mb" selected="selected">Moreau-Broto</option>
-        <option value="moran">Moran</option>
-        <option value="geary">Geary</option>
-    </select>
-
-    <label class="select">AA Scale</label>
-    <select class="param input-medium">
-        <optgroup label="AAIndex combined">
-            <option value="gg" selected="selected">Georgiev (19 scales)</option>
-        </optgroup>
-        <optgroup label="AAIndex scales">
-% for index, aai in enumerate(aaindex_scale_ids):
-            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
-% endfor
-        </optgroup>
-    </select>
-
-    <label class="select">Lag</label>
-    <select class="param input-mini">
-% for i in xrange(1, 20):
-        <option value="${i}">${i}</option>
-% endfor
-        <option value="20" selected="selected">20</option>
-% for i in xrange(21, 31):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-    
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#autocorrelation" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Autocorrelation</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="ac" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="ac-type" class="col-sm-3 control-label">Type</label>
+                <div class="col-sm-9">
+                    <select id="ac-type" class="form-control param">
+                        <option value="mb" selected="selected">Moreau-Broto</option>
+                        <option value="moran">Moran</option>
+                        <option value="geary">Geary</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ac-aascale" class="col-sm-3 control-label">Amino acid scale</label>
+                <div class="col-sm-9">
+                    <select id="ac-aascale" class="form-control param">
+                        <optgroup label="AAIndex combined">
+                            <option value="gg" selected="selected">Georgiev (19 scales)</option>
+                        </optgroup>
+                        <optgroup label="AAIndex scales">
+% for index, aai in enumerate(aaindex_scale_ids):
+                            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
+% endfor
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ac-lag" class="col-sm-3 control-label">Lag</label>
+                <div class="col-sm-9">
+                    <select id="ac-lag" class="form-control param">
+% for i in xrange(1, 20):
+                        <option value="${i}">${i}</option>
+% endfor
+                        <option value="20" selected="selected">20</option>
+% for i in xrange(21, 31):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#autocorrelation" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Signal average -->
-
-<div class="well feat-calc">
-<form id="sigavg" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Signal average 
-    </legend>
-
-    <label class="select first">AA Scale</label>
-    <select class="param input-medium">
-        <optgroup label="AAIndex combined">
-            <option value="gg" selected="selected">Georgiev (19 scales)</option>
-        </optgroup>
-        <optgroup label="AAIndex scales">
-% for index, aai in enumerate(aaindex_scale_ids):
-            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
-% endfor
-        </optgroup>
-    </select>
-
-    <label class="select">Window</label>
-    <select class="param input-mini">
-        <option value="7">7</option>
-        <option value="9">9</option>
-        <option value="11">11</option>
-        <option value="13">13</option>
-        <option value="15">15</option>
-        <option value="17">17</option>
-        <option value="19">19</option>
-        <option value="21" selected="selected">21</option>
-        <option value="23">23</option>
-        <option value="25">25</option>
-    </select>
-    
-    <label class="select">Edge</label>
-    <select class="param input-mini">
-        <option value="0">0</option>
-        <option value="50">50</option>
-        <option value="100" selected="selected">100</option>
-    </select>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#signal-average" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Signal average</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="sigavg" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="sigavg-aascale" class="col-sm-3 control-label">Amino acid scale</label>
+                <div class="col-sm-9">
+                    <select id="sigavg-aascale" class="form-control param">
+                        <optgroup label="AAIndex combined">
+                            <option value="gg" selected="selected">Georgiev (19 scales)</option>
+                        </optgroup>
+                        <optgroup label="AAIndex scales">
+% for index, aai in enumerate(aaindex_scale_ids):
+                            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
+% endfor
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sigavg-window" class="col-sm-3 control-label">Window</label>
+                <div class="col-sm-9">
+                    <select id="sigavg-window" class="form-control param">
+                        <option value="7">7</option>
+                        <option value="9">9</option>
+                        <option value="11">11</option>
+                        <option value="13">13</option>
+                        <option value="15">15</option>
+                        <option value="17">17</option>
+                        <option value="19">19</option>
+                        <option value="21" selected="selected">21</option>
+                        <option value="23">23</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sigavg-edge" class="col-sm-3 control-label">Edge</label>
+                <div class="col-sm-9">
+                    <select id="sigavg-edge" class="form-control param">
+                        <option value="0">0</option>
+                        <option value="50">50</option>
+                        <option value="100" selected="selected">100</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#signal-average" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Signal peaks area -->
-
-<div class="well feat-calc">
-<form id="sigpeak" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Signal peaks area
-    </legend>
-
-    <label class="select first">AA Scale</label>
-    <select class="param input-medium">
-        <optgroup label="AAIndex combined">
-            <option value="gg" selected="selected">Georgiev (19 scales)</option>
-        </optgroup>
-        <optgroup label="AAIndex scales">
-% for index, aai in enumerate(aaindex_scale_ids):
-            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
-% endfor
-        </optgroup>
-    </select>
-
-    <label class="select">Window</label>
-    <select class="param input-mini">
-        <option value="7">7</option>
-        <option value="9">9</option>
-        <option value="11">11</option>
-        <option value="13">13</option>
-        <option value="15">15</option>
-        <option value="17">17</option>
-        <option value="19">19</option>
-        <option value="21" selected="selected">21</option>
-        <option value="23">23</option>
-        <option value="25">25</option>
-    </select>
-    
-    <label class="select">Edge</label>
-    <select class="param input-mini">
-        <option value="0">0</option>
-        <option value="50">50</option>
-        <option value="100" selected="selected">100</option>
-    </select>
-
-    <label class="select">Threshold</label>
-    <select class="param input-mini">
-        <option value="0">0</option>
-        <option value="5">0.5</option>
-        <option value="10" selected="selected">1.0</option>
-        <option value="15">1.5</option>
-        <option value="20">2.0</option>
-    </select>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#signal-peaks-area" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Signal peaks area</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="sigpeak" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="sigpeak-aascale" class="col-sm-3 control-label">Amino acid scale</label>
+                <div class="col-sm-9">
+                    <select id="sigpeak-aascale" class="form-control param">
+                        <optgroup label="AAIndex combined">
+                            <option value="gg" selected="selected">Georgiev (19 scales)</option>
+                        </optgroup>
+                        <optgroup label="AAIndex scales">
+% for index, aai in enumerate(aaindex_scale_ids):
+                            <option value="${index}">${'%03d' % (index)}: ${aai}</option>
+% endfor
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sigpeak-window" class="col-sm-3 control-label">Window</label>
+                <div class="col-sm-9">
+                    <select id="sigpeak-window" class="form-control param">
+                        <option value="7">7</option>
+                        <option value="9">9</option>
+                        <option value="11">11</option>
+                        <option value="13">13</option>
+                        <option value="15">15</option>
+                        <option value="17">17</option>
+                        <option value="19">19</option>
+                        <option value="21" selected="selected">21</option>
+                        <option value="23">23</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sigpeak-edge" class="col-sm-3 control-label">Edge</label>
+                <div class="col-sm-9">
+                    <select id="sigpeak-edge" class="form-control param">
+                        <option value="0">0</option>
+                        <option value="50">50</option>
+                        <option value="100" selected="selected">100</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sigpeak-threshold" class="col-sm-3 control-label">Edge</label>
+                <div class="col-sm-9">
+                    <select id="sigpeak-threshold" class="form-control param">
+                        <option value="0">0</option>
+                        <option value="5">0.5</option>
+                        <option value="10" selected="selected">1.0</option>
+                        <option value="15">1.5</option>
+                        <option value="20">2.0</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#signal-peaks-area" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Type 1 pseudo amino acid composition -->
-<div class="well feat-calc">
-<form id="paac1" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Pseudo amino acid composition (type 1)
-    </legend>
-
-    <label class="select first">AA Scales </label>
-    <select class="param input-medium" multiple="multiple">
-        <option value="p0" selected="selected">${pseaac_scale_ids[0]}</option>
-% for i, scale_id in enumerate(pseaac_scale_ids[1:]):
-        <option value="${'p%i' % (i + 1)}">${scale_id}</option>
-% endfor
-    </select>
-
-    <label class="select">Lambda </label>
-    <select class="param input-mini">
-% for i in xrange(1, 30):
-        <option value="${i}">${i}</option>
-% endfor
-        <option value="30" selected="selected">30</option>
-% for i in xrange(31, 51):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-    <label>Weight: 0.05</label>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-1" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Pseudo amino acid composition (type 1)</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="paac1" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="paac1-aascale" class="col-sm-3 control-label">Amino acid scales</label>
+                <div class="col-sm-9">
+                    <select id="paac1-aascale" class="form-control param" multiple="multiple">
+                        <option value="p0" selected="selected">${pseaac_scale_ids[0]}</option>
+% for i, scale_id in enumerate(pseaac_scale_ids[1:]):
+                        <option value="${'p%i' % (i + 1)}">${scale_id}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="paac1-lambda" class="col-sm-3 control-label">Lambda</label>
+                <div class="col-sm-9">
+                    <select id="paac1-lambda" class="form-control param">
+% for i in xrange(1, 30):
+                        <option value="${i}">${i}</option>
+% endfor
+                        <option value="30" selected="selected">30</option>
+% for i in xrange(31, 51):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="paac1-weight" class="col-sm-3 control-label">Weight</label>
+                <div class="col-sm-9">
+                    <input id="paac1-weight" class="form-control" value="0.05" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-1" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Type 2 pseudo amino acid composition -->
-<div class="well feat-calc">
-<form id="paac2" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Pseudo amino acid composition (type 2)
-    </legend>
-
-    <label class="select first">AA Scales </label>
-    <select class="param input-medium" multiple="multiple">
-        <option value="p0" selected="selected">${pseaac_scale_ids[0]}</option>
-% for i, scale_id in enumerate(pseaac_scale_ids[1:]):
-        <option value="${'p%i' % (i + 1)}">${scale_id}</option>
-% endfor
-    </select>
-
-    <label class="select">Lambda </label>
-    <select class="param input-mini">
-% for i in xrange(1, 30):
-        <option value="${i}">${i}</option>
-% endfor
-        <option value="30" selected="selected">30</option>
-% for i in xrange(31, 51):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-    <label>Weight: 0.05</label>
-    
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-2" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Pseudo amino acid composition (type 2)</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="paac2" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="paac2-aascale" class="col-sm-3 control-label">Amino acid scales</label>
+                <div class="col-sm-9">
+                    <select id="paac2-aascale" class="form-control param" multiple="multiple">
+                        <option value="p0" selected="selected">${pseaac_scale_ids[0]}</option>
+% for i, scale_id in enumerate(pseaac_scale_ids[1:]):
+                        <option value="${'p%i' % (i + 1)}">${scale_id}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="paac2-lambda" class="col-sm-3 control-label">Lambda</label>
+                <div class="col-sm-9">
+                    <select id="paac2-lambda" class="form-control param">
+% for i in xrange(1, 30):
+                        <option value="${i}">${i}</option>
+% endfor
+                        <option value="30" selected="selected">30</option>
+% for i in xrange(31, 51):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="paac2-weight" class="col-sm-3 control-label">Weight</label>
+                <div class="col-sm-9">
+                    <input id="paac2-weight" class="form-control" value="0.05" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#pseudo-amino-acid-composition-type-2" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 
 <h3>Amino acid distance-based features</h3>
 
 <!-- Quasi sequence order descriptors -->
-
-<div class="well feat-calc">
-<form id="qso" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Quasi-sequence-order descriptors
-    </legend>
-
-    <label class="select first">AA distance matrix</label>
-    <select class="param input-medium">
-        <option value="sw" selected="selected">Schneider-Wrede</option>
-        <!--option value="aam11">Grantham</option--> <!-- NOT NORMALIZED LIKE IN PROFEAT -->
-    </select>
-
-    <label class="select">Lambda </label>
-    <select class="param input-mini">
-% for i in xrange(1, 30):
-        <option value="${i}">${i}</option>
-% endfor
-        <option value="30" selected="selected">30</option>
-% for i in xrange(31, 51):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-
-    <label>Weight: 0.1</label>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#quasi-sequence-order-descriptors" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Quasi-sequence-order discriptors</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="qso" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="qso-aamatrix" class="col-sm-3 control-label">Amino acid dist. matrix</label>
+                <div class="col-sm-9">
+                    <select id="qso-aamatrix" class="form-control param">
+                        <option value="sw" selected="selected">Schneider-Wrede</option>
+                        <!--option value="aam11">Grantham</option--> <!-- NOT NORMALIZED LIKE IN PROFEAT -->
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="qso-lambda" class="col-sm-3 control-label">Lambda</label>
+                <div class="col-sm-9">
+                    <select id="qso-lambda" class="form-control param">
+% for i in xrange(1, 30):
+                        <option value="${i}">${i}</option>
+% endfor
+                        <option value="30" selected="selected">30</option>
+% for i in xrange(31, 51):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="qso-weight" class="col-sm-3 control-label">Weight</label>
+                <div class="col-sm-9">
+                    <input id="qso-weight" class="form-control" value="0.1" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#quasi-sequence-order-descriptors" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <h2>Secondary structure sequence-based features</h2>
 
 <!-- Secondary structure composition -->
-
-<div class="well feat-calc">
-<form id="ssc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Secondary structure composition
-    </legend>
-
-    <label class="select first">Number of segments</label>
-    <select class="param input-mini">
-        <option value="1" selected="selected">1</option>
-% for i in xrange(2, 11):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#secondary-structure-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Secondary structure composition</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="ssc" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="ssc-numseg" class="col-sm-3 control-label">Number of segments</label>
+                <div class="col-sm-9">
+                    <select id="ssc_numseg" class="form-control param">
+                        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 11):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#secondary-structure-composition" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Per secondary structure amino acid composition -->
-
-<div class="well feat-calc">
-<form id="ssaac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Per secondary structure amino acid composition
-    </legend>
-
-    <label class="select first">Amino acid composition of the helix, strand, and random coil regions</label>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#per-secondary-structure-amino-acid-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Per secondary structure amino acid composition</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="ssaac" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label class="col-sm-8">Amino acid composition of the helix, strand, and random coil regions</label>
+                <div class="col-sm-4">
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#per-secondary-structure-amino-acid-composition" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <h2>Solvent accessibility sequence-based features</h2>
 
 <!-- Solvent accessibility composition -->
-
-<div class="well feat-calc">
-<form id="sac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Solvent accessibility composition
-    </legend>
-
-    <label class="select first">Number of segments</label>
-    <select class="param input-mini">
-        <option value="1" selected="selected">1</option>
-% for i in xrange(2, 11):
-        <option value="${i}">${i}</option>
-% endfor
-    </select>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#solvent-accessibility-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Solvent accessibility composition</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="sac" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label for="sac-numseg" class="col-sm-3 control-label">Number of segments</label>
+                <div class="col-sm-9">
+                    <select id="sac_numseg" class="form-control param">
+                        <option value="1" selected="selected">1</option>
+% for i in xrange(2, 11):
+                        <option value="${i}">${i}</option>
+% endfor
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#solvent-accessibility-composition" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Per solvent accessibility class amino acid composition -->
-
-<div class="well feat-calc">
-<form id="saaac" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Per solvent accessibility class amino acid composition
-    </legend>
-
-    <label class="select first">Amino acid composition of the buried and exposed regions</label>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#per-solvent-accessibility-class-amino-acid-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Per solvent accessibility class amino acid composition</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="saaac" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label class="col-sm-8">Amino acid composition of the buried and exposed regions</label>
+                <div class="col-sm-4">
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#per-solvent-accessibility-class-amino-acid-composition" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <h2>ORF codon sequence-based features</h2>
 
 <!-- Codon composition -->
-
-<div class="well feat-calc">
-<form id="cc" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Codon composition
-    </legend>
-
-    <label class="select first">The ORF codon composition</label>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#codon-composition" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Codon composition</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="cc" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label class="col-sm-8">The ORF codon composition</label>
+                <div class="col-sm-4">
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#codon-composition" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 <!-- Codon usage -->
-
-<div class="well feat-calc">
-<form id="cu" class="form-inline feat-calc" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Codon usage
-    </legend>
-
-    <label class="select first">Relative usage of the codons per amino acid</label>
-
-    <div class="btn-group pull-right">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Calculate</button>
-        <a href="${root_url}doc/features_spice.html#codon-usage" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Codon usage</h3>
     </div>
+    <div class="panel-body">
 
-</form>
+        <form id="cu" class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
+            <div class="form-group">
+                <label class="col-sm-8">Relative usage of the codons per amino acid</label>
+                <div class="col-sm-4">
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-warning">Calculate</button>
+                        <a href="${root_url}doc/features_spice.html#codon-usage" target="_blank" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 
 

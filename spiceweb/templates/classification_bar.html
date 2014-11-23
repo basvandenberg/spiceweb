@@ -14,7 +14,7 @@ menu_names = ['Classifiers', 'Create']
 % if (index == sub_menu_index):
         <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % else:
-        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+        <a href="${uri}" class="btn btn-default"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % endif
 % endfor
     </div>
@@ -24,18 +24,18 @@ menu_names = ['Classifiers', 'Create']
 % if (len(cl_ids) > 0):
     <div class="btn-group">
 % if context.get('cl_id', UNDEFINED) is not UNDEFINED:
-        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" 
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ' btn-default'}" 
            href="${root_url}${main_menu[3][1]}details/${cl_id}">
             ${cl_id}
         </a>
 % else:
-        <a class="btn${' btn-primary' if sub_menu_index > 1 else ''}" 
+        <a class="btn${' btn-primary' if sub_menu_index > 1 else ' btn-default'}" 
            href="${root_url}${main_menu[3][1]}details/${cl_ids[0]}">
             ${cl_ids[0]}
         </a>
 % endif
 % if (len(cl_ids) > 1):
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
@@ -51,7 +51,7 @@ menu_names = ['Classifiers', 'Create']
     <div class="btn-group">
         <div class="classifier">
             <a href=${root_url}${main_menu[3][1]}run/${cl_id} 
-               class="btn${' btn-primary' if sub_menu_index == 3 else ''}">Run classifier</a>
+               class="btn${' btn-primary' if sub_menu_index == 3 else ' btn-default'}">Run classifier</a>
         </div>
     </div>
 % endif

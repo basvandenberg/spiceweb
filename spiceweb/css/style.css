@@ -6,16 +6,6 @@ body {
 }
 h1, h2, h3 {
     font-family: 'Ubuntu';
-    font-weight: normal;
-}
-h1 {
-    font-size: 24pt;
-}
-h2 {
-    font-size: 18pt;
-}
-h3 {
-    font-size: 14pt;
 }
 h3>a.pull-right {
     font-size: 10pt;
@@ -25,6 +15,9 @@ p {
 }
 p.story {
     text-align: justify;
+}
+label {
+    font-size: 11pt;
 }
 
 /* Default link **************************************************************/
@@ -117,7 +110,7 @@ div#wrapper {
     padding: 20px 43px;
     border-radius: 0px 0px 15px 15px;
     border: 1px solid #babdb6;
-    font-size: 11pt;
+    /*font-size: 11pt;*/
     overflow: auto; /* hack for floating divs inside this wrapper */
 }
 
@@ -434,27 +427,6 @@ hr.spacer_both {
     font-size: 12pt;
 }
 
-/* additional form style feature calculation *********************************/
-form.feat-calc legend {
-    font-size: 15px;
-    font-weight: bold;
-}
-form.feat-calc legend a {
-    font-size: 14px;
-    font-weight: normal;
-}
-legend>a {
-    font-size: 14px;
-    font-weight: normal;
-}
-div.well.feat-calc {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-form.feat-calc label:not(.first) {
-    padding-left: 10px;
-}
-
 /* forms *********************************************************************/
 .form-wrapper{
     border: 1px solid #babdb6;
@@ -573,7 +545,6 @@ div.legend div.status {
 div.legend div.text {
     display:inline;
     padding: 0 6px 0 4px;
-    font-size: 12px;
     color: #555753;
 }
 table.tablesorter tbody td.disabled {

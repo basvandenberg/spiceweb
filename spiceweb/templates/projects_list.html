@@ -41,40 +41,19 @@ init_str += ' - %s:%s' % (init_tokens[1][:2], init_tokens[1][2:4])
     <td><a href="${uri_details(name)}">${name}</a></td>
     <td>${init_str}</td>
     <!--td><a href='#' class="delete" id="${name}">delete</a></td-->
-    <td><a href="#delete-${name}-modal" class="btn btn-link my-btn-link delete-project" data-toggle="modal" id="${name}">delete</a>
-        <!-- Modal -->
-        <div id="delete-${name}-modal" class="modal hide fade delete-project" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3 id="myModalLabel">Delete project ${name}?</h3>
-          </div>
-          <div class="modal-body">
-            <p>The project ${name} will be permanently deleted and cannot be recovered. Are you sure?</p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button id="${name}" class="btn btn-danger delete-project">Delete</button>
-          </div>
-        </div>
+    <td>
+        <a type="button" id="${name}" class="btn btn-link my-btn-link delete-project" data-target="#delete-project-modal">delete</a>
     </td>
 </tr>
 % endfor
 </tbody>
 </table>
+
 % else:
 <p>No projects available.</p>
 % endif
 
-<a href="${root_url}doc/tutorial1.html#projects" class="btn pull-right" target="_blank"><i class="icon-info-sign"></i> Projects</a>
-
-<!-- Button to trigger delete modal -->
-<!--a href="#myModal" role="button" class="btn btn-link" data-toggle="modal">Launch demo modal</a-->
- 
-
-## delete project dialog
-<div id="dialog-confirm" class='dialog' title="Delete project?">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The project will be permanently deleted and cannot be recovered. Are you sure?</p>
-</div>
+<a href="${root_url}doc/tutorial1.html#projects" class="btn btn-default pull-right" target="_blank"><i class="icon-info-sign"></i> Projects</a>
 
 </%block>
 

@@ -15,7 +15,7 @@ menu_names = ['Features', 'Calculate', 'Upload']
 % if (index == sub_menu_index):
         <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % else:
-        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
+        <a href="${uri}" class="btn btn-default"><i class="${icons[index]}"></i> ${menu_names[index]}</a>
 % endif
 % endif
 % endfor
@@ -30,7 +30,7 @@ menu_names = ['Features', 'Calculate', 'Upload']
 % if (index == sub_menu_index):
         <a href="${uri}" class="btn btn-primary"><i class="${icons[index]}"></i> Statistics</a>
 % else:
-        <a href="${uri}" class="btn"><i class="${icons[index]}"></i> Statistics</a>
+        <a href="${uri}" class="btn btn-default"><i class="${icons[index]}"></i> Statistics</a>
 % endif
 % endif
 % endfor
@@ -41,7 +41,7 @@ menu_names = ['Features', 'Calculate', 'Upload']
 % if (sub_menu_index >= 4 and sub_menu_index < 7):
   <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
 % else:
-  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+  <a class="btn dropdown-toggle btn-default" data-toggle="dropdown" href="#">
 % endif
     Visualizations
     <span class="caret"></span>

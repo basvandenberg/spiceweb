@@ -5,17 +5,17 @@ $(document).ready(function() {
       setTimeout("location.reload(true);", 10000);
     }
 
-    $("div.delete-features").on('shown', function() {
+    $('a.delete-features').on('click', function() {
 
-        $(this).find("button.delete-features").click(function() {
-            var featcat_id = $(this).attr("id");
-            var postdata = {featcat_id: featcat_id};
+        $('#delete-features-modal').modal();
+        var fid = $(this).attr('id');
+
+        $('button.delete', '#delete-features-modal').off('click').on('click', function() {
+            var postdata = {featcat_id: fid};
             $.post('delete', postdata, function() {
                 location.reload();
             });
         });
-
     });
-
 });
 
