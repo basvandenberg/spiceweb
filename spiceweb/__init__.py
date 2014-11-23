@@ -43,13 +43,7 @@ def authenticate():
     '''
     user = cherrypy.session.get(auth.Auth.SESSION_USER_KEY, None)
     if(user is None):
-        #user = cherrypy.session.id
-        try:
-            user = cherrypy.request.cookie['spice.session'].value
-        except(KeyError):
-            #if(user is None):
-            # go to login, should not happen anymore...
-            raise cherrypy.HTTPRedirect('%s' % (ROOT_URL))
+        raise cherrypy.HTTPRedirect('%slogin' % (ROOT_URL))
 
 # add the authentication decorator as a tool
 cherrypy.tools.authenticate = cherrypy.Tool('before_handler', authenticate)
