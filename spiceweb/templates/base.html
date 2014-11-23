@@ -118,24 +118,6 @@
     </div>
 % endif
 
-% if user_id and not '@' in user_id:
-    <div class="project_item">user: <b>unregistered user</b> <a
-class="info-button" data-toggel="popover" data-trigger="click"
-data-placement="bottom" data-content="
-<p>
-You are not logged in, but you can still explore the website. However, data is
-stored within your session and once your session expires, all data will be
-lost.
-</p>
-<p>
-If you want your data to be saved for later use, please
-<strong>login</strong> to your account or <strong>create</strong> a new
-account.
-</p>" 
-title="" data-original-title=""> <i class="icon-info-sign"></i> </a>
-</div>
-% endif
-
 % if project_id and not project_id == 'None':
     <div class="project_item" id="project_name">
         project:
