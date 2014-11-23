@@ -68,6 +68,7 @@ div#header div#title {
     position: absolute;
     left: 20px;
     top: 10px;
+    line-height: 20px;
     font-size: 23pt;
     color: #eeeeec;
 }
@@ -75,10 +76,12 @@ div#header div#subtitle {
     position: absolute;
     left: 20px;
     bottom: 6px;
+    line-height: 20px;
     font-size: 13pt;
 }
 div#header div#version {
     position: absolute;
+    line-height: 20px;
     right: 11px;
     bottom: 5px;
     font-size: 10pt;
@@ -122,14 +125,14 @@ div#wrapper {
 
 div#home_wrapper {
     float: left;
-    width: 592px;
+    width: 634px;
     padding-right: 42px;
 }
 div#home_sidebar {
     float: right;
     padding-left: 19px;
     border-left: 1px solid #babdb6;
-    width: 190px;
+    width: 208px;
 }
 div#home_sidebar h3 {
     text-align: center;
@@ -309,6 +312,7 @@ nav#main_menu {
 }
 .menu_item {
     width: 232px;
+    line-height: 20px;
     float: left;
     color: #d3d7cf;
     padding: 6px 15px 4px 15px;
@@ -317,7 +321,7 @@ nav#main_menu {
 }
 .menu_active {
     width: 236px;
-    height: 37px;
+    height: 35px;
     padding-bottom: 8px;
     padding-top: 8px;
     margin-top: -5px;
@@ -353,7 +357,7 @@ div#project_bar {
     font-size:9pt;
 }
 div.project_item {
-    height: 15px;
+    height: 21px;
     line-height: 15px;
     padding: 3px 2px 3px 7px;
     margin: 9px 5px 0 7px;
