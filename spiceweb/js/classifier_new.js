@@ -54,13 +54,13 @@ $(document).ready(function() {
 
 // hide alerts
 function hide_alerts() {
-    $("form > div.alert-error").remove()
+    $("form > div.alert-danger").remove()
 }
 
 // show alert msg above the submit button of the form with form_id
 function form_alert(form_id, msg) {
     hide_alerts();
     $("form#" + form_id + "> :submit").before(
-    '<div class="alert alert-block alert-error fade in"><p>' + msg + '</p></div>'
+    '<div class="alert alert-danger"><p>' + msg + '</p></div>'
     );
 }

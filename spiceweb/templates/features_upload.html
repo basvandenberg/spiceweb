@@ -13,65 +13,39 @@
 ## Upload custom feature form
 ###############################################################################
 
-<div class="well">
+<div class="panel panel-default">
 
-<form id="upload-custom-features" class="form-horizontal" enctype="multipart/form-data" method="post">
+    <div class="panel-heading">
+        <h3 class="panel-title">Upload your own feature matrix</h3>
+    </div>
 
-    <legend>
-        Upload your own feature matrix
-    </legend>
+    <div class="panel-body">
 
-    <div class="control-group">
-        <label class="control-label" for="feature_matrix_f">Feature matrix file 
-        </label>
-        <div class="controls" id="feature_matrix">
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-                <div class="input-append">
-                    <div class="uneditable-input span3">
-                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
-                    </div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Select file</span>
-                        <span class="fileupload-exists">Change</span>
-                        <input type="file" name="feature_matrix_f" id="feature_matrix_f" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                </div>
+        <form id="upload-custom-features" class="form" enctype="multipart/form-data" method="post">
+
+            <div class="form-group">
+                <label for="feature_matrix_f">Feature matrix file</label>
+                <input type="file" name="feature_matrix_f" id="feature_matrix_f">
             </div>
-        </div>
-    </div>
 
-    <div class="control-group">
-        <label class="control-label" for="object_ids_f">Protein ids file 
-        </label>
-        <div class="controls" id="object_ids">
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-                <div class="input-append">
-                    <div class="uneditable-input span3">
-                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
-                    </div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Select file</span>
-                        <span class="fileupload-exists">Change</span>
-                        <input type="file" name="object_ids_f" id="object_ids_f" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                </div>
+            <div class="form-group">
+                <label for="object_ids_f">Protein ids file</label>
+                <input type="file" name="object_ids_f" id="object_ids_f">
             </div>
-        </div>
+            
+        % if msg:
+            <div class="alert alert-danger"><p>${msg}</p></div>
+        % endif
+
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
+                <a href="${root_url}doc/file_formats.html#feature-matrix-file" target="_blank" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                </a>
+            </div>
+
+        </form>
     </div>
-    
-% if msg:
-    <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
-% endif
-
-    <div class="btn-group">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Upload</button>
-        <a href="${root_url}doc/file_formats.html#feature-matrix-file" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
-    </div>
-
-</form>
-
 </div>
 
 </%block>

@@ -9,67 +9,61 @@
 
 <%include file="classification_bar.html" />
 
-<div class="well">
-<form id="new-classifier" class="form-horizontal" enctype="multipart/form-data" method="post">
-
-    <legend>New classifier</legend>
-
-    <div class="alert alert-info">
-        <strong>Important: </strong> Use the sidebar on the right to <strong>i)</strong> select the labels of the classes you want to classify and <strong>ii)</strong> select the features that should be used for classification.
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">New classifier</h3>
     </div>
+    <div class="panel-body">
 
-    <div class="control-group">
-        <label class="control-label">Cross-validation loops
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="A cross-validation protocol is used to asses classification performance. This sets the number of cross-validation loops used." title="" data-original-title="Number of CV-loops">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
-        <div class="controls">
-            <select id="n_fold_cv" name="n_fold_cv" class="input-mini">
-              <option>3</option>
-              <option>5</option>
-              <option selected="selected">10</option>
-            </select>
-        </div>
+        <form id="new-classifier" class="form" enctype="multipart/form-data" method="post">
+
+            <div class="alert alert-info">
+                <strong>Important: </strong> Use the sidebar on the right to <strong>i)</strong> select the labels of the classes you want to classify and <strong>ii)</strong> select the features that should be used for classification.
+            </div>
+
+            <div class="form-group">
+                <label for="n_fold_cv">Cross-validation loops</label>
+                <select id="n_fold_cv" name="n_fold_cv" class="form-control">
+                    <option>3</option>
+                    <option>5</option>
+                    <option selected="selected">10</option>
+                </select>
+                <p class="help-block">A cross-validation protocol is used to asses classification performance. This sets the number of cross-validation loops used.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="cl_type">Classifier</label>
+                <select id="cl_type" name="cl_type" class="form-control"/>
+                    <optgroup label="Linear Discriminant Analysis">
+                        <option value="lda">Linear Discriminant Analysis (LDA) classifier</option>
+                        <option value="qda">Quadratic Discriminant Analysis (QDA) classifier</option>
+                    </optgroup>
+                    <optgroup label="Nearest Neighbor Classifiers">
+                        <option value="kn_uniform">k-Nearest neighbor classifier (uniform weights)</option>
+                        <option value="kn_distance">k-Nearest neighbor classifier (distance-based weights)</option>
+                        <option value="nc">Nearest centroid classifier</option>
+                    </optgroup>
+                    <optgroup label="Support Vector Classifiers">
+                        <option value="linearsvc">SVM (linear)</option>
+                        <option value="svc_rbf">SVM (RBF)</option> <!-- removed for now, gave errors and long runtimes -->
+                    </optgroup>
+                    <optgroup label="Naive Bayes">
+                        <option value="gnb">Gaussian naive bayes</option>
+                        <!--option value="mnb">Multinomial naive bayes</option-->
+                        <!--option value="bnb">Bernoulli naive bayes</option-->
+                    </optgroup>
+                    <optgroup label="Tree classifiers">
+                        <option value="dtree">Decision Tree</option>
+                        <option value="rforest">Random Forest</option>
+                    </optgroup>
+                </select>
+                <p class="help-block">Here you can select what classifier to use for classification.</p>
+            </div>
+            
+            <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run</button>
+
+        </form>
     </div>
-
-    <div class="control-group">
-        <label class="control-label">Classifier
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Here you can select what classifier to use for classification." title="" data-original-title="Classifier">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
-        <div class="controls">
-            <select id="cl_type" name="cl_type" class="input-xlarge"/>
-                <optgroup label="Linear Discriminant Analysis">
-                    <option value="lda">Linear Discriminant Analysis (LDA) classifier</option>
-                    <option value="qda">Quadratic Discriminant Analysis (QDA) classifier</option>
-                </optgroup>
-                <optgroup label="Nearest Neighbor Classifiers">
-                    <option value="kn_uniform">k-Nearest neighbor classifier (uniform weights)</option>
-                    <option value="kn_distance">k-Nearest neighbor classifier (distance-based weights)</option>
-                    <option value="nc">Nearest centroid classifier</option>
-                </optgroup>
-                <optgroup label="Support Vector Classifiers">
-                    <option value="linearsvc">SVM (linear)</option>
-                    <option value="svc_rbf">SVM (RBF)</option> <!-- removed for now, gave errors and long runtimes -->
-                </optgroup>
-                <optgroup label="Naive Bayes">
-                    <option value="gnb">Gaussian naive bayes</option>
-                    <!--option value="mnb">Multinomial naive bayes</option-->
-                    <!--option value="bnb">Bernoulli naive bayes</option-->
-                </optgroup>
-                <optgroup label="Tree classifiers">
-                    <option value="dtree">Decision Tree</option>
-                    <option value="rforest">Random Forest</option>
-                </optgroup>
-            </select>
-        </div>
-    </div>
-    
-    <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run</button>
-
-</form>
 </div>
 
 </%block>

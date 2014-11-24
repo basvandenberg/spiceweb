@@ -374,6 +374,56 @@ features = zip(feat_ids, feat_names)
   </div>
 </div>
 
+<!-- Modal - upload sequence data -->
+<div class="modal fade" id="upload-seq-data-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload <span class="seq-type"></span> file</h4>
+      </div>
+      <div class="modal-body">
+
+        <form class="form" id="upload-seqs" enctype="multipart/form-data" method="post">
+
+            <!-- labeling file input file chooser -->
+            <div class="form-group">
+                <label for="data_file">FASTA file</label>
+                <input type="file" name="data_file" id="data_file">
+                <p class="help-block">Select a FASTA file with <span class="seq-type"></span>s</p>
+            </div>
+            <!-- hidden data type input -->
+            <input id="data_name" type="hidden" name="data_name" value="">
+            <input id="data_type" type="hidden" name="data_type" value="data_source" />
+            <!-- submit -->
+
+        </form>
+
+        <div class="alert alert-warning">
+            <p><strong>Warning!</strong></p>
+            <p>SPiCE checks:</p>
+            <ul>
+                <li>if the sequence ids in the FASTA file correspond to those in this project,</li>
+                <li>if the FASTA file contains a sequence for each protein in this project,</li>
+                <li>if the sequence letters are uppercase and from the correct alphabet.</li>
+            </ul>
+
+            <p>SPiCE <u><strong>does not</strong></u> check if the
+uploaded sequences are consistent with the sequence data in this project. For
+example, SPiCE does not check if uploaded ORF sequences correctly translate to
+the available protein sequences in this project! Please make sure to check this
+yourself.</p>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning upload" data-loading-text="Loading...">Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 
 </html>

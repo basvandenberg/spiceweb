@@ -13,181 +13,156 @@
 ## Initialize new project form
 ###############################################################################
 
-<div class="well">
+<div class="panel panel-default">
 
-<form id="create-new-project" class="form-horizontal" enctype="multipart/form-data" method="post">
+    <div class="panel-heading">
+        <h3 class="panel-title">Create new project</h3>
+    </div>
 
-    <legend>Create new project</legend>
+    <div class="panel-body">
 
-    <div class="control-group">
-        <label class="control-label" for="inputFastaFile">FASTA file
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select a FASTA file with either protein amino acid sequences or open reading frame nucleotide sequences. Note that the sequences should be <b>upper case</b> and that <b>5MB</b> is the maximum allowed file size." title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
-        <div class="controls">
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-                <div class="input-append">
-                    <div class="uneditable-input span3">
-                        <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span>
-                    </div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Select file</span>
-                        <span class="fileupload-exists">Change</span>
-                        <input type="file" name="fasta_file" id="fasta_file" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+        <form id="create-new-project" class="form" enctype="multipart/form-data" method="post">
+
+            <div class="form-group">
+                <label for="inputFastaFile">FASTA file</label>
+                <input type="file" name="fasta_file" id="fasta_file">
+                <p class="help-block">Select a FASTA file with either protein amino acid sequences or open reading frame nucleotide sequences. Note that the sequences should be <b>upper case</b> and that <b>5MB</b> is the maximum allowed file size.</p>
+            </div>
+
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sequence_type" id="protein" value="prot_seq" checked="checked" />
+                    Protein amino acid sequences
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sequence_type" id="orf" value="orf_seq" />
+                    ORF nucleotide sequences
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="project_id">Project id</label>
+                <input class="form-control" type="text" name="project_id" id="project_id" required="required" />
+                <p class="help-block">Provide a unique id for your project. It should be at least 4 characters long. Only alphanumeric characters, dashes, and underscores can be used.</p>
+            </div>
+
+            <!-- Switched off comparison to reference proteome for the moment -->
+
+            <!--div class="control-group">
+                <label class="control-label">Proteome
+                    <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Check this option if you want to compare your protein set to the proteome of a selected organism. A select box will appear in which you can select the organism." title="" data-original-title="">
+                        <i class="icon-info-sign"></i>
+                    </a>
+                </label>
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox" name="use_reference" />
+                        Compare uploaded protein sequences to a selected proteome
+                    </label>
                 </div>
+            </div-->
+         
+            <!-- collapsable part -->
+            <!--div id="taxon_select" class="collapse in">
+
+                <div class="control-group">
+                    <label class="control-label">Taxon domain
+                    </label>
+                    <div class="controls">
+                        <select id="taxon_domain" name="taxon_domain">
+            % for (taxon_name, taxon_ancestor) in taxon_domains:
+                            <option value="${taxon_ancestor}">${taxon_name}</option>
+            % endfor
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Taxon
+                    </label>
+                    <div class="controls">
+                        <select id="taxon" name="taxon" class="input-block-level">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="alert alert-block alert-info fade in">
+                    <p>NOTE:</p>
+                    <ul>
+                        <li>The taxon reference proteome was obtained from <a href="http://www.uniprot.org/taxonomy/complete-proteomes" target="_tab">UniProt</a> using the keyword <a href="http://www.uniprot.org/keywords/181" target="_tab">'Complete proteome' (keywork 181)</a>.</li>
+                        <li>The protein sequences were taken from the <a href="http://www.uniprot.org/help/uniref" target="_tab">uniref50</a> database.</li>
+                        <li>To limit data the set size, a random selection of 5,000 sequences was used, if the proteome contains more than 5000 sequences</li>
+                    </ul>
+                </div>
+
+            </div--> <!-- collapse -->
+
+        % if msg:
+            <div class="alert alert-danger"><p>${msg}</p></div>
+        % endif
+
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Initialize project</button>
+                <a href="${root_url}doc/file_formats.html#fasta-file" target="_blank" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                </a>
             </div>
-        </div>
+
+        </form>
     </div>
-
-    <div class="control-group">
-        <label class="control-label">Sequence type
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Select if the sequences in the FASTA file contain amino acid or nucleotide sequences." title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
-        <div class="controls">
-            <label class="radio">
-                <input type="radio" name="sequence_type" id="protein" value="prot_seq" checked="checked" />
-                Protein amino acid sequences
-            </label>
-        </div>
-        <div class="controls">
-            <label class="radio">
-                <input type="radio" name="sequence_type" id="orf" value="orf_seq" />
-                ORF nucleotide sequences
-            </label>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label">Project id
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Provide a unique id for your project. It should be at least 4 characters long. Only alphanumeric characters, dashes, and underscores can be used." title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
-        <div class="controls">
-            <input class="input-xlarge" type="text" name="project_id" id="project_id" required="required" />
-        </div>
-    </div>
-
-    <!-- Switched off comparison to reference proteome for the moment -->
-
-    <!--div class="control-group">
-        <label class="control-label">Proteome
-            <a href="#" class="info-button" data-toggle="popover" data-placement="top" data-content="Check this option if you want to compare your protein set to the proteome of a selected organism. A select box will appear in which you can select the organism." title="" data-original-title="">
-                <i class="icon-info-sign"></i>
-            </a>
-        </label>
-        <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox" name="use_reference" />
-                Compare uploaded protein sequences to a selected proteome
-            </label>
-        </div>
-    </div-->
- 
-    <!-- collapsable part -->
-    <!--div id="taxon_select" class="collapse in">
-
-        <div class="control-group">
-            <label class="control-label">Taxon domain
-            </label>
-            <div class="controls">
-                <select id="taxon_domain" name="taxon_domain">
-    % for (taxon_name, taxon_ancestor) in taxon_domains:
-                    <option value="${taxon_ancestor}">${taxon_name}</option>
-    % endfor
-                </select>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label class="control-label">Taxon
-            </label>
-            <div class="controls">
-                <select id="taxon" name="taxon" class="input-block-level">
-                </select>
-            </div>
-        </div>
-
-        <div class="alert alert-block alert-info fade in">
-            <p>NOTE:</p>
-            <ul>
-                <li>The taxon reference proteome was obtained from <a href="http://www.uniprot.org/taxonomy/complete-proteomes" target="_tab">UniProt</a> using the keyword <a href="http://www.uniprot.org/keywords/181" target="_tab">'Complete proteome' (keywork 181)</a>.</li>
-                <li>The protein sequences were taken from the <a href="http://www.uniprot.org/help/uniref" target="_tab">uniref50</a> database.</li>
-                <li>To limit data the set size, a random selection of 5,000 sequences was used, if the proteome contains more than 5000 sequences</li>
-            </ul>
-        </div>
-
-    </div--> <!-- collapse -->
-
-% if msg:
-    <div class="alert alert-block alert-error fade in">
-        <p>${msg}</p>
-    </div>
-% endif
-
-    <div class="btn-group">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Initialize project</button>
-        <a href="${root_url}doc/file_formats.html#fasta-file" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
-    </div>
-
-</form>
-
 </div>
 
 ###############################################################################
 ## Load example project
 ###############################################################################
 
-<div class="well">
+<div class="panel panel-default">
 
-<form id="load-example-project" class="form-horizontal" enctype="multipart/form-data" method="post">
-
-    <legend>
-        Load example project
-    </legend>
-
-
-    <div class="control-group" id="radio-example-project">
-        <label class="control-label">Example project 
-        </label>
-        <div class="controls">
-            <label class="radio">
-                <input type="radio" name="project_index" id="0" value="aniger_secretion" checked="checked" />
-                A. niger high-level secretion
-            </label>
-        </div>
-        <div class="controls">
-            <label class="radio">
-                <input type="radio" name="project_index" id="1" value="yeast_expression" />
-                Yeast expression
-            </label>
-        </div>
-        <div class="controls">
-            <label class="radio">
-                <input type="radio" name="project_index" id="2" value="human_localization" />
-                Human localization
-            </label>
-        </div>
-        <div class="controls">
-            <label class="radio">
-                <input type="radio" name="project_index" id="3" value="ecoli_solubility" />
-                E. coli solubility
-            </label>
-        </div>
+    <div class="panel-heading">
+        <h3 class="panel-title">Load example project</h3>
     </div>
 
-    <div class="btn-group">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Load project</button>
-        <a href="${root_url}doc/example_projects.html" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    <div class="panel-body">
+
+
+        <form id="load-example-project" class="form" enctype="multipart/form-data" method="post">
+
+            <label>Example project</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="project_index" id="0" value="aniger_secretion" checked="checked" />
+                    A. niger high-level secretion
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="project_index" id="1" value="yeast_expression" />
+                    Yeast expression
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="project_index" id="2" value="human_localization" />
+                    Human localization
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="project_index" id="3" value="ecoli_solubility" />
+                    E. coli solubility
+                </label>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Load project</button>
+                <a href="${root_url}doc/example_projects.html" target="_blank" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                </a>
+            </div>
+        </form>
     </div>
-
-</form>
-
 </div>
 
 </%block>

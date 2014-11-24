@@ -12,7 +12,26 @@ $(document).ready(function() {
 
     // register button, to enable loading state
     $("form#create-new-project>button").button();
-   
+ 
+    // activate upload links
+    $('a.upload').on('click', function() {
+
+        $('#upload-seq-data-modal').modal();
+
+        var seqtype_id = $(this).attr('id');
+        var seqtype_name = $(this).parent().prev().text();
+
+        $('span.seq-type').text(seqtype_name);
+        $('input#data_name').val(seqtype_id);
+
+        $('button.upload', '#upload-seq-data-modal')
+            .off('click')
+            .on('click', function() {
+
+                upload_seqs();
+            });
+    });   
+  
     // check form input upload labeling file, before submit
     $("form#upload-labeling").submit(function(e){
 
@@ -37,24 +56,27 @@ $(document).ready(function() {
     });
 
     // check form input upload sequence data form, before submit
-    $("form.upload-seqs").submit(function(e){
-
-        var form_id = $(this).attr('id')
+    function upload_seqs() {
 
         // check labeling name
         var isFormValid = true;
 
-        var labeling_file = $(this).find("span.fileupload-preview").html();
+        /*var labeling_file = $(this).find("span.fileupload-preview").html();
         if(labeling_file == '') {
-            form_alert(form_id, "No sequence fasta file selected");
+            form_alert('upload-seqs', "No sequence fasta file selected");
             isFormValid = false;
         }
         else {
             $(this).find("button").button('loading');
-        }
+        }*/
 
-        return isFormValid;
-    });
+        if(isFormValid) {
+            $('form#upload-seqs').submit();
+        }
+        else {
+            return isFormValid;
+        }
+    }
 
     // bind ajax download call to links
     $('a.download').bind('click', function(event) {
