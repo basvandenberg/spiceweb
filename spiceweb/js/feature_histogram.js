@@ -110,11 +110,18 @@ function show_hist(cid, class_ids) {
             var height = 280;
 
             var margin = 10;
+            var title_height = 20;
+            var x_axis_height = 20;
+            var y_axis_width = 20;
+
+            var grid_width = width - 2 * margin - y_axis_width;
+            var grid_height = height - 
+                    (2 * margin + x_axis_height + title_height);
 
             var num_hists = data['legend'].length;
             var num_bins = data[data['legend'][0]].length;
 
-            var total_bin_width = Math.floor((840 - 2 * margin) / num_bins);
+            var total_bin_width = Math.floor(grid_width / num_bins);
             var margin_between_bins = 3;
 
             var margin_between_bars = 1;
@@ -126,20 +133,76 @@ function show_hist(cid, class_ids) {
                     - (2 * margin_between_bins)
                     - ((num_hists - 1) * margin_between_bars)) / 2;
 
-            var max_count = 0;
-            for(var leg_i = 0; leg_i < data['legend'].length; leg_i++) {
-                max_count = Math.max(
-                        Math.max.apply(null, data[data['legend'][leg_i]]),
-                        max_count
-                );
-            }
-            var max_bar_height = height - 2 * margin;
-            var y_step = max_bar_height / max_count;
+            var max_bar_height = height - (2 * margin + title_height + x_axis_height);
 
+            var y_grid = data['y-grid'];
+            var y_step = max_bar_height / y_grid[y_grid.length - 1];
+
+            var x_grid = data['bin-edges'];
+            var x_step = total_bin_width / x_grid[x_grid.length - 1];
+
+            var max_x = x_grid[x_grid.length - 1];
+            var min_x = x_grid[0];
+            function x_px(x_val) {
+
+                var perc = (x_val - min_x) / (max_x - min_x);
+                var x = perc * grid_width;
+                return margin + y_axis_width + x;
+            }
+
+            var max_y = y_grid[y_grid.length - 1];
+            var min_y = y_grid[0];
+            function y_px(y_val) {
+
+                var perc = (y_val - min_y) / (max_y - min_y);
+                var y = perc * grid_height;
+                return height - (margin + x_axis_height + y);
+            }
+
+            // viewport
             var svg = d3.select('#' + feat_id)
               .append('svg')
                 .attr('width', width)
                 .attr('height', height);
+
+            var y_offset = height - (margin + x_axis_height)
+            var x_offset = margin + y_axis_width
+
+            // y grid lines
+            var y_grid_lines = svg.append('g')
+                .selectAll('line.y-grid')
+                .data(y_grid)
+              .enter()
+                .append('line')
+                .attr('class', 'y-grid')
+                .attr('stroke', '#999999')
+                .attr('stroke-width', '1px')
+                .attr('x1', x_offset)
+                .attr('y1', function(d){
+                    return y_px(d);
+                })
+                .attr('x2', width - margin)
+                .attr('y2', function(d) {
+                    return y_px(d);
+                });
+
+            // x grid lines
+            var x_grid_lines = svg.append('g')
+                .selectAll('line.x-grid')
+                .data(x_grid)
+              .enter()
+                .append('line')
+                .attr('class', 'x-grid')
+                .attr('stroke', '#999999')
+                .attr('stroke-width', '1px')
+                .attr('y1', y_offset)
+                .attr('x1', function(d){
+                    return x_px(d);
+                })
+                .attr('y2', margin + title_height)
+                .attr('x2', function(d) {
+                    return x_px(d);
+                });
 
             var colors = ['#204a87', '#fce94f'];
 
@@ -161,14 +224,14 @@ function show_hist(cid, class_ids) {
                     })
                     .attr('x', function(d, i) {
 
-                        return margin
-                                + (i * total_bin_width)
+                        var x_off = x_px(x_grid[i]);
+                        return x_off
                                 + margin_between_bins
                                 + leg_i * (bar_width + margin_between_bars);
                     })
                     .attr('y', function(d) {
 
-                        return (height - margin) - d * y_step;
+                        return y_offset - d * y_step;
                     })
                     .attr('width', bar_width)
                     .attr('height', function(d) {
@@ -180,8 +243,8 @@ function show_hist(cid, class_ids) {
             svg.append('g')
                 .append('text')
                 .text(data['title'])
-                .attr('x', 10)
-                .attr('y', 10);
+                .attr('x', 20)
+                .attr('y', 20);
         });
         
         return false;

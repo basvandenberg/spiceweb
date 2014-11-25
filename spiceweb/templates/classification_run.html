@@ -16,7 +16,7 @@
 <h2>Classifier ${cl_id}</h2>
 
 % if msg:
-    <div class="alert alert-block alert-error fade in"><p>${msg}</p></div>
+    <div class="alert alert-danger"><p>${msg}</p></div>
 % endif
 
 ###############################################################################
@@ -27,27 +27,35 @@
 
 % if len(data_sets) > 0:
 
-<!--div class="well"-->
+<div class="panel panel-default">
 
-<form id="run-classifier" class="form-inline" enctype="multipart/form-data" method="post">
-
-    <legend>Run this classifier on your project data sets</legend>
-
-    <label for="data_set">Project data set </label>
-    <select name="data_set" id="data_set" class="param input-large">
-% for data_set in data_sets:
-        <option value="${data_set}" selected="selected">${data_set}</option>
-% endfor
-    </select>
-    
-    <div class="btn-group">
-        <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run classification</button>
-        <a href="${root_url}doc/" class="btn" target="_blank"><i class="icon-info-sign"></i></a>
+    <div class="panel-heading">
+        <h3 class="panel-title">Run this classifier on your project data set</h3>
     </div>
 
-</form>
-<!-- well -->
-<!--/div--> 
+    <div class="panel-body">
+
+        <form id="run-classifier" class="form" enctype="multipart/form-data" method="post">
+
+            <div class="form-group">            
+                <label for="data_set">Project data set </label>
+                <select name="data_set" id="data_set" class="param form-control">
+        % for data_set in data_sets:
+                    <option value="${data_set}" selected="selected">${data_set}</option>
+        % endfor
+                </select>
+            </div>
+            
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" type="submit" data-loading-text="Loading...">Run classification</button>
+                <a href="${root_url}doc/" target="_blank" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 % else:
 
