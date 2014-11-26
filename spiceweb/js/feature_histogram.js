@@ -111,7 +111,7 @@ function show_hist(cid, class_ids) {
 
             var margin = 10;
             var title_height = 20;
-            var x_axis_height = 20;
+            var x_axis_height = 40;
             var y_axis_width = 20;
 
             var grid_width = width - 2 * margin - y_axis_width;
@@ -214,7 +214,7 @@ function show_hist(cid, class_ids) {
                 .attr('font-size', '9pt')
                 .style("text-anchor", "end")
                 .text(function(d) {
-                    return d.toString()
+                    return d.toFixed(3);
                 })
                 .attr('x', 0)
                 .attr('y', 0)
