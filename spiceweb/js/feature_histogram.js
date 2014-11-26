@@ -204,6 +204,33 @@ function show_hist(cid, class_ids) {
                     return x_px(d);
                 });
 
+            // x grid labels
+            var x_grid_labels = svg.append('g')
+                .selectAll('text.x-grid')
+                .data(x_grid)
+              .enter()
+                .append('text')
+                .attr('class', 'x-grid')
+                .attr('font-size', '9pt')
+                .style("text-anchor", "end")
+                .text(function(d) {
+                    return d.toString()
+                })
+                .attr('x', 0)
+                .attr('y', 0)
+                .attr('transform', function(d) {
+                    return 'translate(' + (x_px(d) + 5).toString() + ', ' + (height - margin - x_axis_height + 10).toString() + ') rotate(-65)';
+                });
+
+            /*
+            x_grid_labels
+                .attr('x', function(d) {
+                    return x_px(d);
+                })
+                .attr('y', function(d) {
+                    return height - margin;
+                });
+            */
             var colors = ['#204a87', '#fce94f'];
 
             for(var leg_i = 0; leg_i < data['legend'].length; leg_i++) {
