@@ -1,9 +1,3 @@
-// global settings
-var min_num_classes = 1;
-var max_num_classes = 7;
-var min_num_features = 1;
-var max_num_features = Infinity;
-
 function updateContent(labeling_name, class_ids, feat_ids, changed_classes, changed_features) {
 
     if(feat_ids.length == 0) {
@@ -26,22 +20,17 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $("div#class_error").remove()
     }
 
-    var count = 0;
+    if(class_ids.length > 2) {
+        $("div#class_error").remove()
+        $("ul.histograms").before(
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Currently, you cannot visualize more than two labels at the same time in a histogram. Please, select one or two labels using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">label filter</a> in the right panel.</p></div>'
+        );
+    }
+    else {
+        $("div#class_error").remove()
+    }
 
-    // count number of hist updates, for progress bar
-    $("ol.feats li").each(function () {
-        var currentId = $(this).attr('id');
-        var hist_li = $("li.hist#" + currentId);
-        if($(this).hasClass('ui-selected')) {
-            if(hist_li.length == 0) {
-                count += 1
-            }
-            else if(changed_classes) {
-                count += 1
-            }
-        }
-    });
-    var step = 100 / count;
+    var count = 0;
 
     // add/update/remove histograms based on feature and label selection
     $("ol.feats li").each(function () {
@@ -67,34 +56,32 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
 function show_hist(cid, class_ids) {
 
     // remove histograms if no class labels are selected
-    if(class_ids.length < 1) {
+    if(class_ids.length < 1 || class_ids.length > 2) {
 
         $("li.hist").hide('fast', function(){$("li.hist").remove();});
-        $("li.loadhist").hide('fast', function(){$("li.loadhist").remove();});
+        //$("li.loadhist").hide('fast', function(){$("li.loadhist").remove();});
     }
     else {
 
-        $('#sortable').append(
-            $('<li>').attr(
-                {"id": cid, "class": "hist"}
-            )
+        var spinner = $('<img>')
+            .attr('src', '../../img/loading1.gif')
+            .attr('width', '40px')
+            .attr('height', '40px');
+        var loading = $('<div></div>')
+            .addClass('loading')
+            .append(spinner);
+
+        $('#histogram-list').append(
+            $('<li>')
+                .attr('id', cid)
+                .addClass('hist')
+                .append(loading)
         );
 
         // construct post data
         var labels_str = class_ids.join(",");
         var labeling = $("select#labeling_select").val()
-        //var postdata = {labeling_name: labeling, labels: labels_str};
         
-        // append load box to sortable list
-        /*$('<img>').attr(
-            {'src':'ahistogram?feat_ids=' + cid + 
-                                   '&labeling_name=' + labeling + 
-                                   '&class_ids=' + labels_str + 
-                                   '&figtype=png'}
-        ).load(function() {
-            
-        }).appendTo($("li.hist#" + cid))*/
-
         url = 'ahistogram?feat_ids=' + cid
                       + '&labeling_name=' + labeling
                       + '&class_ids=' + labels_str;
@@ -186,6 +173,23 @@ function show_hist(cid, class_ids) {
                     return y_px(d);
                 });
 
+            // y grid labels
+            var y_grid_labels = svg.append('g')
+                .selectAll('text.y-grid')
+                .data(y_grid)
+              .enter()
+                .append('text')
+                .attr('class', 'y-grid')
+                .attr('font-size', '9pt')
+                .style('text-anchor', 'end')
+                .text(function(d) {
+                    return d.toString();
+                })
+                .attr('x', margin + y_axis_width - 4)
+                .attr('y', function(d) {
+                    return y_px(d) + 4;
+                })
+
             // x grid lines
             var x_grid_lines = svg.append('g')
                 .selectAll('line.x-grid')
@@ -212,7 +216,7 @@ function show_hist(cid, class_ids) {
                 .append('text')
                 .attr('class', 'x-grid')
                 .attr('font-size', '9pt')
-                .style("text-anchor", "end")
+                .style('text-anchor', 'end')
                 .text(function(d) {
                     return d.toFixed(3);
                 })
@@ -222,16 +226,7 @@ function show_hist(cid, class_ids) {
                     return 'translate(' + (x_px(d) + 5).toString() + ', ' + (height - margin - x_axis_height + 10).toString() + ') rotate(-65)';
                 });
 
-            /*
-            x_grid_labels
-                .attr('x', function(d) {
-                    return x_px(d);
-                })
-                .attr('y', function(d) {
-                    return height - margin;
-                });
-            */
-            var colors = ['#204a87', '#fce94f'];
+            var colors = ['#204a87', '#fce94f', '#204a87', 'fce94f'];
 
             for(var leg_i = 0; leg_i < data['legend'].length; leg_i++) {
 
@@ -267,23 +262,47 @@ function show_hist(cid, class_ids) {
                     });
             }
 
+            // legend
+            svg.append('g')
+                .selectAll('text.legend')
+                .data(data['legend'])
+              .enter()
+                .append('text')
+                .attr('class', 'legend')
+                .style('text-anchor', 'end')
+                .text(function(d) {
+                    return d;
+                })
+                .attr('x', width - (margin + 27))
+                .attr('y', function(d, i) {
+                    return margin + title_height + 18 + i*20;
+                });
+
+            svg.append('g')
+                .selectAll('rect.legend')
+                .data(data['legend'])
+              .enter()
+                .append('rect')
+                .attr('fill', function(d, i) {
+                    return colors[i];
+                })
+                .attr('width', 13)
+                .attr('height', 13)
+                .attr('x', width - (margin + 23))
+                .attr('y', function(d, i) {
+                    return margin + title_height + 6 + i*20;
+                })
+                .attr('stroke', '#2e3436')
+                .attr('stroke-width', '1px')
+
+            // title
             svg.append('g')
                 .append('text')
                 .text(data['title'])
-                .attr('x', 20)
+                .attr('x', margin + y_axis_width)
                 .attr('y', 20);
         });
         
         return false;
     }
 }
-
-$(document).ready(function() {
-
-    // make histograms dragable
-    //var sortable = $('#sortable');
-    //$(sortable).sortable();
-    //$(sortable).disableSelection();
-});
-
-

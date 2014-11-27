@@ -377,8 +377,12 @@ class Feature:
             fc, fid = tokens
             title = 'Custom feature category %s' % (fc)
 
+        num_bins = 40
+        if(len(class_ids) > 2):
+            num_bins = 30
+
         return fm.histogram_json(feat_ids, labeling_name, class_ids=class_ids,
-                                 title=title)
+                                 title=title, num_bins=num_bins)
 
     def ahistogram2(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
