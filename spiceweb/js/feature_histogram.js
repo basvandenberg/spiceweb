@@ -94,11 +94,11 @@ function show_hist(cid, class_ids) {
             $('#' + feat_id).empty();
 
             var width = 840;
-            var height = 280;
+            var height = 300;
 
             var margin = 10;
             var title_height = 20;
-            var x_axis_height = 40;
+            var x_axis_height = 60;
             var y_axis_width = 20;
 
             var grid_width = width - 2 * margin - y_axis_width;
@@ -225,6 +225,15 @@ function show_hist(cid, class_ids) {
                 .attr('transform', function(d) {
                     return 'translate(' + (x_px(d) + 5).toString() + ', ' + (height - margin - x_axis_height + 10).toString() + ') rotate(-65)';
                 });
+
+            // x axis label
+            var x_axis_label = svg.append('g')
+                .append('text')
+                .attr('class', 'x-axis-label')
+                .text(data['x-label'])
+                .style('text-anchor', 'middle')
+                .attr('x', (grid_width / 2) + margin + y_axis_width)
+                .attr('y', height - (margin + 3))
 
             var colors = ['#204a87', '#fce94f', '#204a87', 'fce94f'];
 
