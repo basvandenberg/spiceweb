@@ -265,7 +265,7 @@ class Feature:
         This function handles an ajax call to delete feature category.
         '''
         self.fetch_session_data()
-        
+
         fm = self.project_manager.get_feature_matrix()
 
         num_fc_items = len(featcat_id.split('_'))
@@ -363,7 +363,6 @@ class Feature:
         class_ids = [l.strip() for l in class_ids.split(',')]
         pm = self.project_manager
         fm = pm.get_feature_matrix()
-        fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
 
         tokens = feat_ids.split('_')
@@ -382,7 +381,8 @@ class Feature:
             num_bins = 30
 
         return fm.histogram_json(feat_ids, labeling_name, class_ids=class_ids,
-                                 title=title, num_bins=num_bins)
+                                 title=title, num_bins=num_bins,
+                                 standardized=False)
 
     def ahistogram2(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
@@ -418,7 +418,40 @@ class Feature:
         return serve_file(filepath, filetype, 'attachment')
 
     @cherrypy.expose
-    def ascatter(self, feat_ids, labeling_name, class_ids, figtype='png'):
+    def ascatter(self, feat_ids, labeling_name, class_ids):
+
+        feat_ids = [f.strip() for f in feat_ids.split(',')]
+        class_ids = [l.strip() for l in class_ids.split(',')]
+        pm = self.project_manager
+        fm = pm.get_feature_matrix()
+        fe = pm.get_feature_extraction()
+
+        tokens0 = feat_ids[0].split('_')
+        tokens1 = feat_ids[1].split('_')
+
+        if(len(tokens0) == 3):
+            fc0, param0, fid0 = tokens0
+            featcat0 = fe.PROTEIN_FEATURE_CATEGORIES[fc0]
+            param_s0 = featcat0.param_str(param0)
+            lab0 = '%s (%s)' % (featcat0.fc_name, param_s0)
+        else:
+            lab0, _ = tokens0
+
+        if(len(tokens1) == 3):
+            fc1, param1, fid1 = tokens1
+            featcat1 = fe.PROTEIN_FEATURE_CATEGORIES[fc1]
+            param_s1 = featcat1.param_str(param1)
+            lab1 = '%s (%s)' % (featcat1.fc_name, param_s1)
+        else:
+            lab1, _ = tokens1
+
+        return fm.scatter_json(
+            feat_ids[0], feat_ids[1], labeling_name=labeling_name,
+            class_ids=class_ids, standardized=False, feat0_pre=lab0,
+            feat1_pre=lab1
+        )
+
+    def ascatter2(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
         feat_ids = [f.strip() for f in feat_ids.split(',')]
         class_ids = [l.strip() for l in class_ids.split(',')]
@@ -426,7 +459,7 @@ class Feature:
         fm = pm.get_feature_matrix()
         fm_root_dir = pm.fm_dir
         fe = pm.get_feature_extraction()
-        
+
         tokens0 = feat_ids[0].split('_')
         tokens1 = feat_ids[1].split('_')
 

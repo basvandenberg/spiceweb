@@ -21,9 +21,6 @@ $(document).ready(function() {
     init_labeling_filter(sl, sc);
     init_feature_filter(sf);
 
-    // update content in main window
-    update(true, true);
-  
     // button to show/hide feature category
     $(".filter_showcat").click(function() {
         var currentId = $(this).parent().attr('id');
@@ -38,7 +35,6 @@ $(document).ready(function() {
 
     // hide feature categories by default
     $(".filter_select:gt(0)").animate({height:'toggle'});
-
 });
 
 function project_name() {
@@ -106,6 +102,9 @@ function init_labeling_filter(labeling_name, class_ids) {
                 $("#labels_selected").replaceWith(data['class_names_selected']);
                 $("#labels_unselected").replaceWith(data['class_names_unselected']);
                 init_class_filter(c);
+
+                // update content in main window
+                update(true, true);
             });
         return false ;
 
@@ -193,7 +192,7 @@ function init_class_filter(class_ids) {
         accept: "#labels_unselected li",
         activeClass: "ui-state_highlight",
         drop: function( event, ui ) {
-            selectLabel( ui.draggable );
+            selectLabel(ui.draggable, true);
         }
     });
 
@@ -202,25 +201,29 @@ function init_class_filter(class_ids) {
         accept: "#labels_selected li",
         activeClass: "custom-state-active",
         drop: function( event, ui ) {
-            deselectLabel( ui.draggable );
+            deselectLabel(ui.draggable, true);
         }
     });
 
     // label selection function
     var deselect_icon = "<a href=# class='ui-icon ui-icon-triangle-1-e'>Deselect label</a>";
-    function selectLabel( $item ) {
-        $item.fadeOut(100, function() {
+    function selectLabel($item, upd) {
+        var upd = upd;
+        $item.fadeOut(0, function() {
             $item.find( "a.ui-icon-triangle-1-w" ).remove();
-            $item.append( deselect_icon ).appendTo( $labels_select ).fadeIn(100, function() {
-                update(true, false);
+            $item.append( deselect_icon ).appendTo( $labels_select ).fadeIn(0, function() {
+                if(upd) {
+                    update(true, false);
+                }
             });
         });
     }
 
     // label deselect function
     var select_icon = "<a href=# class='ui-icon ui-icon-triangle-1-w'>Select label</a>";
-    function deselectLabel( $item ) {
-        $item.fadeOut(100, function() {
+    function deselectLabel($item, upd) {
+        var upd = upd;
+        $item.fadeOut(0, function() {
             $item
                 .find( "a.ui-icon-triangle-1-e" )
                 .remove()
@@ -228,8 +231,10 @@ function init_class_filter(class_ids) {
                 .css("width", "120px")
                 .append( select_icon )
                 .appendTo( $labels )
-                .fadeIn(100, function(){
-                    update(true, false);
+                .fadeIn(0, function(){
+                    if(upd) {
+                        update(true, false);
+                    }
                 })
         });
     }
@@ -240,10 +245,10 @@ function init_class_filter(class_ids) {
             $target = $( event.target );
  
         if ( $target.is( "a.ui-icon-triangle-1-w" ) ) {
-            selectLabel( $item );
+            selectLabel($item, true);
         } 
         else if ( $target.is( "a.ui-icon-triangle-1-e" ) ) {
-            deselectLabel( $item );
+            deselectLabel($item, true);
         }
         return false;
     });
@@ -253,13 +258,13 @@ function init_class_filter(class_ids) {
         $("#labels_selected li").each(function () {
             cur_id = $(this).children("div").text();
             if(jQuery.inArray(cur_id, class_ids) == -1) {
-                deselectLabel($(this));
+                deselectLabel($(this), false);
             }
         });
         $("#labels_unselected li").each(function () {
             cur_id = $(this).children("div").text();
             if(jQuery.inArray(cur_id, class_ids) > -1) {
-                selectLabel($(this));
+                selectLabel($(this), false);
             }
         });
     }

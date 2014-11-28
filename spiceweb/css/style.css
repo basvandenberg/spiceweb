@@ -582,16 +582,17 @@ div.loading {
     padding: 120px;
     text-align: center;
 }
-
 /* scatter & heatmap *********************************************************/
 
 #scatter {
-    margin: 10px;
-    width: 539px;
-    height: 546px;
+    width: 842px;
+    height: 842px;
     border: 1px solid #d3d7cf;
     border-radius: 4px;
-    padding: 20px;
+    margin-bottom: 20px;
+}
+#scatter div.loading {
+    padding-top: 400px;
 }
 #heatmap {
     margin: 10px;

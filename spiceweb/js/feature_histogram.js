@@ -235,8 +235,8 @@ function show_hist(cid, class_ids) {
                 .attr('x', (grid_width / 2) + margin + y_axis_width)
                 .attr('y', height - (margin + 3))
 
+            // histograms
             var colors = ['#204a87', '#fce94f', '#204a87', 'fce94f'];
-
             for(var leg_i = 0; leg_i < data['legend'].length; leg_i++) {
 
                 var legend = data['legend'][leg_i];
