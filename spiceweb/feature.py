@@ -508,8 +508,9 @@ class Feature:
             class_ids = [class_ids]
 
         pm = self.project_manager
-        objs = pm.get_feature_matrix().filtered_object_indices(labeling_name,
-                                                               class_ids)
+        objs = pm.get_feature_matrix().filtered_object_indices(
+            labeling_name, class_ids
+        )
 
         if(len(objs) > max_proteins):
             msg = 'Heatmaps are only possible for %i proteins or less.'\
@@ -521,7 +522,22 @@ class Feature:
         return simplejson.dumps(dict(msg=msg))
 
     @cherrypy.expose
-    def aheatmap(self, feat_ids, labeling_name, class_ids, figtype='png'):
+    def aheatmap(self, feat_ids, labeling_name, class_ids):
+
+        feat_ids = [f.strip() for f in feat_ids.split(',')]
+        class_ids = [l.strip() for l in class_ids.split(',')]
+
+        pm = self.project_manager
+        fm = pm.get_feature_matrix()
+
+        return fm.clustdist_json(
+            feature_ids=feat_ids,
+            labeling_name=labeling_name,
+            class_ids=class_ids,
+        )
+
+    @cherrypy.expose
+    def aheatmap2(self, feat_ids, labeling_name, class_ids, figtype='png'):
 
         feat_ids = [f.strip() for f in feat_ids.split(',')]
         class_ids = [l.strip() for l in class_ids.split(',')]

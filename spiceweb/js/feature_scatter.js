@@ -1,13 +1,10 @@
 // global settings
 var min_num_classes = 1;
-var max_num_classes = 7;
-var min_num_features = 1;
-var max_num_features = Infinity;
+var max_num_classes = 10;
 
 function updateContent(labeling_name, class_ids, feat_ids, changed_classes, changed_features) {
 
     if(feat_ids.length != 2) {
-        $("div#scatter img").replaceWith($('<img>'))
         $("div#feat_error").remove()
         $("div#scatter").before(
             '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Select exactly two features using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">feature filter</a> in the right panel. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
@@ -18,8 +15,7 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $("div#feat_error").remove()
     }
 
-    if(class_ids.length < 1) {
-        $("div#scatter img").replaceWith($('<img>'))
+    if(class_ids.length < min_num_classes) {
         $("div#class_error").remove()
         $("div#scatter").before(
             '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />Select one ore more labels using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">label filter</a> in the right panel. The right panel is closed by default, click on the dark gray box with the arrow to open it.</p></div>'
@@ -30,7 +26,19 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
         $("div#class_error").remove()
     }
 
-    if(feat_ids.length == 2 && class_ids.length > 0) {
+    if(class_ids.length > max_num_classes) {
+        $("div#class_error").remove()
+        $("div#scatter").before(
+            '<div id="feat_error" class="alert alert-info alert-error fade in"><p><strong>Info:</strong><br />It is not possible to show more than 10 labels in one scatter plot. Please select 10 or less labels using the <a href="http://localhost:8080/spice/doc/tutorial1.html#filter-sidebar">label filter</a></p></div>'
+        );
+        $('#scatter').empty();
+    }
+    else {
+        $("div#class_error").remove()
+    }
+
+    if(feat_ids.length == 2 && class_ids.length >= min_num_classes
+            && class_ids.length <= max_num_classes) {
 
         var spinner = $('<img>')
             .attr('src', '../../img/loading1.gif')
@@ -89,8 +97,8 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
                 .attr('width', width)
                 .attr('height', height);
 
-            var y_offset = height - (margin + x_axis_height)
-            var x_offset = margin + y_axis_width
+            var y_offset = height - (margin + x_axis_height);
+            var x_offset = margin + y_axis_width;
 
             // y grid lines
             var y_grid_lines = svg.append('g')
@@ -172,7 +180,9 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
                 .attr('x', (grid_width / 2) + margin + y_axis_width)
                 .attr('y', height - (margin + 3))
 
-            var colors = ['#204a87', '#fce94f', '#204a87', 'fce94f'];
+            var colors = ['#204a87', '#fce94f',
+                    '#73d216', '#f57900', '#5c3566', '#c17d11', '#729fcf',
+                    '#4e9a06', '#fcaf3e', '#ad7fa8', '#8f5902']
 
             // scatters
             for(var leg_i = 0; leg_i < data['legend'].length; leg_i++) {

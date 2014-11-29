@@ -587,18 +587,14 @@ div.loading {
 #scatter {
     width: 842px;
     height: 842px;
-    border: 1px solid #d3d7cf;
-    border-radius: 4px;
-    margin-bottom: 20px;
 }
 #scatter div.loading {
     padding-top: 400px;
 }
-#heatmap {
-    margin: 10px;
+#heatmap, #scatter {
     border: 1px solid #d3d7cf;
     border-radius: 4px;
-    padding: 20px;
+    margin-bottom: 20px;
 }
 
 /* Feature filter ************************************************************/
