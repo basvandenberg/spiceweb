@@ -101,9 +101,12 @@ class Classification:
 
     @cherrypy.expose
     def index(self):
-        raise cherrypy.HTTPRedirect(self.get_url(0))
+        #raise cherrypy.HTTPRedirect(self.get_url(0))
+        kw_args = self.get_template_args(0)
+        template_f = 'classification_disabled.html'
+        return spiceweb.get_template(template_f, **kw_args)
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def list(self):
 
         smi = 0
@@ -122,7 +125,7 @@ class Classification:
 
         return spiceweb.get_template(template_f, **kw_args)
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def new(self, cl_type=None, n_fold_cv=None, labeling_name=None,
             class_ids=None, feat_ids=None):
 
@@ -163,7 +166,7 @@ class Classification:
 
             return spiceweb.get_template(template_f, **kw_args)
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def details(self, cl_id):
 
         smi = 2
@@ -199,7 +202,7 @@ class Classification:
 
         return spiceweb.get_template(template_f, **kw_args)
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def run(self, cl_id, data_set=None):
 
         smi = 3
@@ -294,7 +297,7 @@ class Classification:
     # ajax calls
     ###########################################################################
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def download(self, cl_id, data_set=None):
 
         self.fetch_session_data()
@@ -330,7 +333,7 @@ class Classification:
 
         return serve_file(filepath, filetype, 'attachment')
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def delete(self, cl_id):
         '''
         This function handles an ajax call to delete feature category.
@@ -356,7 +359,7 @@ class Classification:
 
     # TODO this is a copy of the function in feature.py!
     # Maybe create a parent class, some other methods can be inherited as well
-    @cherrypy.expose
+    #@cherrypy.expose
     def class_names(self, labeling_name):
         # TODO use a template for this...
 
@@ -382,7 +385,7 @@ class Classification:
         return simplejson.dumps(dict(class_names_selected=str_data0,
                 class_names_unselected=str_data1))
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def result_tables(self):
         # TODO use a template for this...
 
@@ -489,7 +492,7 @@ class Classification:
         return simplejson.dumps(dict(result_tables=str_data,
                                 score_select=sel_str))
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def status_table(self):
         # TODO use a template for this...
 
@@ -534,7 +537,7 @@ class Classification:
         s += '</table>\n'
         return simplejson.dumps(dict(status_table=s))
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def progress(self, cl_id):
 
         self.fetch_session_data()
@@ -547,7 +550,7 @@ class Classification:
         return simplejson.dumps(
             dict(progress=progress_txt, error=error_txt, finished=finished))
 
-    @cherrypy.expose
+    #@cherrypy.expose
     def roc(self, cl_id):
 
         self.fetch_session_data()
