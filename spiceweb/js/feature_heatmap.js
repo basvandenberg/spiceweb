@@ -104,9 +104,9 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
                             }
                             perc = value / colorbar_max;
 
-                            r = Math.round(60 - perc * 60);
-                            g = Math.round(135 - perc * 135);
-                            b = Math.round(190 - perc * 190);
+                            r = Math.round(60 + perc * (255 - 60));
+                            g = Math.round(135 + perc * (255 - 135));
+                            b = Math.round(190 + perc * (255 - 190));
                         }
                         else if(value < 0.0) {
 
@@ -115,9 +115,9 @@ function updateContent(labeling_name, class_ids, feat_ids, changed_classes, chan
                             } 
                             perc = value / colorbar_min;
 
-                            r = Math.round(60 + perc * (255 - 60));
-                            g = Math.round(135 + perc * (255 - 135));
-                            b = Math.round(190 + perc * (255 - 190));
+                            r = Math.round(60 - perc * 60);
+                            g = Math.round(135 - perc * 135);
+                            b = Math.round(190 - perc * 190);
                         }
                         else {
                             r = 60;
